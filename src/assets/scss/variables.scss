@@ -1,0 +1,88 @@
+@use './mixins';
+
+:root {
+    background-color: hsl(136, 0%, 95%);
+
+    // padding
+    --pd-xs: 5px;
+    --pd-sm: 10px;
+    --pd-md: 15px;
+    --pd-lg: 20px;
+    --pd-xl: 30px;
+    --pd-xl: 40px;
+    --pd-2xl: 50px;
+
+    --pd-screen: var(--pd-md);
+    --pd-fullwidth: 0 5vw;
+
+    --pd-inner-component: var(--pd-lg);
+
+    @include mixins.desktop {
+        --pd-screen: var(--pd-md);
+    }
+
+    // Margins
+    --mg-xs: 5px;
+    --mg-sm: 10px;
+    --mg-md: 15px;
+    --mg-lg: 20px;
+    --mg-xl: 30px;
+    --mg-xl: 40px;
+    --mg-2xl: 50px;
+
+    --mg-between-components: var(--mg-lg);
+
+    // Sizes
+    --sz-content: 100%;
+
+    @include mixins.desktop {
+        --sz-content: 500px;
+    }
+
+
+    // Colors
+    --c-primary-transparency: hsla(54, 67%, 38%, 0.2);
+
+    --c-primary: hsl(54, 67%, 38%);
+    --c-black: hsl(0, 0%, 15%);
+    --c-font-global: var(--c-black);
+
+    --c-font-h: hsl(0, 0%, 15%);
+    --c-font-white: hsl(136, 0%, 95%);
+
+
+
+
+    // Transitions
+    --tr-base: 0.3s;
+
+    // Colors
+    --bg-main: white;
+
+
+    // Font weight
+    --fw-boldest: 900;
+    --fw-bolder: 800;
+    --fw-bold: 600;
+    --fw-medium: 500;
+    --fw-regular: 400;
+    --fw-light: 300;
+    --fw-lighter: 200;
+
+    // Font size
+
+    --fs-4xl: 3rem;
+    --fs-3xl: 2.4rem;
+    --fs-2xl: 2rem;
+    --fs-xl: 1.7rem;
+    --fs-lg: 1.45rem;
+    --fs-global: 1.25rem;
+    --fs-sm: 1rem;
+
+    p {
+        line-height: 1.5;
+    }
+
+
+}
+

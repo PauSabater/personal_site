@@ -1,0 +1,10 @@
+.callout {
+    background: hsl(242, 88%, 96%);
+    padding: var(--pd-lg) var(--pd-xl);
+    border-radius: 15px;
+
+    p {
+        font-size: var(--fs-global);
+        margin: 0;
+    }
+}

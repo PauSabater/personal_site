@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    margin-bottom: var(--mg-xl);
+
+    .text {
+        font-size: var(--fs-2xs);
+        font-style: italic;
+        margin: 0;
+    }
+}
+
+.imgContainer {
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        border-radius: 10px;
+    }
+}

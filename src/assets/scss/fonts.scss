@@ -1,0 +1,53 @@
+
+@font-face {
+    font-family: 'raleway';
+    font-stretch: 80%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 300;
+    src: url(../../../public/fonts/Raleway-VariableFont_wght.ttf) format("truetype-variations");
+}
+
+@font-face {
+    font-family: 'quanticoRegular';
+    src: url(../../../public/fonts/Quantico-Regular.ttf)
+}
+
+@font-face {
+    font-family: 'quanticoBold';
+    src: url(../../../public/fonts/Quantico-Bold.ttf)
+}
+
+@font-face {
+    font-family: 'avenir-regular';
+    src: url(../../../public/fonts/AvenirNextLTPro-Regular.otf) format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nunito-800';
+    font-stretch: 80%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 800;
+    src: url(../../../public/fonts/Nunito-VariableFont_wght.ttf) format("truetype-variations");
+}
+
+@font-face {
+    font-family: 'nunito-400';
+    font-stretch: 100%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 400;
+    src: url(../../../public/fonts/Nunito-VariableFont_wght.ttf) format("truetype-variations");
+}
+
+@font-face {
+    font-family: 'inter-regular';
+    font-stretch: 100%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 400;
+    src: url(../../../public/fonts/Inter-VariableFont_slnt_wght.ttf) format("truetype-variations");
+}
+
+//   div {
+//     font-family: 'raleway';
+//   }

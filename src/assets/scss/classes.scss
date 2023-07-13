@@ -1,0 +1,10 @@
+.fullwidth {
+    width: 100vw;
+}
+
+.wrapp {
+    width: var(--sz-content);
+    margin: auto;
+    box-sizing: border-box;
+    padding: var(--pd-screen);
+}

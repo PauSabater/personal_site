@@ -1,0 +1,11 @@
+.labelContainer {
+    display: flex;
+
+    p {
+        font-size: var(--fs-sm);
+        padding: var(--pd-xs) var(--pd-lg);
+        background-color: hsl(54, 67%, 88%);
+        margin-right: var(--mg-sm);
+        border-radius: 5px;
+    }
+}
