@@ -10,12 +10,12 @@ export const texts = {
     intro: {
         title: "hello. i'm pau",
         textDesktop: [
-            "Lorem <label>ipsum dolor sit</label> amet, consectetur",
-            "adipiscing elit, sed do eiusmod tempor",
-            "incididunt ut <label>labore et dolore</label> magna aliqua.",
-            "Ut enim ad minim veniam, quis nostrud",
-            "<label>exercitation ullamco</label> laboris nisi ut",
-            "aliquip ex ea commodo consequat."
+            "I am a <span>frontend developer</span> recently",
+            "installed in <span>Berlin</span>. After an enriching",
+            "first professional experience as a developer ",
+            "in a startup based in Paris, I am looking",
+            " forward to continue this journey.",
+            "<span>Scroll down</span> to learn more about me !"
         ],
         textMobile: [
             "Lorem ipsum dolor sit amet, consectetur",

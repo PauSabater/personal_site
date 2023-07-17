@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useLayoutEffect, useRef } from "react"
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
 import { TagLabels } from "./Components/TagLabels/TagLabels"
 import { Callout } from "./Components/Callout/Callout"
 import { ImageArticle } from "./Components/ImageArticle/ImageArticle"
@@ -16,49 +16,43 @@ export function ProjectPost({ imgPath }: { imgPath: string}) {
 
     console.log("HELLO IN PROJECT")
 
+    const [titles, setTitles] = useState<NodeListOf<Element> | null>(null)
 
-    // useLayoutEffect(() => {
-    //     const elArticleContainer: HTMLElement | null = refArticleContainer.current
-    //     const elIndexContainer: HTMLElement | null = refIndexContainer.current
+    useEffect(() => {
+        const elArticleContainer: HTMLElement | null = refArticleContainer.current
+        const elIndexContainer: HTMLElement | null = refIndexContainer.current
+        if (elArticleContainer === null || elIndexContainer === null) return
 
-
-
-    //     // let context = gsap.context(() => {
-
-    //     //     // gsap.timeline({
-    //     //     //     scrollTrigger: {
-    //     //     //       trigger: elArticleContainer,
-    //     //     //       start: "top top",
-    //     //     //       end: '+=1000',
-    //     //     //       scrub: true,
-    //     //     //       pin:true,
-    //     //     //       markers: true,
-    //     //     //     }
-    //     //     //   })
-
-    //     //     // console.log("HELLO IN GSAP")
-
-    //     //     // let timeline = gsap.timeline({
-    //     //     //     scrollTrigger: {
-    //     //     //         trigger: elArticleContainer,
-    //     //     //         start: "top",
-    //     //     //         end: "bottom",
-    //     //     //         markers: true,
-    //     //     //         // pin: elIndexContainer,
-    //     //     //         // pinSpacing: true,
-    //     //     //         // scrub: true
-    //     //     //     }
-    //     //     // })
-
-    //     //     // timeline.addLabel('initial')
-    //     //     //     .to(elIndexContainer, {y: 50})
-    //     //     //  // .to(elIndexContainer({opacity: "0.4"}))
-
-    //     //return () => context.revert();
-
-    // })}, [])
+        const elsHeading: NodeListOf<Element> = (elArticleContainer as HTMLElement).querySelectorAll("h2, h3")
+        setTitles(elsHeading)
 
 
+        const observer = new IntersectionObserver((entries)=> observerCallback(entries),
+            {
+                root: null,
+                rootMargin: "0px 0px -50% 0px",
+                threshold: 1
+            });
+
+        const observerCallback = (entries: any) => {
+            entries.forEach((entry: any) => {
+                if (entry.isIntersecting) {
+                    console.log(entry.target.innerHTML);
+                    const attr: string = entry.target.getAttribute("data-title-target")
+                    const elListItem = (elIndexContainer as HTMLElement).querySelector(`[data-title="${attr}"]`)
+                    console.log("attr is ", attr)
+                    console.log("heyyy list content is")
+                    elListItem?.classList.add("highlighted")
+                    console.log(elListItem)
+                }
+            })
+        }
+
+        Array.from(elsHeading).forEach((heading)=> observer.observe(heading))
+
+
+
+    }, [refArticleContainer])
 
     return (
         <div>
@@ -68,21 +62,27 @@ export function ProjectPost({ imgPath }: { imgPath: string}) {
                 </div>
             </div>
 
-            <div ref={refArticleContainer} className={styles.articleContainer}>
+            <div className={styles.articleContainer}>
 
                 <div className={styles.indexContainer}>
                     <div ref={refIndexContainer}>
-                        <ul>
-                            <li>hello</li>
-                            <li>hello</li>
-                            <li>hello</li>
-                            <li>hello</li>
-                            <li>hello</li>
+                        <li className={styles.itemFirst}>CONTENT</li>
+                        <ul>{titles ? Array.from(titles as NodeListOf<Element>).map((title) => {
+                            title.setAttribute('data-title-target', title.innerHTML.toLowerCase().replaceAll(' ', '-'))
+                            return title.nodeName === 'H2'
+                                ? <li
+                                    className={`${styles.itemFirst}`}
+                                    data-title={title.innerHTML.toLowerCase().replaceAll(' ', '-')}>{title.innerHTML}</li>
+                                : <li
+                                    className={styles.itemSecond}
+                                    data-title={title.innerHTML.toLowerCase().replaceAll(' ', '-')}>{title.innerHTML}</li>
+                            }
+                        ): ''}
                         </ul>
                     </div>
                 </div>
 
-                <div className={styles.article}>
+                <div ref={refArticleContainer} className={styles.article}>
                     <h1>
                         Frontend developer at papernest
                     </h1>

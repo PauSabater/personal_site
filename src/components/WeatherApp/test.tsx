@@ -1,1 +1,0 @@
-export { BannerForecastDays } from "./components/BannerForecastDays/BannerForecastDays"

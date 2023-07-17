@@ -48,6 +48,22 @@
     src: url(../../../public/fonts/Inter-VariableFont_slnt_wght.ttf) format("truetype-variations");
 }
 
+@font-face {
+    font-family: 'inter-bold';
+    font-stretch: 80%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 800;
+    src: url(../../../public/fonts/Inter-VariableFont_slnt_wght.ttf) format("truetype-variations");
+}
+
+@font-face {
+    font-family: 'inter-bolder';
+    font-stretch: 80%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 1000;
+    src: url(../../../public/fonts/Inter-VariableFont_slnt_wght.ttf) format("truetype-variations");
+}
+
 //   div {
 //     font-family: 'raleway';
 //   }

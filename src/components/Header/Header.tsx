@@ -8,7 +8,7 @@ export function Header({ links }: { links: string[]}) {
     const navLinkStyles = { fontWeight: "bold", color: "white" }
 
     return (
-        <div className={styles.container}>
+        <div id="header" className={styles.container}>
             <ul className={styles.list}>
                 <li className={styles.item}>
                     <NavLink to='/'>about</NavLink>

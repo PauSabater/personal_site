@@ -24,18 +24,48 @@
 .articleContainer {
     position: relative;
     display: grid;
-    grid-template-columns: auto 300px 700px auto;
+    grid-template-columns: auto 400px 700px auto;
     margin-bottom: 200px;
     overflow: visible;
 }
 
 .indexContainer {
-    // position: sticky;
+    position: sticky;
     top: 100px;
-    left: 200px;
+    left: 30px;
+    width: 350px;
     grid-column-start: 2;
     margin-left: -75px;
     height: 500px;
+    padding-top: 170px;
+
+    ul {
+        padding: 0;
+    }
+
+    ul, li {
+        list-style: none;
+        font-size: var(--fs-sm);
+    }
+
+    li {
+        border-radius: 5px;
+        padding: var(--pd-xs) var(--pd-lg);
+    }
+
+    .itemFirst {
+        margin: var(--mg-xs) 0;
+        font-family: 'nunito-800';
+    }
+
+    .itemSecond {
+        padding-left: var(--pd-xl);
+        font-family: 'nunito-400';
+    }
+
+    .highlighted {
+        background-color: var(--c-primary-lighter);
+    }
 }
 
 .article {

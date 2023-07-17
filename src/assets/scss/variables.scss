@@ -43,7 +43,13 @@
     // Colors
     --c-primary-transparency: hsla(54, 67%, 38%, 0.2);
 
+    --c-primary-lighter: hsl(54, 67%, 90%);
+    --c-primary-light: hsl(54, 67%, 75%);
     --c-primary: hsl(54, 67%, 38%);
+    --c-primary-dark: hsl(54, 67%, 25%);
+    --c-primary-darker: hsl(54, 67%, 15%);
+
+
     --c-black: hsl(0, 0%, 15%);
     --c-font-global: var(--c-black);
 
@@ -77,7 +83,7 @@
     --fs-xl: 1.7rem;
     --fs-lg: 1.45rem;
     --fs-global: 1.25rem;
-    --fs-sm: 1rem;
+    --fs-sm: 1.1rem;
 
     p {
         line-height: 1.5;

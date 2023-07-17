@@ -5,7 +5,7 @@
     grid-template-columns: 70% 30%;
 }
 
-.wrapp {
+.wrappTitle {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,33 +13,46 @@
     width: 100vw;
     height: 100vh;
     padding: var(--pd-fullwidth);
+    perspective: 1250px;
+    overflow: hidden;
 }
 
 .preTitle {
     font-size: 4vw;
     font-weight: 800;
     margin: 0;
+    opacity: 0;
     color: var(--c-primary);
+    padding-left: 100px;
+    margin-left: -100px;
+    transform-origin: left;
 }
 
 .title, line {
-    font-size: 9vw;
+    font-size: 8vw;
     font-weight: 800;
     margin: 0;
 }
 
 .title {
+    font-family: "inter-bold";
     font-weight: var(--fw-bolder);
     color: var(--c-font-h);
-    margin-left: 100px;
+    margin: 0;
+    padding-left: 100px;
+    line-height: 1.25 !important;
+    transform-origin: left;
+    opacity: 0;
 
     &:last-child {
-        margin-left: 300px;
+        padding-left: 100px;
+        margin-left: 200px;
     }
 }
 
 .date {
     position: relative;
+    opacity: 0;
 
     &:before {
         content: '';
@@ -52,7 +65,7 @@
         background-color: transparent;
     }
 
-    &__container {
+    .container {
         display: grid;
         grid-template-columns: 150px 150px;
         margin-top: 70vh;
@@ -64,22 +77,30 @@
         font-weight: var(--fw-boldest);
         width: fit-content;
         margin: 0;
+        font-family: "inter-bolder";
         -webkit-text-fill-color: transparent;
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: var(--c-font-h);
         transform: rotateZ(-90deg);
     }
 
-    &__month {
-        font-size: 35px;
-        margin: 0;
-        font-weight: var(--fw-bold);
+    .textContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    &__text-container {
-        display: flex;
+    .text {
+        margin: 0;
         font-family: 'quanticoBold';
-        flex-direction: column;
-        justify-content: end;
+        font-size: 25px;
+    }
+
+    .text:first-child {
+        font-family: "inter-bolder";
+        font-size: 50px;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: var(--c-font-h);
     }
 }
