@@ -3,5 +3,5 @@
 }
 
 html {
-    background-color: hsl(136, 0%, 95%);
+    background-color: var(--bg-main);
 }

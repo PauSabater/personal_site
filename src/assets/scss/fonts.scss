@@ -25,6 +25,14 @@
 }
 
 @font-face {
+    font-family: 'nunito-bolder';
+    font-stretch: 70%; /* Note that font-stretch is a % of normal width */
+    font-style: NORMAL; /* See note below */
+    font-weight: 1000;
+    src: url(../../../public/fonts/Nunito-VariableFont_wght.ttf) format("truetype-variations");
+}
+
+@font-face {
     font-family: 'nunito-800';
     font-stretch: 80%; /* Note that font-stretch is a % of normal width */
     font-style: NORMAL; /* See note below */

@@ -30,35 +30,36 @@ export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRe
         tlTopBanner.to(Array.from(elsTitles), {
             rotationY:"0deg",
             ease: CustomEase.create("custom", easeTitle),
-            duration: 0.4,
+            duration: 1.2,
             opacity: 1,
-            stagger: 0.3
+            stagger: 0.4
         }, 'start')
 
         // Animate titles opacity separately from rotation:
         tlTopBanner.to(Array.from(elsTitles), {
             opacity: 1,
-            duration: 0.3,
-            stagger: 0.3
+            duration: 1.2,
+            stagger: 0.4
         }, 'start')
 
         // Header entering screen:
         tlTopBanner.to(elHeader, {
             opacity: 1,
             y: 0,
-            duration: 0.3,
-        }, 0.6)
+            duration: 1,
+            ease: CustomEase.create("custom", easeTitle)
+        }, 0.7)
 
         // Date entering screen:
         tlTopBanner.to(elDateBanner, {
             opacity: 1,
             y: 0,
-            duration: 0.3,
-        }, 0.6)
+            duration: 1,
+            ease: CustomEase.create("custom", easeTitle)
+        }, 0.7)
 
         tlTopBanner.delay(0.7)
     })
 
-    return () => ctx.revert();
+    return () => ctx.revert()
 }
-

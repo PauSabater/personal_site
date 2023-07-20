@@ -1,7 +1,7 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 import { ProjectPost } from "../components/ProjectPost/ProjectPost"
-import img from "../assets/svg/full-mountains.svg"
+import img from "../assets/svg/papernest.svg"
 
 export function Project() {
 

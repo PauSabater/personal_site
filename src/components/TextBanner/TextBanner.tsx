@@ -1,8 +1,8 @@
-import { Fragment } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./TextBanner.module.scss"
-// import { HightLightedSpan } from '../Header/Header'
 import parse from 'html-react-parser'
-import { Button, IBtnProps } from '../Button/Button'
+import { Button, IBtnProps } from '../UI/Button/Button'
+import { setTextBannerAnimations } from "./TextBanner.animations"
 
 export interface ITextBannerTexts {
     title: string,
@@ -12,17 +12,25 @@ export interface ITextBannerTexts {
 }
 
 export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
+
+    const refTextBanner = useRef(null)
+
+    useLayoutEffect(() => {
+        setTextBannerAnimations(refTextBanner)
+    }, [])
+
+
     return (
-        <Fragment>
-            <div className={styles.container}>
-                <div className={styles.wrapp} >
-                    <p className={styles.title}>{texts.title}</p>
-                    {texts.textDesktop.map((line) =>
+        <div ref={refTextBanner} className={styles.container}>
+            <div className={styles.wrap} >
+                <p className={styles.title}>{texts.title}</p>
+                {texts.textDesktop.map((line) =>
+                    <div className={styles.lineWrap}>
                         <p className={styles.text}>{parse(line)}</p>
-                    )}
-                    <Button btnProps={texts.button}></Button>
-                </div>
+                    </div>
+                )}
+                <Button btnProps={texts.button}></Button>
             </div>
-        </Fragment>
+        </div>
     )
 }

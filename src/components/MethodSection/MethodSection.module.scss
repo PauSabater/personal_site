@@ -1,0 +1,29 @@
+.container {
+    background-color: var(--c-black);
+    width: 100%;
+
+    p {
+        color: var(--c-white);
+    }
+}
+
+.containerContent {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.title {
+    font-family: 'inter-bold';
+    font-size: 80px;
+    color: var(--c-white);
+    margin: 0;
+}
+
+.phrase {
+    font-family: 'inter-regular';
+    font-size: 40px;
+    color: var(--c-white);
+    margin: 0;
+    border-bottom: 1px solid white;
+    padding: 20px 0;
+}

@@ -14,6 +14,7 @@ import { Project } from '../../pages/project'
 
 import { Routes, Route } from 'react-router-dom'
 import { Home } from '../../pages/home'
+import { TransitionImages } from '../TransitionImages/TransitionImages';
 
 const routes = [
     {path: '/project', name: 'Project', Component: Project},
@@ -25,7 +26,8 @@ function App() {
 
     return (
         <div className="main">
-            <Header links={ texts.header.links }></Header>
+            <Header links={ texts.header.links }/>
+            <TransitionImages/>
             <Routes>
                 {routes.map((route) =>
                     <Route

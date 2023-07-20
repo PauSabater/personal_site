@@ -40,17 +40,16 @@
 
 .link {
     display: inline-block;
-    // background: var(--c-black);
     padding: var(--pd-xs) var(--pd-md);
-    // border-radius: 5px;
-    // border: 1px solid grey;
-    // color: white;
     font-weight: var(--fw-bold);
     color: grey;
     transition: opacity var(--tr-base), transform var(--tr-base);
 }
 
 .imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     height: var(--card-height);
     width: calc(100% + 2px);
@@ -60,23 +59,13 @@
     overflow: hidden;
 
     .img, svg {
-        position:absolute;
-        top: 50%;
-        left: 50%;
         height: 100%;
         width: auto;
-        grid-column-start: 2;
-        // border-radius: 15px 0 15px 15px;
-        transform: translate(-50%, -50%);
 
         #trees-first-layer path {
             transform-origin: bottom !important;
             animation: skewTree 2s;
         }
-    }
-
-    img {
-        opacity: 0;
     }
 }
 

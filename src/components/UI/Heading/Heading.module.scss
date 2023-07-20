@@ -1,5 +1,5 @@
 .heading {
-    font-size: 4rem;
+    font-size: clamp(45px, 5vw, 120px);
     padding: 0;
     margin:0;
     font-weight: var(--fw-bolder);
@@ -7,4 +7,8 @@
 
 .right {
     text-align: right;
+}
+
+.lineContainer {
+    overflow: hidden;
 }

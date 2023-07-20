@@ -5,9 +5,10 @@
     border-radius: 15px;
     margin: var(--pd-fullwidth);
     margin-bottom: 100px;
+    opacity: 0;
 }
 
-.wrapp {
+.wrap {
     position: relative;
     width: 100%;
     margin: auto;
@@ -24,6 +25,17 @@
     font-weight: var(--fw-bolder);
     margin: 0 0 var(--mg-sm) 0;
 }
+
+.lineWrap {
+    margin: 0;
+    overflow: hidden;
+
+    &:last-of-type {
+        margin-bottom: 20px !important;
+    }
+}
+
+
 
 .text {
     position: relative;
@@ -50,10 +62,5 @@
             width: 100%;
             z-index: 0;
         }
-
-    }
-
-    &:last-of-type {
-        margin-bottom: 20px !important;
     }
 }

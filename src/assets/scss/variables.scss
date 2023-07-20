@@ -1,7 +1,7 @@
 @use './mixins';
 
 :root {
-    background-color: hsl(136, 0%, 95%);
+    background-color: var(--bg-main);
 
     // padding
     --pd-xs: 5px;
@@ -49,12 +49,21 @@
     --c-primary-dark: hsl(54, 67%, 25%);
     --c-primary-darker: hsl(54, 67%, 15%);
 
+    --c-secondary-lighter: hsl(248, 30%, 90%);
+    --c-secondary-light: hsl(248, 30%, 70%);
+    --c-secondary: hsl(248, 30%, 50%);
+    --c-secondary-dark: hsl(248, 30%, 30%);
+    --c-secondary-darker: hsl(248, 30%, 10%);
 
-    --c-black: hsl(0, 0%, 15%);
+
+    --c-black: hsl(0, 0%, 7%);
     --c-font-global: var(--c-black);
 
     --c-font-h: hsl(0, 0%, 15%);
-    --c-font-white: hsl(136, 0%, 95%);
+    --c-font-white: var(--c-white);
+
+    --c-white: hsl(136, 0%, 96%);
+    --bg-main: var(--c-white);
 
 
 
@@ -63,7 +72,6 @@
     --tr-base: 0.3s;
 
     // Colors
-    --bg-main: white;
 
 
     // Font weight
