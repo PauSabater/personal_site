@@ -7,8 +7,19 @@ import { setCardTransitionAnimation } from "./Card.animations"
 
 import ImgCloudFirstLine1 from "../../../assets/img/clouds/cloud-first-line-1.png"
 import ImgCloudFirstLine2 from "../../../assets/img/clouds/cloud-first-line-2.png"
-import SvgTreesFirstLayer from "../../../assets/svg/mountains/trees-first-layer.svg"
+import ImgCloudSecondLine from "../../../assets/img/clouds/cloud-second-line.png"
+import ImgCloudThirdLine from "../../../assets/img/clouds/cloud-third-line.png"
 
+import SvgTreesFirstLayer from "../../../assets/svg/mountains/trees-first-layer.svg"
+import SvgDarkeningLayer from "../../../assets/svg/mountains/darkening-layer.svg"
+import SvgMoon from "../../../assets/svg/mountains/moon.svg"
+import SvgTreesSecondLayer from "../../../assets/svg/mountains/trees-second-layer.svg"
+import SvgTreesThirdLayer from "../../../assets/svg/mountains/trees-third-layer.svg"
+import SvgMountains from "../../../assets/svg/mountains/mountains.svg"
+import SvgLightning from "../../../assets/svg/mountains/lightning.svg"
+import {ReactComponent as SvgSkyDarkening} from "../../../assets/svg/mountains/sky-darkening.svg"
+import SvgSky from "../../../assets/svg/mountains/sky.svg"
+import SvgSkyDarkeningImg from "../../../assets/svg/mountains/sky-darkening.svg"
 
 
 export interface ICardProps {
@@ -26,15 +37,32 @@ export function Card({ props }: { props: ICardProps}) {
         if (img === 'mountains') {
             const images: string[] = ["cloud-first-line-1", "cloud-first-line-2"]
             return (
-                <div className={styles.imgMountainContainer}>
+                <Fragment>
+                <div className={styles.imgMountainContainer} id="card-3-img-wrap">
                     {/* {
                     images.map((img)=>
                         <img id="cloud-first-line-1" src={require(`../../../assets/svg/mountains${img}`)}/>
                     )} */}
-                    <img id="cloud-first-line-1" src={ImgCloudFirstLine1}/>
-                    <img id="cloud-first-line-2" src={ImgCloudFirstLine2}/>
+                    <img id="sky" src={SvgSky}/>
+                    <SvgSkyDarkening/>
+                    <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg}/>
+                    {/* <img id="sky-darkening" className={styles.skyDarkening} src={SvgSkyDarkening}/> */}
+                    <img id="lightning" className={styles.lightning} src={SvgLightning}/>
+                    <img id="mountains" src={SvgMountains}/>
+                    <img id="cloud-second-line" className={styles.cloud} src={ImgCloudThirdLine}/>
+                    <img id="trees-third-layer" src={SvgTreesThirdLayer}/>
+                    <img id="trees-second-layer" src={SvgTreesSecondLayer}/>
+                    <img id="moon" src={SvgMoon}/>
+                    <img id="cloud-second-line" className={styles.cloud} src={ImgCloudSecondLine}/>
+                    <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer}/>
                     <img id="trees-first-layer" src={SvgTreesFirstLayer}/>
+                    <img id="cloud-first-line-2" className={styles.cloud} src={ImgCloudFirstLine2}/>
+                    <img id="cloud-first-line-1"className={styles.cloud} src={ImgCloudFirstLine1}/>
+                    <div className={styles.rain} id="rain-container">
+                    {[...Array(500)].map((_, i) => <div className={styles.drop}></div>)}
                 </div>
+                </div>
+                </Fragment>
                 // <Fragment>
                 //     <MountainsSvg />
                 //     {/* <img className={`${styles.img} img`} src={img}></img> */}
@@ -65,6 +93,7 @@ export function Card({ props }: { props: ICardProps}) {
                 ref={refImgContainer}>
                 {getImg(props.img)}
             </div>
+            <div className={`${styles.overlay} overlay`}></div>
         </div>
     )
 }

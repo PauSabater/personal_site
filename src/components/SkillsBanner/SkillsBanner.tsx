@@ -19,9 +19,6 @@ export function SkillsBanner({texts}: {texts: ISkillsBannerTexts}) {
     useLayoutEffect(() => {
         const elBanner: HTMLElement | null = refBanner.current
 
-        console.log("banner is")
-        console.log(elBanner)
-
         if (elBanner === null) return
         setSkillsBannerAnimation(elBanner)
     }, [])

@@ -14,7 +14,7 @@ export function Header({ links }: { links: string[]}) {
                     <NavLink to='/'>about</NavLink>
                 </li>
                 <li className={styles.item}>
-                    <NavLink to='/project'>projects</NavLink>
+                    <NavLink to='/projects/papernest'>projects</NavLink>
                 </li>
                 <li className={styles.item}>how I work</li>
             </ul>

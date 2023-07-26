@@ -1,10 +1,10 @@
-.labelContainer {
+.tagContainer {
     display: flex;
 
-    p {
-        font-size: var(--fs-sm);
+    .tag {
+        font-size: var(--fs-xs);
         padding: var(--pd-xs) var(--pd-lg);
-        background-color: hsl(54, 67%, 88%);
+        background-color: var(--c-primary-lighter);
         margin-right: var(--mg-sm);
         border-radius: 5px;
     }

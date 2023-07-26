@@ -15,6 +15,7 @@
     margin: 0;
     padding: var(--pd-xs) var(--pd-md);
     border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px var(--c-white);
 
     &:first-child {
         background-color: var(--c-black);

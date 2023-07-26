@@ -1,29 +1,183 @@
 .container {
+    --br-width-selected: 7px;
+
+    position: relative;
     background-color: var(--c-black);
     width: 100%;
+    padding: var(--pd-xl) 0;
 
     p {
         color: var(--c-white);
+        pointer-events: none;
     }
 }
 
 .containerContent {
+    cursor: pointer;
     width: 80vw;
     margin: 0 auto;
+
+    // p {
+    //     font-size: 1.4rem;
+    //     // padding-right: 20vw;
+    // }
 }
 
-.title {
+.containerCollapsible {
+     position: relative;
+    // overflow: hidden;
+    opacity: 0.7;
+    transition: opacity var(--tr-base);
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        height: calc(100% - var(--br-width-selected));
+        width: calc(100% - var(--br-width-selected));
+        top: 0px;
+        left: 0px;
+        opacity: 0;
+       // border-radius: 0 0 0 var(--br-width-selected);
+        border-left: var(--br-width-selected) solid rgb(209, 209, 209);
+        border-bottom: var(--br-width-selected) solid rgb(209, 209, 209);
+        transition: opacity 0;
+        clip-path: polygon(
+            0 var(--br-width-selected),
+            var(--br-width-selected) 0,
+            100% 0, 100% calc(100% - var(--br-width-selected)),
+            calc(100% - var(--br-width-selected)) 100%,
+            0 100%
+        );
+        // border-radius: 15px;
+    }
+}
+
+.char {
     font-family: 'inter-bold';
     font-size: 80px;
     color: var(--c-white);
     margin: 0;
+    padding: 0;
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.charWrap {
+    overflow: hidden;
+}
+
+.charEmpty {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spliLettersContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--mg-xl);
+}
+
+.phraseContainer {
+    pointer-events: none;
+    overflow: hidden;
 }
 
 .phrase {
-    font-family: 'inter-regular';
+    font-family: 'inter-light';
     font-size: 40px;
     color: var(--c-white);
-    margin: 0;
-    border-bottom: 1px solid white;
-    padding: 20px 0;
+    margin: 30px 0;
+    padding: 0 var(--pd-md);
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.animatedContainer {
+    pointer-events: none;
+    transition: transform var(--tr-base), background-color 0s;
+}
+
+[is-expanded] {
+    opacity: 1;
+
+    &::before {
+        opacity: 1;
+        transition: opacity var(--tr-base) ease-out var(--tr-base);
+    }
+
+    .animatedContainer {
+        position: relative;
+        background: hsl(0, 0%, 16%);
+        transform: translate(var(--br-width-selected), calc(var(--br-width-selected) * -1));
+        transition: transform var(--tr-base) var(--tr-base), background-color 0s;
+        clip-path: polygon(
+            0 var(--br-width-selected),
+            var(--br-width-selected) 0,
+            100% 0, 100% calc(100% - var(--br-width-selected)),
+            calc(100% - var(--br-width-selected)) 100%,
+            0 100%
+        );
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(var(--br-width-selected) * -1);
+            height: var(--br-width-selected);
+            width: var(--br-width-selected);
+            background-color: var(--c-black);
+        }
+    }
+
+    .collapsible {
+        opacity: 1;
+        overflow: hidden;
+        transition: var(--tr-base), opacity 0.2s ease-in 0.3s, transform var(--tr-base);
+    }
+
+    .line {
+        opacity: 0 !important;
+    }
+}
+
+
+[is-unfocused] {
+    opacity: 0.3;
+    transition: opacity var(--tr-base);
+
+    &:hover {
+        opacity: 0.7;
+
+    }
+}
+
+.collapsible {
+    pointer-events: none;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    transition: var(--tr-base), opacity 0s, transform var(--tr-base);
+    // transform: translateY(30px);
+
+    p {
+        font-family: 'nunito-400';
+        font-size: var(--fs-lg);
+        color: hsl(136, 0%, 85%);
+        max-width: 1000px;
+        margin: 0;
+        padding: 0 var(--pd-xl) var(--pd-xl) var(--pd-xl);
+    }
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    background-color: var(--c-white);
+    opacity: 0;
+    transform-origin: left;
+    transform: scaleX(20%);
 }

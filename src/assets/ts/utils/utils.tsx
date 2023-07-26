@@ -13,6 +13,10 @@ export function isElProportionHigherThanViewport(elCompare: HTMLImageElement | S
     return getViewportProportion() > getElementProportion(elCompare)
 }
 
+export function getProportionRelToViewport(elCompare: HTMLImageElement | SVGSVGElement): number {
+    return getElementProportion(elCompare) / getViewportProportion()
+}
+
 export function getElementProportion(element: HTMLImageElement | SVGSVGElement) {
     return element.getBoundingClientRect().width / element.getBoundingClientRect().height
 }

@@ -10,14 +10,14 @@ import { TextBanner } from '../TextBanner/TextBanner'
 import { TopBanner } from '../TopBanner/TopBanner'
 import { Header } from '../Header/Header'
 import { WorkBanner } from '../WorkBanner/WorkBanner'
-import { Project } from '../../pages/project'
+import { Project } from '../../pages/projectPapernest'
 
 import { Routes, Route } from 'react-router-dom'
 import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages';
 
 const routes = [
-    {path: '/project', name: 'Project', Component: Project},
+    {path: '/projects/papernest', name: 'Project', Component: Project},
     {path: '/', name: 'Home', Component: Home}
 ]
 

@@ -8,6 +8,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { setTextAnimation } from "./WorkBanner.animations"
 import { Button, IBtnProps } from "../UI/Button/Button"
+import { getProportionRelToViewport, isElProportionHigherThanViewport } from "../../assets/ts/utils/utils"
 // import { getWorkBannerAnimations } from "./WorkBanner.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -25,7 +26,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
     const refFullContainer = useRef(null)
     const refContainerTexts = useRef(null)
 
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         //getWorkBannerAnimations(refFullContainer, refSectionAfter)
 
@@ -40,33 +41,41 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
 
         // Card 3 elements:
         const card3ImgContainer: HTMLElement = (card3 as HTMLElement).querySelector('.img-container') as HTMLElement
-        const card3Svg: SVGSVGElement = (card3 as HTMLElement).querySelector('svg') as SVGSVGElement
-        const card3Img: HTMLElement = (card3 as HTMLElement).querySelector('img') as HTMLElement
+        const card3ImgWrap: HTMLElement = (card3 as HTMLElement).querySelector('#card-3-img-wrap') as HTMLElement
+        const card3Svg: SVGSVGElement = (card3 as HTMLElement).querySelector('#sky-darkening') as SVGSVGElement
+
+        // card-3-img-wrap
+
+        // const card3Img: HTMLElement = (card3 as HTMLElement).querySelector('img') as HTMLElement
         const card3Rain: HTMLElement = (card3 as HTMLElement).querySelector('#rain-container') as HTMLElement
-        // Card 3 illustration elements:
+        // // Card 3 illustration elements:
         const elMoon: HTMLElement = (card3 as HTMLElement).querySelector('#moon') as HTMLElement
         const elDarkeningLayer: HTMLElement = (card3 as HTMLElement).querySelector('#darkening-layer') as HTMLElement
-        const elSkyDarkening: HTMLElement = (card3 as HTMLElement).querySelector('#sky-darkening') as HTMLElement
+        const elSkyDarkeningImg: HTMLElement = (card3 as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
         const elLightning: HTMLElement = (card3 as HTMLElement).querySelector('#lightning') as HTMLElement
-        // Clouds:
+        // // Clouds:
         const elFirstCloudsLayerOne = (card3 as HTMLElement).querySelector('#cloud-first-line-1') as HTMLElement
-        const elFirstCloudsLayerOneCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-1-copy') as HTMLElement
-        const elFirstCloudsLayerTwo = (card3 as HTMLElement).querySelector('#cloud-first-line-2') as HTMLElement
-        const elFirstCloudsLayerTwoCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-2-copy') as HTMLElement
+        // const elFirstCloudsLayerOneCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-1-copy') as HTMLElement
+        // const elFirstCloudsLayerTwo = (card3 as HTMLElement).querySelector('#cloud-first-line-2') as HTMLElement
+        // const elFirstCloudsLayerTwoCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-2-copy') as HTMLElement
         const elSecondCloudsLayer = (card3 as HTMLElement).querySelector('#cloud-second-line') as HTMLElement
-        const elSecondCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-second-line-copy') as HTMLElement
+        // const elSecondCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-second-line-copy') as HTMLElement
         const elThirdCloudsLayer = (card3 as HTMLElement).querySelector('#cloud-third-line') as HTMLElement
-        const elThirdCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-third-line-copy') as HTMLElement
+        // const elThirdCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-third-line-copy') as HTMLElement
 
-        // Set distances on images for animations:
-        const distCard3ToTop = (elContainer as HTMLElement).getBoundingClientRect().top - card3Svg.getBoundingClientRect().top
-        card3Svg.setAttribute("data-dist-top", Math.abs(distCard3ToTop).toString())
+        // // Set distances on images for animations:
+        // const distCard3ToTop = (elContainer as HTMLElement).getBoundingClientRect().top - card3Svg.getBoundingClientRect().top
+        // card3Svg.setAttribute("data-dist-top", Math.abs(distCard3ToTop).toString())
 
-        const  distCard3ToLeft = (card3Svg.parentElement as HTMLElement).getBoundingClientRect().left
+        const  distCard3ToLeft = (card3Svg.parentElement?.parentElement as HTMLElement).getBoundingClientRect().left
         card3Svg.setAttribute("data-dist-left", Math.abs(distCard3ToLeft).toString())
 
 
         let ctx = gsap.context(() => {
+
+            console.log("IMAGE: ")
+            console.log(card3Svg)
+            console.log("width is: "+card3Svg.getBoundingClientRect().width)
 
             setTextAnimation(elContainerTexts)
 
@@ -78,10 +87,10 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
             tlLightning.pause()
 
             tlLightning
-                .to(elLightning, {duration: 0.15, yoyo: true, opacity: "0.15", repeat: 1})
-                .to(elLightning, {duration: 0.1, yoyo: true, opacity: "0.2", repeat: 1})
-                .to(elLightning, {duration: 0.1, yoyo: true, opacity: "0.15", repeat: 1, delay: 3})
-                .to(elLightning, {duration: 0.2, yoyo: true, opacity: "0.1", repeat: 1})
+                .to(elLightning, {duration: 0.15, yoyo: true, opacity: "0.3", repeat: 1})
+                .to(elLightning, {duration: 0.1, yoyo: true, opacity: "0.4", repeat: 1})
+                .to(elLightning, {duration: 0.1, yoyo: true, opacity: "0.3", repeat: 1, delay: 3})
+                .to(elLightning, {duration: 0.2, yoyo: true, opacity: "0.4", repeat: 1})
 
             let timeline = gsap.timeline({
                 scrollTrigger: {
@@ -103,103 +112,72 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                 }
             })
 
-            timeline.addLabel('initial')
+            timeline.addLabel('cards-placement')
                 .set([card1, card2, card3], {yPercent: 150, opacity: 1})
+                .set([
+                    card1.querySelector(".overlay"),
+                    card2.querySelector(".overlay")
+                ], {opacity: "0"})
 
-            timeline.addLabel('startaaa')
+            timeline.addLabel('place-card-1')
                 .to(card1, {yPercent: 0})
 
-            timeline.addLabel('second')
+            timeline.addLabel('place-card-2')
                 .to(card2, {yPercent: 0})
+                .set(card1.querySelector(".overlay"), {opacity: 0.5})
+                .set(card1.querySelector(".img-container"), {opacity: 0})
 
-            timeline.addLabel('third')
-                .to(card3, {yPercent: 0, onComplete: ()=> {
-                    console.log("left is" + ScrollTrigger.positionInViewport(card3Svg, "left"))
-                    // console.log(`window:   -=${window.innerHeight}`)
-                    // console.log(`percentage:   -=${ScrollTrigger.positionInViewport(card3Svg, "top")}`)
-                    // console.log(`heyyy:   -=${window.innerHeight * ScrollTrigger.positionInViewport(card3Svg, "top")}`)
-
-                    console.log(window.innerWidth / window.innerHeight)
-                    console.log(card3Svg.getBoundingClientRect().width / card3Svg.getBoundingClientRect().height)
-                    // cardDistToTop = `-=${(elContainer as HTMLElement).getBoundingClientRect().top - card3Svg.getBoundingClientRect().top}`
-                    }
-                })
+            timeline.addLabel('place-card-3')
+                .to(card3, {yPercent: 0})
+                .set(card2.querySelector(".overlay"), {opacity: 0.5})
+                .set(card2.querySelector(".img-container"), {opacity: 0})
+                .set(card1.querySelector(".overlay"), {opacity: 0.7})
                 .set(cardsContainer, {pointerEvents: "none"})
-
-
-            // timeline.addLabel('move-cards')
-            //     .to(card1, {x: 1000})
-            //     .to(card2, {x: 500}, '-=0.2')
-            //     .to(card3, {x: 200}, '-=0.4')
 
 
             // Animate third card:
             timeline.addLabel('forth')
-                .set(card3ImgContainer, {borderRadius: '15'})
+                .set(card3ImgContainer, {
+                    borderRadius: '15'
+                })
                 .to(elContainerTexts, {
                     opacity: 0,
-                    y: `-=80vh`
+                    y: `-=100vh`
                 }, 'end')
-                .to(card3ImgContainer, { width: card3Svg.getBoundingClientRect().width }, 'end')
-                //  maybe for mobile
-                // .to(card3ImgContainer, {x: (card3Svg.getBoundingClientRect().width / 2) * -1}, 'end')
-                // .to(card3ImgContainer, { width: card3Svg.getBoundingClientRect().width }, 'end')
-
-            const myFunction = () => {
-                gsap.set(elFirstCloudsLayerOneCopy, {transformOrigin:"50% 50%", scaleX: -1, xPercent: -100})
-                gsap.set(elSecondCloudsLayerCopy, {transformOrigin:"50% 50%", scaleX: -1, xPercent: 100})
-                gsap.set(elThirdCloudsLayerCopy, {transformOrigin:"50% 50%", scaleX: -1, xPercent: -100})
-                gsap.to(elFirstCloudsLayerOneCopy, {duration: 90, ease: "none", xPercent: 0})
-                gsap.to(elFirstCloudsLayerOne, {duration: 90, ease: "none", xPercent: 100})
-                gsap.to(elSecondCloudsLayer, {repeat: -1, duration: 90, ease: "none", xPercent: -100})
-                gsap.to(elSecondCloudsLayerCopy, {repeat: -1, duration: 90, ease: "none", xPercent: 0})
-                gsap.to(elThirdCloudsLayer, {duration: 120, ease: "none", xPercent: 100})
-                gsap.to(elThirdCloudsLayerCopy, {duration: 120, ease: "none", xPercent: 0})
-            }
-
+                .to(card3ImgContainer, {
+                    width: card3Svg.getBoundingClientRect().width
+                }, 'end')
 
             // Animate third img:
             timeline.addLabel('fifth')
                 //.set(cardsContainer, {overflow: 'visible'})
                 .set(card3ImgContainer, {overflow: 'visible'})
-                .to(card3Svg, {
+                .to(card3ImgContainer, {
                     x: (): string => {
-                        return `-=${card3Svg.getAttribute("data-dist-left")}`
+                        const dist = card3Svg.getBoundingClientRect().width / window.innerWidth
+                        return `${(parseInt(card3Svg.getAttribute("data-dist-left") || '') * dist) / 2 - 4}`
                     },
                     y: (): string => {
                         return `-=${window.innerHeight * ScrollTrigger.positionInViewport(card3Svg, "top")}`
                     },
                     height: (): string => {
-                        console.log(`percentage: ${((window.innerWidth / window.innerHeight) / (card3Svg.getBoundingClientRect().width / card3Svg.getBoundingClientRect().height))}`)
-                        console.log(`RETUUUURN: ${((card3Svg.getBoundingClientRect().width / card3Svg.getBoundingClientRect().height) / (window.innerWidth / window.innerHeight)) * 100}vh`)
-                        return `${((card3Svg.getBoundingClientRect().width / card3Svg.getBoundingClientRect().height) / (window.innerWidth / window.innerHeight)) * 100}vh`}
-                }, 'start')
-                .to(card3Img, {
-                    width: (): string => {
-                        //return `-=${((window.innerWidth / window.innerHeight) / (card3Svg.getBoundingClientRect().width / card3Svg.getBoundingClientRect().height)) * 100}vw`
-                        return `-=${card3Svg.getAttribute("data-dist-left")}`
-                    },
-                }, 'start')
-                .to(card3Rain, {
-                    x: (): string => {return `-=${card3Svg.getAttribute("data-dist-left")}`},
-                    y: (): string => {
-                        return `-=${Math.abs((elContainer as HTMLElement).getBoundingClientRect().top - card3Svg.getBoundingClientRect().top)}`
-                    },
-                    width: "105vw"
-                }, 'start')
-                .to(card3Rain, {
-                    width: "105vw"
+                        const prop = getProportionRelToViewport(card3Svg)
+                        return prop >= 1 ? `${prop * 100}vh` : `${100 / prop}vh`
+                    }
                 }, 'start')
                 .to(elMoon, {opacity: "0"}, 'start')
-                //.to(elDarkeningLayer, {fillOpacity: "0.4", onComplete: ()=> {tlLightning.play()}}, 'start')
-                .to(elSkyDarkening, {fillOpacity: "0.7", onStart: myFunction}, 'start')
-                .to(elFirstCloudsLayerOneCopy, {opacity: "0.1"}, 'start')
-                .to(elSecondCloudsLayerCopy, {opacity: "0.55"}, 'start')
-                .to(elThirdCloudsLayerCopy, {opacity: "0.3"}, 'start')
-                .to(elFirstCloudsLayerOne, {opacity: "0.10"}, 'start')
-                .to(elFirstCloudsLayerTwo, {opacity: "0.03"}, 'start')
-                .to(elSecondCloudsLayer, {opacity: "0.55"}, 'start')
-                .to(elThirdCloudsLayer, {opacity: "0.3"}, 'start')
+                .to(elDarkeningLayer, {opacity: "0.3", onComplete: ()=> {tlLightning.play()}}, 'start')
+                .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
+                .to(elFirstCloudsLayerOne, {opacity: "1"}, 'start')
+                .to(elSecondCloudsLayer, {opacity: "1"}, 'start')
+                .to(elThirdCloudsLayer, {opacity: "1"}, 'start')
+
+            //     .to(elFirstCloudsLayerOneCopy, {opacity: "0.1"}, 'start')
+            //     .to(elSecondCloudsLayerCopy, {opacity: "0.55"}, 'start')
+            //     .to(elThirdCloudsLayerCopy, {opacity: "0.3"}, 'start')
+            //     .to(elFirstCloudsLayerTwo, {opacity: "0.03"}, 'start')
+            //     .to(elSecondCloudsLayer, {opacity: "0.55"}, 'start')
+            //     .to(elThirdCloudsLayer, {opacity: "0.3"}, 'start')
 
             // TEXTS ANIMATIONS
 

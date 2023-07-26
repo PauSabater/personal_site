@@ -1,5 +1,5 @@
 .sectionContainer {
-    --container-pd-top: 50px;
+    --container-pd-top: 15vh;
     --heading-height: 80px;
 
     --card-title-width: 70px;
@@ -9,6 +9,7 @@
     --card-left: 80px;
     --card-img-width: calc(var(--card-width) - var(--card-title-width));
     --card-top: var(--container-pd-top);
+    --card-total-height: calc(var(--card-height) + var(--card-title-height));
 
     position: relative;
     padding-top: var(--container-pd-top);
@@ -28,7 +29,7 @@
 .textContainer {
     grid-column-start: 2;
     grid-row-start: 1;
-    margin-top: 13vh;
+    margin-top: 0;
 
     h1 {
         height: auto;
@@ -75,8 +76,8 @@
     position: absolute;
     top: var(--card-top);
     left: var(--card-left);
-    opacity: 0;
-    transition: transform 0.3s;
+    opacity: 1;
+    transition: transform var(--tr-base);
 
     &:hover a {
         transform: translateX(10px);
@@ -91,11 +92,11 @@
 }
 
 .cardContainer:nth-child(2) {
-    top: calc(var(--card-title-height) + var(--card-top));
+    top: calc(15px + var(--card-top));
     left: calc(var(--card-left) + var(--card-title-width));
 }
 
 .cardContainer:nth-child(3) {
-    top: calc(var(--card-title-height) * 2 + var(--card-top));
+    top: calc(30px + var(--card-top));
     left: calc(var(--card-left) + (var(--card-title-width) * 2));
 }

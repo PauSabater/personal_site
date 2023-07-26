@@ -55,6 +55,8 @@
     --c-secondary-dark: hsl(248, 30%, 30%);
     --c-secondary-darker: hsl(248, 30%, 10%);
 
+    --c-grey: hsl(0, 0%, 50%);
+
 
     --c-black: hsl(0, 0%, 7%);
     --c-font-global: var(--c-black);
@@ -70,6 +72,7 @@
 
     // Transitions
     --tr-base: 0.3s;
+    --tr-slow: 0.5s;
 
     // Colors
 
@@ -96,6 +99,10 @@
     p {
         line-height: 1.5;
     }
+
+    // Border-radius
+    --br-base: 10px;
+    --br-sm: 5px;
 
 
 }

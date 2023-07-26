@@ -10,12 +10,12 @@ import { MethodSection } from "../components/MethodSection/MethodSection";
 export function Home() {
 
     return (
-        <Fragment>
+        <div>
             <TopBanner title={texts.topBanner.title} lines={texts.topBanner.lines}/>
             <TextBanner texts={texts.intro}/>
             <WorkBanner props={texts.workBanner}/>
             <SkillsBanner texts={texts.skillsBanner}/>
-            <MethodSection/>
-        </Fragment>
+            <MethodSection props={texts.methodSectionTexts}/>
+        </div>
     )
 }
