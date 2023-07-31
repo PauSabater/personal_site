@@ -1,10 +1,23 @@
 import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayDayNum, isMobileScreen } from "../../assets/ts/utils/utils"
+import { getTodayDayNum, getTodayMonthName, isMobileScreen } from "../../assets/ts/utils/utils"
 import { setTopBannerAnimations } from "./TopBanner.animations"
+import parse from "html-react-parser"
+import { ellipse, highlights, underline } from "../../assets/svg/ts/strokes"
 
+export interface ITopBannerProps {
+    desktop: {
+        pretitle: string,
+        lines: string[]
+    },
+    mobile: {
+        pretitle: string,
+        lines: string[]
+    },
+    dateText: string
+}
 
-export function TopBanner({ title, lines }: { title: string, lines: string[]}) {
+export function TopBanner({ props }: { props: ITopBannerProps}) {
 
     const refContainerTitleDesktop: React.MutableRefObject<null> = useRef(null)
     const refContainerTitleMobile: React.MutableRefObject<null> = useRef(null)
@@ -17,21 +30,27 @@ export function TopBanner({ title, lines }: { title: string, lines: string[]}) {
     return (
         <Fragment>
             <div className={styles.container} >
-                <div ref={refContainerTitleDesktop} className={styles.wrappTitle} >
-                    <p className={styles.preTitle}>frontend dev</p>
-                    <p className={styles.title}>giving light</p>
-                    <p className={styles.title}>to ideas</p>
+                <div ref={refContainerTitleDesktop} className={styles.containerTitleDesktop} >
+                    <p className={styles.preTitle}>{props.desktop.pretitle}</p>
+                    { props.desktop.lines.map((line, i)=> {
+                        return <p className={styles.title}>{parse(`
+                            ${i === 0 ? highlights : ''}
+                            ${line.replace("$ellipse$", ellipse).replace("$underline$", underline)}
+                        `)}</p>
+                    })}
                 </div>
-                {/* <div ref={refContainerTitleMobile}className={styles.wrapp} >
-                    <p className={styles.preTitle}>frontend dev</p>
-                    <p className={styles.title}>giving light</p>
-                    <p className={styles.title}>to ideas</p>
-                </div> */}
+                {/* {parse(ellipse)} */}
+                <div ref={refContainerTitleMobile} className={styles.containerTitleMobile} >
+                    <p className={styles.preTitle}>{props.mobile.pretitle}</p>
+                    { props.mobile.lines.map((line)=> {
+                        return <p className={styles.title}>{parse(line)}</p>
+                    })}
+                </div>
                 <div id="date-banner" className={styles.date}>
-                    <div className={styles.container} >
-                        <p className={styles['date__date']}>{getTodayDayNum()}</p>
+                    <div className={styles.dateContainer} >
+                        <p id="day-num" className={styles.dayNum}>{"00"}</p>
                         <div className={styles.textContainer}>
-                            <p className={styles.text}>Jul</p>
+                            <p className={styles.text}>{getTodayMonthName()}</p>
                             <p className={styles.text}>Available</p>
                             <p className={styles.text}>for work</p>
                         </div>

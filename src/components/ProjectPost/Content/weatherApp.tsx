@@ -3,17 +3,17 @@ import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
 import { Callout } from "../Components/Callout/Callout"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
-import { LinkInline } from "../Components/LinkInline/LinkInline"
-import parse from "html-react-parser"
+import { Cta, IBtnProps } from '../../UI/Cta/Cta'
 import { calendar } from "../../../assets/svg/ts/calendar"
+import parse from "html-react-parser"
+import { LinkInline } from "../Components/LinkInline/LinkInline"
 
-
-export const papernestContent = (): JSX.Element => { return (
+export const weatherAppContent = (): JSX.Element => { return (
     <Fragment>
         <div className={styles.introArticle} id="intro-article">
             <div className={`${styles.introContainer} intro-container`}>
                 <h1>
-                    Frontend developer at papernest
+                    Npm package for a weather app
                 </h1>
                 <TagLabels tags={['professional experience']} color={"secondary"}></TagLabels>
                 <TagLabels tags={['TypeScript', 'LITElement', 'Django', 'PHP', 'Wordpress', 'SEO', 'Performance']} color={"primary"}></TagLabels>
@@ -21,7 +21,7 @@ export const papernestContent = (): JSX.Element => { return (
                     {parse(calendar("var(--c-grey)"))}<p>March 2021 - April 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    <LinkInline text={"papernest"} href={"https://papernest.com/"}/> is a french <span>tech startup</span> with a worforce of around 1000 employees, which automates the moving process of telecom contracts, energy contracts or even its home insurance through partnerships with its suppliers. I had the pleasure to work for them as a <span>frontend developer</span>. Having the tech department strongly integrated <span>good coding practises</span>, this period was very benefitial for me to grow professionally.
+                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components. In addition, I have been always curious about weather science. Despite that there are many tutorials out there about a project like this, I did not follow any and did all from scratch, using the React documentation instead.
                 </p>
             </div>
         </div>

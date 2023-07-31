@@ -28,17 +28,24 @@
 }
 
 .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:not(:last-child) {
+        margin-right: 30px;
+    }
+}
+
+.item a {
     cursor: pointer;
     color: white;
     padding: var(--pd-sm) var(--pd-md);
     font-weight: var(--fw-medium);
     font-size: var(--fs-sm);
-    border-radius: 5px;
+    text-decoration: none;
+    border-radius: var(--br-sm);
     transition: background-color var(--tr-base);
-
-    &:not(:last-child) {
-        margin-right: 30px;
-    }
 
     &:hover {
         background-color: grey;

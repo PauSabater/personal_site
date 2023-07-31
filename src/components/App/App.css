@@ -5,3 +5,7 @@
 html {
     background-color: var(--bg-main);
 }
+
+.page {
+    transition: opacity 2s;
+}

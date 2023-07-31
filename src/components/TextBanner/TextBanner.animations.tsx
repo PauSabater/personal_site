@@ -1,7 +1,7 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase";
-import { isMobileScreen } from "../../assets/ts/utils/utils";
+import { isVerticalMobileTablet } from "../../assets/ts/utils/utils";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {
@@ -13,7 +13,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
         if (elTextBanner === null) return
 
         const elsTextLines: NodeListOf<HTMLParagraphElement> = (elTextBanner as HTMLElement).querySelectorAll("p")
-        const elBtn = (elTextBanner as HTMLElement).querySelector("button")
+        const elBtn = (elTextBanner as HTMLElement).querySelector("Cta")
 
 
         // Set timeline
@@ -35,7 +35,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
         // Text lines reveal effect:
         tlTBanner.fromTo(elBtn,
             {opacity: 0},
-            {opacity: 1, duration: 0.3},
+            {opacity: 1, duration: 0.3, onComplete: ()=> elTextBanner?.setAttribute('data-animation-is-finished', '')},
             'end'
         )
 

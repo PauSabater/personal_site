@@ -7,8 +7,8 @@ import { texts } from "../../assets/ts/texts/texts"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { setTextAnimation } from "./WorkBanner.animations"
-import { Button, IBtnProps } from "../UI/Button/Button"
-import { getProportionRelToViewport, isElProportionHigherThanViewport } from "../../assets/ts/utils/utils"
+import { Cta, IBtnProps } from "../UI/Cta/Cta"
+import { getProportionRelToViewport, isViewportPropHigherThanEl, isMobileScreen, getElementProportion, getViewportProportion } from "../../assets/ts/utils/utils"
 // import { getWorkBannerAnimations } from "./WorkBanner.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger)
 export interface IWorkBannerProps {
     heading: IHeadingProps,
     text: string[],
-    button: IBtnProps
+    Cta: IBtnProps
 }
 
 export function WorkBanner({props}: { props: IWorkBannerProps }) {
@@ -26,7 +26,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
     const refFullContainer = useRef(null)
     const refContainerTexts = useRef(null)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         //getWorkBannerAnimations(refFullContainer, refSectionAfter)
 
@@ -73,10 +73,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
 
         let ctx = gsap.context(() => {
 
-            console.log("IMAGE: ")
-            console.log(card3Svg)
-            console.log("width is: "+card3Svg.getBoundingClientRect().width)
-
             setTextAnimation(elContainerTexts)
 
             // Texts animations
@@ -94,13 +90,14 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
 
             let timeline = gsap.timeline({
                 scrollTrigger: {
-                    trigger: elContainer,
+                    trigger: isMobileScreen() ? cardsContainer : elContainer,
+                   // trigger: elContainer,
                     start: "top",
-                    end: "bottom -250%",
+                    end: "bottom",
                     pin: true,
                     pinSpacing: true,
                     markers: true,
-                    scrub: 0.5,
+                    scrub: 1,
                     onLeave: () => {
                         tlLightning.play()
                         gsap.to(card3Rain, {display: "block", opacity: "0.3"})
@@ -113,21 +110,29 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
             })
 
             timeline.addLabel('cards-placement')
-                .set([card1, card2, card3], {yPercent: 150, opacity: 1})
+                .set(card1, {yPercent: 30, opacity: 1})
+                .set([card2, card3], {yPercent: 150, opacity: 0})
                 .set([
                     card1.querySelector(".overlay"),
                     card2.querySelector(".overlay")
                 ], {opacity: "0"})
 
-            timeline.addLabel('place-card-1')
-                .to(card1, {yPercent: 0})
 
-            timeline.addLabel('place-card-2')
-                .to(card2, {yPercent: 0})
-                .set(card1.querySelector(".overlay"), {opacity: 0.5})
-                .set(card1.querySelector(".img-container"), {opacity: 0})
+            //timeline.addLabel('place-card-1-and-2')
+
+
+            // timeline.addLabel('place-card-2')
+            //     .set(card2, {opacity: 1})
+            //     .to(card2, {yPercent: 0})
+            //     .set(card1.querySelector(".overlay"), {opacity: 0.5})
+            //     .set(card1.querySelector(".img-container"), {opacity: 0})
 
             timeline.addLabel('place-card-3')
+                .set(card2, {opacity: 1})
+                .to([card1, card2], {yPercent: 0})
+                .set(card1.querySelector(".img-container"), {opacity: 0})
+                .set(card1.querySelector(".overlay"), {opacity: 0.5})
+                .set(card3, {opacity: 1})
                 .to(card3, {yPercent: 0})
                 .set(card2.querySelector(".overlay"), {opacity: 0.5})
                 .set(card2.querySelector(".img-container"), {opacity: 0})
@@ -152,19 +157,60 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
             timeline.addLabel('fifth')
                 //.set(cardsContainer, {overflow: 'visible'})
                 .set(card3ImgContainer, {overflow: 'visible'})
-                .to(card3ImgContainer, {
+                .to(card3ImgWrap, {
+                    //x: 600,
                     x: (): string => {
-                        const dist = card3Svg.getBoundingClientRect().width / window.innerWidth
-                        return `${(parseInt(card3Svg.getAttribute("data-dist-left") || '') * dist) / 2 - 4}`
+                        // proportion image width to window width
+                        const dist = (window.innerWidth / 2) - parseInt(card3Svg.getAttribute("data-dist-left") as string)
+                        // const propImgToWindow = card3Svg.getBoundingClientRect().width / window.innerWidth
+                        // return `${dist}`
+                        console.log("heyyy")
+                        console.log(isViewportPropHigherThanEl(card3Svg))
+                        console.log("prop image is")
+                        console.log(getElementProportion(card3Svg))
+
+                        console.log("viewport prop is")
+                        console.log(getViewportProportion())
+
+                        console.log("WIDTH SVG IS: "+card3Svg.getBoundingClientRect().width)
+                        console.log("TO CENTERRRR:")
+                        const imgCenterToLeft = (parseInt(card3Svg.getAttribute("data-dist-left") || '0') + (card3Svg.getBoundingClientRect().width / 2))
+                        const windowHalf = window.innerWidth / 2
+                        const distance = windowHalf - imgCenterToLeft
+                        console.log(windowHalf - imgCenterToLeft)
+                        return distance > 0
+                            ? distance.toString()
+                            : `-=${distance}`
+
+
+
+                        // return '0'
+
+                        // return isViewportPropHigherThanEl(card3Svg)
+                        //     ? `${card3Svg.getAttribute("data-dist-left")?.toString()}`
+                        //     : `-=${card3Svg.getAttribute("data-dist-left")?.toString()}`
+                        //return `-=${card3Svg.getAttribute("data-dist-left")?.toString()}` || '0'
                     },
                     y: (): string => {
-                        return `-=${window.innerHeight * ScrollTrigger.positionInViewport(card3Svg, "top")}`
+                        const windowHalfHeight = window.innerHeight / 2
+                        const elHalfHeight = card3Svg.getBoundingClientRect().height
+                        const dist = windowHalfHeight - elHalfHeight
+
+                        console.log("HEYYY TO TOP: "+dist)
+
+                        return `-=${Math.abs(dist).toString()}`
+                        //return `-=${window.innerHeight * ScrollTrigger.positionInViewport(card3Svg, "top")}`
+                        //return '0'
                     },
-                    height: (): string => {
-                        const prop = getProportionRelToViewport(card3Svg)
-                        return prop >= 1 ? `${prop * 100}vh` : `${100 / prop}vh`
-                    }
-                }, 'start')
+                    width: isViewportPropHigherThanEl(card3Svg)
+                        ? '100vw'
+                        : ((getViewportProportion() / getElementProportion(card3Svg)) * window.innerWidth).toString()
+                    ,
+                    height: isViewportPropHigherThanEl(card3Svg)
+                        ? ((getViewportProportion() / getElementProportion(card3Svg)) * window.innerHeight).toString()
+                        : '100vh'
+                    }, 'start')
+
                 .to(elMoon, {opacity: "0"}, 'start')
                 .to(elDarkeningLayer, {opacity: "0.3", onComplete: ()=> {tlLightning.play()}}, 'start')
                 .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
@@ -191,14 +237,14 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
     return (
         <Fragment>
             <div ref={refFullContainer} className={styles.sectionContainer}>
-                <div ref={refContainer} className={styles.container} id="cards-container">
-                    <div className={styles.cardsContainer} id="test">
+                <div ref={refContainer} className={styles.container}>
+                    <div className={styles.cardsContainer} id="cards-container">
                         <div className={styles.cardContainer} id="card-1">
                             <Card props={{
                                 title: "WORK IN PAPERNEST",
                                 text: "// Work developed for papernest during my frontend contract",
                                 img: "papernest.svg",
-                                path: "project"
+                                path: "projects/papernest"
                             }}></Card>
                         </div>
                         <div className={styles.cardContainer} id="card-2">
@@ -214,7 +260,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 title: "WEATHER NPM PACKAGE",
                                 text: "// A react weather component installable through npm",
                                 img: "mountains",
-                                path: "/"
+                                path: "projects/weather-app"
                             }}></Card>
                         </div>
                     </div>
@@ -231,7 +277,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                     </div>
                                 )
                             })}
-                                <Button btnProps={texts.workBanner.button} />
+                                <Cta props={texts.workBanner.Cta} />
                             </div>
                     </div>
                 </div>

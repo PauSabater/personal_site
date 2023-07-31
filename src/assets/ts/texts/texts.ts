@@ -4,8 +4,15 @@ export const texts = {
         links: ["projects", "how I work", "skills"]
     },
     topBanner: {
-        title: "Creative?",
-        lines: ["FRONTEND", "DEVELOPER"]
+        desktop: {
+            pretitle: "frontend dev",
+            lines: ["casting <span>$ellipse$<span>light</span></span>", "to <span>$underline$<span>ideas</span></span>"]
+        },
+        mobile: {
+            pretitle: "frontend dev",
+            lines: ["casting", "light", "to<br>ideas"]
+        },
+        dateText: "Available for work"
     },
     intro: {
         title: "hello. i'm pau",
@@ -18,14 +25,17 @@ export const texts = {
             "<span>Scroll down</span> to learn more about me !"
         ],
         textMobile: [
-            "Lorem ipsum dolor sit amet, consectetur",
-            "adipiscing elit, sed do eiusmod tempor",
-            "incididunt ut labore et dolore magna aliqua.",
-            "Ut enim ad minim veniam, quis nostrud",
-            "exercitation ullamco laboris nisi ut",
-            "aliquip ex ea commodo consequat."
+            "I am a <span>frontend developer</span>",
+            "recently installed in <span>Berlin</span>.",
+            "After an enriching first",
+            " professional experience as",
+            "a developer in a startup",
+            "based in Paris, I am",
+            "looking forward to continue",
+            "this journey. <span>Scroll down</span>",
+            "to learn more about me !"
         ],
-        button: {
+        Cta: {
             text: "Contact me",
             href: "www.test.com",
             color: "black"
@@ -46,7 +56,7 @@ export const texts = {
             "consisted of. It created a",
             "quality base for the next "
         ],
-        button: {
+        Cta: {
             text: "Visit my github",
             href: "www.test.com",
             color: "black"
@@ -114,7 +124,7 @@ export const texts = {
         }
     },
     methodSectionTexts: {
-        title: "How do I like to work?",
+        title: "How do I $like to work?",
         methods: [
             {
                 title: "Think about the users, think about the devs",
@@ -126,7 +136,7 @@ export const texts = {
             },
             {
                 title: "Good communication makes a better product",
-                description: "Product is best shaped when all sides have a say from their area of experteese. Developers have unique insights and ideas from their perspective. Good communication on all sides will improve working athmosphere and create much better solutions !"
+                description: "Product is best shaped when all sides have a say from their area of experteese. Developers have unique insights and ideas from their perspective. <span>Good communication</span> on all sides will improve working athmosphere and create much better solutions !"
             },
             {
                 title: "Keep it simple",

@@ -11,7 +11,7 @@ export function Home() {
 
     return (
         <div>
-            <TopBanner title={texts.topBanner.title} lines={texts.topBanner.lines}/>
+            <TopBanner props={texts.topBanner}/>
             <TextBanner texts={texts.intro}/>
             <WorkBanner props={texts.workBanner}/>
             <SkillsBanner texts={texts.skillsBanner}/>

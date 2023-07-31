@@ -1,24 +1,24 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
-import { CustomEase } from "gsap/CustomEase";
-import { isMobileScreen } from "../../assets/ts/utils/utils";
+import { CustomEase } from "gsap/CustomEase"
+import { getTodayDayNum, isVerticalMobileTablet } from "../../assets/ts/utils/utils"
+import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRefObject<null>, refContainerTitleMobile: React.MutableRefObject<null>) {
     let ctx = gsap.context(() => {
 
         // Reference element from component:
-        let elContainerTitle: HTMLElement | null = isMobileScreen() ? refContainerTitleDesktop.current : refContainerTitleMobile.current
-        elContainerTitle = refContainerTitleDesktop.current
+        let elContainerTitle: HTMLElement | null = isVerticalMobileTablet() ? refContainerTitleMobile.current : refContainerTitleDesktop.current
+        //elContainerTitle = refContainerTitleDesktop.current
 
         // Query elements from DOM:
         const elHeader: HTMLElement = document.querySelector("#header") as HTMLElement
         const elDateBanner: HTMLElement = document.querySelector("#date-banner") as HTMLElement
+        const elDayNumber: HTMLElement = document.querySelector("#day-num") as HTMLElement
 
         if (elContainerTitle === null) return
-
         const elsTitles: NodeListOf<HTMLParagraphElement> = (elContainerTitle as HTMLElement).querySelectorAll("p")
-        const easeTitle: string = "M0,0,C0.11,0.494,0.212,0.618,0.32,0.748,0.439,0.891,0.504,1,1,1"
 
         // Set timeline
         let tlTopBanner = gsap.timeline()
@@ -29,7 +29,7 @@ export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRe
         // Animate titles rotation:
         tlTopBanner.to(Array.from(elsTitles), {
             rotationY:"0deg",
-            ease: CustomEase.create("custom", easeTitle),
+            ease: CustomEase.create("custom", easeOutLong),
             duration: 1.2,
             opacity: 1,
             stagger: 0.4
@@ -47,7 +47,7 @@ export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRe
             opacity: 1,
             y: 0,
             duration: 1,
-            ease: CustomEase.create("custom", easeTitle)
+            ease: CustomEase.create("custom", easeOutLong)
         }, 0.7)
 
         // Date entering screen:
@@ -55,11 +55,37 @@ export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRe
             opacity: 1,
             y: 0,
             duration: 1,
-            ease: CustomEase.create("custom", easeTitle)
+            ease: CustomEase.create("custom", easeOutLong),
+            onStartParams:[elDayNumber, 500],
+            onStart: setDayNumCounter,
+            onCompleteParams:[isVerticalMobileTablet() ? refContainerTitleDesktop.current : refContainerTitleMobile.current],
+            onComplete: setElAttribute
         }, 0.7)
 
         tlTopBanner.delay(0.7)
     })
 
     return () => ctx.revert()
+}
+
+function setElAttribute(elParentTitles: HTMLElement) {
+    if (elParentTitles === null) return
+    elParentTitles.setAttribute('data-animation-completed', '')
+}
+
+function setDayNumCounter(elDayNumber: HTMLElement, delayExec: number) {
+    if (elDayNumber === null) return
+    const numToday: number = parseInt(getTodayDayNum())
+    let numCount: number = 0
+    const delay = (1000 - delayExec) / numToday
+
+    setTimeout(()=> {
+        const interval: NodeJS.Timer = setInterval(()=> {
+            numCount += 1
+            const numString = numCount < 10 ? `0${numCount.toString()}` : numCount.toString()
+            elDayNumber.textContent = numString
+            if (numCount === numToday) clearInterval(interval)
+        }
+        , delay)
+    }, delayExec)
 }

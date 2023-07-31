@@ -2,10 +2,26 @@
     @media (max-width: 768px) { @content; }
 }
 
+@mixin mobile-tablet {
+    @media (max-width: 1023px) { @content; }
+}
+
+@mixin mobile-tablet-vertical {
+    @media (max-width: 1023px) and (max-aspect-ratio: 1/1) { @content; }
+}
+
 @mixin tablet {
     @media (min-width: 769px) and (max-width: 1023px) { @content; }
 }
 
-@mixin desktop {
+@mixin desktop-sm {
     @media (min-width: 1024px) { @content; }
+}
+
+@mixin desktop {
+    @media (min-width: 1200px) { @content; }
+}
+
+@mixin desktop-lg {
+    @media (min-width: 1600px) { @content; }
 }

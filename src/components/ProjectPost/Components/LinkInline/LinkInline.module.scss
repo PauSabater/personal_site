@@ -1,0 +1,19 @@
+.linkInline {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'nunito-800';
+    color: var(--c-secondary);
+    text-decoration: none;
+    transition: background-color var(--tr-base);
+    text-decoration: underline;
+
+    &:hover {
+        color: var(--c-secondary-dark);
+    }
+
+    svg {
+        height: 12px;
+        width: 12px;
+        margin: 0 5px;
+    }
+}

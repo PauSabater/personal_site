@@ -1,5 +1,5 @@
 .heading {
-    font-size: clamp(45px, 5vw, 120px);
+    font-size: var(--fs-heading);
     padding: 0;
     margin:0;
     font-weight: var(--fw-bolder);

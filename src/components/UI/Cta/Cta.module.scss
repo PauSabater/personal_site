@@ -1,0 +1,35 @@
+.cta {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: fit-content;
+    font-size: var(--fs-global);
+    text-decoration: none;
+    padding: 0 var(--pd-xl);
+    border: none;
+    border-radius: 5px;
+    color: var(--c-font-white);
+    font-weight: var(--fw-bold);
+}
+
+.black {
+    background-color: var(--c-black);
+}
+
+.primary {
+    background-color: var(--c-primary);
+}
+
+.secondary {
+    background-color: var(--c-secondary);
+}
+
+.dashed {
+    background: transparent;
+    border: 2px solid var(--c-grey);
+    border-style: dashed;
+    color: var(--c-font-global);
+
+}

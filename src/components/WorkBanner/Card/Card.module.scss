@@ -1,3 +1,6 @@
+
+@use '../../../assets/scss/mixins.scss';
+
 .container {
     position: relative;
     height: var(--card-height);
@@ -34,12 +37,27 @@
     transform-origin: left;
     white-space: nowrap;
     transform: rotate(270deg);
+
+    @include mixins.mobile-tablet {
+        left: 15px;
+        font-size: 22px;
+    }
 }
 
 .containerText {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
+
+    @include mixins.mobile-tablet {
+        font-size: var(--fs-xs);
+        width: 230px;
+
+        p {
+            margin-bottom: 0;
+        }
+
+    }
 }
 
 .text {
@@ -81,6 +99,10 @@
             animation: skewTree 2s;
         }
     }
+
+    @include mixins.mobile-tablet {
+        width: var(--card-img-width);
+    }
 }
 
 .imgMountainContainer {
@@ -90,10 +112,10 @@
     img {
         position: absolute;
         height: 100%;
-        top: 0;
+        top: 50%;
         left: 50%;
         height: 100%;
-        transform: translateX(-50%);
+        transform: translate(-50%, -50%);
     }
 
     .darkeningLayer {

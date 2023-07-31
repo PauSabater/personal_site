@@ -3,7 +3,7 @@ import styles from "./TransitionImages.module.scss"
 import imgPapernest from "../../assets/svg/papernest.svg"
 // import { setSkillsBannerAnimation } from "./SkillsBanner-animations"
 import gsap from "gsap"
-import { isElProportionHigherThanViewport } from "../../assets/ts/utils/utils"
+import { isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
 
 
 
@@ -25,7 +25,7 @@ export function TransitionImages({}: {}) {
         const elsImg: NodeListOf<HTMLImageElement> = (refContainer.current as HTMLElement).querySelectorAll("img")
 
         // Set img width and height depending on its proportions:
-        elsImg.forEach((img)=> isElProportionHigherThanViewport(img)
+        elsImg.forEach((img)=> isViewportPropHigherThanEl(img)
             ? gsap.set(img, {width: '100vw', height: 'auto'})
             : gsap.set(img, {height: '100vh', width: 'auto'})
         )

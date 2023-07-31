@@ -1,12 +1,16 @@
+@use '../../assets/scss/mixins';
+
 .container {
     background-color: var(--c-black);
-    padding: 75px 0;
+    padding: var(--pd-fullwidth) 0;
+
+    @include mixins.desktop-lg {
+        padding: var(--pd-fullwidth-lg) 0;
+    }
 }
 
 .banner {
-    width: 80vw;
-    max-width: 1100px;
-    height: 400px;
+    height: auto;
     padding: var(--pd-lg) var(--pd-xl);
     border-radius: 20px;
     border: 1px solid white;
@@ -18,20 +22,41 @@
     h1 {
         font-size: clamp(25px, 3vw, 70px);
         font-family: 'inter-bold';
+        margin-bottom: var(--mg-lg);
+    }
+
+    @include mixins.mobile {
+        padding: var(--pd-md) var(--pd-md);
+    }
+
+    @include mixins.desktop-lg {
+        padding: var(--pd-lg) calc(var(--pd-xl) * 2) var(--pd-2xl) calc(var(--pd-xl) * 2);
     }
 }
 
 .skillsContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
+    @include mixins.mobile-tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include mixins.mobile {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .skillContainer {
     position: relative;
     display: grid;
-    grid-template-columns: 60px 150px;
+    grid-template-columns: 60px auto;
     margin-bottom: var(--mg-md);
     opacity: 0;
+
+    @include mixins.mobile {
+        grid-template-columns: 30px auto;
+    }
 }
 
 .img {
@@ -39,11 +64,20 @@
     max-width: 70px;
     align-self: center;
     opacity: 0.6;
+
+    @include mixins.mobile {
+        height: 25px;
+        max-width: 40px;
+    }
 }
 
 .name {
     align-self: center;
-    font-size: 20px;
+    font-size: var(--fs-global);
+
+    @include mixins.mobile-tablet {
+        font-size: var(--fs-sm);
+    }
 }
 
 .level {
@@ -55,6 +89,18 @@
     bottom: 0;
     left: 0;
     overflow: hidden;
+
+    @include mixins.mobile-tablet {
+        width: 150px;
+    }
+
+    @include mixins.mobile {
+        width: 130px;
+    }
+
+    @include mixins.desktop-lg {
+        width: 220px;
+    }
 }
 
 .levelBar {

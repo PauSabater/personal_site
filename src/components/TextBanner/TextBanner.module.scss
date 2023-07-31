@@ -1,3 +1,5 @@
+@use '../../assets/scss/mixins.scss';
+
 .container {
     margin-top: 200px;
     width: 90vw;
@@ -11,9 +13,10 @@
 .wrap {
     position: relative;
     width: 100%;
+    // max-width: var(--width-max-main-content);
     margin: auto;
     box-sizing: border-box;
-    padding: var(--pd-xl) var(--pd-2xl);
+    padding: var(--pd-xl) 5vw;
     background: white;
     border-radius: 20px;
     z-index: 10;
@@ -21,7 +24,7 @@
 
 .title {
     color: var(--c-primary);
-    font-size: clamp(25px, 3vw, 70px);
+    font-size: clamp(25px, 3vw, 50px);
     font-weight: var(--fw-bolder);
     margin: 0 0 var(--mg-sm) 0;
 }
@@ -35,20 +38,17 @@
     }
 }
 
-
-
 .text {
     position: relative;
     margin: 0;
     // width: 50vw;
     color: var(--c-font-global);
-    font-size: clamp(25px, 2.3vw, 35px);
+    font-size: var(--fs-text-banner);
     font-weight: var(--fw-regular);
     z-index: 10;
 
     span {
         position: relative;
-        //padding: 0 5px;
 
         &:before {
             content: "";
@@ -61,6 +61,36 @@
             height: 100%;
             width: 100%;
             z-index: 0;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+            transition: clip-path var(--tr-slow);
         }
+    }
+}
+
+[data-animation-is-finished] {
+    span:before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+.textMobile {
+    display: none;
+}
+
+@include mixins.mobile-tablet-vertical {
+    .container {
+        margin-bottom: var(--mg-2xl);
+    }
+
+    .textMobile {
+        display: block;
+    }
+
+    .textDesktop {
+        display: none;
+    }
+
+    .title {
+        font-size: clamp(28px, 7vw, 35px);
     }
 }

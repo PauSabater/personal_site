@@ -1,3 +1,5 @@
+@use '../../assets/scss/mixins.scss';
+
 .sectionContainer {
     --container-pd-top: 15vh;
     --heading-height: 80px;
@@ -11,19 +13,42 @@
     --card-top: var(--container-pd-top);
     --card-total-height: calc(var(--card-height) + var(--card-title-height));
 
+    @include mixins.mobile-tablet {
+        --card-width: 250px;
+        --card-height: 400px;
+        --card-title-width: 30px;
+        --card-title-height: 80px;
+        --card-img-width: calc(var(--card-width) - var(--card-title-width));
+        --card-left: 4vw;
+    }
+
     position: relative;
     padding-top: var(--container-pd-top);
     width: 100vw;
     height: calc(100vh - var(--container-pd-top));
-    overflow: hidden;
+    //overflow: hidden;
+
+    @include mixins.mobile {
+        height: auto;
+        padding-top: 0;
+    }
 }
 
 .container {
     display: grid;
-    grid-template-columns: 700px auto;
+    grid-template-columns: minmax(700px, 50%) auto;
     padding: var(--pd-fullwidth);
     height: calc(var(--card-height) + var(--card-title-height) * 3);
-    overflow: hidden;
+    //overflow: hidden;
+
+    @include mixins.mobile-tablet {
+        grid-template-columns: minmax(350px, 50%) auto;
+    }
+
+    @include mixins.mobile {
+        grid-template-columns: 100%;
+        height: auto;
+    }
 }
 
 .textContainer {
@@ -34,19 +59,30 @@
     h1 {
         height: auto;
         right: 80px;
+        line-height: 1.1;
         margin-bottom: 0;
     }
 
     p {
         font-size: clamp(20px, 1.5vw, 28px);
-        width: 350px;
+        width: 380px;
         margin: 0;
     }
 
-    button {
-        margin-top: var(--mg-lg);
+    @include mixins.mobile {
+        grid-column-start: 1;
+        grid-row-start: 1;
     }
 }
+
+@include mixins.mobile {
+    .cardsContainer {
+        grid-row-start: 2;
+        height: 100vh;
+    }
+}
+
+
 
 .lineWrap {
     overflow: hidden;
@@ -64,11 +100,15 @@
     opacity: 0;
 }
 
-.preTitle {
+p.preTitle {
     margin: 0;
     font-family: 'quanticoBold';
     color: var(--c-primary);
     font-size: 1.4rem;
+}
+
+[data-cta] {
+    margin-top: var(--mg-xl);
 }
 
 .cardContainer {
@@ -76,12 +116,12 @@
     position: absolute;
     top: var(--card-top);
     left: var(--card-left);
-    opacity: 1;
-    transition: transform var(--tr-base);
+    opacity: 0;
+    transition: transform var(--tr-base), opacity var(--tr-slow);
 
-    &:hover a {
+    &:hover [data-card-link] {
         transform: translateX(10px);
-        color: green;
+        color: var(--c-primary);
     }
 
     &:hover ~ div {
@@ -94,9 +134,11 @@
 .cardContainer:nth-child(2) {
     top: calc(15px + var(--card-top));
     left: calc(var(--card-left) + var(--card-title-width));
+    z-index: 2;
 }
 
 .cardContainer:nth-child(3) {
     top: calc(30px + var(--card-top));
     left: calc(var(--card-left) + (var(--card-title-width) * 2));
+    z-index: 2;
 }

@@ -1,6 +1,7 @@
 import { Fragment, MouseEventHandler, useLayoutEffect, useRef } from "react"
 import styles from "./MethodSection.module.scss"
 import { setMethodSectionAnimation } from "./MethodSection.animations"
+import parse from "html-react-parser"
 
 
 export interface IMethodSectionTexts {
@@ -97,11 +98,13 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
             <div className={`${styles.spliLettersContainer} split-letters-container`}>
                 {[...str].map((char): JSX.Element => {
                     return (
-                        <div className={styles.charWrap}>
-                            <pre className={char !== ' ' ? styles.char : styles.charEmpty}>
-                                {char !== ' ' ? char : ' '}
-                            </pre>
-                        </div>
+                        char !== '$'
+                        ?   <div className={styles.charWrap}>
+                                <pre className={char !== ' ' ? styles.char : styles.charEmpty}>
+                                    {char !== ' ' ? char : '  '}
+                                </pre>
+                            </div>
+                        :   <div className={styles.fillAvailable}></div>
                     )
                 })}
             </div>
@@ -120,9 +123,12 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
                         <div className={`${styles.animatedContainer} animated-container`}>
                             <div className={styles.phraseContainer}>
                                 <h2 className={styles.phrase}>{method.title}</h2>
+                                <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L11.5 11L22 1" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
                             </div>
                             <div className={`${styles.collapsible} collapsible`}>
-                                <p>{method.description}</p>
+                                <p>{parse(method.description)}</p>
                             </div>
                             <div className={`${styles.line} line`}/>
                         </div>

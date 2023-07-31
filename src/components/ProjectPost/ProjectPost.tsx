@@ -4,24 +4,43 @@ import { Callout } from "./Components/Callout/Callout"
 import { ImageArticle } from "./Components/ImageArticle/ImageArticle"
 import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
+import { CustomEase } from "gsap/CustomEase"
+
 import ScrollToPlugin from "gsap/ScrollToPlugin"
 import { chevronSvg } from "../../assets/svg/ts/arrow"
 import parse from "html-react-parser"
+import { NavLink } from "react-router-dom"
+import { getProportionRelToElement, getViewportProportion, isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
+import { calendar } from "../../assets/svg/ts/calendar"
+import { LinkInline } from "./Components/LinkInline/LinkInline"
+import { easeOutLong } from "../../assets/ts/styles/styles"
+import { getImg } from "../WorkBanner/Card/Card"
+
+
+gsap.registerPlugin(CustomEase)
+
 
 gsap.registerPlugin(ScrollToPlugin)
 // gsap.registerPlugin(ScrollTrigger)
 
 
 export interface IPropsProjectPost {
+    element?: HTMLElement,
     indexTitle: string,
     wysiwyg: JSX.Element,
-    imgPath: string
+    imgPath: string,
+    pathNextProject: string,
+    currentPath: string
 }
 
 export function ProjectPost({ props }: { props: IPropsProjectPost}) {
 
+    // console.log('PROOOOOPS')
+    // console.log(props)
+
     const refArticleContainer = useRef(null)
     const refIndexContainer = useRef(null)
+    const refPostImage = useRef(null)
 
     const [titles, setTitles] = useState<NodeListOf<Element> | null>(null)
 
@@ -61,6 +80,72 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
 
     }, [refArticleContainer])
 
+    useLayoutEffect(() => {
+
+        const elImage = refPostImage.current
+        let elImgMountainContainer
+
+        if (elImage === null) {
+            elImgMountainContainer = document.querySelector("#card-3-img-wrap") as HTMLElement
+            elImgMountainContainer.style.height = `${(getProportionRelToElement(elImgMountainContainer.firstElementChild as HTMLElement) * window.innerHeight).toString()}px`
+            elImgMountainContainer.style.width = '100vw'
+
+            gsap
+                .set([
+                    elImgMountainContainer,
+                    elImgMountainContainer.querySelectorAll("img"),
+                    elImgMountainContainer.querySelectorAll("svg")
+                ], {
+                    height: `${(getProportionRelToElement(elImgMountainContainer.firstElementChild as HTMLElement) * window.innerHeight).toString()}px`,
+                    width: '100vw'
+                })
+        }
+
+        if (elImage !== null) {
+            if (isViewportPropHigherThanEl(elImage)) {
+                (elImage as HTMLImageElement).setAttribute('data-locked-width', '');
+                (elImage as HTMLImageElement).removeAttribute('data-locked-height');
+            } else {
+                (elImage as HTMLImageElement).setAttribute('data-locked-height', '');
+                (elImage as HTMLImageElement).removeAttribute('data-locked-width');
+            }
+        }
+
+        const elImg = document.querySelector("#post-container-image") === null
+            ? document.querySelector("#card-3-img-wrap")
+            : document.querySelector("#post-container-image")
+
+        console.log("ANIMATEEE")
+        console.log(elImg)
+
+        gsap
+        .timeline({ paused: true })
+            .to(!elImgMountainContainer
+                ? elImg
+                : [elImgMountainContainer, elImg], {
+                height: '75vh',
+                duration: 0.8,
+                delay: 0.2,
+                ease: CustomEase.create("custom", easeOutLong),
+            }, 0)
+            .to(document.querySelector("#intro-article"), {
+                y: '0',
+                opacity: 1,
+                duration: 0.2,
+                delay: 0.2,
+                ease: CustomEase.create("custom", easeOutLong),
+            }, 0)
+            .to(document.querySelector(".intro-container"), {
+                y: '0',
+                opacity: '1',
+                duration: 0.8,
+                delay: 0.,
+                ease: CustomEase.create("custom", easeOutLong),
+            }, 0)
+        .play();
+
+    }, [])
+
     /*
         Receives item click event, substracts referal to the corresponding title and triggers scroll to the title
     */
@@ -82,46 +167,19 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
     }
 
     return (
-        <div>
-            <div className={styles.containerImage}>
+        <div id="page-project-post" className={styles.projectPostContainer}>
+            <div id="post-container-image" className={styles.containerImage}>
                 <div className={styles.container}>
-                    <img className={styles.image} src={require(`../../assets/${props.imgPath}`)}></img>
+                    {props.imgPath !== 'mountains'
+                        ? <img ref={refPostImage} className={styles.image} src={require(`../../assets/${props.imgPath}`)}></img>
+                        : getImg('mountains')
+                    }
                 </div>
             </div>
 
-            <div className={styles.articleContainer} ref={refArticleContainer}>
-                <div className={styles.indexContainer}>
-                    <div className={styles.linksContainer}>
-                        <div className={styles.linkWrap}>
-                            {parse(chevronSvg("currentColor"))}
-                            <a className={styles.linkProject}>Previous<br></br>projec</a>
-                        </div>
-                        <div className={styles.linkWrap}>
-                            <a className={styles.linkProject}>Next<br></br>project</a>
-                            {parse(chevronSvg("currentColor"))}
-                        </div>
-                    </div>
-                    <div className={styles.listContainer} ref={refIndexContainer}>
-                        <li className={styles.itemFirst}>{props.indexTitle}</li>
-                        <ul>{titles ? Array.from(titles as NodeListOf<Element>).map((title) => {
-                            title.setAttribute('data-title-target', title.innerHTML.toLowerCase().replaceAll(' ', '-'))
-                            return title.nodeName === 'H2'
-                                ? <li
-                                    onClick={(e)=> handleItemClickEvent(e)}
-                                    className={`${styles.itemFirst} article-index-title`}
-                                    data-title={title.innerHTML.toLowerCase().replaceAll(' ', '-')}
-                                >{title.innerHTML}</li>
-                                : <li
-                                    onClick={(e)=> handleItemClickEvent(e)}
-                                    className={`${styles.itemSecond} article-index-title`}
-                                    data-title={title.innerHTML.toLowerCase().replaceAll(' ', '-')}
-                                >{title.innerHTML}</li>
-                            }
-                        ): ''}
-                        </ul>
-                    </div>
-                </div>
-                {props.wysiwyg}
+            {props.wysiwyg}
+            <div className={styles.nextProjects}>
+                <h1>Other projects</h1>
             </div>
         </div>
     )
