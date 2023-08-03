@@ -11,6 +11,8 @@
     display: grid;
     grid-template-columns: var(--card-title-width) 280px;
     grid-template-rows: var(--card-title-height) 410px;
+    text-decoration: none;
+    color: var(--fc-global);
     z-index: 1;
 
     &:before {

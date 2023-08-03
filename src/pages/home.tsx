@@ -6,6 +6,9 @@ import { WorkBanner } from "../components/WorkBanner/WorkBanner";
 import { Header } from "../components/Header/Header"
 import { SkillsBanner } from "../components/SkillsBanner/SkillsBanner";
 import { MethodSection } from "../components/MethodSection/MethodSection";
+import { FootBanner } from "../components/FootBanner/FootBanner";
+import styles from "./pages.module.scss"
+
 
 export function Home() {
 
@@ -14,8 +17,11 @@ export function Home() {
             <TopBanner props={texts.topBanner}/>
             <TextBanner texts={texts.intro}/>
             <WorkBanner props={texts.workBanner}/>
-            <SkillsBanner texts={texts.skillsBanner}/>
-            <MethodSection props={texts.methodSectionTexts}/>
+            <div className={styles.containerSecondHalf}>
+                <SkillsBanner texts={texts.skillsBanner}/>
+                <MethodSection props={texts.methodSectionTexts}/>
+                <FootBanner />
+            </div>
         </div>
     )
 }

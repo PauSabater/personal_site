@@ -21,21 +21,21 @@ export function getTodayMonthName(): string {
 }
 
 export function isViewportPropHigherThanEl(elCompare: HTMLElement | SVGSVGElement): boolean {
-    return getViewportProportion() > getElementProportion(elCompare)
+    return getViewportAspectRatio() > getElementProportion(elCompare)
 }
 
 export function getProportionRelToViewport(elCompare: HTMLElement | SVGSVGElement): number {
-    return getElementProportion(elCompare) / getViewportProportion()
+    return getElementProportion(elCompare) / getViewportAspectRatio()
 }
 
 export function getProportionRelToElement(elCompare: HTMLElement | SVGSVGElement): number {
-    return getViewportProportion() / getElementProportion(elCompare)
+    return getViewportAspectRatio() / getElementProportion(elCompare)
 }
 
 export function getElementProportion(element: HTMLElement | SVGSVGElement) {
     return element.getBoundingClientRect().width / element.getBoundingClientRect().height
 }
 
-export function getViewportProportion() {
+export function getViewportAspectRatio() {
     return window.innerWidth / window.innerHeight
 }

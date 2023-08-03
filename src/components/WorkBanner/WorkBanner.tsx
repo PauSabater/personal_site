@@ -8,7 +8,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { setTextAnimation } from "./WorkBanner.animations"
 import { Cta, IBtnProps } from "../UI/Cta/Cta"
-import { getProportionRelToViewport, isViewportPropHigherThanEl, isMobileScreen, getElementProportion, getViewportProportion } from "../../assets/ts/utils/utils"
+import { getProportionRelToViewport, isViewportPropHigherThanEl, isMobileScreen, getElementProportion, getViewportAspectRatio } from "../../assets/ts/utils/utils"
 // import { getWorkBannerAnimations } from "./WorkBanner.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -75,10 +75,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
 
             setTextAnimation(elContainerTexts)
 
-            // Texts animations
-
-            // CARDS ANIMATIONS
-
             const tlLightning = gsap.timeline({ repeat: -1, repeatDelay: 7 })
             tlLightning.pause()
 
@@ -117,16 +113,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     card2.querySelector(".overlay")
                 ], {opacity: "0"})
 
-
-            //timeline.addLabel('place-card-1-and-2')
-
-
-            // timeline.addLabel('place-card-2')
-            //     .set(card2, {opacity: 1})
-            //     .to(card2, {yPercent: 0})
-            //     .set(card1.querySelector(".overlay"), {opacity: 0.5})
-            //     .set(card1.querySelector(".img-container"), {opacity: 0})
-
             timeline.addLabel('place-card-3')
                 .set(card2, {opacity: 1})
                 .to([card1, card2], {yPercent: 0})
@@ -162,52 +148,25 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     x: (): string => {
                         // proportion image width to window width
                         const dist = (window.innerWidth / 2) - parseInt(card3Svg.getAttribute("data-dist-left") as string)
-                        // const propImgToWindow = card3Svg.getBoundingClientRect().width / window.innerWidth
-                        // return `${dist}`
-                        console.log("heyyy")
-                        console.log(isViewportPropHigherThanEl(card3Svg))
-                        console.log("prop image is")
-                        console.log(getElementProportion(card3Svg))
-
-                        console.log("viewport prop is")
-                        console.log(getViewportProportion())
-
-                        console.log("WIDTH SVG IS: "+card3Svg.getBoundingClientRect().width)
-                        console.log("TO CENTERRRR:")
                         const imgCenterToLeft = (parseInt(card3Svg.getAttribute("data-dist-left") || '0') + (card3Svg.getBoundingClientRect().width / 2))
                         const windowHalf = window.innerWidth / 2
                         const distance = windowHalf - imgCenterToLeft
-                        console.log(windowHalf - imgCenterToLeft)
                         return distance > 0
                             ? distance.toString()
                             : `-=${distance}`
-
-
-
-                        // return '0'
-
-                        // return isViewportPropHigherThanEl(card3Svg)
-                        //     ? `${card3Svg.getAttribute("data-dist-left")?.toString()}`
-                        //     : `-=${card3Svg.getAttribute("data-dist-left")?.toString()}`
-                        //return `-=${card3Svg.getAttribute("data-dist-left")?.toString()}` || '0'
                     },
                     y: (): string => {
                         const windowHalfHeight = window.innerHeight / 2
                         const elHalfHeight = card3Svg.getBoundingClientRect().height
                         const dist = windowHalfHeight - elHalfHeight
-
-                        console.log("HEYYY TO TOP: "+dist)
-
                         return `-=${Math.abs(dist).toString()}`
-                        //return `-=${window.innerHeight * ScrollTrigger.positionInViewport(card3Svg, "top")}`
-                        //return '0'
                     },
                     width: isViewportPropHigherThanEl(card3Svg)
                         ? '100vw'
-                        : ((getViewportProportion() / getElementProportion(card3Svg)) * window.innerWidth).toString()
+                        : ((getViewportAspectRatio() / getElementProportion(card3Svg)) * window.innerWidth).toString()
                     ,
                     height: isViewportPropHigherThanEl(card3Svg)
-                        ? ((getViewportProportion() / getElementProportion(card3Svg)) * window.innerHeight).toString()
+                        ? ((getViewportAspectRatio() / getElementProportion(card3Svg)) * window.innerHeight).toString()
                         : '100vh'
                     }, 'start')
 
