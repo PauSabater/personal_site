@@ -32,10 +32,10 @@ export const texts = {
 
 root.render(
     <BrowserRouter>
-        <React.StrictMode>
+        {/* <React.StrictMode> */}
           <App></App>
           {/* <WeatherApp texts={ texts.weatherApp }></WeatherApp> */}
-        </React.StrictMode>
+        {/* </React.StrictMode> */}
     </BrowserRouter>
 );
 

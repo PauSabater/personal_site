@@ -77,7 +77,7 @@ export function Header({ links }: { links: string[]}) {
                     <NavLink to='/'>about</NavLink>
                 </li>
                 <li className={styles.item}>
-                    <NavLink to='/projects/papernest'>projects</NavLink>
+                    <NavLink to='/projects'>projects</NavLink>
                 </li>
                 <li className={styles.item}>
                     <NavLink to='/projects/weather-app'>how I work</NavLink>

@@ -1,0 +1,142 @@
+@use '../../assets/scss/mixins.scss';
+
+
+.container {
+    --height-card: 280px;
+
+    width: 90vw;
+    margin: 200px auto 100px auto;
+}
+
+.intro {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--mg-xl);
+    max-width: 800px;
+    font-family: "inter-regular";
+
+    a {
+        text-decoration: none;
+        font-family: "inter-medium";
+    }
+}
+
+.ctaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.projectContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 560px;
+    cursor: pointer;
+    height: var(--height-card);
+    margin-bottom: var(--mg-xl);
+    background: white;
+    border-radius: 30px;
+    box-sizing: border-box;
+    text-decoration: none;
+
+    div {
+        pointer-events: none;
+    }
+
+    p[data-tag-label] {
+        font-size: var(--fs-3xs);
+        font-family: 'inter-regular';
+    }
+
+    [data-cta] {
+        margin-top: 0;
+    }
+
+    .img, img, svg {
+        height: var(--height-card);
+        margin: 0;
+    }
+
+    [data-transitioned-image] {
+        border-radius: 0 30px 30px 0;
+        overflow: hidden;
+        height: var(--height-card);
+    }
+
+
+    svg {
+        opacity: 0.15;
+    }
+}
+
+.textsContainer {
+    padding: var(--pd-md) var(--pd-xl);
+    box-sizing: border-box;
+    color: var(--c-font-global);
+}
+
+.imgContainer {
+    position: relative;
+    display: flex;
+    justify-content: right;
+
+    [data-img-mountain] {
+        width: 100%;
+    }
+}
+
+
+.title {
+    font-size: 4.2vw;
+    font-family: "inter-bold";
+}
+
+.projectTitle {
+    color: var(--c-primary);
+    font-family: 'quanticoBold';
+    font-size: var(--fs-lg);
+    margin-bottom: var(--mg-xs);
+}
+
+.projectDescription {
+    font-size: var(--fs-lg);
+    max-width: 400px;
+    margin-bottom: var(--mg-xl);
+}
+.projectContainer {
+    // background: white;
+}
+
+
+@include mixins.mobile-tablet {
+    .projectContainer {
+        position: relative;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}
+
+@include mixins.desktop-sm {
+    .container {
+        margin: 200px auto 100px auto;
+    }
+
+    .projectDescription {
+        font-size: var(--fs-global);
+        margin-bottom: var(--mg-lg);
+    }
+}
+
+@include mixins.desktop {
+    .container {
+        --height-card: 350px;
+
+        margin: 200px auto 100px auto;
+    }
+}
+
+@include mixins.desktop-lg {
+    .container {
+        width: 75vw;
+        margin: 200px auto 100px auto;
+    }
+}

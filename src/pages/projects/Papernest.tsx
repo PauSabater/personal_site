@@ -4,9 +4,5 @@ import {papernestContent} from "../../components/ProjectPost/Content/papernest"
 
 export function PapernestProject({ props }: { props: IPropsProjectPost }) {
 
-    return (
-        <div>
-            <ProjectPost props={props}></ProjectPost>
-        </div>
-    )
+    return <ProjectPost props={props}></ProjectPost>
 }

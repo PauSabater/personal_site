@@ -22,6 +22,8 @@ export function FootBanner({}: {}) {
     const cameraControlRef = useRef(null)
     const refCamera = useRef(null)
 
+    const [colorMain, setColorMain] = useState("hsl(0, 0%, 5%)")
+
     const [aspectRatio, setAspectRatio] = useState<number>(window.innerWidth / window.innerHeight)
 
     const refVideoTexture = useRef(null)
@@ -84,7 +86,8 @@ export function FootBanner({}: {}) {
     }
 
     function VideoText({text, position}: {text: string, position: Vector3}) {
-        const { camera } = useThree()
+        const { camera, mouse } = useThree()
+
 
         const [video] = useState(() => Object.assign(document.createElement('video'), {
             src: '/video.mov',
@@ -115,6 +118,14 @@ export function FootBanner({}: {}) {
 
         const [isAnimating, setIsAnimating] = useState(false)
         const [isAnimatingFinished, setIsAnimatingFinished] = useState(false)
+
+        const vec = new THREE.Vector3()
+
+        useFrame(() => {
+            if (isBannerExpanded && isAnimatingFinished === true) {
+                camera.position.lerp(vec.set((mouse.x * 0.5) + -3.2, (mouse.y * 0.5) + 0.3, 4.2), 0.01)
+            }
+        })
 
 
         useThree(() => {
@@ -204,15 +215,15 @@ export function FootBanner({}: {}) {
                     <VideoText text="let's+light some+ideas ?" position={[-1.7, 1.55, -2] as Vector3} />
                     <mesh position={[0.1, 4.8, -2.05] as Vector3}>
                         <planeBufferGeometry attach="geometry" args={[10, 10]} />
-                        <meshBasicMaterial reflectivity={0} attach="material" color="hsl(0, 0%, 7%)" />
+                        <meshBasicMaterial reflectivity={1} attach="material" color={colorMain} />
                     </mesh>
                     <mesh rotation={[Math.PI / -2, 0, 0 ]} position={[-5.95, 0.05, -1.5] as Vector3}>
-                        <planeBufferGeometry attach="geometry" args={[0.05, 13]} />
-                        <meshStandardMaterial emissive="#a29520" emissiveIntensity={3} toneMapped={false} />
+                        <planeBufferGeometry attach="geometry" args={[0.075, 13]} />
+                        <meshStandardMaterial emissive="#a29520" emissiveIntensity={1} toneMapped={false} />
                     </mesh>
                     <mesh rotation={[0, Math.PI / 2, 0 ]} position={[-6, 7.4, -3.0] as Vector3}>
                         <planeBufferGeometry attach="geometry" args={[12, 15]} />
-                        <meshBasicMaterial reflectivity={0} attach="material" color="hsl(0, 0%, 7%)" />
+                        <meshBasicMaterial reflectivity={1} attach="material" color={"hsl(0, 0%, 6%)"} />
                     </mesh>
                     <Glass position={[-3.55, 0.55, 0.65] as Vector3} radius={0.65} size={0.65} />
                     <Glass position={[-5.5, 0.45, -1] as Vector3} radius={0.1} size={0.45}/>
@@ -220,6 +231,18 @@ export function FootBanner({}: {}) {
                 </group>
                 <ambientLight intensity={0.5} />
                 <spotLight position={[0, 10, 0]} intensity={2} />
+                {/* <EffectComposer>
+                <Bloom
+                    intensity={2} // The bloom intensity.
+                    blurPass={undefined} // A blur pass.
+                    kernelSize={KernelSize.LARGE} // blur kernel size
+                    luminanceThreshold={0.9} // luminance threshold. Raise this value to mask out darker elements in the scene.
+                    luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+                    mipmapBlur={false} // Enables or disables mipmap blur.
+                    resolutionX={256} // The horizontal resolution.
+                    resolutionY={256} // The vertical resolution.
+                />
+                </EffectComposer> */}
             </Suspense>
             </Canvas>
         </div>

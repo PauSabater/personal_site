@@ -11,9 +11,5 @@ export function WeatherAppProject() {
         currentPath: "weather-app"
     }
 
-    return (
-        <div>
-            <ProjectPost props={props}></ProjectPost>
-        </div>
-    )
+    return <ProjectPost props={props}></ProjectPost>
 }

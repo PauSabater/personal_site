@@ -48,25 +48,49 @@ export const papernestContent = (): JSX.Element => { return (
                         When having a wide range of platforms, web components are a great idea to share features through any project. Many features linked to monolothic projects were <span>refactored to web components</span> through the framework <LinkInline text={"LITElement"} href={"https://lit.dev/"}/>, multipliying their potential to be used anywhere. These components were stored in a new repository for which I was the lead developer, and was exported to an <span>npm Github package</span> and a cdn. They could even be used on no-code pages !
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"components_diagram.svg"}
+                    text={""}
+                    column={1}
+                    maxHeight={400}
+                    hasMargin={true}
+                ></ImageArticle>
+                {/* <ImageArticle
+                    imgName={"individual_components.svg"}
+                    text={""}
+                    row={3}
+                    column={1}
+                ></ImageArticle>
+                <ImageArticle
+                    imgName={"common_components.svg"}
+                    text={""}
+                    row={3}
+                    column={2}
+                ></ImageArticle> */}
             </div>
             <div className={styles.sectionLeft}>
                 <h2 className={styles.sectionTitle}>A first common design system</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        Having the same themes under different stacks and projects, without sharing the same css, led to painful development processes. I was in charge of developing a <span>first design system</span> and refactoring the legacy code and properly documenting it. This long task resulted in a <span>much smoother experience</span> when developing new tasks.
+                        Having the same themes under different stacks and projects, without sharing the same css and guidelines, led to painful development processes. I was in charge of developing a <span>first design system</span> and refactoring the legacy code and properly documenting it. This long task resulted in a <span>much smoother experience</span> when developing new tasks.
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"design_system_diagram.svg"}
+                    column={1}
+                    maxHeight={400}
+                    hasMargin={true}
+                ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>Deploying a Storybook</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        Deploying a <LinkInline text={"Storybook"} href={"https://storybook.js.org/"}/> to document all the new components and design system was the natural next step. Unlike tooks like <LinkInline text={"Figma"} href={"https://www.figma.com/"}/> or <LinkInline text={"Notion"} href={"https://www.notion.so/"}/>, Storybook is based on the project code, so it is possible to interact with it and it will update at the same time of the code. It is also a great tool for testing.
+                        Deploying a <LinkInline text={"Storybook"} href={"https://storybook.js.org/"}/> to document all the new components and design system was the natural next step. Unlike tooks like <LinkInline text={"Figma"} href={"https://www.figma.com/"}/> or <LinkInline text={"Notion"} href={"https://www.notion.so/"}/>, Storybook is based on the project code, so it is possible to interact with the component's properties and generate the corresponding code. This fact makes possible to integrate a code playground for devs to test the component behaviour, as well as integrating automated tests.
                     </p>
                 </div>
                 <ImageArticle
                     imgName={"storybook.png"}
-                    text={"Colors documented on the Storybook."}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMain}>
@@ -86,6 +110,11 @@ export const papernestContent = (): JSX.Element => { return (
                         The feature is currently not working due to an error from an api response, however, not linked to my work !
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"feature_comparator.png"}
+                    column={1}
+
+                ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
                 <h2 className={styles.sectionTitle}>Filtered List</h2>
@@ -97,6 +126,10 @@ export const papernestContent = (): JSX.Element => { return (
                         The feature is currently not working due to an error from an api response, however, not linked to my work !
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"feature_filtered_list.png"}
+                    column={1}
+                ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>Web callback form</h2>
@@ -105,6 +138,10 @@ export const papernestContent = (): JSX.Element => { return (
                         An important role of SEO pages is to allow the users to request information to the company through a <span>callback component</span>. This was a challenging task, as it had to be deployed anywhere, be configurable and process CRUD operations on internal apis. <span>Security</span> was also important, for which google recaptcha was integrated. This component had several subcomponents to be optionally included, such as a calendar to schedule the calls. Web components were used to build this feature.
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"feature_callback.png"}
+                    column={1}
+                ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
                 <h2 className={styles.sectionTitle}>Cookies feature</h2>

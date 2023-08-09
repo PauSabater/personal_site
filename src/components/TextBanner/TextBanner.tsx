@@ -1,7 +1,7 @@
 import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./TextBanner.module.scss"
 import parse from 'html-react-parser'
-import { Cta, IBtnProps } from '../UI/Cta/Cta'
+import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
 import { isVerticalMobileTablet } from "../../assets/ts/utils/utils"
 
@@ -9,7 +9,7 @@ export interface ITextBannerTexts {
     title: string,
     textDesktop: string[],
     textMobile: string[],
-    Cta: IBtnProps
+    Cta: ICtaProps
 }
 
 export function TextBanner({ texts }: { texts: ITextBannerTexts}) {

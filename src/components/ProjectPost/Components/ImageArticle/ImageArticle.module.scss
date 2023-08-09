@@ -1,3 +1,6 @@
+@use '../../../../assets/scss/mixins';
+
+
 .container {
     width: 100%;
     margin-bottom: var(--mg-xl);
@@ -10,12 +13,53 @@
 }
 
 .imgContainer {
-    overflow: hidden;
+    // overflow: hidden;
+    display: flex;
+    justify-content: center;
 
     img {
         width: 100%;
-        height: auto;
+        width: fill-available;
+        width: -webkit-fill-available;
         opacity: 1;
         border-radius: 10px;
+    }
+
+    img:not(.imgWithHeight) {
+        height: auto;
+    }
+
+    img.imgWithHeight {
+        width: auto;
+    }
+
+    img.imgWithMargin {
+        margin-top: -60px;
+    }
+}
+
+.container.column2 {
+    grid-column-start: 2;
+}
+
+.container.row3 {
+    margin-top: var(--mg-lg);
+    grid-row-start: 3;
+}
+
+@include mixins.mobile-tablet {
+        .container {
+            margin-bottom: 0;
+        }
+
+        .imgContainer {
+            img.imgWithMargin {
+            margin-top: 0;
+        }
+
+        img {
+            height: auto;
+            max-width: 90%;
+        }
     }
 }

@@ -60,7 +60,9 @@
 
 
     --c-black: hsl(0, 0%, 7%);
-    --c-black: black;
+    --c-black: hsl(0, 0%, 2%);
+   //  --c-black: black;
+
     --c-font-global: var(--c-black);
 
     --c-font-h: hsl(0, 0%, 15%);
@@ -98,6 +100,8 @@
     --fs-global: 1.25rem;
     --fs-sm: 1.1rem;
     --fs-xs: 0.95rem;
+    --fs-2xs: 0.85rem;
+    --fs-3xs: 0.70rem;
 
     --fs-heading: clamp(45px, 5vw, 90px);
 

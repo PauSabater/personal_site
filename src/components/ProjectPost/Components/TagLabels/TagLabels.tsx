@@ -6,7 +6,7 @@ export function TagLabels({ tags, color }: { tags: string[], color: string}) {
         <Fragment>
             <div className={styles.tagContainer}>
                 {tags.map((tag) => {
-                    return <p className={`${styles.tag} ${styles[color]}`}>{tag}</p>
+                    return <p className={`${styles.tag} ${styles[color]}`} data-tag-label="">{tag}</p>
                 })}
 
             </div>

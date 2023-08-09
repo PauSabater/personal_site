@@ -22,9 +22,11 @@ import { IPropsProjectPost } from '../ProjectPost/ProjectPost';
 import { papernestContent } from '../ProjectPost/Content/papernest';
 import { easeOutLong } from '../../assets/ts/styles/styles';
 import { executeEnterAnimations, executeExitAnimations, setProjectPostEnterAnimation } from './App.animations';
+import { Projects } from '../../pages/projects';
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
+    {path: '/projects', name: 'PapernestProject', Component: Projects},
     {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
 ]
@@ -39,19 +41,6 @@ function App() {
 
     const onEnter = (node: HTMLElement) => {
         console.log("HELLO ENTER!!")
-        // gsap.from(
-        //   [node.children[0].firstElementChild, node.children[0].lastElementChild],
-        //   0.6,
-        //   {
-        //     y: 30,
-        //     delay: 0.6,
-        //     ease: "power3.InOut",
-        //     opacity: 0,
-        //     stagger: {
-        //       amount: 0.6
-        //     }
-        //   }
-        // );
     }
 
     const onExit = (node: HTMLElement) => {
@@ -94,19 +83,14 @@ function App() {
                                     <Transition
                                         key={location.pathname}
                                         nodeRef={nodeRef}
-                                        timeout={500}
+                                        timeout={1100}
                                         classNames="page"
                                         unmountOnExit
                                         onExit={(node: HTMLElement) => {
-                                            executeExitAnimations(node.firstElementChild?.id || '', node)
-                                            // gsap
-                                            //   .timeline({ paused: true })
-                                            //   .to(node, { scale: 0.8, duration: 0.2 })
-                                            //   .to(node, { xPercent: 100, autoAlpha: 0, duration: 0.2 })
-                                            //   .play();
+                                            executeExitAnimations(node.id || '', node)
                                         }}
                                         onEnter={(node: HTMLElement) => {
-                                            executeEnterAnimations(node.firstElementChild?.id || '', node)
+                                            executeEnterAnimations(node.id || '', node)
                                         }}
                                     >
                                          <route.Component props={getProjectProps(propss, nodeRef)}></route.Component>

@@ -3,7 +3,17 @@
 }
 
 html {
+    width: 100vw;
     background-color: var(--bg-main);
+    overflow-x: clip;
+    height: 100%;
+}
+
+body {
+    overflow: auto;
+    height: auto;
+    margin: 0;
+    width: 100%;
 }
 
 .page {

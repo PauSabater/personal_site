@@ -13,6 +13,7 @@ import ImgCloudFirstLine2 from "../../../assets/img/clouds/cloud-first-line-2.pn
 import ImgCloudSecondLine from "../../../assets/img/clouds/cloud-second-line.png"
 import ImgCloudThirdLine from "../../../assets/img/clouds/cloud-third-line.png"
 
+import SvgWireframe from "../../../assets/svg/mountains/wireframe-full-mountains.svg"
 import SvgTreesFirstLayer from "../../../assets/svg/mountains/trees-first-layer.svg"
 import SvgDarkeningLayer from "../../../assets/svg/mountains/darkening-layer.svg"
 import SvgMoon from "../../../assets/svg/mountains/moon.svg"
@@ -37,47 +38,48 @@ export const getImg = (img: string): JSX.Element => {
         const images: string[] = ["cloud-first-line-1", "cloud-first-line-2"]
         return (
             <Fragment>
-            <div className={styles.imgMountainContainer} data-img-mountain id="card-3-img-wrap">
-                {/* {
-                images.map((img)=>
-                    <img id="cloud-first-line-1" src={require(`../../../assets/svg/mountains${img}`)}/>
-                )} */}
-                <img id="sky" src={SvgSky}/>
-                <SvgSkyDarkening/>
-                <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg}/>
-                {/* <img id="sky-darkening" className={styles.skyDarkening} src={SvgSkyDarkening}/> */}
-                <img id="lightning" className={styles.lightning} src={SvgLightning}/>
-                <img id="mountains" src={SvgMountains}/>
-                <img id="cloud-second-line" className={styles.cloud} src={ImgCloudThirdLine}/>
-                <img id="trees-third-layer" src={SvgTreesThirdLayer}/>
-                <img id="trees-second-layer" src={SvgTreesSecondLayer}/>
-                <img id="moon" src={SvgMoon}/>
-                <img id="cloud-second-line" className={styles.cloud} src={ImgCloudSecondLine}/>
-                <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer}/>
-                <img id="trees-first-layer" src={SvgTreesFirstLayer}/>
-                <img id="cloud-first-line-2" className={styles.cloud} src={ImgCloudFirstLine2}/>
-                <img id="cloud-first-line-1"className={styles.cloud} src={ImgCloudFirstLine1}/>
+                <div className={styles.imgMountainContainer} data-img-mountain="" data-transitioned-image="" id="card-3-img-wrap">
+                    {/* {
+                    images.map((img)=>
+                        <img id="cloud-first-line-1" src={require(`../../../assets/svg/mountains${img}`)}/>
+                    )} */}
+                    <img id="sky" src={SvgSky}/>
+                    <SvgSkyDarkening/>
+                    <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg}/>
+                    {/* <img id="sky-darkening" className={styles.skyDarkening} src={SvgSkyDarkening}/> */}
+                    <img id="lightning" className={styles.lightning} src={SvgLightning}/>
+                    <img id="mountains" src={SvgMountains}/>
+                    <img id="cloud-third-line" className={`${`${styles.cloud} cloud`} cloud`} src={ImgCloudThirdLine}/>
+                    <img id="cloud-third-line-copy" className={`${styles.cloud} cloud`} src={ImgCloudThirdLine}/>
+                    <img id="trees-third-layer" src={SvgTreesThirdLayer}/>
+                    <img id="trees-second-layer" src={SvgTreesSecondLayer}/>
+                    <img id="moon" src={SvgMoon}/>
+                    <img id="cloud-second-line-copy" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine}/>
+                    <img id="cloud-second-line" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine}/>
+                    <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer}/>
+                    <img id="trees-first-layer" src={SvgTreesFirstLayer}/>
+                    <img id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
+                    <img id="cloud-first-line-1-copy"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
+                    {/* <img id="mountains-wireframe"className={`wireframe`} src={SvgWireframe}/> */}
+
+                </div>
+                <div className={styles.halfHelper2}></div>
                 <div className={styles.rain} id="rain-container">
-                {[...Array(500)].map((_, i) => <div className={styles.drop}></div>)}
-            </div>
-            </div>
+                    {[...Array(500)].map((_, i) => <div className={styles.drop}></div>)}
+                </div>
             </Fragment>
         )
-    } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)}></img>
+    } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
 }
 
 export function Card({ props }: { props: ICardProps}) {
     const refImgContainer = useRef(null)
-
-
-
-
     const handleCardClick = ()=> {
         console.log("HANDLE CLICK IMAGE!!")
         const elImgContainer: HTMLElement | null = refImgContainer.current
         if (elImgContainer === null) return
         setCardTransitionAnimation(elImgContainer, props.path)
-    }
+}
 
 
     return (

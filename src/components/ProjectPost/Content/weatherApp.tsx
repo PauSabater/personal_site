@@ -3,7 +3,7 @@ import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
 import { Callout } from "../Components/Callout/Callout"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
-import { Cta, IBtnProps } from '../../UI/Cta/Cta'
+import { Cta, ICtaProps } from '../../UI/Cta/Cta'
 import { calendar } from "../../../assets/svg/ts/calendar"
 import parse from "html-react-parser"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
@@ -15,22 +15,36 @@ export const weatherAppContent = (): JSX.Element => { return (
                 <h1>
                     Npm package for a weather app
                 </h1>
-                <TagLabels tags={['professional experience']} color={"secondary"}></TagLabels>
-                <TagLabels tags={['TypeScript', 'LITElement', 'Django', 'PHP', 'Wordpress', 'SEO', 'Performance']} color={"primary"}></TagLabels>
+                <TagLabels tags={['personal side project']} color={"secondary"}></TagLabels>
+                <TagLabels tags={['TypeScript', 'React', 'Styled Components', 'NPM']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
-                    {parse(calendar("var(--c-grey)"))}<p>March 2021 - April 2023</p>
+                    {parse(calendar("var(--c-grey)"))}<p>July 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components. In addition, I have been always curious about weather science. Despite that there are many tutorials out there about a project like this, I did not follow any and did all from scratch, using the React documentation instead.
+                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! In addition, I always had a thing for weather. Despite that there are many tutorials out there about a project like this, I did not follow any and did all from scratch, using the React documentation instead.
                 </p>
+                <div className={styles.ctaContainer}>
+                    <Cta props={{
+                        text: "Visit the repository",
+                        href: "https://github.com/PauSabater/weather_app",
+                        color: "black",
+                        isBold: false
+                    }}></Cta>
+                    <Cta props={{
+                        text: "Checkout the live result",
+                        href: "ge",
+                        color: "black",
+                        isBold: false
+                    }}></Cta>
+                </div>
             </div>
         </div>
         <div className={styles.xArticle}>
             <div className={styles.sectionMain}>
                 <p className={styles.preTitle}>/ A long epic </p>
-                <h2 className={styles.sectionTitle}>Refactoring and optimising a range of projects</h2>
+                <h2 className={styles.sectionTitle}>Leveraging the reusability of react components</h2>
                 <p className={styles.mainParagraph}>
-                    As most of startups, papernest needed during its first years a <span>rapid growth</span>, which means a lot of development during a short period of time with limited resourses. I entered the company in a period of consolidation, which meant more resources for <span>optimising and improving</span> the existing product.
+                    React components are
                 </p>
                 <div>
                     <p className={styles.paragraphRight}>

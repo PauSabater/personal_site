@@ -1,34 +1,69 @@
 import { easeOutLong } from "../../assets/ts/styles/styles";
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
+import { enableScroll } from "../../assets/ts/utils/utils";
 gsap.registerPlugin(CustomEase)
 
+export const animationDurations = {
+    exitOpacity: 0.75
+}
+
 export function executeEnterAnimations(pageId: string, node: HTMLElement) {
+    console.log("node is")
+    console.log(node)
     switch (pageId) {
         case 'page-project-post':
             setProjectPostEnterAnimation(node)
             break
     }
+    // switch (pageId) {
+    //     case 'page-projects':
+    //         setProjectPostEnterAnimation(node)
+    //         break
+    // }
 }
 
 export function executeExitAnimations(pageId: string, node: HTMLElement) {
+    console.log("EXIT ANIMATION "+pageId)
+
+    console.log(pageId)
     switch (pageId) {
         case 'page-project-post':
             setProjectPostExitAnimation(node)
             break
     }
+    switch (pageId) {
+        case 'page-projects':
+            // setProjectPostExitAnimation(node)
+            break
+    }
 }
 
-export function setProjectPostEnterAnimation(node: HTMLElement) {
+
+export function setPageOpacityAnimation(node: HTMLElement) {
     window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })
-            .set(document.body, {overflow: 'visible'})
+        .to(node, {
+            opacity: 0,
+            duration: animationDurations.exitOpacity,
+            delay: 0,
+            ease: "power2.in",
+        }, 0)
+        .play();
+}
+
+export function setProjectPostEnterAnimation(node: HTMLElement) {
+    console.log("PROJECT POST ENTEEER")
+    window.scrollTo(0, 0)
+    gsap
+        .timeline({ paused: true })
             .set(node.querySelector("#intro-article"), {
                 y: '20vh'
             })
             .set(node.querySelector(".intro-container"), {
-                y: '100px'
+                y: '100px',
+                onComplete: ()=> {setTimeout(()=> enableScroll(), 1005)}
             })
         // .to(node.querySelector("#post-container-image"), {
         //     height: '75vh',
