@@ -7,6 +7,9 @@ import { Cta, ICtaProps } from '../../UI/Cta/Cta'
 import { calendar } from "../../../assets/svg/ts/calendar"
 import parse from "html-react-parser"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
+import { Link } from "react-router-dom"
+import { arrowFilled } from "../../../assets/svg/ts/arrowFilled"
+import { getArrowLinkTemplate } from "../ProjectPost"
 
 export const weatherAppContent = (): JSX.Element => { return (
     <Fragment>
@@ -39,7 +42,8 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
             </div>
         </div>
-        <div className={styles.xArticle}>
+        <div className={styles.articleContent}>
+            {getArrowLinkTemplate("/projects/personal-site")}
             <div className={styles.sectionMain}>
                 <p className={styles.preTitle}>/ A long epic </p>
                 <h2 className={styles.sectionTitle}>Leveraging the reusability of react components</h2>

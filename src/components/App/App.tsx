@@ -23,12 +23,17 @@ import { papernestContent } from '../ProjectPost/Content/papernest';
 import { easeOutLong } from '../../assets/ts/styles/styles';
 import { executeEnterAnimations, executeExitAnimations, setProjectPostEnterAnimation } from './App.animations';
 import { Projects } from '../../pages/projects';
+import { PersonalSiteProject } from '../../pages/projects/PersonalSite';
+import { Overlay } from '../Overlay/Overlay';
+import { msTransitionPage } from '../../assets/ts/utils/utils';
+import { Footer } from '../Footer/Footer';
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
     {path: '/projects', name: 'PapernestProject', Component: Projects},
     {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
+    {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
 ]
 
 
@@ -39,68 +44,109 @@ function App() {
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
 
-    const onEnter = (node: HTMLElement) => {
-        console.log("HELLO ENTER!!")
-    }
-
-    const onExit = (node: HTMLElement) => {
-        console.log("HELLO EXIT!!")
-        // gsap.to(
-        //     [node.children[0].firstElementChild, node.children[0].lastElementChild],
-        //     0.6,
-        //     {
-        //     y: -30,
-        //     ease: "power3.InOut",
-        //     stagger: {
-        //         amount: 0.2
-        //     }
-        //     }
-        // );
-    }
-
-    const propss: IPropsProjectPost = {
+    const propsPpn: IPropsProjectPost = {
         indexTitle: "CONTENT",
         wysiwyg: papernestContent(),
-        imgPath: "svg/papernest.svg",
+        imgPath: "papernest.svg",
         pathNextProject: "weather-app",
-        currentPath: "papernest"
+        currentPath: "papernest",
+        nextProjects: {
+            title: "More projects",
+            projects: [{
+                title: "/ personal site",
+                description: "",
+                path: "/projects/personal-site",
+                img: "personal-site.svg"
+            },{
+                title: "/ weather forecast app",
+                description: "",
+                path: "/projects/weather-app",
+                img: "mountains"
+        }]}
     }
 
-    function getProjectProps(props: IPropsProjectPost, element: HTMLElement): IPropsProjectPost {
-        props.element = element
-        return props
+    const propsWeatherApp: IPropsProjectPost = {
+        indexTitle: "CONTENT",
+        wysiwyg: papernestContent(),
+        imgPath: "personal-site.svg",
+        pathNextProject: "weather-app",
+        currentPath: "weather-app",
+        nextProjects: {
+            title: "More projects",
+            projects: [{
+                title: "/ personal site",
+                description: "",
+                path: "/projects/personal-site",
+                img: "personal-site.svg"
+            },{
+                title: "/ weather forecast app",
+                description: "",
+                path: "/projects/weather-app",
+                img: "mountains"
+        }]}
+    }
+
+    const propsPersonalSite: IPropsProjectPost = {
+        indexTitle: "CONTENT",
+        wysiwyg: papernestContent(),
+        imgPath: "personal-site.svg",
+        pathNextProject: "weather-app",
+        currentPath: "personal-site",
+        nextProjects: {
+            title: "More projects",
+            projects: [{
+                title: "/ personal site",
+                description: "",
+                path: "projects/personal-site",
+                img: "personal-site.svg"
+            },{
+                title: "/ weather forecast app",
+                description: "",
+                path: "projects/weather-app",
+                img: "mountains"
+        }]}
+    }
+
+    function getProjectProps(route: string): IPropsProjectPost {
+        if (route === "papernest") return propsPpn
+        else if (route === "weather-app") return propsWeatherApp
+        else if (route === "personal-site") return propsPersonalSite
+
+        else return propsPpn
     }
 
     return (
         <div className="main">
             <Header links={ texts.header.links }/>
-            {/* <TransitionImages/> */}
-            <div className='page'>
-                    <Routes>
-                        {routes.map((route) =>
-                            <Route path={route.path} element={
-                                <SwitchTransition>
-                                    <Transition
-                                        key={location.pathname}
-                                        nodeRef={nodeRef}
-                                        timeout={1100}
-                                        classNames="page"
-                                        unmountOnExit
-                                        onExit={(node: HTMLElement) => {
-                                            executeExitAnimations(node.id || '', node)
-                                        }}
-                                        onEnter={(node: HTMLElement) => {
-                                            executeEnterAnimations(node.id || '', node)
-                                        }}
-                                    >
-                                         <route.Component props={getProjectProps(propss, nodeRef)}></route.Component>
-                                    </Transition>
-                                </SwitchTransition>
-                            }
-                            ></Route>
-                        )}
-                    </Routes>
-            </div>
+            <TransitionImages/>
+                <div className='page' id="page-content">
+                        <Routes>
+                            {routes.map((route) =>
+                                <Route path={route.path} element={
+                                    <SwitchTransition>
+                                        <Transition
+                                            key={location.pathname}
+                                            nodeRef={nodeRef}
+                                            timeout={msTransitionPage}
+                                            classNames="page"
+                                            unmountOnExit
+                                            onExit={(node: HTMLElement) => {
+                                                executeExitAnimations(node.id || '', node, route.path)
+                                            }}
+                                            onEnter={(node: HTMLElement) => {
+                                                executeEnterAnimations(node.id || '', node, route.path)
+                                            }}
+                                        >
+                                            <route.Component props={getProjectProps(route.path)}></route.Component>
+                                        </Transition>
+                                    </SwitchTransition>
+                                }
+                                ></Route>
+                            )}
+                        </Routes>
+                </div>
+            <Footer/>
+            <Overlay/>
         </div>
     )
 }

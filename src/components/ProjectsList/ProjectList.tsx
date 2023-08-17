@@ -6,7 +6,9 @@ import { Cta, ICtaProps } from "../UI/Cta/Cta"
 import { getImg } from "../WorkBanner/Card/Card"
 import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
-import { setLeaveAnimation } from "./ProjectList.animations"
+import { setLeaveAnimation, setProjectListEnterAnimation } from "./ProjectList.animations"
+import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
+import { removeOutlineHeader } from "../Header/Header.animations"
 // import "../../assets/svg/"
 
 // import "../../assets/svg/papernest.svg"
@@ -32,6 +34,9 @@ export function ProjectList({props}: {props: IProjectList}) {
     const refBanner: React.MutableRefObject<null> = useRef(null)
 
     useLayoutEffect(() => {
+        removeOutlineHeader()
+        hideAllTransitionImages()
+        setProjectListEnterAnimation()
         // const elBanner: HTMLElement | null = refBanner.current
 
         // if (elBanner === null) return

@@ -22,7 +22,7 @@ export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
 
 
     return (
-        <div ref={refTextBanner} className={styles.container}>
+        <div ref={refTextBanner} className={styles.container} id="text-banner">
             <div className={styles.wrap} >
                 <p className={styles.title}>{texts.title}</p>
                 {

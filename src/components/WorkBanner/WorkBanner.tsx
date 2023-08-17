@@ -9,6 +9,8 @@ import ScrollTrigger from "gsap/ScrollTrigger"
 import { getCloudsAnimation, setTextAnimation } from "./WorkBanner.animations"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
 import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis } from "../../assets/ts/utils/utils"
+import { Link } from "react-router-dom"
+import { addOutlineHeader, removeOutlineHeader } from "../Header/Header.animations"
 // import { getWorkBannerAnimations } from "./WorkBanner.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -78,7 +80,9 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     pinSpacing: true,
                     markers: true,
                     scrub: 1,
+                    invalidateOnRefresh: true,
                     onEnter: () => {
+                        addOutlineHeader()
                         tlClouds.pause()
                         tlLightning.pause()
                         gsap.to(card3Rain, {display: "block", opacity: "0"})
@@ -89,9 +93,11 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                         gsap.to(card3Rain, {display: "block", opacity: "0.3"})
                     },
                     onEnterBack: () => {
+                        removeOutlineHeader()
                         tlLightning.pause()
                         tlClouds.pause()
                         gsap.to(card3Rain, {display: "none", opacity: "0"})
+
                     },
                 }
             })
@@ -168,7 +174,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
     return (
         <Fragment>
             <div ref={refFullContainer} className={styles.sectionContainer}>
-                <div className={styles.halfHelper}></div>
+                {/* <div className={styles.halfHelper}></div> */}
                 <div ref={refContainer} className={styles.container}>
                     <div className={styles.cardsContainer} id="cards-container">
                         <div className={styles.cardContainer} id="card-1">
@@ -212,6 +218,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 )
                             })}
                                 <Cta props={texts.workBanner.Cta} />
+                                <Link to="/projects">hello</Link>
                             </div>
                     </div>
                 </div>

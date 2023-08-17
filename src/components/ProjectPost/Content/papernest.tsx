@@ -6,6 +6,11 @@ import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
 import parse from "html-react-parser"
 import { calendar } from "../../../assets/svg/ts/calendar"
+import { arrowFilled } from "../../../assets/svg/ts/arrowFilled"
+import { Link } from "react-router-dom"
+import { INextProjects, NextProjects } from "../Components/NextProjects/NextProjects"
+import { leaveFromArrowClick } from "../ProjectPost.animations"
+import { getArrowLinkTemplate } from "../ProjectPost"
 
 
 export const papernestContent = (): JSX.Element => { return (
@@ -25,7 +30,8 @@ export const papernestContent = (): JSX.Element => { return (
                 </p>
             </div>
         </div>
-        <div className={styles.xArticle}>
+        <div className={styles.articleContent}>
+            {getArrowLinkTemplate("/projects/weather-app")}
             <div className={styles.sectionMain}>
                 <p className={styles.preTitle}>/ A long epic </p>
                 <h2 className={styles.sectionTitle}>Refactoring and optimising a range of projects</h2>

@@ -1,8 +1,19 @@
+import gsap from "gsap"
+
 const mediaDesktop: string = `screen and (max-width: 900px)`
 const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (max-aspect-ratio: 1/1)`
+const mediaMobile: string = `screen and (max-width: 768px)`
+
+// Time animations
+export const msTransitionPage = 700
+export const msEnterPageLong = 900
+export const scTransitionPage = msTransitionPage / 1000
+export const scEnterPageLong = msEnterPageLong / 1000
+export const scOpacityFade = scTransitionPage - 0.3
+
 
 export function isMobileScreen(): boolean {
-    return window.matchMedia(mediaDesktop).matches
+    return window.matchMedia(mediaMobile).matches
 }
 
 export function isVerticalMobileTablet(): boolean {
@@ -21,18 +32,18 @@ export function getTodayMonthName(): string {
 }
 
 export function isViewportPropHigherThanEl(elCompare: HTMLElement | SVGSVGElement): boolean {
-    return getViewportAspectRatio() > getElementProportion(elCompare)
+    return getViewportAspectRatio() > getElementAspectRatio(elCompare)
 }
 
 export function getProportionRelToViewport(elCompare: HTMLElement | SVGSVGElement): number {
-    return getElementProportion(elCompare) / getViewportAspectRatio()
+    return getElementAspectRatio(elCompare) / getViewportAspectRatio()
 }
 
 export function getProportionRelToElement(elCompare: HTMLElement | SVGSVGElement): number {
-    return getViewportAspectRatio() / getElementProportion(elCompare)
+    return getViewportAspectRatio() / getElementAspectRatio(elCompare)
 }
 
-export function getElementProportion(element: HTMLElement | SVGSVGElement) {
+export function getElementAspectRatio(element: HTMLElement | SVGSVGElement) {
     return element.getBoundingClientRect().width / element.getBoundingClientRect().height
 }
 
@@ -65,16 +76,39 @@ export function getGsapDistToCenterElXAxis(elTarget: HTMLElement | SVGSVGElement
 
 export function getGsapDistToCenterElYAxis(elTarget: HTMLElement | SVGSVGElement) {
     const distance = getElYAxisDistCenterToCenterViewport(elTarget)
-    console.log("we return ")
-    console.log(distance > 0 ? distance.toString() : `-=${Math.abs(distance)}`)
     return distance > 0 ? distance.toString() : `-=${Math.abs(distance)}`
-    return `-=${Math.abs(distance)}`
+}
+
+export function isElLeftOfScreen(elTarget: HTMLElement | SVGSVGElement) {
+    return getElXAxisDistCenterToCenterViewport(elTarget) >= 0 ? true : false
 }
 
 export function disableScroll() {
-    (document.body.parentElement as HTMLElement).style.overflowY = 'hidden';
+    (document.body.parentElement as HTMLElement).style.overflowY = 'hidden'
 }
 
 export function enableScroll() {
-    (document.body.parentElement as HTMLElement).style.overflowY = 'visible';
+    (document.body.parentElement as HTMLElement).style.overflowY = 'visible'
+}
+
+export function hideAllTransitionImages() {
+    const elsImages: NodeListOf<HTMLElement> = document.querySelectorAll(".transition-images-container")
+    Array.from(elsImages).forEach((img) => {
+        gsap.set(img, {opacity: 0})
+        gsap.set(img, {height: '100vh'})
+    })
+}
+
+export function displayTransitionImage() {
+    const elTransitionImages: HTMLElement | null = document.querySelector("#transition-images")
+    if (elTransitionImages === null) return
+    elTransitionImages.style.opacity = "0"
+    const elsImages: NodeListOf<HTMLElement> = elTransitionImages.querySelectorAll(".transition-images-container")
+    Array.from(elsImages).forEach((img) => img.style.opacity = "0")
+}
+
+
+export function hidePageOverlay() {
+    const elPageOverlay: HTMLElement | null = document.getElementById("page-overlay")
+    if (elPageOverlay !== null) gsap.set(elPageOverlay, {opacity: 0})
 }

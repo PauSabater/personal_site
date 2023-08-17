@@ -4,3 +4,118 @@
     height: 100vh;
     transform: translateX(0);
 }
+
+.contactContainer {
+    position: absolute;
+    left: 5vw;
+    bottom: 8vh;
+    border-radius: var(--br-base);
+    opacity: 0;
+    overflow: hidden;
+
+    .relativeContainer {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    .svgBorder {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 2;
+
+        .path {
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            fill-opacity: 0;
+            transition: stroke-dashoffset 1.5s, fill-opacity 0.3s;
+        }
+    }
+
+    .backgroundLink {
+        --width-border: 5px;
+
+        height: calc(100% - var(--width-border) * 2);
+        width: calc(100% - var(--width-border) * 2);
+        left: var(--width-border);
+        top: var(--width-border);
+        background: var(--c-black);
+    }
+
+    .backgroundLinkColor {
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: linear-gradient(to right, var(--c-tertiary),  var(--c-primary-light));
+    }
+
+    a {
+        position: relative;
+        display: flex;
+        padding: 30px var(--pd-xl);
+        align-items: center;
+        color: rgb(189, 189, 189);
+        font-size: var(--fs-lg);
+        font-family: 'inter-bold';
+        border-radius: var(--br-base);
+        opacity: 0;
+        z-index: 2;
+
+        svg {
+            fill: currentColor;
+            margin-left: var(--mg-lg);
+        }
+    }
+}
+
+.linesContainer {
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    div {
+        position: absolute;
+        background-color: var(--c-black);
+        z-index: 1003;
+    }
+
+    div:first-child,
+    div:last-child {
+        left: 0;
+        height: 15px;
+        width: 100%;
+    }
+
+    div:last-child {
+        top: -1px;
+        transform-origin: right;
+    }
+
+    div:first-child {
+        bottom: -1px;
+        transform-origin: left;
+    }
+
+    div:nth-child(2),
+    div:nth-child(3) {
+        width: 15px;
+        height: 100%;
+    }
+
+    div:nth-child(2) {
+        left: -1px;
+        transform-origin: top;
+    }
+
+    div:nth-child(3) {
+        right: -1px;
+        transform-origin: bottom;
+    }
+}

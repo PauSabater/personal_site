@@ -34,7 +34,7 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
 
 }
 
-export function getCloudsAnimation(container: HTMLElement) {
+export function getCloudsAnimation(container: HTMLElement, placeClouds = false) {
 
     const elFirstCloudsLayerOne = (container as HTMLElement).querySelector('#cloud-first-line-1') as HTMLElement
     const elFirstCloudsLayerOneCopy = (container as HTMLElement).querySelector('#cloud-first-line-1-copy') as HTMLElement
@@ -43,9 +43,12 @@ export function getCloudsAnimation(container: HTMLElement) {
     const elThirdCloudsLayer = (container as HTMLElement).querySelector('#cloud-third-line') as HTMLElement
     const elThirdCloudsLayerCopy = (container as HTMLElement).querySelector('#cloud-third-line-copy') as HTMLElement
 
+    // if (placeClouds === true) {
+    //     gsap.set([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy], {xPercent: -150, scaleX: -1})
+    //     gsap.set([elSecondCloudsLayerCopy], {xPercent: 49.98, scaleX: -1})
+    // }
+
     return gsap.timeline({ repeat: -1 })
-        .set([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy], {xPercent: -150, scaleX: -1})
-        .set([elSecondCloudsLayerCopy], {xPercent: 49.98, scaleX: -1})
         // Clouds to the right
         .to([elFirstCloudsLayerOne, elThirdCloudsLayer], {xPercent: 50, duration: 150, ease: 'none'}, 0)
         .to([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy,], {xPercent: -50, duration: 150, ease: 'none'}, 0)

@@ -21,6 +21,11 @@ export function FootBanner({}: {}) {
     const refContainer = useRef(null)
     const cameraControlRef = useRef(null)
     const refCamera = useRef(null)
+    const refContactContainer = useRef(null)
+    // const refContactLinesContainer = useRef(null)
+    const refContactLink = useRef(null)
+    const refSvgBorder = useRef(null)
+
 
     const [colorMain, setColorMain] = useState("hsl(0, 0%, 5%)")
 
@@ -55,13 +60,94 @@ export function FootBanner({}: {}) {
                 },
                 xPercent: -30,
                 ease: "none",
-                onLeave: ()=> setIsBannerExpanded(false),
+                onLeave: ( )=> {
+                    setIsBannerExpanded(false)
+                },
                 onStart: () => setIsBannerExpanded(false),
-                onComplete: () => setIsBannerExpanded(true)
+                onComplete: () => {
+                    animateContactLink()
+                    setIsBannerExpanded(true)
+                }
             })
         })
         return () => ctxGsap.revert()
     }, [])
+
+    function resetContactLink() {
+        // console.log("START LETS RESET!!")
+        // if (refContactLinesContainer.current === null) return
+        // const elsLines = (refContactLinesContainer.current as HTMLElement).querySelectorAll("div")
+
+        gsap.set(refContactContainer.current, {opacity: 0})
+        // gsap.set(elsLines, {scaleX: 1, scaleY: 1})
+    }
+
+    function animateContactLink() {
+        console.log("ANIMATEEEE")
+        if (refSvgBorder.current === null) return
+
+        const svgPath: SVGPathElement | null = (refSvgBorder.current as HTMLElement).querySelector(".path")
+        if (svgPath === null) return
+        const lenghtPath = svgPath.getTotalLength()
+        console.log("PATH IS "+lenghtPath)
+        // resetContactLink()
+
+        // if (refContactLinesContainer.current === null) return
+
+        // const elsLines = Array.from((refContactLinesContainer.current as HTMLElement).querySelectorAll("div"))
+
+        gsap.timeline()
+            .pause()
+            .set(refContactContainer.current, {opacity: 0})
+            // .set(elsLines, {scaleX: 1, scaleY: 1})
+            // .set(elsLines, {scale: 1})
+            .set(svgPath, {fillOpacity: 0})
+            .set(refContactLink.current, {
+                opacity: 0,
+                y: 10,
+            })
+            .set(svgPath, {
+                strokeDashoffset: lenghtPath,
+                strokeDasharray: lenghtPath
+            })
+            .set(svgPath, {strokeDashoffset: 0, delay: 1})
+            .to(refContactContainer.current, {
+                opacity: 1,
+                duration: 0.5,
+                onComplete: ()=> { gsap.set(svgPath, {fillOpacity: 0.5, delay: 1}) }
+            }, 'start')
+            // .to(elsLines[0], {
+            //     duration: 0.2,
+            //     delay: 0.6,
+            //     scaleX: 0,
+            //     ease: "none"
+            // }, 'start')
+            // .to(elsLines[1], {
+            //     duration: 0.1,
+            //     delay: 0.8,
+            //     scaleY: 0,
+            //     ease: "none"
+            // }, 'start')
+            // .to(elsLines[3], {
+            //     duration: 0.25,
+            //     delay: 0.9,
+            //     scaleX: 0,
+            //     ease: "none"
+            // }, 0)
+            // .to(elsLines[2], {
+            //     duration: 0.3,
+            //     delay: 1.15,
+            //     scaleY: 0,
+            //     ease: "none"
+            // }, 'start')
+            .to(refContactLink.current, {
+                opacity: 1,
+                duration: 0.5,
+                delay: 0.8,
+                y: 0,
+            }, 'end')
+            .play()
+    }
 
 
     function Camera() {
@@ -131,10 +217,6 @@ export function FootBanner({}: {}) {
         useThree(() => {
 
             if (isBannerExpanded && isAnimating === false) {
-                console.log("ASPECT RATIO IS")
-                const aspectRatio = getViewportAspectRatio()
-                console.log(aspectRatio)
-
                 let posX = -3.2
 
                 if (aspectRatio > 1) posX = -3.2
@@ -159,12 +241,12 @@ export function FootBanner({}: {}) {
         })
 
         return (
-          <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
-            {parse(text.split('+').join('\n'))}
-            <meshBasicMaterial ref={refVideoTexture} toneMapped={false}>
-               <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
-            </meshBasicMaterial>
-          </Text>
+            <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
+                {parse(text.split('+').join('\n'))}
+                <meshBasicMaterial ref={refVideoTexture} toneMapped={false}>
+                <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
+                </meshBasicMaterial>
+            </Text>
         )
       }
 
@@ -201,11 +283,11 @@ export function FootBanner({}: {}) {
 
       return (
         //https://github.com/pmndrs/drei#performancemonitor
-        <div className={styles.container} ref={refContainer}>
+        <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
             <Canvas ref={refCanvas} concurrent gl={{ alpha: false }}>
-            <Perf position="top-left" />
-            <PerformanceMonitor />
+            {/* <Perf position="top-left" />
+            <PerformanceMonitor /> */}
             <color attach="background" args={['hsl(0, 0%, 7%)']} />
             <Camera />
 
@@ -245,6 +327,27 @@ export function FootBanner({}: {}) {
                 </EffectComposer> */}
             </Suspense>
             </Canvas>
+            <div ref={refContactContainer} className={styles.contactContainer}>
+                <div className={styles.relativeContainer}>
+                    {/* <div ref={refContactLinesContainer} className={styles.linesContainer}>
+                        <div></div><div></div><div></div><div></div>
+                    </div> */}
+                    <svg ref={refSvgBorder} className={styles.svgBorder} viewBox="0 0 500 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path className={`${styles.path} path`} d="M490 5H10C7.23858 5 5 7.23858 5 10V85C5 87.7614 7.23857 90 10 90H490C492.761 90 495 87.7614 495 85V10C495 7.23858 492.761 5 490 5Z" fill="black" fill-opacity="0.2" stroke="url(#paint0_linear_53_13)" stroke-width="10"/>
+                        <defs>
+                        <linearGradient id="paint0_linear_53_13" x1="495" y1="5.00002" x2="7.16941" y2="101.022" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#EAE195"/>
+                        <stop offset="1" stop-color="#975BA4"/>
+                        </linearGradient>
+                        </defs>
+                    </svg>
+                    <a href="mailto:pau.sabater.vilar@gmail.com" ref={refContactLink}>pau.sabater.vilar@gmail.com
+                        <svg width="29" height="16" viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7C0.447715 7 0 7.44772 0 8C0 8.55228 0.447715 9 1 9L1 7ZM28.7071 8.70711C29.0976 8.31658 29.0976 7.68342 28.7071 7.29289L22.3431 0.928932C21.9526 0.538408 21.3195 0.538408 20.9289 0.928932C20.5384 1.31946 20.5384 1.95262 20.9289 2.34315L26.5858 8L20.9289 13.6569C20.5384 14.0474 20.5384 14.6805 20.9289 15.0711C21.3195 15.4616 21.9526 15.4616 22.3431 15.0711L28.7071 8.70711ZM1 9L28 9V7L1 7L1 9Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
         )
 }

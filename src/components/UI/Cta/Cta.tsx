@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styles from "./Cta.module.scss"
 
 export interface ICtaProps {
@@ -11,12 +12,12 @@ export interface ICtaProps {
 export function Cta({ props }: { props: ICtaProps}) {
 
     return (
-        <a
-            href={props.href || ''}
+        <Link
+            to={props.href || ''}
             className={`${styles.cta} ${styles[props.color || "black"]} ${styles[props.isBold === false ? "regular" : "bold"]}`}
             data-cta
             target={props.target || "_blank"}
         >{props.text}
-        </a>
+        </Link>
     )
 }

@@ -60,8 +60,8 @@ export function TopBannerCanvas() {
 
       <color attach="background" args={['hsl(136, 0%, 96%)']} />
 
-      <Perf position="top-left" />
-            <PerformanceMonitor />
+      {/* <Perf position="bottom-left" />
+            <PerformanceMonitor /> */}
 
       {/* <OrthographicCamera
                 makeDefault
@@ -160,7 +160,6 @@ function TextQ({ position, font = '/Inter_Medium_Regular.json', ...props }: {pos
 
      if (distToTop && windowHeight) {
         const percentage = (windowHeight - Math.abs(distToTop)) / windowHeight
-        console.log(percentage)
         if (percentage < 0.95 && percentage > 0) {
             // @ts-ignore
             // refGlass.current.position.x.lerp(vec.set((mouse.x * 0.5) + -3.2, (mouse.y * 0.5) + 0.3, 4.2), 0.01)

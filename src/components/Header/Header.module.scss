@@ -1,11 +1,94 @@
-.container {
+@use '../../assets/scss/mixins';
+
+.headerContainer {
     position: fixed;
-    display: flex;
-    flex-direction: row;
+    width: 100vw;
+    top: 0px;
+    z-index: 1000;
+}
+
+.burger {
+    display: none;
+}
+
+.header {
+    --height-header: 50px;
+
+    position: fixed;
+    width: 100vw;
     top: 20px;
-    right: 50px;
     opacity: 0;
     z-index: 1000;
+}
+
+.logoContainer {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: var(--height-header);
+    width: fit-content;
+    margin-left: -1vw;
+    text-decoration: none;
+
+    img, svg {
+        height: var(--height-header);
+        width: var(--height-header);
+    }
+
+    .logoName {
+        font-size: 60px;
+        margin: 0;
+        // letter-spacing: -2px;
+        font-family: 'quanticoBold';
+        transform: scaleX(0.75);
+        color: var(--c-font-global);
+        // margin-left: -4px;
+        // color: black;
+        // -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        // -webkit-text-stroke-width: 1px;
+        // -webkit-text-stroke-color: black;
+    }
+}
+
+.iconsContainer {
+    display: none;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 94vw;
+    top: 20px;
+    margin: 0 auto;
+    z-index: 1001;
+}
+
+.linesContainer {
+    display: none;
+}
+
+[data-is-outlined] {
+    .list {
+        border: 1px solid grey;
+    }
+
+    a p {
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: grey;
+    }
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.fullWidth {
+    width: 100vw;
 }
 
 .list {
@@ -15,7 +98,6 @@
     margin: 0;
     padding: var(--pd-xs) var(--pd-md);
     border-radius: 5px;
-    box-shadow: 0px 0px 2px 0px var(--c-white);
 
     &:first-child {
         background-color: var(--c-black);
@@ -39,7 +121,7 @@
 
 .item a {
     cursor: pointer;
-    color: white;
+    color: var(--c-white);
     padding: var(--pd-sm) var(--pd-md);
     font-weight: var(--fw-medium);
     font-size: var(--fs-sm);
@@ -49,5 +131,270 @@
 
     &:hover {
         background-color: grey;
+    }
+}
+
+@include mixins.mobile {
+    div.header {
+        --height-burger: 38px;
+        --dist-burger-lines: 8px;
+
+        background-color: transparent;
+        height: 0;
+    }
+
+    .burger {
+        cursor: pointer;
+        display: block;
+        position: fixed;
+        top: 30px;
+        right: 20px;
+        height: var(--height-burger);
+        width: calc(var(--height-burger) + 15px);
+        z-index: 999;
+    }
+
+    .iconsContainer {
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: 20vh;
+        top: 80vh;
+        left: 0;
+        opacity: 0;
+        z-index: 998;
+
+        .iconLink, svg {
+            height: 40px;
+            width: 40px;
+        }
+
+        .iconLink {
+            position: absolute;
+            bottom: 90px;
+            left: 35px;
+            margin-right: var(--mg-lg);
+
+            &:last-child {
+                left: 90px;
+            }
+        }
+    }
+
+    .burgerBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        border-radius: var(--br-sm);
+        background-color: var(--c-black);
+        background-color: var(--c-black);
+    }
+
+    // .isOpen {
+
+    //     .burgerBackground {
+    //         transform: scale(80);
+    //     }
+
+    //     & + div {
+    //         opacity: 1;
+    //         pointer-events: all;
+    //     }
+    // }
+
+    .logoContainer {
+        justify-content: left;
+        color: var(--c-font-global);
+        transition: color var(--tr-base);
+
+        .logoName {
+            line-height: calc(var(--height-burger) + 8px);
+            font-size: calc(var(--height-burger) + 8px);
+        }
+
+        .logoName, svg {
+            color: currentColor;
+        }
+    }
+
+    .burgerLine {
+        position: absolute;
+        height: 2.5px;
+        width: calc(var(--height-burger) - 5px);
+        top: 50%;
+        left: 50%;
+        border-radius: 1.25px;
+        background-color: var(--bg-main);
+        border-radius: 1.5px;
+        transform: translate(-50%, -50%);
+
+        &:nth-child(2) {
+            top: calc(50% - var(--dist-burger-lines));
+        }
+
+        &:last-child {
+            top: calc(50% + var(--dist-burger-lines));
+        }
+    }
+
+    .container {
+        flex-direction: column;
+        width: 70vw;
+        height: var(--height-header);
+        margin-left: 5vw;
+    }
+
+    .list {
+        --cta-br-width: 10px;
+
+        flex-direction: column;
+        margin-bottom: var(--mg-xl);
+        padding: 0;
+
+        &:last-child {
+            position: relative;
+            display: block;
+            margin-left: 0;
+            background-color: none;
+            z-index: 1000;
+            // background: linear-gradient(to right, #743ad5,  #d53a9d);
+            background: linear-gradient(to right, var(--c-tertiary),  var(--c-primary-light));
+
+            .item {
+                justify-content: center;
+                position: relative;
+
+                svg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1002;
+                }
+            }
+
+            a {
+                display: block;
+                position: relative;
+                padding: var(--pd-lg) 0;
+                z-index: 1002;
+            }
+
+            .backgroundLink {
+                display: block;
+                position: absolute;
+                top: var(--cta-br-width);
+                left: var(--cta-br-width);
+                border-radius: 5px;
+                background-color: var(--c-black);
+                height: calc(100% - calc(var(--cta-br-width) * 2));
+                width:calc(100% - 20px);
+                z-index: 1001;
+                // background: linear-gradient(to right, #743ad5,  #d53a9d);
+            }
+        }
+    }
+
+
+    [data-is-outlined] .list {
+        box-shadow: none;
+    }
+
+    .listContainer {
+        position: fixed;
+        height: 85vh;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        z-index: 1001;
+    }
+
+    .list:first-child {
+        background-color: transparent;
+    }
+
+    .linesContainer {
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        div {
+            position: absolute;
+            background-color: var(--c-black);
+            z-index: 1003;
+        }
+
+        div:first-child,
+        div:last-child {
+            left: 0;
+            height: 15px;
+            width: 100%;
+        }
+
+        div:last-child {
+            top: -1px;
+        }
+
+        div:first-child {
+            bottom: -1px;
+        }
+
+        div:nth-child(2),
+        div:nth-child(3) {
+            width: 15px;
+            height: 100%;
+        }
+
+        div:nth-child(2) {
+            left: -1px;
+        }
+
+        div:nth-child(3) {
+            right: -1px;
+        }
+    }
+
+    .item {
+        justify-content: left;
+        // height: 90px;
+        overflow: hidden;
+    }
+
+    .item a {
+        // color: black;
+        font-family: 'inter-bold';
+        font-size: 10vw;
+        white-space: nowrap;
+    }
+
+    .list:not(:last-child) .item a {
+        // color: black;
+        font-family: 'inter-bold';
+        font-size: clamp(var(--fs-lg), 9.5vw, 60px);
+        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 1.5px;
+        -webkit-text-stroke-color: var(--c-white);
+
+        &:hover {
+            -webkit-text-fill-color: var(--c-white);
+            background-color: transparent;
+        }
+    }
+
+    .list:last-child .item a {
+        // color: black;
+        font-size: clamp(var(--fs-global), 8vw, 45px);
+
+        &:hover {
+            -webkit-text-fill-color: var(--c-white);
+            background-color: transparent;
+        }
     }
 }

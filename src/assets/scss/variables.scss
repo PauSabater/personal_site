@@ -45,16 +45,23 @@
     --c-primary-transparency: hsla(54, 67%, 38%, 0.2);
 
     --c-primary-lighter: hsl(54, 67%, 90%);
-    --c-primary-light: hsl(54, 67%, 75%);
-    --c-primary: hsl(54, 67%, 38%);
+    --c-primary-light: #eae195;
+    --c-primary: rgb(162, 149, 32);
     --c-primary-dark: hsl(54, 67%, 25%);
     --c-primary-darker: hsl(54, 67%, 15%);
 
     --c-secondary-lighter: hsl(248, 30%, 90%);
     --c-secondary-light: hsl(248, 30%, 70%);
-    --c-secondary: hsl(248, 30%, 50%);
+    --c-secondary: #6359a6;
     --c-secondary-dark: hsl(248, 30%, 30%);
     --c-secondary-darker: hsl(248, 30%, 10%);
+
+    --c-tertiary-lighter: hsl(289, 29%, 90%);
+    --c-tertiary-light: hsl(289, 29%, 70%);
+    --c-tertiary: #975ba4;
+    --c-tertiary-dark: hsl(289, 29%, 30%);
+    --c-tertiary-darker: hsl(289, 29%, 10%);
+
 
     --c-grey: hsl(0, 0%, 50%);
 

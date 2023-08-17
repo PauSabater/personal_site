@@ -1,18 +1,49 @@
 .container {
-    position: fixed;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
     height: 100vh;
     width: 100vw;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .imageContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    position: relative;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    // align-items: center;
+    // justify-content: center;
     height: 100vh;
     width: 100vw;
-}
-
-.image {
     opacity: 0;
-    pointer-events: none;
+    overflow: hidden;
+    // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
+
+    img {
+        transform-origin: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+            @media (min-aspect-ratio: 2560/1600) {
+                width: 100vw !important;
+                height: auto !important;
+            }
+
+            @media (max-aspect-ratio: 2559/1599) {
+                width: auto !important;
+                height: 100vh !important;
+            }
+    }
+
+    .image {
+        opacity: 1;
+        pointer-events: none;
+    }
 }

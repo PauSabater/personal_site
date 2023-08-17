@@ -1,52 +1,61 @@
-import { easeOutLong } from "../../assets/ts/styles/styles";
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
-import { enableScroll } from "../../assets/ts/utils/utils";
+import { scOpacityFade } from "../../assets/ts/utils/utils"
 gsap.registerPlugin(CustomEase)
 
-export const animationDurations = {
-    exitOpacity: 0.75
-}
 
-export function executeEnterAnimations(pageId: string, node: HTMLElement) {
+
+export function executeEnterAnimations(pageId: string, node: HTMLElement, route?: string) {
     console.log("node is")
     console.log(node)
     switch (pageId) {
         case 'page-project-post':
             setProjectPostEnterAnimation(node)
             break
+        case 'page-projects':
+            setProjectListEnterAnimation(node)
+            break
+        // case 'page-home':
+        //     setPageFadeInAnimation(node)
+        //     break
     }
-    // switch (pageId) {
-    //     case 'page-projects':
-    //         setProjectPostEnterAnimation(node)
-    //         break
-    // }
 }
 
-export function executeExitAnimations(pageId: string, node: HTMLElement) {
-    console.log("EXIT ANIMATION "+pageId)
+export function executeExitAnimations(pageId: string, node: HTMLElement, route?: string) {
 
-    console.log(pageId)
     switch (pageId) {
         case 'page-project-post':
             setProjectPostExitAnimation(node)
             break
-    }
-    switch (pageId) {
         case 'page-projects':
             // setProjectPostExitAnimation(node)
+            break
+        case 'page-home':
+            setPageFadeOutAnimation(node)
             break
     }
 }
 
-
-export function setPageOpacityAnimation(node: HTMLElement) {
-    window.scrollTo(0, 0)
+export function setPageFadeOutAnimation(node: HTMLElement) {
+    // window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })
-        .to(node, {
+        .to(document.getElementById('page-overlay'), {
+            opacity: 1,
+            duration: scOpacityFade,
+            delay: 0,
+            ease: "power2.in",
+        }, 0)
+        .play();
+}
+
+export function setPageFadeInAnimation(node?: HTMLElement) {
+    // window.scrollTo(0, 0)
+    gsap
+        .timeline({ paused: true })
+        .to(document.getElementById('page-overlay'), {
             opacity: 0,
-            duration: animationDurations.exitOpacity,
+            duration: scOpacityFade,
             delay: 0,
             ease: "power2.in",
         }, 0)
@@ -55,46 +64,16 @@ export function setPageOpacityAnimation(node: HTMLElement) {
 
 export function setProjectPostEnterAnimation(node: HTMLElement) {
     console.log("PROJECT POST ENTEEER")
+    const elTransitionImages: HTMLElement | null = document.querySelector("#transition-images")
+    gsap.set(elTransitionImages, {opacity: 1})
     window.scrollTo(0, 0)
-    gsap
-        .timeline({ paused: true })
-            .set(node.querySelector("#intro-article"), {
-                y: '20vh'
-            })
-            .set(node.querySelector(".intro-container"), {
-                y: '100px',
-                onComplete: ()=> {setTimeout(()=> enableScroll(), 1005)}
-            })
-        // .to(node.querySelector("#post-container-image"), {
-        //     height: '75vh',
-        //     duration: 0.8,
-        //     delay: 0.2,
-        //     ease: CustomEase.create("custom", easeOutLong),
-        // }, 0)
-        // .to(node.querySelector("#intro-article"), {
-        //     y: '0',
-        //     duration: 0.8,
-        //     delay: 0.2,
-        //     ease: CustomEase.create("custom", easeOutLong),
-        // }, 0)
-        // .to(node.querySelector(".intro-container"), {
-        //     y: '0',
-        //     opacity: '1',
-        //     duration: 0.8,
-        //     delay: 0.6,
-        //     ease: CustomEase.create("custom", easeOutLong),
-        // }, 0)
-        .play();
 }
 
 export function setProjectPostExitAnimation(node: HTMLElement) {
-    gsap
-        .timeline({ paused: true })
-        .to(node, {
-            opacity: 0,
-            duration: 0.5,
-            delay: 0,
-            ease: CustomEase.create("custom", easeOutLong),
-        }, 0)
-        .play();
+
+}
+
+export function setProjectListEnterAnimation(node: HTMLElement) {
+    // window.scrollTo(0, 0)
+
 }

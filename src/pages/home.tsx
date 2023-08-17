@@ -1,4 +1,5 @@
-import { Fragment, Suspense } from "react";
+import gsap from "gsap"
+import { Fragment, Suspense, useLayoutEffect } from "react";
 import { texts } from "../assets/ts/texts/texts"
 import { TextBanner } from "../components/TextBanner/TextBanner";
 import { TopBanner } from "../components/TopBanner/TopBanner";
@@ -12,6 +13,13 @@ import { GridBg } from "../components/Grid/Grid";
 
 
 export function Home() {
+
+    useLayoutEffect(()=> {
+        gsap
+        .timeline({ paused: true })
+            .to (document.getElementById("page-overlay"), {opacity: 0, duration: 0.7,}, 'start')
+        .play();
+    }, [])
 
     return (
         <div id="page-home">

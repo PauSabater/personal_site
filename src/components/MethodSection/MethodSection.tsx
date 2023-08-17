@@ -142,7 +142,7 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} id="method-section">
             <div className={styles.containerContent} ref={refContent}>
                 {splitLetters(props.title)}
                 {generateCollapsiblesTemplate()}

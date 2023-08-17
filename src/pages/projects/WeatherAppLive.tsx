@@ -8,7 +8,20 @@ export function WeatherAppLive() {
         wysiwyg: weatherAppContent(),
         imgPath: "mountains",
         pathNextProject: "projects/personal-site",
-        currentPath: "personal-site"
+        currentPath: "personal-site",
+        nextProjects: {
+            title: "More projects",
+            projects: [{
+                title: "/ personal site",
+                description: "",
+                path: "/projects/personal-site",
+                img: "personal-site.svg"
+            },{
+                title: "/ weather forecast app",
+                description: "",
+                path: "/projects/weather-app",
+                img: "mountains"
+        }]}
     }
 
     return <ProjectPost props={props}></ProjectPost>

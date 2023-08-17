@@ -1,0 +1,117 @@
+@use '../../../../assets/scss/mixins';
+
+
+.container {
+    cursor: pointer;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .title, .imgContainer, svg {
+        pointer-events: none;
+    }
+}
+
+.title {
+    color: var(--c-primary);
+    font-size: var(--fs-lg);
+    font-family: 'quanticoBold';
+    margin-bottom: var(--mg-xs);
+    transition: transform var(--tr-base);
+}
+
+.heading {
+    font-size: var(--fs-4xl);
+    font-family: 'inter-bold';
+}
+
+.imgContainer {
+    position: relative;
+
+    div[data-img-mountain] {
+        width: 100%;
+        height: auto;
+    }
+
+    img, svg {
+        width: 100%;
+    }
+}
+
+.mountainContainer {
+    position: relative;
+    display: grid;
+
+    img, svg {
+        position: relative;
+        grid-column-start: 1;
+        grid-row-end: 1;
+    }
+}
+
+.project {
+    position: relative;
+    text-decoration: none;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    padding-right: var(--pd-md);
+    padding-bottom: 60px;
+
+    img, svg {
+        position: relative;
+        border-radius: 20px;
+        z-index: 1;
+    }
+
+    .imgContainer + svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: scaleX(-1);
+        width: 70px;
+        transition: transform var(--tr-base);
+        z-index: 0;
+    }
+
+    &:hover {
+        .title {
+            transform: translateY(-3px);
+        }
+
+        .imgContainer + svg {
+            transform: translateX(-5px) scaleX(-1);
+        }
+
+    }
+
+    &:last-child {
+        grid-column-start: 2;
+        padding-left: var(--pd-md);
+
+        .imgContainer + svg {
+            right: 0;
+            left: unset;
+            transform: scaleX(1);
+        }
+
+        &:hover .imgContainer + svg {
+            transform: translateX(5px);
+        }
+    }
+}
+
+@include mixins.mobile {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imgContainer + svg {
+        display: none;
+    }
+
+    .project {
+        padding-bottom: var(--pd-ld);
+    }
+
+}

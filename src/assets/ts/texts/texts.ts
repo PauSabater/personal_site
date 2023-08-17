@@ -1,7 +1,7 @@
 
 export const texts = {
     header: {
-        links: ["projects", "how I work", "skills"]
+        links: ["projects", "how do I work", "skills"]
     },
     topBanner: {
         desktop: {
@@ -57,9 +57,10 @@ export const texts = {
             "quality base for the next "
         ],
         Cta: {
-            text: "Visit my github",
-            href: "www.test.com",
-            color: "black"
+            text: "Check out all the projects",
+            href: "/projects",
+            color: "black",
+            target: "_self"
         }
     },
     skillsBanner: {

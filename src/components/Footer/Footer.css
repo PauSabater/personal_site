@@ -1,0 +1,32 @@
+.footer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 100px;
+    margin-right: 7vw;
+    font-family: 'inter-medium';
+    align-items: center;
+}
+
+.footer a {
+    display: block;
+    margin-left: 35px;
+    color: var(--c-black);
+}
+
+.footer p {
+    margin: 0 0 -4px 0;
+    font-family: 'inter-bold';
+    font-size: var(--fs-2xs);
+    color: grey;
+}
+
+#page-content:has(#page-home) + .footer {
+    height: 80px;
+    margin-top: -80px;
+}
+
+#page-content:has(#page-home) + .footer a {
+    color: var(--c-white);
+}
