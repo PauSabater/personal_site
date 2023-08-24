@@ -1,0 +1,15 @@
+.container {
+    min-height: calc(85vh - var(--height-footer));
+    padding: var(--pd-fullwidth);
+    padding-top: 15vh;
+}
+
+.title {
+    font-family: 'inter-bold';
+    font-size: var(--fs-2xl);
+    margin-bottom: var(--mg-xl);
+}
+
+.title + div {
+    margin-bottom: 70px;
+}

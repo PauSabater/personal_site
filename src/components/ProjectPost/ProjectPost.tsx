@@ -109,9 +109,10 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
     )
 }
 
+
 export const getArrowLinkTemplate = (path: string)=> {
     return (
-        <Link to={path} onClick={(e) => leaveFromArrowClick(e)} className={styles.nextProjectContainer}>
+        <Link to={path} onClick={() => leaveFromArrowClick()} className={styles.nextProjectContainer}>
             Next project
             {parse(arrowFilled())}
         </Link>

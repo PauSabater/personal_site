@@ -1,9 +1,14 @@
-import { Fragment, useLayoutEffect, useRef } from "react"
+import { Fragment, Suspense, useLayoutEffect, useRef } from "react"
 import styles from "./TextBanner.module.scss"
 import parse from 'html-react-parser'
 import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
 import { isVerticalMobileTablet } from "../../assets/ts/utils/utils"
+import { PerspectiveCamera } from "three"
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import { TextBannerCanvas } from "./TextBannerCanvas/TextBannerCanvas"
+import { ReactComponent as NoteLogo } from '../../assets/svg/note-logo.svg'
 
 export interface ITextBannerTexts {
     title: string,
@@ -27,16 +32,20 @@ export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
                 <p className={styles.title}>{texts.title}</p>
                 {
                     texts.textDesktop.map((line) =>
-                        <div className={`${styles.lineWrap} ${styles.textDesktop}`}>
+                        <div className={`${styles.lineWrap} ${styles.textDesktop} text-desktop`}>
                             <p className={styles.text}>{parse(line)}</p>
                         </div>
                     )}
                     {texts.textMobile.map((line) =>
-                        <div className={`${styles.lineWrap} ${styles.textMobile}`}>
+                        <div className={`${styles.lineWrap} ${styles.textMobile} text-mobile`}>
                             <p className={styles.text}>{parse(line)}</p>
                         </div>
                 )}
                 <Cta props={texts.Cta}></Cta>
+            </div>
+            <div className={styles.canvasContainer} id="text-banner-canvas">
+                <TextBannerCanvas/>
+                <NoteLogo/>
             </div>
         </div>
     )

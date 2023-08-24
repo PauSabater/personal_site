@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: right;
-    height: 100px;
+    height: var(--height-footer);
     margin-right: 7vw;
     font-family: 'inter-medium';
     align-items: center;

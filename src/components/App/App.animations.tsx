@@ -31,12 +31,12 @@ export function executeExitAnimations(pageId: string, node: HTMLElement, route?:
             // setProjectPostExitAnimation(node)
             break
         case 'page-home':
-            setPageFadeOutAnimation(node)
+            setPageFadeOutAnimation()
             break
     }
 }
 
-export function setPageFadeOutAnimation(node: HTMLElement) {
+export function setPageFadeOutAnimation() {
     // window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })
@@ -49,7 +49,7 @@ export function setPageFadeOutAnimation(node: HTMLElement) {
         .play();
 }
 
-export function setPageFadeInAnimation(node?: HTMLElement) {
+export function setPageFadeInAnimation() {
     // window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })

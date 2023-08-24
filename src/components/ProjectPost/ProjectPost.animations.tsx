@@ -8,9 +8,7 @@ import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
-export function leaveFromArrowClick(e: React.MouseEvent) {
-    const elTarget: HTMLElement | null = e.target as HTMLElement
-
+export function leaveFromArrowClick() {
     const elTransitionImages: HTMLElement | null = document.querySelector("#transition-images")
     const elPage: HTMLElement | null = document.getElementById("page-project-post")
     document.querySelector("#page-content")?.setAttribute("data-fade-in", "")

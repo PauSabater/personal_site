@@ -22,13 +22,8 @@ export interface ITopBannerProps {
 
 export function TopBanner({ props }: { props: ITopBannerProps}) {
 
-    const refContainerTitleDesktop: React.MutableRefObject<null> = useRef(null)
+    const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
     const refContainerTitleMobile: React.MutableRefObject<null> = useRef(null)
-
-    useLayoutEffect(() => {
-        setTopBannerAnimations(refContainerTitleDesktop, refContainerTitleMobile)
-    }, [])
-
 
     return (
         <Fragment>
@@ -39,7 +34,7 @@ export function TopBanner({ props }: { props: ITopBannerProps}) {
             </div>
              <div className={styles.container} id={"top-banner-container"}>
              {/* <img src={require("../../assets/svg/brush-stroke.svg")} alt="stoke" /> */}
-            <div ref={refContainerTitleDesktop} className={styles.containerTitleDesktop} >
+            <div ref={refsizedTopBanner} className={styles.sizedTopBanner} >
              {/*   <p className={styles.preTitle}>{props.desktop.pretitle}</p>
                 { props.desktop.lines.map((line, i)=> {
                     return <p className={styles.title}>{parse(`

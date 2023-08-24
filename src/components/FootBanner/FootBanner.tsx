@@ -107,7 +107,7 @@ export function FootBanner({}: {}) {
                 y: 10,
             })
             .set(svgPath, {
-                strokeDashoffset: lenghtPath,
+                strokeDashoffset: 200,
                 strokeDasharray: lenghtPath
             })
             .set(svgPath, {strokeDashoffset: 0, delay: 1})
@@ -285,7 +285,7 @@ export function FootBanner({}: {}) {
         //https://github.com/pmndrs/drei#performancemonitor
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
-            <Canvas ref={refCanvas} concurrent gl={{ alpha: false }}>
+            <Canvas ref={refCanvas} concurrent gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
             {/* <Perf position="top-left" />
             <PerformanceMonitor /> */}
             <color attach="background" args={['hsl(0, 0%, 7%)']} />

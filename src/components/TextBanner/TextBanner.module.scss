@@ -1,6 +1,7 @@
 @use '../../assets/scss/mixins.scss';
 
 .container {
+    position: relative;
     margin-top: 200px;
     width: 90vw;
     // border: 2px solid var(--c-black);
@@ -8,6 +9,27 @@
     margin: var(--pd-fullwidth);
     margin-bottom: 100px;
     opacity: 0;
+}
+
+.canvasContainer {
+    position: absolute;
+    height: 100%;
+    width: 45%;
+    top: 0;
+    right: 30px;
+    opacity: 0;
+    z-index: 11;
+    transition: opacity var(--tr-base);
+
+    svg {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        height: 200px;
+        width: 220px;
+        opacity: 0;
+        transform: rotateZ(10deg);
+    }
 }
 
 .wrap {

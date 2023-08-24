@@ -27,6 +27,7 @@ import { PersonalSiteProject } from '../../pages/projects/PersonalSite';
 import { Overlay } from '../Overlay/Overlay';
 import { msTransitionPage } from '../../assets/ts/utils/utils';
 import { Footer } from '../Footer/Footer';
+import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult';
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
@@ -34,6 +35,7 @@ const routes = [
     {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
     {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
+    {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
 ]
 
 

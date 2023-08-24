@@ -5,72 +5,72 @@ import { getTodayDayNum, isVerticalMobileTablet } from "../../assets/ts/utils/ut
 import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
-export function setTopBannerAnimations(refContainerTitleDesktop: React.MutableRefObject<null>, refContainerTitleMobile: React.MutableRefObject<null>) {
+export function setTopBannerAnimations(el: HTMLElement | null) {
+    console.log("IN SET TOP BANNER ANIM")
+
     let ctx = gsap.context(() => {
 
-        // Reference element from component:
-        let elContainerTitle: HTMLElement | null = isVerticalMobileTablet() ? refContainerTitleMobile.current : refContainerTitleDesktop.current
-        //elContainerTitle = refContainerTitleDesktop.current
 
         // Query elements from DOM:
         const elHeader: HTMLElement = document.querySelector("#header") as HTMLElement
         const elDateBanner: HTMLElement = document.querySelector("#date-banner") as HTMLElement
         const elDayNumber: HTMLElement = document.querySelector("#day-num") as HTMLElement
+        const elGradient: HTMLElement = document.querySelector("#top-banner-gradient") as HTMLElement
+        const elEllipse: HTMLElement = document.querySelector("#top-banner-ellipse svg") as HTMLElement
+        const elUnderline: HTMLElement = document.querySelector("#top-banner-underline svg") as HTMLElement
 
-        if (elContainerTitle === null) return
-        const elsTitles: NodeListOf<HTMLParagraphElement> = (elContainerTitle as HTMLElement).querySelectorAll("p")
+
+        const pathEllipse: SVGPathElement | null = elEllipse.querySelector("path")
+        const pathUnderline: SVGPathElement | null = elUnderline.querySelector("path")
+
+        if (pathEllipse === null) return
+        const lenghtPath = pathEllipse.getTotalLength()
+        console.log("PATH IS "+lenghtPath)
+
+        // gsap.set(pathEllipse, {
+        //     strokeDashoffset: lenghtPath,
+        //     strokeDasharray: lenghtPath
+        // })
 
         // Set timeline
-        let tlTopBanner = gsap.timeline()
-        tlTopBanner.set(Array.from(elsTitles), {rotationY:"95deg", opacity: 0})
-        tlTopBanner.set(elHeader, {y: -200, opacity: 1})
-        tlTopBanner.set(elDateBanner, {y: 400, opacity: 1})
-
-        // Animate titles rotation:
-        tlTopBanner.to(Array.from(elsTitles), {
-            rotationY:"0deg",
-            ease: CustomEase.create("custom", easeOutLong),
-            duration: 1.2,
-            opacity: 1,
-            stagger: 0.4
-        }, 'start')
-
-        // Animate titles opacity separately from rotation:
-        tlTopBanner.to(Array.from(elsTitles), {
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.4
-        }, 'start')
-
-        // Header entering screen:
-        tlTopBanner.to(elHeader, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: CustomEase.create("custom", easeOutLong)
-        }, 0.7)
-
-        // Date entering screen:
-        tlTopBanner.to(elDateBanner, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: CustomEase.create("custom", easeOutLong),
-            onStartParams:[elDayNumber, 500],
-            onStart: setDayNumCounter,
-            onCompleteParams:[isVerticalMobileTablet() ? refContainerTitleDesktop.current : refContainerTitleMobile.current],
-            onComplete: setElAttribute
-        }, 0.7)
-
-        tlTopBanner.delay(0.7)
+        let tlTopBanner = gsap.timeline().pause()
+        tlTopBanner
+            .set(elHeader, {y: -200, opacity: 1})
+            .set(elDateBanner, {y: 400, opacity: 1})
+            // Header entering screen:
+            .set([pathEllipse], {
+                strokeDashoffset: 0,
+                delay: 0
+            })
+            .set([pathUnderline], {
+                strokeDashoffset: 0,
+                delay: 0.8
+            })
+            .to(elHeader, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: CustomEase.create("custom", easeOutLong)
+            }, 0)
+            // Gradient element appear:
+            .to(elGradient, {
+                opacity: 1,
+                duration: 1.5,
+                delay: 0
+            }, 0)
+            // Date entering screen:
+            .to(elDateBanner, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: CustomEase.create("custom", easeOutLong),
+                onStartParams:[elDayNumber, 500],
+                onStart: setDayNumCounter,
+            }, 0)
+            .play()
     })
 
     return () => ctx.revert()
-}
-
-function setElAttribute(elParentTitles: HTMLElement) {
-    if (elParentTitles === null) return
-    elParentTitles.setAttribute('data-animation-completed', '')
 }
 
 function setDayNumCounter(elDayNumber: HTMLElement, delayExec: number) {

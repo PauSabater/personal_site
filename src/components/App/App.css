@@ -19,3 +19,19 @@ body {
 .page {
     transition: opacity 2s;
 }
+
+[data-svg-ellipse] {
+    top: 0;
+}
+
+[data-svg-path-ellipse] {
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+    transition: stroke-dashoffset 1.5s ease-out;
+}
+
+[data-svg-path-underline] {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: -1200;
+    transition: stroke-dashoffset 0.75s ease-out;
+}

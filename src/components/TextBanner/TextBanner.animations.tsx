@@ -1,7 +1,7 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase";
-import { isVerticalMobileTablet } from "../../assets/ts/utils/utils";
+import { isMobileScreen, isVerticalMobileTablet } from "../../assets/ts/utils/utils";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {
@@ -12,30 +12,42 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
 
         if (elTextBanner === null) return
 
-        const elsTextLines: NodeListOf<HTMLParagraphElement> = (elTextBanner as HTMLElement).querySelectorAll("p")
+        const elsTextLines: NodeListOf<HTMLParagraphElement> =
+            (elTextBanner as HTMLElement).querySelectorAll(`${isMobileScreen() ? '.text-mobile p' : '.text-desktop p'}`)
         const elBtn = (elTextBanner as HTMLElement).querySelector("Cta")
+        const elCanvas = document.querySelector("#text-banner-canvas")
 
-
-        // Set timeline
         let tlTBanner = gsap.timeline()
 
+        console.log("SVG IS")
+        // console.log((elTextBanner as HTMLElement).querySelector("#text-banner-canvas svg"))
+
+        tlTBanner
         // Full banner opacity and translate:
-        tlTBanner.fromTo(
+        .fromTo(
             elTextBanner,
             {opacity: 0, y: 200},
             {opacity: 1, y: 0, duration: 0.4},
             'start'
         )
         // Text lines reveal effect:
-        tlTBanner.fromTo(Array.from(elsTextLines),
+        .fromTo(Array.from(elsTextLines),
             {opacity: 0, y: 100},
             {opacity: 1, y: 0, duration: 0.5, stagger: 0.05},
             'start'
         )
-        // Text lines reveal effect:
-        tlTBanner.fromTo(elBtn,
+        // Canvas:
+        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.3}, 'start')
+        // Btn appear:
+        .fromTo(elBtn,
             {opacity: 0},
-            {opacity: 1, duration: 0.3, onComplete: ()=> elTextBanner?.setAttribute('data-animation-is-finished', '')},
+            {
+                opacity: 1, duration: 0.3,
+                onComplete: ()=> {
+                    elTextBanner?.setAttribute('data-animation-is-finished', '')
+                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
+                }
+            },
             'end'
         )
 

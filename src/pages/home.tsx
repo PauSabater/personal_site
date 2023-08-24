@@ -1,15 +1,13 @@
 import gsap from "gsap"
-import { Fragment, Suspense, useLayoutEffect } from "react";
+import { Suspense, useLayoutEffect } from "react";
 import { texts } from "../assets/ts/texts/texts"
 import { TextBanner } from "../components/TextBanner/TextBanner";
 import { TopBanner } from "../components/TopBanner/TopBanner";
 import { WorkBanner } from "../components/WorkBanner/WorkBanner";
-import { Header } from "../components/Header/Header"
 import { SkillsBanner } from "../components/SkillsBanner/SkillsBanner";
 import { MethodSection } from "../components/MethodSection/MethodSection";
 import { FootBanner } from "../components/FootBanner/FootBanner";
 import styles from "./pages.module.scss"
-import { GridBg } from "../components/Grid/Grid";
 
 
 export function Home() {
