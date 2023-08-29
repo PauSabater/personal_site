@@ -9,7 +9,7 @@ import { CustomEase } from "gsap/CustomEase"
 import { chevronSvg } from "../../assets/svg/ts/arrow"
 import parse from "html-react-parser"
 import { Link, NavLink } from "react-router-dom"
-import { getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, getViewportAspectRatio, hidePageOverlay, isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
+import { getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, getViewportAspectRatio, hidePageOverlay, isViewportPropHigherThanEl, msEnterPageLong, scEnterPageLong } from "../../assets/ts/utils/utils"
 import { calendar } from "../../assets/svg/ts/calendar"
 import { LinkInline } from "./Components/LinkInline/LinkInline"
 import { easeOutLong } from "../../assets/ts/styles/styles"
@@ -19,6 +19,7 @@ import { getCloudsAnimation } from "../WorkBanner/WorkBanner.animations"
 import { INextProjects, NextProjects } from "./Components/NextProjects/NextProjects"
 import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
+import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
 
 
 gsap.registerPlugin(CustomEase)
@@ -45,18 +46,23 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
     const refPostImageContainer = useRef(null)
 
     const [titles, setTitles] = useState<NodeListOf<Element> | null>(null)
+    const [showCanvas, setShowCanvas] = useState(false)
 
-    useEffect(() => {
-        // window.scroll(0, 0)
-        const elImgTransition: HTMLElement | null = document.getElementById(`transition-img-${props.imgPath}`)
-        hidePageOverlay()
-        if (elImgTransition === null) return
-        elImgTransition.style.opacity = '1'
+    useLayoutEffect(() => {
 
-    })
+    }, [])
 
 
     useLayoutEffect(() => {
+        window.scroll(0, 0)
+
+        const elImgTransition: HTMLElement | null = document.getElementById(`transition-img-${props.imgPath}`)
+        hidePageOverlay()
+        if (elImgTransition === null) return
+        // elImgTransition.style.opacity = '1'
+        gsap.set(elImgTransition, {opacity: 1})
+        gsap.set(document.querySelector(".footer-canvas"), {marginTop: '-45vh'})
+
         removeOutlineHeader()
         executePageEnterAnimation(props.imgPath)
 
@@ -66,32 +72,21 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
             // setMountainsScale(elImage)
             setMountainsAnimationObserver()
         }
+
+        console.log(props.imgPath)
+
+        if (props.imgPath === "personal-site.svg") {
+            console.log("IEEEEEE SET CANVAS")
+            setTimeout(()=> setShowCanvas(true), msEnterPageLong + 200)
+        }
+
     }, [])
-
-    /*
-        Receives item click event, substracts referal to the corresponding title and triggers scroll to the title
-    */
-    // const handleItemClickEvent = (e: React.MouseEvent<HTMLLIElement, MouseEvent>)=> {
-    //     const elArticleContainer: HTMLElement | null = refArticleContainer.current
-    //     if (elArticleContainer === null) return
-
-    //     const elTarget: HTMLElement = e.target as HTMLElement
-    //     const attrTarget = elTarget.getAttribute("data-title")
-    //     gsap.to(window, {
-    //         duration: 1,
-    //         ease: "power3.out",
-    //         scrollTo: {
-    //             y: (elArticleContainer as HTMLElement).querySelector(`[data-title-target=${attrTarget}]`) as HTMLElement,
-    //             offsetY: 100
-    //         }
-    //     })
-
-    // }
 
     return (
         <div id="page-project-post" className={styles.projectPostContainer}>
             <div id="post-container-image" className={styles.containerImage}>
                 <div className={styles.container} ref={refPostImageContainer}>
+                    { showCanvas === true ? <PersonalSiteCanvas /> : '' }
                     {/* {getImg(props.imgPath)} */}
                     {/* {props.imgPath !== 'mountains'
                         ? <img ref={refPostImageContainer} className={styles.image} src={require(`../../assets/${props.imgPath}`)}></img>

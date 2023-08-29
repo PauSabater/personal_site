@@ -27,7 +27,7 @@ export function TopBanner({ props }: { props: ITopBannerProps}) {
 
     return (
         <Fragment>
-            <div className={styles.canvasContainer}>
+            <div className={styles.canvasContainer} id="top-banner">
                 <TopBannerCanvas/>
                 {/* <div className={styles.gradientLight}></div> */}
                 {/* <div className={styles.gradientLightSecondary}></div> */}

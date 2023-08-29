@@ -34,6 +34,7 @@ export function SkillsBanner({texts}: {texts: ISkillsBannerTexts}) {
                     {texts.skills.map((skill) => { return (
                         <div className={`${styles.skillContainer} skill-container`}>
                             <img
+                                loading="lazy"
                                 className={styles.img}
                                 src={require(`../../assets/svg/logos/${skill.icon}.svg`)}
                             ></img>

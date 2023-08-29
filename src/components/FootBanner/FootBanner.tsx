@@ -27,7 +27,7 @@ export function FootBanner({}: {}) {
     const refSvgBorder = useRef(null)
 
 
-    const [colorMain, setColorMain] = useState("hsl(0, 0%, 5%)")
+    const [colorMain, setColorMain] = useState("hsl(0, 0%, 10%)")
 
     const [aspectRatio, setAspectRatio] = useState<number>(window.innerWidth / window.innerHeight)
 
@@ -288,7 +288,7 @@ export function FootBanner({}: {}) {
             <Canvas ref={refCanvas} concurrent gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
             {/* <Perf position="top-left" />
             <PerformanceMonitor /> */}
-            <color attach="background" args={['hsl(0, 0%, 7%)']} />
+            <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
 
             <Suspense fallback={null}>
@@ -305,7 +305,7 @@ export function FootBanner({}: {}) {
                     </mesh>
                     <mesh rotation={[0, Math.PI / 2, 0 ]} position={[-6, 7.4, -3.0] as Vector3}>
                         <planeBufferGeometry attach="geometry" args={[12, 15]} />
-                        <meshBasicMaterial reflectivity={1} attach="material" color={"hsl(0, 0%, 6%)"} />
+                        <meshBasicMaterial reflectivity={1} attach="material" color={colorMain} />
                     </mesh>
                     <Glass position={[-3.55, 0.55, 0.65] as Vector3} radius={0.65} size={0.65} />
                     <Glass position={[-5.5, 0.45, -1] as Vector3} radius={0.1} size={0.45}/>

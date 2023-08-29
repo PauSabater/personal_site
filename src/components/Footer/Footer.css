@@ -30,3 +30,43 @@
 #page-content:has(#page-home) + .footer a {
     color: var(--c-white);
 }
+
+.footer-canvas {
+    width: 100vw;
+    height: 60vh;
+    background: var(--bg-main);
+    margin-bottom: -100px;
+    border-radius: 45px;
+    /* border: 2px solid black; */
+    scrollbar-color: var(--c-secondary-darker) transparent !important;
+    scrollbar-width: thin !important;
+}
+
+.footer-canvas ::-webkit-scrollbar {
+    background: transparent;
+    width: 6px;
+}
+
+.footer-canvas ::-webkit-scrollbar-thumb {
+    background: var(--c-secondary-darker);
+    border-radius: var(--br-base);
+}
+
+.footer-title {
+    font-size: 60px;
+    margin: 0;
+    margin-bottom: var(--mg-md);
+    font-family: "inter-bolder";
+    padding: var(--pd-fullwidth);
+}
+
+@media (max-width: 768px) {
+    .footer-canvas {
+        height: 80vh;
+    }
+
+    .footer a {
+        margin-left: 25px;
+        font-size: var(--fs-xs);
+    }
+}

@@ -49,17 +49,17 @@
     --c-primary-light: #eae195;
     --c-primary: hsl(54, 67%, 38%);
     // --c-primary: hsl(60, 63%, 62%);
-    --c-primary-dark: hsl(54, 67%, 25%);
+    --c-primary-dark: #6a6215;
     --c-primary-darker: hsl(54, 67%, 15%);
 
     --c-secondary-lighter: hsl(248, 30%, 90%);
     --c-secondary-light: hsl(248, 30%, 70%);
     --c-secondary: hsl(248, 30%, 50%);
-    --c-secondary-dark: hsl(248, 30%, 30%);
+    --c-secondary-dark: #3c3663;
     --c-secondary-darker: hsl(248, 30%, 10%);
 
     --c-tertiary-lighter: hsl(289, 29%, 90%);
-    --c-tertiary-light: hsl(289, 29%, 70%);
+    --c-tertiary-light: rgb(193, 156, 201);
     --c-tertiary: #975ba4;
     --c-tertiary-dark: hsl(289, 29%, 30%);
     --c-tertiary-darker: hsl(289, 29%, 10%);
@@ -69,7 +69,8 @@
 
 
     --c-black: hsl(0, 0%, 7%);
-    --c-black: hsl(0, 0%, 2%);
+    --c-black: hsl(0, 0%, 6%);
+    --c-blackest: hsl(0, 0%, 3%);
    //  --c-black: black;
 
     --c-font-global: var(--c-black);

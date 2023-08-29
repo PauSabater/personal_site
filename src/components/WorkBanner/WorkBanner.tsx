@@ -102,7 +102,8 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                 }
             })
 
-            timeline.addLabel('cards-placement')
+            // Initial setup
+            timeline
                 .set([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy], {xPercent: -150, scaleX: -1})
                 .set([elSecondCloudsLayerCopy], {xPercent: 50, scaleX: -1})
                 .set(card1, {yPercent: 30, opacity: 1})
@@ -112,10 +113,11 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     card2.querySelector(".overlay")
                 ], {opacity: "0"})
 
-            timeline.addLabel('place-card-3')
-                .set(card2, {opacity: 1})
-                .to([card1, card2], {yPercent: 0})
-                .set(card1.querySelector(".img-container"), {opacity: 0})
+            // Cards move to reveal
+            timeline
+                .to(card2, {opacity: 1, duration: 0})
+                // .set(card1.querySelector(".img-container"), {opacity: 0})
+                .to([card1, card2], {yPercent: 0, opacity: 1})
                 .set(card1.querySelector(".overlay"), {opacity: 0.5})
                 .set(card3, {opacity: 1})
                 .to(card3, {yPercent: 0})
@@ -218,7 +220,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 )
                             })}
                                 <Cta props={texts.workBanner.Cta} />
-                                <Link to="/projects">hello</Link>
                             </div>
                     </div>
                 </div>

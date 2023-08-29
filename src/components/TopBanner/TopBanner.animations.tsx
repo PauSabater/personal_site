@@ -1,16 +1,14 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
-import { getTodayDayNum, isVerticalMobileTablet } from "../../assets/ts/utils/utils"
+import { getTodayDayNum, scTransitionPage } from "../../assets/ts/utils/utils"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
+
 export function setTopBannerAnimations(el: HTMLElement | null) {
-    console.log("IN SET TOP BANNER ANIM")
 
     let ctx = gsap.context(() => {
-
-
         // Query elements from DOM:
         const elHeader: HTMLElement = document.querySelector("#header") as HTMLElement
         const elDateBanner: HTMLElement = document.querySelector("#date-banner") as HTMLElement
@@ -19,18 +17,10 @@ export function setTopBannerAnimations(el: HTMLElement | null) {
         const elEllipse: HTMLElement = document.querySelector("#top-banner-ellipse svg") as HTMLElement
         const elUnderline: HTMLElement = document.querySelector("#top-banner-underline svg") as HTMLElement
 
-
         const pathEllipse: SVGPathElement | null = elEllipse.querySelector("path")
         const pathUnderline: SVGPathElement | null = elUnderline.querySelector("path")
 
         if (pathEllipse === null) return
-        const lenghtPath = pathEllipse.getTotalLength()
-        console.log("PATH IS "+lenghtPath)
-
-        // gsap.set(pathEllipse, {
-        //     strokeDashoffset: lenghtPath,
-        //     strokeDasharray: lenghtPath
-        // })
 
         // Set timeline
         let tlTopBanner = gsap.timeline().pause()
@@ -69,6 +59,35 @@ export function setTopBannerAnimations(el: HTMLElement | null) {
             }, 0)
             .play()
     })
+
+    return () => ctx.revert()
+}
+
+export function executeInitialPageAnimation() {
+    const elTopBanner = document.getElementById("top-banner")
+    const elPageOverlay = document.getElementById("page-overlay")
+
+    let ctx = gsap.context(() => {
+        gsap.timeline().pause()
+            .set(elTopBanner, {
+                y: 100
+            })
+            .set(elPageOverlay, {
+                opacity: 1
+            })
+            .to(elPageOverlay, {
+                opacity: 0,
+                duration: scTransitionPage - 0.1,
+                ease: "power1.in"
+            }, 'start')
+            .to(elTopBanner, {
+                y: 0,
+                duration: scTransitionPage - 0.1,
+                delay: 0,
+                ease: "power1.in"
+            }, 'start')
+            .play()
+        })
 
     return () => ctx.revert()
 }

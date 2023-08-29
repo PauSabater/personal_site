@@ -50,11 +50,12 @@ export const texts = {
             align: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         },
         text: [
-            "It is not been until my first",
-            "professional experience that I",
-            "learned what a project really",
-            "consisted of. It created a",
-            "quality base for the next "
+            "Having acquired a good range",
+            "of good practises during my",
+            "time at papernest, I believe",
+            "I can take bring forward a",
+            "good range of projects with",
+            "a mature perspective."
         ],
         Cta: {
             text: "Check out all the projects",

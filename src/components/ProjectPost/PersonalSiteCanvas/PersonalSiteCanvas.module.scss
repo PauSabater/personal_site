@@ -1,0 +1,10 @@
+.canvasContainer {
+    position: fixed;
+    top: 50vh;
+    left: 0;
+    height: 75vh;
+    width: 100%;
+    opacity: 0;
+    z-index: -1;
+    // transform: translateY(50%);
+}

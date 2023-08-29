@@ -1,5 +1,6 @@
-import { Fragment, Suspense } from "react";
+import { Fragment, Suspense, useLayoutEffect } from "react";
 import { ProjectList } from "../components/ProjectsList/ProjectList";
+import { showHeader } from "../components/Header/Header.animations";
 
 
 const projectList = {
@@ -56,6 +57,10 @@ const projectList = {
 }
 
 export function Projects() {
+
+    useLayoutEffect(()=> {
+        showHeader()
+    }, [])
 
     return (
         <ProjectList props={projectList}></ProjectList>

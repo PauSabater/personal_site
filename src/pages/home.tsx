@@ -1,5 +1,5 @@
 import gsap from "gsap"
-import { Suspense, useLayoutEffect } from "react";
+import { Suspense, useEffect, useLayoutEffect } from "react";
 import { texts } from "../assets/ts/texts/texts"
 import { TextBanner } from "../components/TextBanner/TextBanner";
 import { TopBanner } from "../components/TopBanner/TopBanner";
@@ -11,13 +11,6 @@ import styles from "./pages.module.scss"
 
 
 export function Home() {
-
-    useLayoutEffect(()=> {
-        gsap
-        .timeline({ paused: true })
-            .to (document.getElementById("page-overlay"), {opacity: 0, duration: 0.7,}, 'start')
-        .play();
-    }, [])
 
     return (
         <div id="page-home">

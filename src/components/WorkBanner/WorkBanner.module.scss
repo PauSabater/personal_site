@@ -14,6 +14,7 @@
     --card-total-height: calc(var(--card-height) + var(--card-title-height));
 
     @include mixins.mobile-tablet {
+        --container-pd-top: 150px;
         --card-width: 250px;
         --card-height: 400px;
         --card-title-width: 30px;
@@ -76,7 +77,7 @@
 
     p {
         font-size: clamp(20px, 1.5vw, 28px);
-        width: 380px;
+        max-width: 450px;
         margin: 0;
     }
 
@@ -123,7 +124,6 @@ p.preTitle {
 }
 
 .cardContainer {
-    cursor: pointer;
     position: absolute;
     top: var(--card-top);
     left: var(--card-left);
@@ -144,12 +144,12 @@ p.preTitle {
 
 .cardContainer:nth-child(2) {
     top: calc(15px + var(--card-top));
-    left: calc(var(--card-left) + var(--card-title-width));
+    left: calc(var(--card-left) + var(--card-title-width) - 10px);
     z-index: 2;
 }
 
 .cardContainer:nth-child(3) {
     top: calc(30px + var(--card-top));
-    left: calc(var(--card-left) + (var(--card-title-width) * 2));
+    left: calc(var(--card-left) + (var(--card-title-width) * 2) - 10px);
     z-index: 2;
 }

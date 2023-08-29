@@ -44,17 +44,17 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
                     <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg}/>
                     <img id="lightning" className={styles.lightning} src={SvgLightning}/>
                     <img id="mountains" src={SvgMountains}/>
-                    <img id="cloud-third-line" className={`${`${styles.cloud} cloud`} cloud`} src={ImgCloudThirdLine}/>
-                    <img id="cloud-third-line-copy" className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudThirdLine}/>
+                    <img loading="lazy" id="cloud-third-line" className={`${`${styles.cloud} cloud`} cloud`} src={ImgCloudThirdLine}/>
+                    <img loading="lazy" id="cloud-third-line-copy" className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudThirdLine}/>
                     <img id="trees-third-layer" src={SvgTreesThirdLayer}/>
                     <img id="trees-second-layer" src={SvgTreesSecondLayer}/>
                     <img id="moon" src={SvgMoon}/>
                     <img id="cloud-second-line-copy" className={`${styles.cloud} ${styles.cloudFromRight} cloud`} src={ImgCloudSecondLine}/>
-                    <img id="cloud-second-line" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine}/>
+                    <img loading="lazy" id="cloud-second-line" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine}/>
                     <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer}/>
                     <img id="trees-first-layer" src={SvgTreesFirstLayer}/>
-                    <img id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
-                    <img id="cloud-first-line-1-copy"className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudFirstLine1}/>
+                    <img loading="lazy" id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
+                    <img loading="lazy" id="cloud-first-line-1-copy"className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudFirstLine1}/>
                 </div>
                 {/* <div className={styles.halfHelper2}></div> */}
                 {
@@ -93,11 +93,10 @@ export function Card({ props }: { props: ICardProps}) {
 
 
     return (
-        <Link onClick={handleCardClick} to={props.path} className={`${styles.container} card-container`} data-card-container="" data-path={props.path}>
+        <div onClick={handleCardClick} className={`${styles.container} card-container`} data-card-container="" data-path={props.path}>
             <p className={styles.title}>{props.title}</p>
             <div className={`${styles.containerText}`}>
                 <p className={`${styles.text} card-text`}>{props.text}</p>
-                <a className={`${styles.link}`} data-card-link>{"--> view case"}</a>
             </div>
             <div
                 className={`${styles.imgContainer}  img-container`}
@@ -105,6 +104,6 @@ export function Card({ props }: { props: ICardProps}) {
                 {getImg(props.img)}
             </div>
             <div className={`${styles.overlay} overlay`}></div>
-        </Link>
+        </div>
     )
 }

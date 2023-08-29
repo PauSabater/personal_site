@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
@@ -116,6 +116,10 @@ function App() {
 
         else return propsPpn
     }
+
+    useEffect(()=> {
+        window.addEventListener("load", ()=> console.log("LOADEEEEEED"))
+    }, [])
 
     return (
         <div className="main">

@@ -292,6 +292,13 @@ export function Header({ links }: { links: string[]}) {
                     <path d="M0 108H48V141C48 149.284 41.2843 156 33 156H0V108Z" fill="#050505"/>
                 </svg> */}
 
+<svg width="48" height="156" viewBox="0 0 48 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" rx="10" fill="#050505"/>
+<rect y="54" width="48" height="48" rx="10" fill="#050505"/>
+<rect y="108" width="48" height="48" rx="10" fill="#050505"/>
+</svg>
+
+
 
                     {/* <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.167 0H7C3.13401 -2.04858e-06 2.04858e-06 3.134 0 7V15.1667H15.167L15.167 0ZM15.167 18.1667H0V31.8333H15.167V18.1667ZM18.167 31.8333L18.167 18.1667H31.833L31.833 31.8333H18.167ZM15.167 34.8333H0V43C0 46.866 3.13401 50 7 50H15.167L15.167 34.8333ZM18.167 50V34.8333H31.833V50H18.167ZM18.167 15.1667V0H31.833V15.1667H18.167ZM34.833 18.1667L34.833 31.8333H50V18.1667H34.833ZM34.833 34.8333V50H43C46.866 50 50 46.866 50 43V34.8333H34.833ZM34.833 0V15.1667H50V7C50 3.13401 46.866 0 43 0H34.833Z" fill="#050505"/>
@@ -355,6 +362,7 @@ export function Header({ links }: { links: string[]}) {
                         <a className={styles.iconLink} href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989" target="_blank">
                             {parse(linkedInLogo("var(--c-black"))}
                         </a>
+                        <div className={styles.gradientLight}></div>
                     </div>
                 </div>
 

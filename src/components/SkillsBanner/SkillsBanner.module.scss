@@ -1,8 +1,8 @@
 @use '../../assets/scss/mixins';
 
 .container {
-    background-color: var(--c-black);
     padding: var(--pd-fullwidth) 0;
+    margin-top: -5px;
 
     @include mixins.desktop-lg {
         padding: var(--pd-fullwidth-lg) 0;
@@ -26,7 +26,7 @@
     }
 
     @include mixins.mobile {
-        padding: var(--pd-md) var(--pd-md);
+        padding: var(--pd-lg) var(--pd-md) var(--pd-xl);
     }
 
     @include mixins.desktop-lg {

@@ -61,3 +61,7 @@ export function removeOutlineHeader() {
 
     elHeader.removeAttribute("data-is-outlined")
 }
+
+export function showHeader() {
+    gsap.set(document.getElementById("header"), {opacity: 1})
+}

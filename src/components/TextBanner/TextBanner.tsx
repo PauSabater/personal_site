@@ -3,10 +3,6 @@ import styles from "./TextBanner.module.scss"
 import parse from 'html-react-parser'
 import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
-import { isVerticalMobileTablet } from "../../assets/ts/utils/utils"
-import { PerspectiveCamera } from "three"
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
 import { TextBannerCanvas } from "./TextBannerCanvas/TextBannerCanvas"
 import { ReactComponent as NoteLogo } from '../../assets/svg/note-logo.svg'
 
@@ -16,6 +12,7 @@ export interface ITextBannerTexts {
     textMobile: string[],
     Cta: ICtaProps
 }
+
 
 export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
 
@@ -42,10 +39,11 @@ export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
                         </div>
                 )}
                 <Cta props={texts.Cta}></Cta>
-            </div>
-            <div className={styles.canvasContainer} id="text-banner-canvas">
+
+                <div className={styles.canvasContainer} id="text-banner-canvas">
                 <TextBannerCanvas/>
                 <NoteLogo/>
+            </div>
             </div>
         </div>
     )

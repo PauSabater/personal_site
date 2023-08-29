@@ -37,7 +37,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             'start'
         )
         // Canvas:
-        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.3}, 'start')
+        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.7}, 'start')
         // Btn appear:
         .fromTo(elBtn,
             {opacity: 0},
@@ -45,7 +45,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
                 opacity: 1, duration: 0.3,
                 onComplete: ()=> {
                     elTextBanner?.setAttribute('data-animation-is-finished', '')
-                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
+                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.5 })
                 }
             },
             'end'
