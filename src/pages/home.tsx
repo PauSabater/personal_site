@@ -12,6 +12,11 @@ import styles from "./pages.module.scss"
 
 export function Home() {
 
+    useLayoutEffect(()=> {
+        window.scrollTo(0,0)
+        document.getElementById("page-content")?.classList.add("page-loaded")
+    }, [])
+
     return (
         <div id="page-home">
             <TopBanner props={texts.topBanner}/>

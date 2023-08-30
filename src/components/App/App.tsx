@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
@@ -117,8 +117,10 @@ function App() {
         else return propsPpn
     }
 
-    useEffect(()=> {
-        window.addEventListener("load", ()=> console.log("LOADEEEEEED"))
+    useLayoutEffect(()=> {
+        if (window.location.href.includes("projects")) {
+            document.querySelector(".page-loader")?.classList.remove("is-loading")
+        }
     }, [])
 
     return (

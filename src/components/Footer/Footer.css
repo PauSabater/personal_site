@@ -7,6 +7,7 @@
     margin-right: 7vw;
     font-family: 'inter-medium';
     align-items: center;
+    z-index: 3;
 }
 
 .footer a {
@@ -22,16 +23,21 @@
     color: grey;
 }
 
-#page-content:has(#page-home) + .footer {
+#page-content:has(#page-home) ~ #footer {
     height: 80px;
     margin-top: -80px;
 }
 
-#page-content:has(#page-home) + .footer a {
+#page-content:has(#page-home) ~ #footer a {
     color: var(--c-white);
 }
 
+#page-content:has(#page-home) ~ #footer-canvas {
+    display: none;
+}
+
 .footer-canvas {
+    position: relative;
     width: 100vw;
     height: 60vh;
     background: var(--bg-main);
@@ -40,6 +46,7 @@
     /* border: 2px solid black; */
     scrollbar-color: var(--c-secondary-darker) transparent !important;
     scrollbar-width: thin !important;
+    z-index: 0;
 }
 
 .footer-canvas ::-webkit-scrollbar {

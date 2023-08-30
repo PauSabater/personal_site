@@ -17,8 +17,14 @@ body {
 }
 
 .page {
+    position: relative;
     transition: opacity 2s;
+    z-index: 1;
 }
+
+/* #page-content:not(:has(#page-project-post)) {
+    transform: translateY(0) !important;
+} */
 
 [data-svg-ellipse] {
     top: 0;

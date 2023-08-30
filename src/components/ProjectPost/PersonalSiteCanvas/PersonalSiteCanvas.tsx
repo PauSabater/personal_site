@@ -7,6 +7,7 @@ import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 import * as THREE from 'three'
 import gsap from "gsap"
 import { getViewportAspectRatio } from "../../../assets/ts/utils/utils"
+import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 
 const material = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('hsl(248, 29%, 62%)').convertSRGBToLinear(),
@@ -36,6 +37,13 @@ export function PersonalSiteCanvas() {
                     </Suspense>
                     <Environment preset="city"  resolution={512}></Environment>
                     <CameraControls enabled={false} makeDefault dollyToCursor minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
+                    {/* <EffectComposer multisampling={ 4 }>
+                        <DepthOfField
+                            focusDistance={ -0.7 }
+                            focalLength={ 0.005 }
+                            bokehScale={ 6 }
+                        />
+                    </EffectComposer> */}
                 </group>
             </Canvas>
         </div>

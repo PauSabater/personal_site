@@ -56,6 +56,7 @@
     grid-row-start: 2;
     padding-right: var(--pd-md);
     padding-bottom: 60px;
+    z-index: 0;
 
     img, svg {
         position: relative;
@@ -70,7 +71,7 @@
         transform: scaleX(-1);
         width: 70px;
         transition: transform var(--tr-base);
-        z-index: 0;
+        z-index: 2;
     }
 
     &:hover {
@@ -87,6 +88,7 @@
     &:last-child {
         grid-column-start: 2;
         padding-left: var(--pd-md);
+        padding-right: 0;
 
         .imgContainer + svg {
             right: 0;

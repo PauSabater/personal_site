@@ -246,7 +246,6 @@ export function executePageEnterAnimation(img: string) {
                 y: '100px',
                 opacity: 0
             })
-
             .to(document.querySelector("#intro-article"), {
                 opacity: 1,
                 duration: scOpacityFade,
@@ -259,8 +258,11 @@ export function executePageEnterAnimation(img: string) {
                 duration: scEnterPageLong,
                 ease: easeAnimations,
             }, 'start')
-            .to(document.querySelector("#page-project-post"), {
-                y: '-=50vh',
+            .fromTo(document.querySelector("#page-project-post"), {
+                y: '50vh'
+            },
+            {
+                y: '0',
                 duration: scEnterPageLong,
                 opacity: 1,
                 ease: easeAnimations,

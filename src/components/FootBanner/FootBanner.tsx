@@ -8,7 +8,7 @@ import parse from 'html-react-parser'
 import * as THREE from 'three'
 import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
-import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial } from '@react-three/drei'
+import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial, Environment } from '@react-three/drei'
 import { Perf } from "r3f-perf"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 import { getViewportAspectRatio } from "../../assets/ts/utils/utils"
@@ -116,37 +116,13 @@ export function FootBanner({}: {}) {
                 duration: 0.5,
                 onComplete: ()=> { gsap.set(svgPath, {fillOpacity: 0.5, delay: 1}) }
             }, 'start')
-            // .to(elsLines[0], {
-            //     duration: 0.2,
-            //     delay: 0.6,
-            //     scaleX: 0,
-            //     ease: "none"
-            // }, 'start')
-            // .to(elsLines[1], {
-            //     duration: 0.1,
-            //     delay: 0.8,
-            //     scaleY: 0,
-            //     ease: "none"
-            // }, 'start')
-            // .to(elsLines[3], {
-            //     duration: 0.25,
-            //     delay: 0.9,
-            //     scaleX: 0,
-            //     ease: "none"
-            // }, 0)
-            // .to(elsLines[2], {
-            //     duration: 0.3,
-            //     delay: 1.15,
-            //     scaleY: 0,
-            //     ease: "none"
-            // }, 'start')
             .to(refContactLink.current, {
                 opacity: 1,
                 duration: 0.5,
                 delay: 0.8,
                 y: 0,
             }, 'end')
-            .play()
+        .play()
     }
 
 
@@ -173,6 +149,7 @@ export function FootBanner({}: {}) {
 
     function VideoText({text, position}: {text: string, position: Vector3}) {
         const { camera, mouse } = useThree()
+        const [shouldRender, setShouldRender] = useState(false)
 
 
         const [video] = useState(() => Object.assign(document.createElement('video'), {
@@ -198,6 +175,16 @@ export function FootBanner({}: {}) {
             }
         }, [isBannerExpanded])
 
+        useLayoutEffect(()=> {
+            // Observe to determine when we render:
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.intersectionRatio > 0) setShouldRender(true)
+                    else setShouldRender(false)
+                })
+            }).observe(document.getElementById("foot-banner") as Element)
+        }, [])
+
         const setVideo = ()=> {
             setTimeout(()=> void video.play(), 0)
         }
@@ -207,11 +194,16 @@ export function FootBanner({}: {}) {
 
         const vec = new THREE.Vector3()
 
-        useFrame(() => {
-            if (isBannerExpanded && isAnimatingFinished === true) {
-                camera.position.lerp(vec.set((mouse.x * 0.5) + -3.2, (mouse.y * 0.5) + 0.3, 4.2), 0.01)
+        useFrame(({ gl, scene, camera }) => {
+            if (shouldRender === true) {
+                console.log("RENDEEEER FOOTER")
+                gl.render(scene, camera)
+
+                if (isBannerExpanded && isAnimatingFinished === true) {
+                    camera.position.lerp(vec.set((mouse.x * 0.5) + -3.2, (mouse.y * 0.5) + 0.3, 4.2), 0.01)
+                }
             }
-        })
+        }, 1)
 
 
         useThree(() => {
@@ -286,8 +278,8 @@ export function FootBanner({}: {}) {
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
             <Canvas ref={refCanvas} concurrent gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
-            {/* <Perf position="top-left" />
-            <PerformanceMonitor /> */}
+            <Perf position="top-left" />
+            <PerformanceMonitor />
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
 
@@ -311,27 +303,26 @@ export function FootBanner({}: {}) {
                     <Glass position={[-5.5, 0.45, -1] as Vector3} radius={0.1} size={0.45}/>
                     <Glass position={[-1.3, 0.45, -1] as Vector3} radius={0.2} size={0.55}/>
                 </group>
-                <ambientLight intensity={0.5} />
+                {/* <ambientLight intensity={0.5} /> */}
                 <spotLight position={[0, 10, 0]} intensity={2} />
-                {/* <EffectComposer>
-                <Bloom
-                    intensity={2} // The bloom intensity.
-                    blurPass={undefined} // A blur pass.
-                    kernelSize={KernelSize.LARGE} // blur kernel size
-                    luminanceThreshold={0.9} // luminance threshold. Raise this value to mask out darker elements in the scene.
-                    luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
-                    mipmapBlur={false} // Enables or disables mipmap blur.
-                    resolutionX={256} // The horizontal resolution.
-                    resolutionY={256} // The vertical resolution.
-                />
+                {/* <EffectComposer> */}
+                    {/* <Bloom
+                        intensity={4} // The bloom intensity.
+                        blurPass={undefined} // A blur pass.
+                        kernelSize={KernelSize.LARGE} // blur kernel size
+                        luminanceThreshold={0.5} // luminance threshold. Raise this value to mask out darker elements in the scene.
+                        luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+                        mipmapBlur={false} // Enables or disables mipmap blur.
+                        resolutionX={256} // The horizontal resolution.
+                        resolutionY={256} // The vertical resolution.
+                    /> */}
+                    {/* <Bloom kernelSize={3} luminanceThreshold={0} luminanceSmoothing={0.4} intensity={0.6} />
+                    <Bloom kernelSize={KernelSize.LARGE} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.5} />
                 </EffectComposer> */}
             </Suspense>
             </Canvas>
             <div ref={refContactContainer} className={styles.contactContainer}>
                 <div className={styles.relativeContainer}>
-                    {/* <div ref={refContactLinesContainer} className={styles.linesContainer}>
-                        <div></div><div></div><div></div><div></div>
-                    </div> */}
                     <svg ref={refSvgBorder} className={styles.svgBorder} viewBox="0 0 500 95" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path className={`${styles.path} path`} d="M490 5H10C7.23858 5 5 7.23858 5 10V85C5 87.7614 7.23857 90 10 90H490C492.761 90 495 87.7614 495 85V10C495 7.23858 492.761 5 490 5Z" fill="black" fill-opacity="0.2" stroke="url(#paint0_linear_53_13)" stroke-width="10"/>
                         <defs>

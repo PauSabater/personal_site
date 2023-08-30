@@ -61,7 +61,6 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
         if (elImgTransition === null) return
         // elImgTransition.style.opacity = '1'
         gsap.set(elImgTransition, {opacity: 1})
-        gsap.set(document.querySelector(".footer-canvas"), {marginTop: '-45vh'})
 
         removeOutlineHeader()
         executePageEnterAnimation(props.imgPath)

@@ -33,7 +33,9 @@ useGLTF.preload("/logo3d.gbl")
 export function TopBannerCanvas() {
     const refCamera = useRef(null)
 
-    useLayoutEffect(()=> {gsap.set(document.getElementById("header"), {opacity: 0})})
+    useLayoutEffect(()=> {
+        gsap.set(document.getElementById("header"), {opacity: 0})
+    })
 
     return (
         <Canvas gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
@@ -312,7 +314,17 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
                 }
             }, 0)
 
-            setTimeout(() => tl.play(), 1000)
+            const initiateTopBanner = ()=> {
+                document.querySelector(".page-loader")?.classList.remove("is-loading")
+                tl.play()
+            }
+
+            const elPageLoader = document.querySelector(".page-loader")
+            if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
+            else setTimeout(() => {
+                if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
+                else setTimeout(() => initiateTopBanner(), 500)
+            }, 1000)
         }
     }, [])
 

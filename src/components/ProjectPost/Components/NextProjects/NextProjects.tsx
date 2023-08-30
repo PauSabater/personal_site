@@ -63,7 +63,6 @@ export function NextProjects({ props }: { props: INextProjects }) {
                                     ? <div className={styles.mountainContainer} data-transitioned-image data-img-mountain>{getMountainImgs()}</div>
                                     : getImg(project.img, false)}
                             </div>
-                            {parse(arrowFilled())}
                         </Link>
                     )
                 })

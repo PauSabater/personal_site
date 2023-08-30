@@ -1,22 +1,20 @@
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
-  useScroll,
   useGLTF
 } from '@react-three/drei'
-
 import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import gsap from "gsap"
-import ScrollTrigger from "gsap/ScrollTrigger"
-gsap.registerPlugin(ScrollTrigger)
+import { EffectComposer, Noise } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
 
 useGLTF.preload("/logo3d.gbl")
 
 const material = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('rgb(100, 100, 100)').convertSRGBToLinear(),
+    color: new THREE.Color('rgb(135, 135, 135)').convertSRGBToLinear(),
     roughness: 0,
     clearcoat: 1,
     clearcoatRoughness: 0,
@@ -51,28 +49,25 @@ export function TextBannerCanvas() {
   )
 }
 
-function Model({ position }: {position: any}) {
+function Model() {
 
     const refGlass = useRef(null)
-
-    const scroll = useScroll();
-    const tl = useRef()
 
     const [elCanvas, setElCanvas] = useState<HTMLElement | null>(null)
     const [windowHeight, setWindowHeight] = useState<number | null>(null)
     const [scrollPercentage, setScrollPercentage] = useState<number | null>(null)
-    const [previousScrollPercentage, setPreviousScrollPercentage] = useState<number>(0)
+    const [shouldRender, setShouldRender] = useState(false)
 
     {/* @ts-ignore */}
     const { nodes } = useGLTF("/logo3d.glb")
 
-    useFrame(() => {
-        const distToTop = elCanvas?.getBoundingClientRect().top
+    useFrame(({ gl, scene, camera }) => {
 
-        if (distToTop && windowHeight) {
+        if (shouldRender && windowHeight) {
+            const distToTop = elCanvas?.getBoundingClientRect().top || 0
             const percentage = (distToTop / windowHeight)
             // console.log(percentage)
-            if (percentage < 0.90 && percentage > 0
+            if (percentage < 0.95 && percentage > 0
                 && percentage !== scrollPercentage
                 || percentage === null
                 || Math.abs(distToTop) > windowHeight
@@ -80,17 +75,25 @@ function Model({ position }: {position: any}) {
                 setScrollPercentage(percentage)
                 // @ts-ignore
                 gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.5})
+                gl.render(scene, camera)
 
             } else return null
         }
-   })
+    }, 1)
 
     useLayoutEffect(() => {
         setElCanvas(document.querySelector("#text-banner-canvas") as HTMLElement)
         setWindowHeight(window.innerHeight)
+
+        // Observe to determine when we render:
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.intersectionRatio > 0) setShouldRender(true)
+                else setShouldRender(false)
+            })
+        }).observe(document.getElementById("text-banner-canvas") as Element)
     }, [])
 
-    const refSphere = useRef(null)
 
     return (
         <>
@@ -98,14 +101,12 @@ function Model({ position }: {position: any}) {
             <Environment preset="warehouse"></Environment>
                 <mesh
                     ref={refGlass}
-                    position={[-8,1.35,4]} //[-11,1.1,1.2]
+                    position={[-8,1.35,4]}
                     rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
                     geometry={nodes.logoRounded.geometry}
                     scale={0.095}
                     material={material}
                 >
-                    {/* @ts-ignore */}
-                    {/* <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} /> */}
                 </mesh>
         </group>
         </>

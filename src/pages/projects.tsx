@@ -1,6 +1,7 @@
-import { Fragment, Suspense, useLayoutEffect } from "react";
-import { ProjectList } from "../components/ProjectsList/ProjectList";
-import { showHeader } from "../components/Header/Header.animations";
+import { Fragment, Suspense, useLayoutEffect } from "react"
+import { ProjectList } from "../components/ProjectsList/ProjectList"
+import { showHeader } from "../components/Header/Header.animations"
+import gsap from 'gsap'
 
 
 const projectList = {
@@ -60,6 +61,7 @@ export function Projects() {
 
     useLayoutEffect(()=> {
         showHeader()
+        window.scrollTo(0,0)
     }, [])
 
     return (
