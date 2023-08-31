@@ -1,7 +1,7 @@
 import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/ProjectPost"
 import {weatherAppContent} from "../../components/ProjectPost/Content/weatherApp"
 
-export function WeatherAppProject() {
+export function WeatherAppProject(mode: string) {
 
     const props: IPropsProjectPost = {
         indexTitle: "CONTENT",

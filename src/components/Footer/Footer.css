@@ -20,7 +20,7 @@
     margin: 0 0 -4px 0;
     font-family: 'inter-bold';
     font-size: var(--fs-2xs);
-    color: grey;
+    color: lightgrey;
 }
 
 #page-content:has(#page-home) ~ #footer {
@@ -29,7 +29,7 @@
 }
 
 #page-content:has(#page-home) ~ #footer a {
-    color: var(--c-white);
+    color: white;
 }
 
 #page-content:has(#page-home) ~ #footer-canvas {
@@ -43,7 +43,6 @@
     background: var(--bg-main);
     margin-bottom: -100px;
     border-radius: 45px;
-    /* border: 2px solid black; */
     scrollbar-color: var(--c-secondary-darker) transparent !important;
     scrollbar-width: thin !important;
     z-index: 0;

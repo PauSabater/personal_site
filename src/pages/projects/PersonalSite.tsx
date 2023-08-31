@@ -1,7 +1,7 @@
 import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/ProjectPost"
 import { personalSiteContent } from "../../components/ProjectPost/Content/personalSite"
 
-export function PersonalSiteProject() {
+export function PersonalSiteProject(mode: string) {
 
     const props: IPropsProjectPost = {
         indexTitle: "CONTENT",

@@ -2,6 +2,7 @@ import styles from "./Card.module.scss"
 import { Fragment, useRef } from "react"
 import { setCardTransitionAnimation } from "./Card.animations"
 
+import parse from 'html-react-parser'
 import ImgCloudFirstLine1 from "../../../assets/img/clouds/cloud-first-line-1.png"
 import ImgCloudSecondLine from "../../../assets/img/clouds/cloud-second-line.png"
 import ImgCloudThirdLine from "../../../assets/img/clouds/cloud-third-line.png"
@@ -15,6 +16,7 @@ import SvgLightning from "../../../assets/svg/mountains/lightning.svg"
 import {ReactComponent as SvgSkyDarkening} from "../../../assets/svg/mountains/sky-darkening.svg"
 import SvgSky from "../../../assets/svg/mountains/sky.svg"
 import SvgSkyDarkeningImg from "../../../assets/svg/mountains/sky-darkening.svg"
+import { personalSiteSvgContent } from "../../../assets/svg/ts/varied"
 
 export interface ICardProps {
     title: string,
@@ -55,6 +57,17 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
                 }
             </Fragment>
         )
+    // } else if(img === "personal-site.svg") {return (
+    //     <svg width="2560" height="1600" viewBox="0 0 2560 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    //         {parse(personalSiteSvgContent())}
+    //     </svg>
+    // )
+    } else if(img === "personal-site.svg") {return (
+        <Fragment>
+            <img className={`${styles.img} ${styles.absolutePos} ${styles.imgLightMode}`} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
+            <img className={`${styles.img} ${styles.absolutePos} ${styles.imgDarkMode}`} src={require(`../../../assets/svg/darkmode/${img}`)} data-transitioned-image=""></img>
+        </Fragment>
+    )
     } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
 }
 
@@ -71,7 +84,7 @@ export function getMountainImgs() {
     )
 }
 
-export function Card({ props }: { props: ICardProps}) {
+export function Card({ props, mode = "light" }: { props: ICardProps, mode?: string}) {
     const refImgContainer = useRef(null)
     const handleCardClick = ()=> {
         const elImgContainer: HTMLElement | null = refImgContainer.current
@@ -81,7 +94,7 @@ export function Card({ props }: { props: ICardProps}) {
 
 
     return (
-        <div onClick={handleCardClick} className={`${styles.container} card-container`} data-card-container="" data-path={props.path}>
+        <div onClick={handleCardClick} className={`${styles.container} card-container`} data-mode={mode} data-card-container="" data-path={props.path}>
             <p className={styles.title}>{props.title}</p>
             <div className={`${styles.containerText}`}>
                 <p className={`${styles.text} card-text`}>{props.text}</p>

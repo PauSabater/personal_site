@@ -22,7 +22,7 @@ export interface IProjectList {
     bottomCta: ICtaProps
 }
 
-export function ProjectList({props}: {props: IProjectList}) {
+export function ProjectList({props, mode}: {props: IProjectList, mode: string}) {
 
     useLayoutEffect(() => {
         removeOutlineHeader()

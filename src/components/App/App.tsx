@@ -1,45 +1,41 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
 import './App.css'
 import '../../assets/scss/variables.scss'
 import '../../assets/scss/classes.scss'
 import '../../assets/scss/fonts.scss'
 
-//import
 import { Header } from '../Header/Header'
 import { PapernestProject } from '../../pages/projects/Papernest'
 import { WeatherAppProject } from '../../pages/projects/WeatherApp'
-
-
 import { Routes, Route, useLocation, useOutlet } from 'react-router-dom'
 import { SwitchTransition, Transition } from 'react-transition-group'
-
 import { Home } from '../../pages/home'
-import { TransitionImages } from '../TransitionImages/TransitionImages';
-import { IPropsProjectPost } from '../ProjectPost/ProjectPost';
-import { papernestContent } from '../ProjectPost/Content/papernest';
-import { executeEnterAnimations, executeExitAnimations } from './App.animations';
-import { Projects } from '../../pages/projects';
-import { PersonalSiteProject } from '../../pages/projects/PersonalSite';
-import { Overlay } from '../Overlay/Overlay';
-import { msTransitionPage } from '../../assets/ts/utils/utils';
-import { Footer } from '../Footer/Footer';
-import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult';
+import { TransitionImages } from '../TransitionImages/TransitionImages'
+import { IPropsProjectPost } from '../ProjectPost/ProjectPost'
+import { papernestContent } from '../ProjectPost/Content/papernest'
+import { executeEnterAnimations, executeExitAnimations } from './App.animations'
+import { Projects } from '../../pages/projects'
+import { PersonalSiteProject } from '../../pages/projects/PersonalSite'
+import { Overlay } from '../Overlay/Overlay'
+import { msTransitionPage } from '../../assets/ts/utils/utils'
+import { Footer } from '../Footer/Footer'
+import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
+import { ContextTheme } from '../../context/themeContext'
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
-    {path: '/projects', name: 'PapernestProject', Component: Projects},
-    {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
-    {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
-    {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
-    {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
+    {path: '/projects', name: 'Projects', Component: Projects},
+    // {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
+    // {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
+    // {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
+    // {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
 ]
 
 
 function App() {
 
     const location = useLocation()
-    const currentOutlet = useOutlet()
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
 
@@ -106,23 +102,35 @@ function App() {
         }]}
     }
 
-    function getProjectProps(route: string): IPropsProjectPost {
+    function getProjectProps(route: string): any {
         if (route === "papernest") return propsPpn
         else if (route === "weather-app") return propsWeatherApp
         else if (route === "personal-site") return propsPersonalSite
+        else if (route === "personal-site") return propsPersonalSite
+        else if (route === "projects") return texts.projectsList
 
-        else return propsPpn
+        else return texts.home
     }
+
+    const [theme, setTheme] = useState("light")
 
     useLayoutEffect(()=> {
         if (window.location.href.includes("projects")) {
             document.querySelector(".page-loader")?.classList.remove("is-loading")
         }
+
+        // Listen to event to inform that we must change the theme:
+        document.addEventListener('themeChange', (e)=> {
+            e.preventDefault()
+            if (document.body.getAttribute("data-theme") === "light") setTheme("light")
+            else setTheme("dark")
+            e.stopPropagation()
+        })
     }, [])
 
     return (
-        <div className="main">
-            <Header links={ texts.header.links }/>
+        <div className="main" data-theme={theme}>
+            <Header links={ texts.header.links } mode={theme}/>
             <TransitionImages/>
                 <div className='page' id="page-content">
                         <Routes>
@@ -142,7 +150,10 @@ function App() {
                                                 executeEnterAnimations(node.id || '', node, route.path)
                                             }}
                                         >
-                                            <route.Component props={getProjectProps(route.path)}></route.Component>
+                                            <route.Component
+                                                mode={theme}
+                                                props={getProjectProps(route.path)}
+                                            ></route.Component>
                                         </Transition>
                                     </SwitchTransition>
                                 }

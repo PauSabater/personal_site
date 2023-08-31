@@ -1,6 +1,4 @@
-import gsap from "gsap"
-import { Suspense, useEffect, useLayoutEffect } from "react";
-import { texts } from "../assets/ts/texts/texts"
+import { Suspense, useLayoutEffect } from "react";
 import { TextBanner } from "../components/TextBanner/TextBanner";
 import { TopBanner } from "../components/TopBanner/TopBanner";
 import { WorkBanner } from "../components/WorkBanner/WorkBanner";
@@ -10,7 +8,7 @@ import { FootBanner } from "../components/FootBanner/FootBanner";
 import styles from "./pages.module.scss"
 
 
-export function Home() {
+export function Home({mode, props}: {mode: string, props: any}) {
 
     useLayoutEffect(()=> {
         window.scrollTo(0,0)
@@ -19,15 +17,13 @@ export function Home() {
 
     return (
         <div id="page-home">
-            <TopBanner props={texts.topBanner}/>
-            {/* <GridBg> */}
-                <TextBanner texts={texts.intro}/>
-                <WorkBanner props={texts.workBanner}/>
-            {/* </GridBg> */}
+            <TopBanner props={props.topBanner} mode={mode}/>
+            <TextBanner texts={props.intro} mode={mode}/>
+            <WorkBanner props={props.workBanner} mode={mode}/>
             <Suspense>
             <div className={styles.containerSecondHalf}>
-                <SkillsBanner texts={texts.skillsBanner}/>
-                <MethodSection props={texts.methodSectionTexts}/>
+                <SkillsBanner texts={props.skillsBanner} mode={mode}/>
+                <MethodSection props={props.methodSectionTexts} mode={mode}/>
                 <FootBanner />
             </div>
             </Suspense>

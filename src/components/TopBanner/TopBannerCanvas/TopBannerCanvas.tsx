@@ -23,24 +23,25 @@ import { ellipse, underline } from '../../../assets/svg/ts/strokes'
 import { executeInitialPageAnimation, setTopBannerAnimations } from '../TopBanner.animations'
 import { getViewportAspectRatio } from '../../../assets/ts/utils/utils'
 import * as THREE from 'three'
+
 gsap.registerPlugin(ScrollTrigger)
 
 useGLTF.preload("/pencil.gbl")
 useGLTF.preload("/logo3d.gbl")
 
-export function TopBannerCanvas() {
+export function TopBannerCanvas({mode}: {mode: string}) {
 
     useLayoutEffect(()=> {
         gsap.set(document.getElementById("header"), {opacity: 0})
-    })
+    }, [])
 
     return (
         <Canvas gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
-            <color attach="background" args={['hsl(136, 0%, 96%)']} />
+            <color attach="background" args={[mode === "dark" ? 'hsl(0, 0%, 7%)' : 'hsl(136, 0%, 96%)']} />
             <Camera />
             <Suspense>
                 {/* @ts-ignore */}
-                <SceneComponents></SceneComponents>
+                <SceneComponents mode={mode}></SceneComponents>
                 <Environment preset="warehouse"></Environment>
             </Suspense>
             <OrbitControls
@@ -53,7 +54,7 @@ export function TopBannerCanvas() {
     )
 }
 
-function PhysicsScene() {
+function PhysicsScene({mode}:{mode: string}) {
     const refYellowPencil = useRef(null)
     const refPurplePencil = useRef(null)
 
@@ -86,7 +87,7 @@ function PhysicsScene() {
                 rotation={[-Math.PI / 1.2, yRotate, -Math.PI / 1.3]}
                 ref={refYellowPencil}
                 colliders="cuboid"
-            ><Pencil color={"hsl(54, 67%, 28%)"}></Pencil>
+            ><Pencil color={"hsl(54, 67%, 28%)"} mode={mode}></Pencil>
             </RigidBody>
             <RigidBody
                 restitution={ 0.25 }
@@ -95,7 +96,7 @@ function PhysicsScene() {
                 rotation={[-Math.PI / 2.7, yRotate, -Math.PI / 1.8]}
                 ref={refPurplePencil}
                 colliders="cuboid"
-            ><Pencil color={"hsl(248, 30%, 50%)"}></Pencil>
+            ><Pencil color={"hsl(248, 30%, 50%)"} mode={mode}></Pencil>
             </RigidBody>
             <RigidBody type="fixed">
                 <mesh position={[0, 0, 0]} receiveShadow={false} rotation={[Math.PI / 2, Math.PI, 0]} scale={[50, 50, 50]}>
@@ -150,6 +151,7 @@ function Camera() {
 export function Pencil(props: any) {
     // @ts-ignore
     const { nodes } = useGLTF("/pencil.glb")
+    const colorCone = props.mode === "light" ? "grey" : "rgb(70, 70, 70)"
 
     const material = new THREE.MeshPhysicalMaterial({
         color: new THREE.Color(props.color).convertSRGBToLinear(),
@@ -175,7 +177,7 @@ export function Pencil(props: any) {
                 receiveShadow={false}
                 geometry={nodes.Pencil_2.geometry}
                 {...props}>
-                <meshBasicMaterial attach="material" color={"grey"} />
+                <meshBasicMaterial attach="material" color={colorCone} />
             </mesh>
             <mesh
                 raycast={ meshBounds }
@@ -190,14 +192,17 @@ export function Pencil(props: any) {
     )
   }
 
-const Grid = ({ number = 7, lineWidth = 0.02, height = 0.2 }) => {
+const Grid = ({ mode = "light", number = 7, lineWidth = 0.02, height = 0.2 }) => {
+
+    const colorGrid = mode === "light" ? 'hsl(136, 0%, 86%)' : 'hsl(136, 0%, 16%)'
+    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%))' : 'hsl(136, 0%, 36%)'
 
     return (
     // Renders a grid and crosses as instances
     <Instances position={[0, -0.1, -4]}>
-        <gridHelper args={[50, 50, 'hsl(136, 0%, 86%)', 'hsl(136, 0%, 86%)']} position={[0, -0.01, 0]} />
+        <gridHelper args={[50, 50, colorGrid, colorGrid]} position={[0, -0.01, 0]} />
         <planeGeometry args={[lineWidth, height]} />
-        <meshBasicMaterial color="hsl(136, 0%, 50%)" />
+        <meshBasicMaterial color={colorCross} />
         {Array.from({ length: number }, (_, y) =>
             Array.from({ length: number }, (_, x) => (
                 <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, -0.01, y * 2 - Math.floor(number / 2) * 2]}>
@@ -210,7 +215,7 @@ const Grid = ({ number = 7, lineWidth = 0.02, height = 0.2 }) => {
     )
 }
 
-function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {font?: string}) {
+function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }: {mode: string, font?: string}) {
 
     const refPretitle = useRef(null)
     const refPretitleMaterial = useRef(null)
@@ -229,8 +234,10 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
     const [physics, setPhysics] = useState(false)
     const [isAnimationPlaying, setIsAnimationPlaying] = useState(true)
     const [shouldRender, setShouldRender] = useState(true)
+    const [isAnimating, setIsAnimating] = useState(false)
     const [previousDistToTop, setPreviousDistToTop] = useState<number | null>(null)
     const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
+    const [previousMode, setPreviousMode] = useState(mode)
 
     // Responsive states:
     const aspRatVertBreakpoint = 0.8
@@ -240,20 +247,33 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
     const glassXCoordinate = isVerticalBreakpoint ? -3 : -6
     const glassZCoordinate = isVerticalBreakpoint ? 8 :  9.5
 
+    const colorMainText = mode === "light" ? "black" : "hsl(136, 0%, 96%)"
+    const colorPretitle = mode === "light" ? "hsl(54, 67%, 38%)" : "hsl(54, 67%, 65%)"
+
 
     useFrame(({ gl, size, scene, camera }) => {
 
         // Render scene or not depending on conditions:
-        if (isAnimationPlaying) gl.render(scene, camera)
+        if (isAnimationPlaying || previousMode !== mode) {
+            gl.render(scene, camera)
+
+            if (previousMode !== mode) setPreviousMode(mode)
+        }
 
         if (shouldRender) {
             // @ts-ignore
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
 
+            if (isAnimating) {
+                gl.render(scene, camera)
+                return
+            }
+
             if (previousCanvasWidth !== size.width) {
                 setPreviousCanvasWidth(size.width)
                 updateResponsiveUnits()
                 gl.render(scene, camera)
+                return
             }
 
             if (previousDistToTop !== null && distToTop === previousDistToTop) {
@@ -340,6 +360,7 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
             }, 0)
 
             const initiateTopBanner = ()=> {
+                window.scrollTo(0,0)
                 document.querySelector(".page-loader")?.classList.remove("is-loading")
                 tl.play()
             }
@@ -352,6 +373,35 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
             }, 1000)
         }
     }, [])
+
+    function glassScaleEffect(isEnter: boolean, isClick = false) {
+        if (refGlass.current === null) return
+        setIsAnimating(true)
+
+        const scale = isEnter && !isClick ? 0.0825
+            : isClick ? 0.084 : 0.08
+
+        // @ts-ignore
+        gsap.to(refGlass.current.scale, {
+            x: scale,
+            y: scale,
+            z: scale,
+            duration: isClick ? 0.15 : 0.5,
+            ease: !isClick ? "bounce.out" : "power1.out",
+            onComplete: ()=> setIsAnimating(false),
+        })
+        // @ts-ignore
+        if(isClick) gsap.to(refGlass.current.scale, {
+            onStart: ()=> setIsAnimating(true),
+            x: 0.0825,
+            y: 0.0825,
+            z: 0.0825,
+            duration: 0.25,
+            delay: 0.15,
+            ease: "power1.out",
+            onComplete: ()=> setIsAnimating(false),
+        })
+    }
 
     return (
         <>
@@ -367,7 +417,7 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
                     letterSpacing={-0.01}
                     position={isVerticalBreakpoint  ? [3, 0.1, -1.25] : [0, 0.1, 0.5]}>
                     {parse((getPreTitleText()).split('+').join('\n'))}
-                    <meshStandardMaterial ref={refPretitleMaterial} attach='material' opacity={0} color={"#756c17"}/>
+                    <meshStandardMaterial ref={refPretitleMaterial} attach='material' opacity={0} color={colorPretitle}/>
                 </Text>
 
                 <Text
@@ -378,7 +428,7 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
                     letterSpacing={-0.05}
                     position={[3 ,0.1, 7]}>
                     {parse((getTitleText()).split('+').join('\n'))}
-                        <meshBasicMaterial opacity={0} ref={refTitleMaterial} attach='material' color={'black'}/>
+                        <meshBasicMaterial opacity={0} ref={refTitleMaterial} attach='material' color={colorMainText}/>
                 </Text>
 
                 <group>
@@ -406,18 +456,75 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
                     scale={0.08}
                     raycast={ meshBounds }
                     geometry={nodes.logoRounded.geometry}
+                    onPointerEnter={(e) => {
+                        console.log("POINTER ENTEEER")
+                        document.body.style.cursor = "pointer"
+                        glassScaleEffect(true)
+
+                    }
+                    }
+                    onPointerLeave={(e) => {
+                        console.log("POINTER LEAVE")
+                        document.body.style.cursor = "auto"
+                        // @ts-ignore
+                        glassScaleEffect(false)
+                    }}
+                    onClick={(e) => {
+                        glassScaleEffect(true, true)
+                        document.body.getAttribute("data-theme") === "light"
+                            ? document.body.setAttribute("data-theme", "dark")
+                            : document.body.setAttribute("data-theme", "light")
+                        document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
+                    }}
+
                     {...props}>
                     {/* @ts-ignore */}
                     <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
                 </mesh>
+                {/* < GlassLogo coord = {[-3,1.35,8]} /> */}
             </group>
 
-            <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={"hsl(54, 67%, 38%)"} />
-            <Grid />
-            {physics === true ? <PhysicsScene/> : ''}
+            <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} />
+            <Grid mode={mode} />
+            {physics === true ? <PhysicsScene mode={mode}/> : ''}
         </group>
         </>
     )
+}
+
+
+function GlassLogo({coord}: {coord: number[]}) {
+    const refGlass = useRef(null)
+
+
+    {/* @ts-ignore */}
+    const { nodes } = useGLTF("/logo3d.glb")
+
+    return (
+    <mesh
+            ref={refGlass}
+            receiveShadow
+            castShadow
+            position={[coord[0], coord[1], coord[2]]}
+            rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
+            scale={0.08}
+            raycast={ meshBounds }
+            geometry={nodes.logoRounded.geometry}
+            onPointerEnter={(e) => {
+                document.body.style.cursor = "pointer"
+                console.log('enteeeeer')}
+            }
+            onPointerLeave={(e) => {
+                document.body.style.cursor = "auto"
+                console.log('leaveeeee')}
+            }
+            // {...props}
+            >
+            {/* @ts-ignore */}
+        <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
+    </mesh>
+    )
+
 }
 
 function setTextPositionXCoordinate() {

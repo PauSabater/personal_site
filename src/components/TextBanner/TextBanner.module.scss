@@ -39,9 +39,10 @@
     margin: auto;
     box-sizing: border-box;
     padding: var(--pd-xl) 5vw 60px;
-    background: white;
+    background: var(--bg-white-translucent);
     border-radius: 20px;
     z-index: 10;
+    border: 1px solid var(--c-br-dark-mode);
 }
 
 .title {

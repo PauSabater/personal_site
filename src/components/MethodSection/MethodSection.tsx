@@ -12,7 +12,7 @@ export interface IMethodSectionTexts {
     }[]
 }
 
-export function MethodSection({props}: {props: IMethodSectionTexts}) {
+export function MethodSection({props, mode}: {props: IMethodSectionTexts, mode: string}) {
 
     const refContent: React.MutableRefObject<null> = useRef(null)
 
@@ -130,7 +130,7 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
     }
 
     return (
-        <div className={styles.container} id="method-section">
+        <div className={styles.container} id="method-section" data-theme={mode}>
             <div className={styles.containerContent} ref={refContent}>
                 {splitLetters(props.title)}
                 {generateCollapsiblesTemplate()}

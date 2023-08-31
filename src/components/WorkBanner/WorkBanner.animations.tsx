@@ -6,6 +6,7 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
     const elLinesTextContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-texts") as HTMLElement
     const elsHeadings: NodeListOf<HTMLHeadingElement> = (elHeadingContainer as HTMLElement).querySelectorAll("h1")
     const elsLinesText: NodeListOf<HTMLParagraphElement> = (elLinesTextContainer as HTMLElement).querySelectorAll("p")
+    const elGradient = (elContainerTexts as HTMLElement).querySelector("#work-banner-gradient")
 
     const optObserver = {
         root: null,
@@ -21,6 +22,7 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
         entries.forEach((entry: any) => {
             if (entry.isIntersecting && entry.target.className === elHeadingContainer.className) {
                 gsap.fromTo(elHeadingContainer, {opacity: 0}, {opacity: 1, duration: 0.6})
+                gsap.to(elGradient, {opacity: 0.6, duration: 0.8, delay: 0.5})
                 gsap.fromTo(Array.from(elsHeadings), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.5, stagger: 0.1})
                 observer.unobserve(elHeadingContainer)
             }

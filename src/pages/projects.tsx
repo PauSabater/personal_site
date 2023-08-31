@@ -59,7 +59,7 @@ const projectList = {
     }
 }
 
-export function Projects() {
+export function Projects({props, mode}:{props: any, mode: string}) {
 
     useLayoutEffect(()=> {
         showHeader()
@@ -67,6 +67,6 @@ export function Projects() {
     }, [])
 
     return (
-        <ProjectList props={projectList}></ProjectList>
+        <ProjectList props={props} mode={mode}></ProjectList>
     )
 }

@@ -2,7 +2,6 @@ import styles from "./WorkBanner.module.scss"
 import { Card } from "./Card/Card"
 import { Heading, IHeadingProps } from "../UI/Heading/Heading"
 import { Fragment, useLayoutEffect, useRef } from "react"
-import { texts } from "../../assets/ts/texts/texts"
 
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
@@ -19,11 +18,12 @@ export interface IWorkBannerProps {
     Cta: ICtaProps
 }
 
-export function WorkBanner({props}: { props: IWorkBannerProps }) {
+export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: string }) {
 
     const refContainer = useRef(null)
     const refFullContainer = useRef(null)
     const refContainerTexts = useRef(null)
+    const refGradient = useRef(null)
 
     useLayoutEffect(() => {
         const elContainer: HTMLElement | null = refFullContainer.current
@@ -184,7 +184,9 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 text: "// A site to present myself and my work",
                                 img: "personal-site.svg",
                                 path: "/"
-                            }}></Card>
+                            }}
+                                mode={mode}
+                        ></Card>
                         </div>
                         <div className={styles.cardContainer} id="card-3">
                             <Card props={{
@@ -198,18 +200,19 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     <div className={styles.textContainer} ref={refContainerTexts}>
                         <div className={styles.headingContainer} id="work-banner-heading">
                             <p className={styles.preTitle}>// WORK</p>
-                            <Heading props={ texts.workBanner.heading }></Heading>
+                            <Heading props={ props.heading }></Heading>
                         </div>
                         <div id="work-banner-texts" className={styles.textLinesContainer} >
-                            {texts.workBanner.text.map((line, i) => {
+                            {props.text.map((line, i) => {
                                 return (
                                     <div className={styles.lineWrap} key={`text-${i}`}>
                                         <p>{line}</p>
                                     </div>
                                 )
                             })}
-                                <Cta props={texts.workBanner.Cta} />
+                                <Cta props={props.Cta} />
                             </div>
+                        <div className={`${styles.gradient}`} data-mode={mode} id="work-banner-gradient"></div>
                     </div>
                 </div>
             </div>

@@ -79,6 +79,7 @@
         font-size: clamp(20px, 1.5vw, 28px);
         max-width: 450px;
         margin: 0;
+        color: var(--c-font-global);
     }
 
     @include mixins.mobile {
@@ -152,4 +153,19 @@ p.preTitle {
     top: calc(30px + var(--card-top));
     left: calc(var(--card-left) + (var(--card-title-width) * 2) - 10px);
     z-index: 2;
+}
+
+.gradient {
+    position: absolute;
+    height: 80vh;
+    width: 80vh;
+    top: -15vh;
+    border-radius: 20vw;
+    background: rgb(2, 0, 36);
+    opacity: 0;
+    background: radial-gradient(circle, rgb(2, 0, 36) 0%, rgba(162, 149, 32, 0.25) 0%, rgba(162, 149, 32, 0.005) 70%, rgba(0, 0, 0, 0) 90%);
+}
+
+.gradient[data-mode="light"] {
+    display: none;
 }

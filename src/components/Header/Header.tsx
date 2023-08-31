@@ -11,7 +11,7 @@ import ScrollToPlugin from "gsap/ScrollToPlugin"
 
 gsap.registerPlugin(CustomEase, ScrollToPlugin)
 
-export function Header({ links }: { links: string[]}) {
+export function Header({ links, mode }: { links: string[], mode: string}) {
 
     const [isBurgerOpen, setIsBurgerOpen] = useState(false)
 
@@ -261,7 +261,7 @@ export function Header({ links }: { links: string[]}) {
     }
 
     return (
-        <div ref={refHeader} id="header" className={styles.header}>
+        <div ref={refHeader} id="header" className={styles.header} data-theme={mode}>
             <div ref={refBurger} className={`${styles.burger} ${isBurgerOpen ? 'is-open' : ''} `} onClick={(e)=> handleBurgerClick(e)}>
                 <div ref={refBurgerBackground} className={styles.burgerBackground}></div>
                 <div className={`${styles.burgerLine} burger-line`}></div>
@@ -271,9 +271,9 @@ export function Header({ links }: { links: string[]}) {
             <div className={styles.container}>
                 <Link ref={refLogoContainer} to={"/"} className={styles.logoContainer}>
                     <svg width="48" height="156" viewBox="0 0 48 156" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="48" rx="10" fill="#050505"/>
-                    <rect y="54" width="48" height="48" rx="10" fill="#050505"/>
-                    <rect y="108" width="48" height="48" rx="10" fill="#050505"/>
+                    <rect width="48" height="48" rx="10" fill="var(--c-font-global)"/>
+                    <rect y="54" width="48" height="48" rx="10" fill="var(--c-font-global)"/>
+                    <rect y="108" width="48" height="48" rx="10" fill="var(--c-font-global)"/>
                     </svg>
                     <p className={styles.logoName}>PS</p>
                 </Link>

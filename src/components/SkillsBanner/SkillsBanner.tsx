@@ -12,7 +12,7 @@ export interface ISkillsBannerTexts {
     }[]
 }
 
-export function SkillsBanner({texts}: {texts: ISkillsBannerTexts}) {
+export function SkillsBanner({texts, mode}: {texts: ISkillsBannerTexts, mode: string}) {
 
     const refBanner: React.MutableRefObject<null> = useRef(null)
 
@@ -27,7 +27,7 @@ export function SkillsBanner({texts}: {texts: ISkillsBannerTexts}) {
 
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} data-theme={mode}>
             <div ref={refBanner} className={styles.banner}>
                 <h1>{texts.title}</h1>
                 <div className={styles.skillsContainer}>

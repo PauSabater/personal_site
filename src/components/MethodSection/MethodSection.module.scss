@@ -3,15 +3,15 @@
 .container {
     --br-width-selected: 10px;
 
-    @include mixins.mobile {
-        --br-width-selected: 5px;
-    }
-
     position: relative;
     background-color: var(--c-blackest);
     padding: var(--pd-fullwidth);
     padding-top: calc(var(--pd-2xl) * 2);
     padding-bottom: 200px !important;
+
+    @include mixins.mobile {
+        --br-width-selected: 5px;
+    }
 
     p {
         color: var(--c-white);
@@ -22,21 +22,25 @@
         padding: var(--pd-fullwidth-lg);
         padding-top: calc(var(--pd-2xl) * 2);
     }
+
+    &[data-theme="dark"] {
+        .char, h2, svg {
+            color: var(--c-font-global);
+        }
+
+        .line {
+            background-color: var(--c-br-dark-mode);
+        }
+    }
 }
 
 .containerContent {
     cursor: pointer;
     margin: 0 auto;
-
-    // p {
-    //     font-size: 1.4rem;
-    //     // padding-right: 20vw;
-    // }
 }
 
 .containerCollapsible {
-     position: relative;
-    // overflow: hidden;
+    position: relative;
     opacity: 0.7;
     transition: opacity var(--tr-base);
 

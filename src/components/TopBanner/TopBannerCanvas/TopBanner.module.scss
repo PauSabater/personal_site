@@ -1,11 +1,6 @@
-.test {
-    font-size: 200px;
-}
-
 .gradientLight {
+    pointer-events: none;
     position: absolute;
-    // top: 5vh;
-    // right: 15vw;
     height:80vh;
     width: 80vh;
     border-radius: 20vw;
@@ -15,10 +10,12 @@
 }
 
 [data-svg-ellipse] {
+    pointer-events: none;
     top: 0;
 }
 
 [data-svg-ellipse], [data-svg-underline] {
+    pointer-events: none;
     position: absolute;
     width: 700px;
     height: 850px;

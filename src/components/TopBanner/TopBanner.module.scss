@@ -197,7 +197,7 @@ p.title, line {
         font-family: "inter-bolder";
         -webkit-text-fill-color: var(--bg-main);
         -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: var(--c-font-h);
+        -webkit-text-stroke-color: var(--c-font-global);
         transform: rotateZ(-90deg);
     }
 
@@ -211,6 +211,7 @@ p.title, line {
         margin: 0;
         font-family: 'quanticoBold';
         font-size: 25px;
+        color: var(--c-font-global);
     }
 
     .text:first-child {
@@ -218,7 +219,7 @@ p.title, line {
         font-size: 50px;
         -webkit-text-fill-color: var(--bg-main);
         -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: var(--c-font-h);
+        -webkit-text-stroke-color: var(--c-font-global);
     }
 }
 

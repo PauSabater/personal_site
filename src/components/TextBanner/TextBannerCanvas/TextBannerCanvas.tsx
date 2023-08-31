@@ -18,12 +18,12 @@ const material = new THREE.MeshPhysicalMaterial({
     clearcoatRoughness: 0,
 })
 
-export function TextBannerCanvas() {
+export function TextBannerCanvas({mode}:{mode: string}) {
     const refCamera = useRef(null)
 
   return (
     <Canvas gl={{ preserveDrawingBuffer: false, precision: "lowp" }} dpr={[1, 1]}>
-        <color attach="background" args={['white']} />
+        {/* <color attach="background" args={["transparent"]} /> */}
               <PerspectiveCamera
                   ref={refCamera}
                   makeDefault

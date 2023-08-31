@@ -9,11 +9,41 @@
     }
 }
 
+
+.container[data-theme="dark"] {
+
+    // --c-primary: hsl(54, 67%, 68%);
+
+    // --bg-main: hsl(0, 0%, 7%);
+    // --c-white: hsl(0, 0%, 7%);
+    // --c-font-global: hsl(136, 0%, 96%);
+    // --bg-white: hsl(0, 0%, 12%);
+    // --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
+    // --c-br-dark-mode: hsl(136, 0%, 60%);
+
+    .banner {
+        border-color: var(--c-br-dark-mode);
+        background-color: var(--bg-white);
+    }
+
+    .name {
+        color: var(--c-font-global);
+    }
+
+    h1 {
+        color: var(--c-font-global);
+    }
+
+    .img {
+        filter: grayscale(1) invert(1);
+    }
+}
+
 .banner {
     height: auto;
     padding: var(--pd-lg) var(--pd-xl);
     border-radius: 20px;
-    border: 1px solid white;
+    border: 1px solid var(--c-font-global);
     background: var(--bg-main);
     margin: auto;
     opacity: 0;
@@ -23,6 +53,7 @@
         font-size: clamp(25px, 3vw, 70px);
         font-family: 'inter-bold';
         margin-bottom: var(--mg-lg);
+        color: 1px solid var(--c-font-global);
     }
 
     @include mixins.mobile {
@@ -74,6 +105,7 @@
 .name {
     align-self: center;
     font-size: var(--fs-global);
+    color: 1px solid var(--c-font-global);
 
     @include mixins.mobile-tablet {
         font-size: var(--fs-sm);

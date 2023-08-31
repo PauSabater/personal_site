@@ -2,7 +2,7 @@ import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/Proje
 import {papernestContent} from "../../components/ProjectPost/Content/papernest"
 
 
-export function PapernestProject({ props }: { props: IPropsProjectPost }) {
+export function PapernestProject({ props, mode }: { props: IPropsProjectPost, mode: string }) {
 
     return <ProjectPost props={props}></ProjectPost>
 }

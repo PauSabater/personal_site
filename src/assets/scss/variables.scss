@@ -1,8 +1,6 @@
 @use './mixins';
 
 :root {
-    background-color: var(--bg-main);
-
     // padding
     --pd-xs: 5px;
     --pd-sm: 10px;
@@ -47,14 +45,14 @@
 
     --c-primary-lighter: rgb(247, 243, 212);
     --c-primary-light: hsl(54, 67%, 75%);
-    --c-primary: #a29520;
+    --c-primary: hsl(54, 67%, 38%);
     // --c-primary: hsl(60, 63%, 62%);
     --c-primary-dark: #6a6215;
     --c-primary-darker: rgb(64, 59, 13);
 
     --c-secondary-lighter: hsl(248, 30%, 90%);
     --c-secondary-light: hsl(248, 30%, 70%);
-    --c-secondary: rgb(99, 89, 166);
+    --c-secondary: hsl(248, 30%, 50%);
     --c-secondary-dark: hsl(248, 29%, 30%);
     --c-secondary-darker: #141221;
 
@@ -81,9 +79,8 @@
     --c-whitest: white;
     --c-white: hsl(136, 0%, 96%);
     --bg-main: var(--c-white);
-
-
-
+    --bg-white: white;
+    --bg-white-translucent: hsl(0, 0%, 100%, 1);
 
     // Transitions
     --tr-base: 0.3s;
@@ -142,7 +139,21 @@
     // Border-radius
     --br-base: 10px;
     --br-sm: 5px;
+}
 
+body[data-theme="dark"] {
 
+    --c-primary: hsl(54, 67%, 68%);
+
+    --bg-main: hsl(0, 0%, 7%);
+    --c-white: hsl(0, 0%, 7%);
+    --c-font-global: hsl(136, 0%, 96%);
+    --bg-white: hsl(0, 0%, 12%);
+    --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
+    --c-br-dark-mode: hsl(136, 0%, 60%);
+}
+
+body {
+    background-color: var(--bg-main);
 }
 

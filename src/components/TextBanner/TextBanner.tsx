@@ -1,4 +1,4 @@
-import { Fragment, Suspense, useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 import styles from "./TextBanner.module.scss"
 import parse from 'html-react-parser'
 import { Cta, ICtaProps } from '../UI/Cta/Cta'
@@ -14,7 +14,7 @@ export interface ITextBannerTexts {
 }
 
 
-export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
+export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: string}) {
 
     const refTextBanner = useRef(null)
 
@@ -41,7 +41,7 @@ export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
                 <Cta props={texts.Cta}></Cta>
 
                 <div className={styles.canvasContainer} id="text-banner-canvas">
-                <TextBannerCanvas/>
+                <TextBannerCanvas mode={mode}/>
                 <NoteLogo/>
             </div>
             </div>

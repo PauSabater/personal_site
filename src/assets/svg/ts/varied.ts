@@ -27,3 +27,83 @@ export const linkedInLogo = (color = "var(--c-black") => {
         </svg>
     `
 }
+
+export const personalSiteSvgContent = ()=> {
+    return`
+            <g clip-path="url(#clip0_107_478)">
+                <rect width="2560" height="1600" fill="white"/>
+            <g clip-path="url(#clip1_107_478)">
+            <mask id="mask0_107_478" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="2693" height="1600">
+            <path d="M2693 0H0V1600H2693V0Z" fill="white"/>
+            </mask>
+            <g mask="url(#mask0_107_478)">
+                <path d="M2693 0H0V1600H2693V0Z" fill="white"/>
+                <path d="M0 40.8979H2693" stroke="#8C8C8C"/>
+                <path d="M0 116.708H2693" stroke="#8C8C8C"/>
+                <path d="M0 192.519H2693" stroke="#8C8C8C"/>
+                <path d="M0 270.324H2693" stroke="#8C8C8C"/>
+                <path d="M0 344.14H2693" stroke="#8C8C8C"/>
+                <path d="M0 419.95H2693" stroke="#8C8C8C"/>
+                <path d="M0 495.761H2693" stroke="#8C8C8C"/>
+                <path d="M0 569.576H2693" stroke="#8C8C8C"/>
+                <path d="M0 647.381H2693" stroke="#8C8C8C"/>
+                <path d="M0 723.192H2693" stroke="#8C8C8C"/>
+                <path d="M0 800.998H2693" stroke="#8C8C8C"/>
+                <path d="M0 874.813H2693" stroke="#8C8C8C"/>
+                <path d="M0 950.624H2693" stroke="#8C8C8C"/>
+                <path d="M0 1028.43H2693" stroke="#8C8C8C"/>
+                <path d="M0 1104.24H2693" stroke="#8C8C8C"/>
+                <path d="M0 1180.05H2693" stroke="#8C8C8C"/>
+                <path d="M0 1253.87H2693" stroke="#8C8C8C"/>
+                <path d="M0 1329.68H2693" stroke="#8C8C8C"/>
+                <path d="M0 1407.48H2693" stroke="#8C8C8C"/>
+                <path d="M0 1481.3H2693" stroke="#8C8C8C"/>
+                <path d="M0 1559.1H2693" stroke="#8C8C8C"/>
+                <path d="M2029.72 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2107.52 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1953.92 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1880.11 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1802.32 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1726.51 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1648.71 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1574.91 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2560.34 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2484.54 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2408.74 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2332.94 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2257.13 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M2183.32 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1499.1 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1421.31 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1345.5 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1271.69 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1195.89 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1120.09 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M1044.29 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M968.482 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M890.685 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M814.882 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M741.074 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M663.276 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M587.473 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M509.675 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M437.862 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M362.059 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M284.261 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M208.458 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M132.655 5.98486V1605.98" stroke="#8C8C8C"/>
+                <path d="M56.8525 5.98486V1605.98" stroke="#8C8C8C"/>
+            </g>
+        </g>
+        </g>
+        <defs>
+            <clipPath id="clip0_107_478">
+            <rect width="2560" height="1600" fill="white"/>
+            </clipPath>
+            <clipPath id="clip1_107_478">
+            <rect width="2693" height="1600" fill="white"/>
+            </clipPath>
+        </defs>
+    `
+
+}

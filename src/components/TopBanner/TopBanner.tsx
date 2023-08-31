@@ -20,15 +20,15 @@ export interface ITopBannerProps {
     dateText: string
 }
 
-export function TopBanner({ props }: { props: ITopBannerProps}) {
+export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: string}) {
 
     const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
     const refContainerTitleMobile: React.MutableRefObject<null> = useRef(null)
 
     return (
         <Fragment>
-            <div className={styles.canvasContainer} id="top-banner">
-                <TopBannerCanvas/>
+            <div className={styles.canvasContainer} id="top-banner" data-theme={mode}>
+                <TopBannerCanvas mode={mode} />
             </div>
             <div className={styles.container} id={"top-banner-container"}>
                 <div ref={refsizedTopBanner} className={styles.sizedTopBanner} />
