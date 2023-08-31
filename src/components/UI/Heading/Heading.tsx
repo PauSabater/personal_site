@@ -18,8 +18,8 @@ export function Heading({ props }: { props: IHeadingProps}): JSX.Element {
     } else {
         return (
             <Fragment>
-                {(props.text as string[]).map((line) => {
-                    return <div className={styles.lineContainer}>
+                {(props.text as string[]).map((line, i) => {
+                    return <div className={styles.lineContainer} key={`heading-${i}`}>
                         <h1 className={`${styles.heading} ${styles[props.align]}`}>
                             {line}
                         </h1>

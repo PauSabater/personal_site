@@ -1,7 +1,7 @@
 import styles from "./WorkBanner.module.scss"
 import { Card } from "./Card/Card"
 import { Heading, IHeadingProps } from "../UI/Heading/Heading"
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import { texts } from "../../assets/ts/texts/texts"
 
 import gsap from "gsap"
@@ -9,12 +9,9 @@ import ScrollTrigger from "gsap/ScrollTrigger"
 import { getCloudsAnimation, setTextAnimation } from "./WorkBanner.animations"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
 import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis } from "../../assets/ts/utils/utils"
-import { Link } from "react-router-dom"
 import { addOutlineHeader, removeOutlineHeader } from "../Header/Header.animations"
-// import { getWorkBannerAnimations } from "./WorkBanner.animations"
 
 gsap.registerPlugin(ScrollTrigger)
-
 
 export interface IWorkBannerProps {
     heading: IHeadingProps,
@@ -78,7 +75,7 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                     end: "bottom",
                     pin: true,
                     pinSpacing: true,
-                    markers: true,
+                    // markers: true,
                     scrub: 1,
                     invalidateOnRefresh: true,
                     onEnter: () => {
@@ -126,22 +123,17 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                 .set(card1.querySelector(".overlay"), {opacity: 0.7})
                 .set(cardsContainer, {pointerEvents: "none"})
 
-
             // Animate third card:
             timeline.addLabel('forth')
                 .set(card3ImgContainer, {
                     borderRadius: '15'
                 })
-                // .to(elWireframe, {
-                //     opacity: 0
-                // }, 'end')
                 .to(elContainerTexts, {
                     opacity: 0,
                     y: `-=100vh`
                 }, 'end')
                 .to(card3ImgContainer, {
                     width: ()=> {
-                        console.log('aspect ratio: '+ getViewportAspectRatio())
                     // Wider viewport
                     if(isViewportPropHigherThanEl(card3Svg)) {
                         return card3Svg.getBoundingClientRect().width
@@ -172,7 +164,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
 
     }, [])
 
-
     return (
         <Fragment>
             <div ref={refFullContainer} className={styles.sectionContainer}>
@@ -185,7 +176,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 text: "// Work developed for papernest during my frontend contract",
                                 img: "papernest.svg",
                                 path: "projects/papernest"
-                                // path: '/'
                             }}></Card>
                         </div>
                         <div className={styles.cardContainer} id="card-2">
@@ -202,7 +192,6 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                                 text: "// A react weather component installable through npm",
                                 img: "mountains",
                                 path: "projects/weather-app"
-                                // path: '/'
                             }}></Card>
                         </div>
                     </div>
@@ -212,9 +201,9 @@ export function WorkBanner({props}: { props: IWorkBannerProps }) {
                             <Heading props={ texts.workBanner.heading }></Heading>
                         </div>
                         <div id="work-banner-texts" className={styles.textLinesContainer} >
-                            {texts.workBanner.text.map((line) => {
+                            {texts.workBanner.text.map((line, i) => {
                                 return (
-                                    <div className={styles.lineWrap}>
+                                    <div className={styles.lineWrap} key={`text-${i}`}>
                                         <p>{line}</p>
                                     </div>
                                 )

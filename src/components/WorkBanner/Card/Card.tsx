@@ -1,19 +1,10 @@
 import styles from "./Card.module.scss"
-import { Link } from "react-router-dom"
-
-
-import img from "../../../assets/img/clouds.png"
-import {ReactComponent as MountainsSvg} from "../../../assets/svg/full-mountains.svg"
 import { Fragment, useRef } from "react"
-import { isViewportPropHigherThanEl } from "../../../assets/ts/utils/utils"
 import { setCardTransitionAnimation } from "./Card.animations"
 
 import ImgCloudFirstLine1 from "../../../assets/img/clouds/cloud-first-line-1.png"
-import ImgCloudFirstLine2 from "../../../assets/img/clouds/cloud-first-line-2.png"
 import ImgCloudSecondLine from "../../../assets/img/clouds/cloud-second-line.png"
 import ImgCloudThirdLine from "../../../assets/img/clouds/cloud-third-line.png"
-
-import SvgWireframe from "../../../assets/svg/mountains/wireframe-full-mountains.svg"
 import SvgTreesFirstLayer from "../../../assets/svg/mountains/trees-first-layer.svg"
 import SvgDarkeningLayer from "../../../assets/svg/mountains/darkening-layer.svg"
 import SvgMoon from "../../../assets/svg/mountains/moon.svg"
@@ -24,7 +15,6 @@ import SvgLightning from "../../../assets/svg/mountains/lightning.svg"
 import {ReactComponent as SvgSkyDarkening} from "../../../assets/svg/mountains/sky-darkening.svg"
 import SvgSky from "../../../assets/svg/mountains/sky.svg"
 import SvgSkyDarkeningImg from "../../../assets/svg/mountains/sky-darkening.svg"
-
 
 export interface ICardProps {
     title: string,
@@ -56,11 +46,10 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
                     <img loading="lazy" id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
                     <img loading="lazy" id="cloud-first-line-1-copy"className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudFirstLine1}/>
                 </div>
-                {/* <div className={styles.halfHelper2}></div> */}
                 {
                     includeRain === true
                         ?   <div className={styles.rain} id="rain-container">
-                                {[...Array(400)].map((_, i) => <div className={styles.drop}></div>)}
+                                {[...Array(400)].map((_, i) => <div key={`drop-${i}`} className={styles.drop}></div>)}
                              </div>
                         : ''
                 }
@@ -85,7 +74,6 @@ export function getMountainImgs() {
 export function Card({ props }: { props: ICardProps}) {
     const refImgContainer = useRef(null)
     const handleCardClick = ()=> {
-        console.log("HANDLE CLICK IMAGE!!")
         const elImgContainer: HTMLElement | null = refImgContainer.current
         if (elImgContainer === null) return
         setCardTransitionAnimation(elImgContainer, props.path)

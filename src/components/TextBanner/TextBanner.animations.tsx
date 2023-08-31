@@ -19,9 +19,6 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
 
         let tlTBanner = gsap.timeline()
 
-        console.log("SVG IS")
-        // console.log((elTextBanner as HTMLElement).querySelector("#text-banner-canvas svg"))
-
         tlTBanner
         // Full banner opacity and translate:
         .fromTo(
@@ -53,7 +50,6 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
 
         tlTBanner.pause()
 
-
         const observer = new IntersectionObserver((entries)=> observerCallback(entries),
         {
             root: null,
@@ -73,8 +69,6 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             })
         }
 
-
     return () => ctx.revert()
-
     })
 }

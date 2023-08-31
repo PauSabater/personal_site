@@ -1,13 +1,9 @@
-import { Fragment, useEffect } from "react"
+import { Fragment } from "react"
 import "./Footer.css"
 import { FooterCanvas } from "./FooterCanvas/FooterCanvas"
-// import { setSkillsBannerAnimation } from "./SkillsBanner-animations"
-
 
 export function Footer() {
     const currentUrl = window.location.href
-    console.log("weeeee")
-    console.log(currentUrl)
 
     return (
         <Fragment>

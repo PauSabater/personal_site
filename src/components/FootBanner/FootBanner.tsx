@@ -1,17 +1,14 @@
 import styles from "./FootBanner.module.scss"
-import { EffectComposer, Bloom } from "@react-three/postprocessing"
-import { KernelSize } from 'postprocessing'
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
 import parse from 'html-react-parser'
 import * as THREE from 'three'
-import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial, Environment } from '@react-three/drei'
 import { Perf } from "r3f-perf"
-import { easeOutLong } from "../../assets/ts/styles/styles"
-import { getViewportAspectRatio } from "../../assets/ts/utils/utils"
+
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
@@ -19,29 +16,15 @@ export function FootBanner({}: {}) {
 
     const refCanvas = useRef(null)
     const refContainer = useRef(null)
-    const cameraControlRef = useRef(null)
     const refCamera = useRef(null)
     const refContactContainer = useRef(null)
-    // const refContactLinesContainer = useRef(null)
     const refContactLink = useRef(null)
     const refSvgBorder = useRef(null)
 
-
     const [colorMain, setColorMain] = useState("hsl(0, 0%, 10%)")
-
     const [aspectRatio, setAspectRatio] = useState<number>(window.innerWidth / window.innerHeight)
-
     const refVideoTexture = useRef(null)
-
-    const [mirrorVal, setMirrorVal] = useState(0.8)
-
-    const [displayVideo, setDisplayVideo] = useState(false)
-
-    const [isObserberSet, setIsObserberSet] = useState(false)
-
     const [isBannerExpanded, setIsBannerExpanded] = useState(false)
-
-    const [isBannerAnimating, setIsBannerAnimating] = useState(false)
 
     useLayoutEffect(()=> {
 
@@ -52,7 +35,7 @@ export function FootBanner({}: {}) {
 
             gsap.from((refContainer.current as HTMLElement), {
                 scrollTrigger: {
-                markers: true,
+                // markers: true,
                     trigger: (refContainer.current as HTMLElement),
                     scrub: true,
                     start: "top bottom",
@@ -73,34 +56,16 @@ export function FootBanner({}: {}) {
         return () => ctxGsap.revert()
     }, [])
 
-    function resetContactLink() {
-        // console.log("START LETS RESET!!")
-        // if (refContactLinesContainer.current === null) return
-        // const elsLines = (refContactLinesContainer.current as HTMLElement).querySelectorAll("div")
-
-        gsap.set(refContactContainer.current, {opacity: 0})
-        // gsap.set(elsLines, {scaleX: 1, scaleY: 1})
-    }
-
     function animateContactLink() {
-        console.log("ANIMATEEEE")
         if (refSvgBorder.current === null) return
 
         const svgPath: SVGPathElement | null = (refSvgBorder.current as HTMLElement).querySelector(".path")
         if (svgPath === null) return
         const lenghtPath = svgPath.getTotalLength()
-        console.log("PATH IS "+lenghtPath)
-        // resetContactLink()
-
-        // if (refContactLinesContainer.current === null) return
-
-        // const elsLines = Array.from((refContactLinesContainer.current as HTMLElement).querySelectorAll("div"))
 
         gsap.timeline()
             .pause()
             .set(refContactContainer.current, {opacity: 0})
-            // .set(elsLines, {scaleX: 1, scaleY: 1})
-            // .set(elsLines, {scale: 1})
             .set(svgPath, {fillOpacity: 0})
             .set(refContactLink.current, {
                 opacity: 0,
@@ -124,7 +89,6 @@ export function FootBanner({}: {}) {
             }, 'end')
         .play()
     }
-
 
     function Camera() {
         let fov: number = 40
@@ -191,12 +155,10 @@ export function FootBanner({}: {}) {
 
         const [isAnimating, setIsAnimating] = useState(false)
         const [isAnimatingFinished, setIsAnimatingFinished] = useState(false)
-
         const vec = new THREE.Vector3()
 
         useFrame(({ gl, scene, camera }) => {
             if (shouldRender === true) {
-                console.log("RENDEEEER FOOTER")
                 gl.render(scene, camera)
 
                 if (isBannerExpanded && isAnimatingFinished === true) {
@@ -274,15 +236,13 @@ export function FootBanner({}: {}) {
       }
 
       return (
-        //https://github.com/pmndrs/drei#performancemonitor
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
-            <Canvas ref={refCanvas} concurrent gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
+            <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
             <Perf position="top-left" />
             <PerformanceMonitor />
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
-
             <Suspense fallback={null}>
                 <group position={[0, -1, 0]}>
                     <Ground />
@@ -303,32 +263,17 @@ export function FootBanner({}: {}) {
                     <Glass position={[-5.5, 0.45, -1] as Vector3} radius={0.1} size={0.45}/>
                     <Glass position={[-1.3, 0.45, -1] as Vector3} radius={0.2} size={0.55}/>
                 </group>
-                {/* <ambientLight intensity={0.5} /> */}
                 <spotLight position={[0, 10, 0]} intensity={2} />
-                {/* <EffectComposer> */}
-                    {/* <Bloom
-                        intensity={4} // The bloom intensity.
-                        blurPass={undefined} // A blur pass.
-                        kernelSize={KernelSize.LARGE} // blur kernel size
-                        luminanceThreshold={0.5} // luminance threshold. Raise this value to mask out darker elements in the scene.
-                        luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
-                        mipmapBlur={false} // Enables or disables mipmap blur.
-                        resolutionX={256} // The horizontal resolution.
-                        resolutionY={256} // The vertical resolution.
-                    /> */}
-                    {/* <Bloom kernelSize={3} luminanceThreshold={0} luminanceSmoothing={0.4} intensity={0.6} />
-                    <Bloom kernelSize={KernelSize.LARGE} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.5} />
-                </EffectComposer> */}
             </Suspense>
             </Canvas>
             <div ref={refContactContainer} className={styles.contactContainer}>
                 <div className={styles.relativeContainer}>
                     <svg ref={refSvgBorder} className={styles.svgBorder} viewBox="0 0 500 95" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path className={`${styles.path} path`} d="M490 5H10C7.23858 5 5 7.23858 5 10V85C5 87.7614 7.23857 90 10 90H490C492.761 90 495 87.7614 495 85V10C495 7.23858 492.761 5 490 5Z" fill="black" fill-opacity="0.2" stroke="url(#paint0_linear_53_13)" stroke-width="10"/>
+                        <path className={`${styles.path} path`} d="M490 5H10C7.23858 5 5 7.23858 5 10V85C5 87.7614 7.23857 90 10 90H490C492.761 90 495 87.7614 495 85V10C495 7.23858 492.761 5 490 5Z" fill="black" fillOpacity="0.2" stroke="url(#paint0_linear_53_13)" strokeWidth="10"/>
                         <defs>
                         <linearGradient id="paint0_linear_53_13" x1="495" y1="5.00002" x2="7.16941" y2="101.022" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#EAE195"/>
-                        <stop offset="1" stop-color="#975BA4"/>
+                        <stop stopColor="#EAE195"/>
+                        <stop offset="1" stopColor="#975BA4"/>
                         </linearGradient>
                         </defs>
                     </svg>
@@ -340,5 +285,5 @@ export function FootBanner({}: {}) {
                 </div>
             </div>
         </div>
-        )
+    )
 }

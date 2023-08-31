@@ -1,5 +1,4 @@
-import { useLayoutEffect, useRef } from "react"
-
+import { useLayoutEffect } from "react"
 import styles from "./ProjectList.module.scss"
 import { TagLabels } from "../ProjectPost/Components/TagLabels/TagLabels"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
@@ -9,10 +8,6 @@ import { Link } from "react-router-dom"
 import { setLeaveAnimation, setProjectListEnterAnimation } from "./ProjectList.animations"
 import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
 import { removeOutlineHeader } from "../Header/Header.animations"
-// import "../../assets/svg/"
-
-// import "../../assets/svg/papernest.svg"
-
 
 export interface IProjectList {
     title: string,
@@ -27,20 +22,12 @@ export interface IProjectList {
     bottomCta: ICtaProps
 }
 
-
-
 export function ProjectList({props}: {props: IProjectList}) {
-
-    const refBanner: React.MutableRefObject<null> = useRef(null)
 
     useLayoutEffect(() => {
         removeOutlineHeader()
         hideAllTransitionImages()
         setProjectListEnterAnimation()
-        // const elBanner: HTMLElement | null = refBanner.current
-
-        // if (elBanner === null) return
-        // setSkillsBannerAnimation(elBanner)
     }, [])
 
 
@@ -64,6 +51,7 @@ export function ProjectList({props}: {props: IProjectList}) {
                         target={project.cta.target}
                         onClick={(e) => handleProjectClick(e)}
                         id={`project-${i}`}
+                        key={`project-${i}`}
                     >
                         <div className={styles.textsContainer}>
                             <p className={styles.projectTitle}>{project.title}</p>
@@ -73,7 +61,6 @@ export function ProjectList({props}: {props: IProjectList}) {
                         </div>
                         <div className={styles.imgContainer}>
                             {getImg(project.imgPath)}
-                            {/* <img className={styles.img} src={require(`../../assets/svg/${project.imgPath}`).default}></img> */}
                         </div>
                     </Link>
                 )})

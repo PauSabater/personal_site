@@ -1,7 +1,5 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
-import gsap from "gsap"
-import { CustomEase } from "gsap/CustomEase"
 import './App.css'
 import '../../assets/scss/variables.scss'
 import '../../assets/scss/classes.scss'
@@ -14,14 +12,13 @@ import { WeatherAppProject } from '../../pages/projects/WeatherApp'
 
 
 import { Routes, Route, useLocation, useOutlet } from 'react-router-dom'
-import { CSSTransition, TransitionGroup, SwitchTransition, Transition } from 'react-transition-group'
+import { SwitchTransition, Transition } from 'react-transition-group'
 
 import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages';
 import { IPropsProjectPost } from '../ProjectPost/ProjectPost';
 import { papernestContent } from '../ProjectPost/Content/papernest';
-import { easeOutLong } from '../../assets/ts/styles/styles';
-import { executeEnterAnimations, executeExitAnimations, setProjectPostEnterAnimation } from './App.animations';
+import { executeEnterAnimations, executeExitAnimations } from './App.animations';
 import { Projects } from '../../pages/projects';
 import { PersonalSiteProject } from '../../pages/projects/PersonalSite';
 import { Overlay } from '../Overlay/Overlay';
@@ -129,8 +126,8 @@ function App() {
             <TransitionImages/>
                 <div className='page' id="page-content">
                         <Routes>
-                            {routes.map((route) =>
-                                <Route path={route.path} element={
+                            {routes.map((route, i) =>
+                                <Route path={route.path} key={`route-${i}`} element={
                                     <SwitchTransition>
                                         <Transition
                                             key={location.pathname}

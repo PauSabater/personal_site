@@ -1,6 +1,6 @@
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
-import { getProportionRelToElement, getProportionRelToViewport, isViewportPropHigherThanEl } from "../../../assets/ts/utils/utils"
+import { getProportionRelToElement, isViewportPropHigherThanEl } from "../../../assets/ts/utils/utils"
 import { easeOutLong } from "../../../assets/ts/styles/styles"
 gsap.registerPlugin(CustomEase)
 
@@ -34,12 +34,7 @@ export function setCardTransitionAnimation(elImgContainer: HTMLElement, cardPath
 
     // Image to transition to:
     const elImgProject = document.querySelector('#transition-img-papernest')
-
     const tlTransition = gsap.timeline()
-
-    console.log("TRANSITION COMINS!!!")
-    console.log(elImgContainer)
-    console.log(elImg)
 
     if(elImg === null) return
 

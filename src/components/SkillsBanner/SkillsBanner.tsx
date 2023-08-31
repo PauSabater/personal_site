@@ -31,8 +31,8 @@ export function SkillsBanner({texts}: {texts: ISkillsBannerTexts}) {
             <div ref={refBanner} className={styles.banner}>
                 <h1>{texts.title}</h1>
                 <div className={styles.skillsContainer}>
-                    {texts.skills.map((skill) => { return (
-                        <div className={`${styles.skillContainer} skill-container`}>
+                    {texts.skills.map((skill, i) => { return (
+                        <div className={`${styles.skillContainer} skill-container`} key={`skill-${i}`}>
                             <img
                                 loading="lazy"
                                 className={styles.img}

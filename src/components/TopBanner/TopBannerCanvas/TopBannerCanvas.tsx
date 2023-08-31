@@ -7,7 +7,6 @@ import {
   OrbitControls,
   MeshTransmissionMaterial,
   PerspectiveCamera,
-  PerformanceMonitor,
   Html,
   ContactShadows,
   useGLTF,
@@ -16,7 +15,6 @@ import {
 
 import { RigidBody, Physics } from '@react-three/rapier'
 import { Fragment, Suspense, useLayoutEffect, useRef, useState } from 'react'
-import { Perf } from 'r3f-perf'
 import parse from 'html-react-parser'
 import styles from "./TopBanner.module.scss"
 import gsap from "gsap"
@@ -31,7 +29,6 @@ useGLTF.preload("/pencil.gbl")
 useGLTF.preload("/logo3d.gbl")
 
 export function TopBannerCanvas() {
-    const refCamera = useRef(null)
 
     useLayoutEffect(()=> {
         gsap.set(document.getElementById("header"), {opacity: 0})
@@ -111,29 +108,41 @@ function PhysicsScene() {
 }
 
 function Camera() {
-    const aspectRatio = getViewportAspectRatio()
-    let cameraPositionXY: number[]
+    const { size } = useThree()
+    const [cameraPositionYZ, setCameraPositionYZ] = useState(getCameraCoordinates())
+    const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
 
-    // Camera coordinates depending on aspect ratio
-    if (aspectRatio < 0.6) {
-        cameraPositionXY = [115, 10]
-    } else if (aspectRatio < 0.8) {
-        cameraPositionXY = [100, 10]
-    } else if (aspectRatio < 1.1) {
-        cameraPositionXY = [90, 10]
-    } else if (aspectRatio < 1.4) {
-        cameraPositionXY = [80, 1]
-    } else {
-        cameraPositionXY = [65, 0]
+    // Update camera coordinates in case there is a change in viewport width
+    useFrame(({ size }) => {
+        if (size.width !== previousCanvasWidth) {
+            setPreviousCanvasWidth(size.width)
+            setCameraPositionYZ(getCameraCoordinates())
+        }
+    })
+
+    function getCameraCoordinates() {
+        const aspectRatio = getViewportAspectRatio()
+
+        if (aspectRatio < 0.6) {
+            return [115, 10]
+        } else if (aspectRatio < 0.8) {
+            return [100, 10]
+        } else if (aspectRatio < 1.1) {
+            return [90, 10]
+        } else if (aspectRatio < 1.4) {
+            return [80, 1]
+        } else {
+            return [65, 0]
+        }
     }
 
     return (
         <PerspectiveCamera
             makeDefault
             near={55}
-            far={cameraPositionXY[0] + 3}
+            far={cameraPositionYZ[0] + 3}
             fov={20}
-            position={[0, cameraPositionXY[0], cameraPositionXY[1]]}
+            position={[0, cameraPositionYZ[0], 0]}
         />
     )
 }
@@ -181,14 +190,14 @@ export function Pencil(props: any) {
     )
   }
 
-const Grid = ({ number = 7, lineWidth = 0.025, height = 0.3 }) => {
+const Grid = ({ number = 7, lineWidth = 0.02, height = 0.2 }) => {
 
     return (
     // Renders a grid and crosses as instances
     <Instances position={[0, -0.1, -4]}>
         <gridHelper args={[50, 50, 'hsl(136, 0%, 86%)', 'hsl(136, 0%, 86%)']} position={[0, -0.01, 0]} />
         <planeGeometry args={[lineWidth, height]} />
-        <meshBasicMaterial color="hsl(136, 0%, 46%)" />
+        <meshBasicMaterial color="hsl(136, 0%, 50%)" />
         {Array.from({ length: number }, (_, y) =>
             Array.from({ length: number }, (_, x) => (
                 <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, -0.01, y * 2 - Math.floor(number / 2) * 2]}>
@@ -202,6 +211,7 @@ const Grid = ({ number = 7, lineWidth = 0.025, height = 0.3 }) => {
 }
 
 function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {font?: string}) {
+
     const refPretitle = useRef(null)
     const refPretitleMaterial = useRef(null)
     const refTitle = useRef(null)
@@ -222,12 +232,14 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
     const [previousDistToTop, setPreviousDistToTop] = useState<number | null>(null)
     const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
 
-    const aspectRatio = getViewportAspectRatio()
+    // Responsive states:
     const aspRatVertBreakpoint = 0.8
-    const isVerticalBreakpoint: boolean = aspectRatio < aspRatVertBreakpoint
+    const [isVerticalBreakpoint, setIsVerticalBreakpoint] = useState(getViewportAspectRatio() < aspRatVertBreakpoint)
+    const [textXCoordinate, setTextXCoordinate] = useState(setTextPositionXCoordinate())
 
     const glassXCoordinate = isVerticalBreakpoint ? -3 : -6
     const glassZCoordinate = isVerticalBreakpoint ? 8 :  9.5
+
 
     useFrame(({ gl, size, scene, camera }) => {
 
@@ -239,8 +251,9 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
 
             if (previousCanvasWidth !== size.width) {
-                gl.render(scene, camera)
                 setPreviousCanvasWidth(size.width)
+                updateResponsiveUnits()
+                gl.render(scene, camera)
             }
 
             if (previousDistToTop !== null && distToTop === previousDistToTop) {
@@ -257,6 +270,18 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
 
         } else return null
     }, 1)
+
+    // Function to run when viewport width changes
+    const updateResponsiveUnits = ()=> {
+        // Text group X coordinate
+        const newTextXCoord = setTextPositionXCoordinate()
+        if (newTextXCoord !== textXCoordinate) {
+            setTextXCoordinate(setTextPositionXCoordinate())
+        }
+
+        // Aspect Ratio
+        setIsVerticalBreakpoint(getViewportAspectRatio() < aspRatVertBreakpoint)
+    }
 
     useLayoutEffect(() => {
 
@@ -328,12 +353,11 @@ function SceneComponents({ font = '/Inter_Medium_Regular.json', ...props }: {fon
         }
     }, [])
 
-
     return (
         <>
         <group>
             <group
-                position={[setTextPositionXCoordinate(), 0, -6.5]}
+                position={[textXCoordinate, 0, -6.5]}
                 rotation={[0, 0, 0]}
                 ref={refPretitle}>
                  <Text

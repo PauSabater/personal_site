@@ -1,9 +1,7 @@
-import { useEffect, useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 import styles from "./TransitionImages.module.scss"
-import imgPapernest from "../../assets/svg/papernest.svg"
-// import { setSkillsBannerAnimation } from "./SkillsBanner-animations"
 import gsap from "gsap"
-import { getScaleToCoverViewPort, isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
+import { isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
 import { getImg } from "../WorkBanner/Card/Card"
 
 
@@ -47,11 +45,9 @@ export function TransitionImages({}: {}) {
             </div>
             <div className={`${styles.imageContainer} transition-images-container`} id={`transition-img-${'personal-site.svg'}`}>
                 {getImg("personal-site.svg")}
-                {/* <img className={styles.image} src={imgPapernest} id={`transition-img-${'papernest'}`}></img> */}
             </div>
             <div className={`${styles.imageContainer} transition-images-container`} id={`transition-img-${'mountains'}`}>
                 {getImg("mountains")}
-                {/* <img className={styles.image} src={imgPapernest} id={`transition-img-${'papernest'}`}></img> */}
             </div>
         </div>
     )

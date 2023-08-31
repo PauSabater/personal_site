@@ -8,8 +8,6 @@ import {
 import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import gsap from "gsap"
-import { EffectComposer, Noise } from '@react-three/postprocessing'
-import { BlendFunction } from 'postprocessing'
 
 useGLTF.preload("/logo3d.gbl")
 
@@ -66,7 +64,6 @@ function Model() {
         if (shouldRender && windowHeight) {
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
             const percentage = (distToTop / windowHeight)
-            // console.log(percentage)
             if (percentage < 0.95 && percentage > 0
                 && percentage !== scrollPercentage
                 || percentage === null

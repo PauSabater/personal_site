@@ -184,7 +184,7 @@ function CanvasScreenContent() {
                 </svg>
             </a>
             <p className={styles.textTitle}>ALWAYS GLAD TO TALK ABOUT :</p>
-            {strTalk.map((str) => <p className={styles.item}>{str}</p>)}
+            {strTalk.map((str, i) => <p key={`item-${i}`} className={styles.item}>{str}</p>)}
         </div>
     )
 }

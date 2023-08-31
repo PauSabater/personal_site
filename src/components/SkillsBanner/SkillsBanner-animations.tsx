@@ -40,43 +40,7 @@ export function setSkillsBannerAnimation(elBanner: HTMLElement) {
                 }
             })
         }
-
-        // let timeline = gsap.timeline({
-        //     scrollTrigger: {
-        //         trigger: elBanner,
-        //         start: "top",
-        //         end: "bottom -250%",
-        //         markers: true,
-        //         onLeave: () => {
-        //             console.log("leavbeee")
-        //         },
-        //         // onEnterBack: () => {
-        //         //     tlLightning.pause()
-        //         //     gsap.to(card3Rain, {display: "none", opacity: "0"})
-        //         // },
-        //     }
-        // })
-
-
-
-
-
-
     })
 
     return () => ctx.revert()
-
-    // const elHeadingContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-heading") as HTMLElement
-    // const elLinesTextContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-texts") as HTMLElement
-    // const elsHeadings: NodeListOf<HTMLHeadingElement> = (elHeadingContainer as HTMLElement).querySelectorAll("h1")
-    // const elsLinesText: NodeListOf<HTMLParagraphElement> = (elLinesTextContainer as HTMLElement).querySelectorAll("p")
-
-
-
-    // const observer: IntersectionObserver = new IntersectionObserver((entries)=> observerCallback(entries), optObserver)
-    // observer.observe(elHeadingContainer)
-    // observer.observe(elLinesTextContainer)
-
-
-
 }

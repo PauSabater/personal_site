@@ -56,6 +56,7 @@ export function NextProjects({ props }: { props: INextProjects }) {
                             to={project.path}
                             className={`${styles.project} more-projects-link`}
                             id={`more-projects-link-${i}`}
+                            key={`more-projects-link-${i}`}
                         >
                             <p className={styles.title}>{project.title}</p>
                             <div className={`${styles.imgContainer} img-container`}>

@@ -29,37 +29,19 @@ export function TopBanner({ props }: { props: ITopBannerProps}) {
         <Fragment>
             <div className={styles.canvasContainer} id="top-banner">
                 <TopBannerCanvas/>
-                {/* <div className={styles.gradientLight}></div> */}
-                {/* <div className={styles.gradientLightSecondary}></div> */}
             </div>
-             <div className={styles.container} id={"top-banner-container"}>
-             {/* <img src={require("../../assets/svg/brush-stroke.svg")} alt="stoke" /> */}
-            <div ref={refsizedTopBanner} className={styles.sizedTopBanner} >
-             {/*   <p className={styles.preTitle}>{props.desktop.pretitle}</p>
-                { props.desktop.lines.map((line, i)=> {
-                    return <p className={styles.title}>{parse(`
-                        ${i === 0 ? highlights : ''}
-                        ${line.replace("$ellipse$", ellipse).replace("$underline$", underline)}
-                    `)}</p>
-                })}
-            </div> */}
-            {/* {parse(ellipse)} */}
-            {/* <div ref={refContainerTitleMobile} className={styles.containerTitleMobile} >
-                <p className={styles.preTitle}>{props.mobile.pretitle}</p>
-                { props.mobile.lines.map((line)=> {
-                    return <p className={styles.title}>{parse(line)}</p>
-                })}*/}
-            </div>
-            <div id="date-banner" className={styles.date}>
-                <div className={styles.dateContainer} >
-                    <p id="day-num" className={styles.dayNum}>{"00"}</p>
-                    <div className={styles.textContainer}>
-                        <p className={styles.text}>{getTodayMonthName()}</p>
-                        <p className={styles.text}>Available</p>
-                        <p className={styles.text}>for work</p>
+            <div className={styles.container} id={"top-banner-container"}>
+                <div ref={refsizedTopBanner} className={styles.sizedTopBanner} />
+                <div id="date-banner" className={styles.date}>
+                    <div className={styles.dateContainer} >
+                        <p id="day-num" className={styles.dayNum}>{"00"}</p>
+                        <div className={styles.textContainer}>
+                            <p className={styles.text}>{getTodayMonthName()}</p>
+                            <p className={styles.text}>Available</p>
+                            <p className={styles.text}>for work</p>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </Fragment>
     )

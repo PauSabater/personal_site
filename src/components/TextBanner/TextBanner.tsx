@@ -28,13 +28,13 @@ export function TextBanner({ texts }: { texts: ITextBannerTexts}) {
             <div className={styles.wrap} >
                 <p className={styles.title}>{texts.title}</p>
                 {
-                    texts.textDesktop.map((line) =>
-                        <div className={`${styles.lineWrap} ${styles.textDesktop} text-desktop`}>
+                    texts.textDesktop.map((line, i) =>
+                        <div className={`${styles.lineWrap} ${styles.textDesktop} text-desktop`} key={`destktop-${i}`}>
                             <p className={styles.text}>{parse(line)}</p>
                         </div>
                     )}
-                    {texts.textMobile.map((line) =>
-                        <div className={`${styles.lineWrap} ${styles.textMobile} text-mobile`}>
+                    {texts.textMobile.map((line, i) =>
+                        <div className={`${styles.lineWrap} ${styles.textMobile} text-mobile`} key={`mobile-${i}`}>
                             <p className={styles.text}>{parse(line)}</p>
                         </div>
                 )}

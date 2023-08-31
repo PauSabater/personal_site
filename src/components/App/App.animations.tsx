@@ -3,11 +3,8 @@ import { CustomEase } from "gsap/CustomEase"
 import { scOpacityFade } from "../../assets/ts/utils/utils"
 gsap.registerPlugin(CustomEase)
 
-
-
 export function executeEnterAnimations(pageId: string, node: HTMLElement, route?: string) {
-    console.log("node is")
-    console.log(node)
+
     switch (pageId) {
         case 'page-project-post':
             setProjectPostEnterAnimation(node)
@@ -63,7 +60,6 @@ export function setPageFadeInAnimation() {
 }
 
 export function setProjectPostEnterAnimation(node: HTMLElement) {
-    console.log("PROJECT POST ENTEEER")
     const elTransitionImages: HTMLElement | null = document.querySelector("#transition-images")
     gsap.set(elTransitionImages, {opacity: 1})
     window.scrollTo(0, 0)

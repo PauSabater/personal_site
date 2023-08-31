@@ -15,7 +15,6 @@ export interface IMethodSectionTexts {
 export function MethodSection({props}: {props: IMethodSectionTexts}) {
 
     const refContent: React.MutableRefObject<null> = useRef(null)
-    const refCollapsibles: React.MutableRefObject<[]> = useRef([])
 
     useLayoutEffect(() => {
         const elContent: HTMLElement | null = refContent.current
@@ -23,9 +22,6 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
 
         setMethodSectionAnimation(elContent)
     }, [])
-
-    const refSplitLettersContainer = useRef(null)
-
 
     const collapseElement = (elCollapsible: HTMLElement): void => {
         if (elCollapsible === null) return
@@ -49,12 +45,7 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
 
         if (refContent.current === null) return
         const elsContainerCollapsible = (refContent.current as HTMLElement).querySelectorAll('.container-collapsible')
-        const elsCollapsible = (refContent.current as HTMLElement).querySelectorAll('.collapsible')
-
         const attrClickedEl: string = elTarget.getAttribute(attrDataCollapsible) || ''
-
-        console.log("HAS ATTRIBUTE IS: "+elTarget.hasAttribute(attrIsExpanded))
-        console.log(elTarget)
 
         // Remove 'is-unfocused' attr when none is selected in order to restart elements:
         if (elTarget.hasAttribute(attrIsExpanded)) {
@@ -63,8 +54,7 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
                 elTarget.removeAttribute(attrIsExpanded)
                 collapseElement(elTarget.querySelector('.collapsible') as HTMLElement)
             })
-
-            return
+        return
 
         // add is-expanded attr to the one clicked and add id-unfocused to the rest
         } else {
@@ -96,15 +86,15 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
     const splitLetters = (str: string): JSX.Element => {
         return (
             <div className={`${styles.spliLettersContainer} split-letters-container`}>
-                {[...str].map((char): JSX.Element => {
+                {[...str].map((char, i): JSX.Element => {
                     return (
                         char !== '$'
-                        ?   <div className={styles.charWrap}>
+                        ?   <div key={`char-${i}`} className={styles.charWrap}>
                                 <pre className={char !== ' ' ? styles.char : styles.charEmpty}>
                                     {char !== ' ' ? char : '  '}
                                 </pre>
                             </div>
-                        :   <div className={styles.fillAvailable}></div>
+                        :   <div key={`char-${i}`} className={styles.fillAvailable}></div>
                     )
                 })}
             </div>
@@ -119,12 +109,13 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleClickEvent(e)}
                         className={`${styles.containerCollapsible} container-collapsible`}
                         data-collapsible={`col-${i}`}
+                        key={`method-${i}`}
                     >
                         <div className={`${styles.animatedContainer} animated-container`}>
                             <div className={styles.phraseContainer}>
                                 <h2 className={styles.phrase}>{method.title}</h2>
                                 <svg width="23" height="13" viewBox="0 0 23 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 1L11.5 11L22 1" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M1 1L11.5 11L22 1" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
                                 </svg>
                             </div>
                             <div className={`${styles.collapsible} collapsible`}>
@@ -135,10 +126,7 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
                     </div>
                 )}
             </Fragment>
-
-
         )
-
     }
 
     return (
@@ -146,10 +134,6 @@ export function MethodSection({props}: {props: IMethodSectionTexts}) {
             <div className={styles.containerContent} ref={refContent}>
                 {splitLetters(props.title)}
                 {generateCollapsiblesTemplate()}
-                {/* <div className={styles.containerCollapsible} data-collapsible={"col-3"}>
-                    <h1 className={styles.phrase}>Spend time planning, save time later</h1>
-                    <h1 className={styles.phrase}>Devs have a work on product</h1>
-                </div> */}
             </div>
         </div>
     )

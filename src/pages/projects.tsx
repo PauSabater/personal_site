@@ -6,7 +6,7 @@ import gsap from 'gsap'
 
 const projectList = {
     title: "All projects",
-    intro: 'Here are displayed the main projects I have worked on and the corresponding cases. I plan on keeping this list growing, you can also check my <a href="https://github.com/PauSabater?tab=repositories" target="_blank">Github account</a> see what I am working on !',
+    intro: 'Here are displayed the main projects I have worked on and the corresponding cases. More projects to be added soon !',
     projects: [
         {
             title: "/ WORK AT PAPERNEST",
@@ -14,11 +14,11 @@ const projectList = {
             text: "Work during my two years working as a frontend developer papernest",
             cta: {
                 text: "Visit case",
-                // href: "projects/papernest",
                 href: "papernest",
                 target: "_self",
                 color: "black",
-                isBold: false
+                isBold: false,
+                isLink: false
             },
             imgPath: "papernest.svg"
         },
@@ -31,7 +31,8 @@ const projectList = {
                 href: "weather-app",
                 target: "_self",
                 color: "black",
-                isBold: false
+                isBold: false,
+                isLink: false
             },
             imgPath: "mountains"
         },
@@ -44,7 +45,8 @@ const projectList = {
                 href: "personal-site",
                 target: "_self",
                 color: "black",
-                isBold: false
+                isBold: false,
+                isLink: false
             },
             imgPath: "personal-site.svg"
         }

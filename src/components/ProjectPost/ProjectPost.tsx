@@ -1,30 +1,14 @@
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
-import { TagLabels } from "./Components/TagLabels/TagLabels"
-import { Callout } from "./Components/Callout/Callout"
-import { ImageArticle } from "./Components/ImageArticle/ImageArticle"
+import { useLayoutEffect, useRef, useState } from "react"
 import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
-import { CustomEase } from "gsap/CustomEase"
-
-import { chevronSvg } from "../../assets/svg/ts/arrow"
 import parse from "html-react-parser"
-import { Link, NavLink } from "react-router-dom"
-import { getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, getViewportAspectRatio, hidePageOverlay, isViewportPropHigherThanEl, msEnterPageLong, scEnterPageLong } from "../../assets/ts/utils/utils"
-import { calendar } from "../../assets/svg/ts/calendar"
-import { LinkInline } from "./Components/LinkInline/LinkInline"
-import { easeOutLong } from "../../assets/ts/styles/styles"
-import { getImg } from "../WorkBanner/Card/Card"
-import { executeEnteringMountainAnimation, executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver, setMountainsScale } from "./ProjectPost.animations"
-import { getCloudsAnimation } from "../WorkBanner/WorkBanner.animations"
+import { Link } from "react-router-dom"
+import { hidePageOverlay, msEnterPageLong } from "../../assets/ts/utils/utils"
+import { executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver } from "./ProjectPost.animations"
 import { INextProjects, NextProjects } from "./Components/NextProjects/NextProjects"
 import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
 import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
-
-
-gsap.registerPlugin(CustomEase)
-// gsap.registerPlugin(ScrollTrigger)
-
 
 export interface IPropsProjectPost {
     element?: HTMLElement,
@@ -37,21 +21,8 @@ export interface IPropsProjectPost {
 }
 
 export function ProjectPost({ props }: { props: IPropsProjectPost}) {
-
-    // console.log('PROOOOOPS')
-    // console.log(props)
-
-    const refArticleContainer = useRef(null)
-    const refIndexContainer = useRef(null)
     const refPostImageContainer = useRef(null)
-
-    const [titles, setTitles] = useState<NodeListOf<Element> | null>(null)
     const [showCanvas, setShowCanvas] = useState(false)
-
-    useLayoutEffect(() => {
-
-    }, [])
-
 
     useLayoutEffect(() => {
         window.scroll(0, 0)
@@ -59,26 +30,18 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
         const elImgTransition: HTMLElement | null = document.getElementById(`transition-img-${props.imgPath}`)
         hidePageOverlay()
         if (elImgTransition === null) return
-        // elImgTransition.style.opacity = '1'
         gsap.set(elImgTransition, {opacity: 1})
 
         removeOutlineHeader()
         executePageEnterAnimation(props.imgPath)
 
-        const elImage: HTMLElement | null = refPostImageContainer.current
-
         if (props.imgPath === "mountains") {
-            // setMountainsScale(elImage)
             setMountainsAnimationObserver()
         }
 
-        console.log(props.imgPath)
-
         if (props.imgPath === "personal-site.svg") {
-            console.log("IEEEEEE SET CANVAS")
             setTimeout(()=> setShowCanvas(true), msEnterPageLong + 200)
         }
-
     }, [])
 
     return (
@@ -86,11 +49,6 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
             <div id="post-container-image" className={styles.containerImage}>
                 <div className={styles.container} ref={refPostImageContainer}>
                     { showCanvas === true ? <PersonalSiteCanvas /> : '' }
-                    {/* {getImg(props.imgPath)} */}
-                    {/* {props.imgPath !== 'mountains'
-                        ? <img ref={refPostImageContainer} className={styles.image} src={require(`../../assets/${props.imgPath}`)}></img>
-                        : getImg('mountains')
-                    } */}
                 </div>
             </div>
 
@@ -103,7 +61,6 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
     )
 }
 
-
 export const getArrowLinkTemplate = (path: string)=> {
     return (
         <Link to={path} onClick={() => leaveFromArrowClick()} className={styles.nextProjectContainer}>
@@ -112,7 +69,3 @@ export const getArrowLinkTemplate = (path: string)=> {
         </Link>
     )
 }
-
-//https://www.fournisseur-energie.com/fournisseurs-electricite/
-
-//https://www.fournisseur-energie.com/comparateur/estimation/
