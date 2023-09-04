@@ -95,7 +95,7 @@ function Model() {
     return (
         <>
         <group>
-            <Environment preset="warehouse"></Environment>
+            <Environment files="warehouse-small.hdr"></Environment>
                 <mesh
                     ref={refGlass}
                     position={[-8,1.35,4]}

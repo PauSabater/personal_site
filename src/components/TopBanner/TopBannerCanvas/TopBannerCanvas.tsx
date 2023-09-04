@@ -45,7 +45,7 @@ export function TopBannerCanvas({mode}: {mode: string}) {
             <Suspense>
                 {/* @ts-ignore */}
                 <SceneComponents mode={mode}></SceneComponents>
-                <Environment preset="warehouse"></Environment>
+                <Environment files="warehouse-small.hdr"></Environment>
             </Suspense>
             <OrbitControls
                 enabled={false}
