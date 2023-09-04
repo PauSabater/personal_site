@@ -7,16 +7,8 @@ import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 import * as THREE from 'three'
 import gsap from "gsap"
 import { getViewportAspectRatio } from "../../../assets/ts/utils/utils"
-import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 
-const material = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color('hsl(248, 29%, 62%)').convertSRGBToLinear(),
-    roughness: 0,
-    clearcoat: 1,
-    clearcoatRoughness: 0,
-})
-
-export function PersonalSiteCanvas() {
+export function PersonalSiteCanvas({mode}: {mode: string}) {
 
     const siteCanvas = useRef(null)
 
@@ -33,7 +25,7 @@ export function PersonalSiteCanvas() {
                 <group >
                     <Camera />
                     <Suspense>
-                        <Model />
+                        <Model mode={mode}/>
                     </Suspense>
                     <Environment preset="city"  resolution={512}></Environment>
                     <CameraControls enabled={false} makeDefault dollyToCursor minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
@@ -50,12 +42,13 @@ export function PersonalSiteCanvas() {
     )
 }
 
-function Model() {
+function Model({mode}: {mode: string}) {
 
     const refGroup = useRef(null)
     const { size } = useThree()
     const [shouldRender, setShouldRender] = useState(true)
     const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
+    const [colorGrid, setColorGrid] = useState(mode === "light" ? "hsl(136, 0%, 80%)" : "hsl(136, 0%, 40%)")
 
     const canvasHeight = size.height
 
@@ -106,12 +99,16 @@ function Model() {
             <Physics gravity={[0, -60, 0]}>
                 <Logo position={[-4, 50, 0]} rotation={[0, 0, 0]} />
                 <Logo position={[0, 80, 0.5]} rotation={[0, 1, 2]} />
-                <Pencil scale={0.6} position={[4, 110, 40]} rotation={[0, 0.55, 0]} color={"hsl(54, 67%, 28%)"} />
+                <Pencil scale={0.6} position={[4, 110, 40]} rotation={[0, 0.55, 0]} color={"hsl(54, 67%, 75%)"} />
                 <Pencil scale={0.6} position={[-6, 110, 45]} rotation={[0, 0.55, Math.PI / 2]} color={"hsl(248, 30%, 50%)"} />
                 {/** @ts-ignore */}
                 <CuboidCollider position={[0, -6, 0]} type="fixed" args={[100, 1, 100]} />
             </Physics>
-            <gridHelper scale={4} args={[150, 150, 'hsl(136, 0%, 80%)', 'hsl(136, 0%, 80%)']} position={[0, -6, 0]} />
+            <gridHelper
+                scale={4}
+                args={[150, 150, colorGrid, colorGrid]}
+                position={[0, -6, 0]}
+            />
         </group>
     )
 }
@@ -161,6 +158,13 @@ function Logo({ stencilBuffer = false, ...props }) {
 
 function Pencil({...props}) {
 
+    const material = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(props.color).convertSRGBToLinear(),
+        roughness: 0,
+        clearcoat: 1,
+        clearcoatRoughness: 0,
+    })
+
     // @ts-ignore
     const {nodes} = useGLTF('/pencil2.glb')
 
@@ -175,7 +179,7 @@ function Pencil({...props}) {
                         material={material}
                         geometry={nodes.Pencil_1.geometry}
                         {...props}>
-                        <meshBasicMaterial attach="material" color={props.color} />
+                        {/* <meshBasicMaterial attach="material" color={props.color} /> */}
                     </mesh>
                     <mesh
                         castShadow={false}

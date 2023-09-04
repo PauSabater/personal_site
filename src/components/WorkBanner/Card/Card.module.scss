@@ -30,18 +30,6 @@
     .drop {
         transform: scale(0.3);
     }
-
-    &[data-mode="dark"] {
-        .imgLightMode {
-            display: none;
-        }
-    }
-
-    &[data-mode="light"] {
-        .imgDarkMode {
-            display: none;
-        }
-    }
 }
 
 .title {
@@ -119,13 +107,13 @@
         }
     }
 
-    img.absolutePos {
-        position: absolute;
-    }
-
     @include mixins.mobile-tablet {
         width: var(--card-img-width);
     }
+}
+
+.img[data-filter-invert] {
+    filter: grayscale(1) invert(0.89);
 }
 
 .imgMountainContainer {

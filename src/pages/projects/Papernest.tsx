@@ -4,5 +4,5 @@ import {papernestContent} from "../../components/ProjectPost/Content/papernest"
 
 export function PapernestProject({ props, mode }: { props: IPropsProjectPost, mode: string }) {
 
-    return <ProjectPost props={props}></ProjectPost>
+    return <ProjectPost props={props} mode={mode}></ProjectPost>
 }

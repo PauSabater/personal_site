@@ -26,9 +26,9 @@ import { ContextTheme } from '../../context/themeContext'
 const routes = [
     {path: '/', name: 'Home', Component: Home},
     {path: '/projects', name: 'Projects', Component: Projects},
-    // {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
-    // {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
-    // {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
+    {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
+    {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
+    {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
     // {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
 ]
 
@@ -103,11 +103,11 @@ function App() {
     }
 
     function getProjectProps(route: string): any {
-        if (route === "papernest") return propsPpn
-        else if (route === "weather-app") return propsWeatherApp
-        else if (route === "personal-site") return propsPersonalSite
-        else if (route === "personal-site") return propsPersonalSite
-        else if (route === "projects") return texts.projectsList
+        console.log("ROUTEEE: "+location.pathname)
+        if (route === "/projects/papernest") return propsPpn
+        else if (route === "/projects/weather-app") return propsWeatherApp
+        else if (route === "/projects/personal-site") return propsPersonalSite
+        else if (route === "/projects") return texts.projectsList
 
         else return texts.home
     }
@@ -152,7 +152,7 @@ function App() {
                                         >
                                             <route.Component
                                                 mode={theme}
-                                                props={getProjectProps(route.path)}
+                                                props={getProjectProps(location.pathname)}
                                             ></route.Component>
                                         </Transition>
                                     </SwitchTransition>
@@ -161,7 +161,7 @@ function App() {
                             )}
                         </Routes>
                 </div>
-            <Footer/>
+            <Footer mode={theme} />
             <Overlay/>
         </div>
     )

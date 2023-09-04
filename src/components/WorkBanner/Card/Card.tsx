@@ -63,10 +63,7 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
     //     </svg>
     // )
     } else if(img === "personal-site.svg") {return (
-        <Fragment>
-            <img className={`${styles.img} ${styles.absolutePos} ${styles.imgLightMode}`} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
-            <img className={`${styles.img} ${styles.absolutePos} ${styles.imgDarkMode}`} src={require(`../../../assets/svg/darkmode/${img}`)} data-transitioned-image=""></img>
-        </Fragment>
+            <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-filter-invert="" data-transitioned-image=""></img>
     )
     } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
 }

@@ -21,11 +21,14 @@ function Light() {
     )
 }
 
-export function FooterCanvas() {
+export function FooterCanvas({mode}: {mode: string}) {
+    const colorBackground = mode === "light" ? 'hsl(136, 0%, 96%)' : 'hsl(136, 0%, 7%)'
+    // const colorBackground = mode === "light" ? 'hsl(136, 0%, 96%)' : 'hsl(136, 0%, 96%)'
+
     return (
         <Canvas shadows dpr={[1, 1]} camera={{ position: [0, 160, 160], fov: 20 }}>
-            <fog attach="fog" args={['hsl(136, 0%, 96%)', 70, 95]} />
-            <color attach="background" args={['hsl(136, 0%, 96%)']} />
+            <fog attach="fog" args={[colorBackground, 70, 95]} />
+            <color attach="background" args={[colorBackground]} />
             <Suspense fallback={null}>
                 <Model />
                 <pointLight position={[-26, -8, -10]} color="red" intensity={5} />

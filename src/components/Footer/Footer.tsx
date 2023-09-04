@@ -2,13 +2,13 @@ import { Fragment } from "react"
 import "./Footer.css"
 import { FooterCanvas } from "./FooterCanvas/FooterCanvas"
 
-export function Footer() {
+export function Footer({mode}: {mode: string}) {
     const currentUrl = window.location.href
 
     return (
         <Fragment>
             <div className="footer-canvas" id="footer-canvas">
-                {window.location.href !== "http://localhost:3000/" ? <FooterCanvas/> : ''}
+                {window.location.href !== "http://localhost:3000/" ? <FooterCanvas mode={mode} /> : ''}
             </div>
             <div className="footer" id="footer">
                 <p>find me on</p>

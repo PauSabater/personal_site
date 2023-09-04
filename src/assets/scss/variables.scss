@@ -72,6 +72,7 @@
    //  --c-black: black;
 
     --c-font-global: var(--c-black);
+    --c-font-global-light: hsl(0, 0%, 12%);
 
     --c-font-h: hsl(0, 0%, 15%);
     --c-font-white: var(--c-white);
@@ -139,6 +140,9 @@
     // Border-radius
     --br-base: 10px;
     --br-sm: 5px;
+
+    // Border color
+    --c-br-dark-mode: hsl(136, 0%, 80%);
 }
 
 body[data-theme="dark"] {
@@ -146,8 +150,9 @@ body[data-theme="dark"] {
     --c-primary: hsl(54, 67%, 68%);
 
     --bg-main: hsl(0, 0%, 7%);
-    --c-white: hsl(0, 0%, 7%);
+    --c-white: #121212;
     --c-font-global: hsl(136, 0%, 96%);
+    --c-font-global-light: hsl(136, 0%, 86%);
     --bg-white: hsl(0, 0%, 12%);
     --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
     --c-br-dark-mode: hsl(136, 0%, 60%);

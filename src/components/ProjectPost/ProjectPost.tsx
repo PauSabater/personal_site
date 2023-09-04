@@ -20,9 +20,11 @@ export interface IPropsProjectPost {
     nextProjects: INextProjects
 }
 
-export function ProjectPost({ props }: { props: IPropsProjectPost}) {
+export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: string}) {
     const refPostImageContainer = useRef(null)
     const [showCanvas, setShowCanvas] = useState(false)
+
+    // console.log(props)
 
     useLayoutEffect(() => {
         window.scroll(0, 0)
@@ -45,18 +47,21 @@ export function ProjectPost({ props }: { props: IPropsProjectPost}) {
     }, [])
 
     return (
-        <div id="page-project-post" className={styles.projectPostContainer}>
+        <div id="page-project-post" className={styles.projectPostContainer} data-theme={mode}>
             <div id="post-container-image" className={styles.containerImage}>
                 <div className={styles.container} ref={refPostImageContainer}>
-                    { showCanvas === true ? <PersonalSiteCanvas /> : '' }
+                    { showCanvas === true ? <PersonalSiteCanvas mode={mode}/> : '' }
+                    <div className={styles.gradientContainer}>
+                        <div className={styles.gradient}></div>
+                    </div>
                 </div>
             </div>
 
             {props.wysiwyg}
 
-            <div className={styles.moreProjectsContainer}>
+            {/* <div className={styles.moreProjectsContainer}>
                 <NextProjects props={props.nextProjects}></NextProjects>
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -8,7 +8,6 @@
     overflow-y: scroll;
 
     .title {
-        // height: 95px;
         font-size: 60px;
         font-family: 'inter-bold';
         margin: var(--mg-xs) 0 var(--mg-sm);
@@ -30,16 +29,10 @@
         }
     }
 
-    // .svgBorder {
-    //     position: absolute;
-    //     top: 10px;
-    //     left: 0px;;
-    //     width: 500px;
-    // }
-
     .textTitle {
         margin-top: 20px;
         font-size: var(--fs-lg);
+        color: var(--c-font-global);
     }
 
     .item {
@@ -49,13 +42,13 @@
         margin: var(--mg-xl) 0;
         width: fit-content;
         border-radius: 30px;
+        color: var(--c-font-global);
     }
 
     @media (max-aspect-ratio: 0.8) {
         height: 285px;
         width: 300px;
         padding: 0 var(--pd-2xs) var(--pd-2xs);
-        // transform: rotateZ(-0.6deg);
         margin-left: 20px;
 
         .title {
@@ -73,5 +66,5 @@
         .item {
             font-size: 22px;
         }
-      }
+    }
 }

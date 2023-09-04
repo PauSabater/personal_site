@@ -349,7 +349,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         duration: 0.9,
                         delay: 0.2,
                         ease: "power4.out",
-                        onComplete: ()=> {setTimeout(()=> setIsAnimationPlaying(false), 1000)}
+                        onComplete: ()=> {setTimeout(()=> setIsAnimationPlaying(false), 1500)}
                     })
 
                     setTimeout(() => {

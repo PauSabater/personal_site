@@ -1,9 +1,9 @@
 import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/ProjectPost"
 import {weatherAppContent} from "../../components/ProjectPost/Content/weatherApp"
 
-export function WeatherAppProject(mode: string) {
+export function WeatherAppProject({ props, mode }: { props: IPropsProjectPost, mode: string }) {
 
-    const props: IPropsProjectPost = {
+    const propss: IPropsProjectPost = {
         indexTitle: "CONTENT",
         wysiwyg: weatherAppContent(),
         imgPath: "mountains",
@@ -24,7 +24,7 @@ export function WeatherAppProject(mode: string) {
         }]}
     }
 
-    return <ProjectPost props={props}></ProjectPost>
+    return <ProjectPost props={propss} mode={mode}></ProjectPost>
 }
 
 // export function WeatherAppProject(props: IPropsProjectPost) {

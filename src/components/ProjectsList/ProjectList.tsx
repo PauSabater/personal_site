@@ -38,7 +38,8 @@ export function ProjectList({props, mode}: {props: IProjectList, mode: string}) 
     }
 
     return (
-        <div className={styles.container} id="page-projects">
+        <div className={styles.container} id="page-projects" data-theme={mode}>
+            <div className={styles.gradient}></div>
             <div className={"intro-container"}>
                 <h1 className={styles.title}>{props.title}</h1>
                 <p className={styles.intro}>{parse(props.intro)}</p>
