@@ -133,6 +133,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     y: `-=100vh`
                 }, 'end')
                 .to(card3ImgContainer, {
+                    border: 'none',
                     width: ()=> {
                     // Wider viewport
                     if(isViewportPropHigherThanEl(card3Svg)) {

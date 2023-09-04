@@ -9,6 +9,12 @@
     bottom: 0;
     overflow: hidden;
     pointer-events: none;
+
+    &[data-theme="light"] {
+        img[data-filter-invert] {
+            filter: none;
+        }
+    }
 }
 
 .imageContainer {

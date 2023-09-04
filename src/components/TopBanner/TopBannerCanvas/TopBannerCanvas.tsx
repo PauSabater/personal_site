@@ -20,8 +20,8 @@ import styles from "./TopBanner.module.scss"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { ellipse, underline } from '../../../assets/svg/ts/strokes'
-import { executeInitialPageAnimation, setTopBannerAnimations } from '../TopBanner.animations'
-import { getViewportAspectRatio } from '../../../assets/ts/utils/utils'
+import { setTopBannerAnimations } from '../TopBanner.animations'
+import { getViewportAspectRatio, hideAllTransitionImages, scTransitionPage } from '../../../assets/ts/utils/utils'
 import * as THREE from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -32,7 +32,10 @@ useGLTF.preload("/logo3d.gbl")
 export function TopBannerCanvas({mode}: {mode: string}) {
 
     useLayoutEffect(()=> {
-        gsap.set(document.getElementById("header"), {opacity: 0})
+        if (document.getElementById("page-content")?.classList.contains("visited") === false) {
+            gsap.set(document.getElementById("header"), {opacity: 0, y: -200})
+            document.getElementById("page-content")?.classList.add("visited")
+        }
     }, [])
 
     return (
@@ -192,10 +195,13 @@ export function Pencil(props: any) {
     )
   }
 
-const Grid = ({ mode = "light", number = 7, lineWidth = 0.02, height = 0.2 }) => {
+const Grid = ({mode}: {mode: string}) => {
+    const number = 7
+    const lineWidth = 0.02
+    const height = 0.2
 
     const colorGrid = mode === "light" ? 'hsl(136, 0%, 86%)' : 'hsl(136, 0%, 16%)'
-    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%))' : 'hsl(136, 0%, 36%)'
+    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%))' : 'hsl(136, 0%, 46%)'
 
     return (
     // Renders a grid and crosses as instances
@@ -318,12 +324,22 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
 
         if (refPretitle.current !== null && refPretitleMaterial !== null && refTitle.current !== null && refTitleMaterial !== null) {
+            const elTopBanner = document.getElementById("top-banner")
+            const elPageOverlay = document.getElementById("page-overlay")
+
             const tl = gsap.timeline().pause()
             tl
+            .set(elTopBanner, {
+                y: 100
+            })
+            .set(elPageOverlay, {
+                opacity: 1
+            })
             // @ts-ignore
             .to(refPretitle.current.position, {
                 z: -8,
-                duration: 0.6
+                duration: 0.6,
+                onStart: ()=> hideAllTransitionImages()
             }, 0)
             .to(refPretitleMaterial.current, {
                 opacity: 1,
@@ -340,7 +356,17 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                 duration: 0.6,
                 delay: 0.4,
                 onStart: ()=> {
-                    executeInitialPageAnimation()
+                    gsap.to(elPageOverlay, {
+                        opacity: 0,
+                        duration: scTransitionPage - 0.1,
+                        ease: "power1.in"
+                    })
+                    gsap.to(elTopBanner, {
+                        y: 0,
+                        duration: scTransitionPage - 0.1,
+                        delay: 0,
+                        ease: "power1.in"
+                    })
 
                     // @ts-ignore
                     gsap.to(refGlass.current.position, {
@@ -367,10 +393,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
             const elPageLoader = document.querySelector(".page-loader")
             if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
-            else setTimeout(() => {
-                if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
-                else setTimeout(() => initiateTopBanner(), 500)
-            }, 1000)
+            else setTimeout(() => initiateTopBanner(), 1000)
         }
     }, [])
 

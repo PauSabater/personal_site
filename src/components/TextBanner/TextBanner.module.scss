@@ -9,6 +9,18 @@
     margin: var(--pd-fullwidth);
     margin-bottom: 100px;
     opacity: 0;
+
+    &[data-theme="dark"] {
+        svg {
+            filter: grayscale(0.2) invert(1);
+        }
+
+        .canvasContainer {
+            filter: invert(0.8);
+        }
+    }
+
+
 }
 
 .canvasContainer {
@@ -42,7 +54,7 @@
     background: var(--bg-white-translucent);
     border-radius: 20px;
     z-index: 10;
-    border: 1px solid var(--c-br-dark-mode);
+    border: 1px solid var(--c-br-light);
 }
 
 .title {

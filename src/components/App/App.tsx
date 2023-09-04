@@ -18,10 +18,10 @@ import { executeEnterAnimations, executeExitAnimations } from './App.animations'
 import { Projects } from '../../pages/projects'
 import { PersonalSiteProject } from '../../pages/projects/PersonalSite'
 import { Overlay } from '../Overlay/Overlay'
-import { msTransitionPage } from '../../assets/ts/utils/utils'
+import { msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
-import { ContextTheme } from '../../context/themeContext'
+
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
@@ -29,7 +29,7 @@ const routes = [
     {path: '/projects/papernest', name: 'PapernestProject', Component: PapernestProject},
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
     {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
-    // {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
+    {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
 ]
 
 
@@ -108,30 +108,33 @@ function App() {
         else if (route === "/projects/weather-app") return propsWeatherApp
         else if (route === "/projects/personal-site") return propsPersonalSite
         else if (route === "/projects") return texts.projectsList
+        else if (route === "/projects/weather-app/live-result") return texts.projectsList
 
         else return texts.home
     }
 
-    const [theme, setTheme] = useState("light")
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     useLayoutEffect(()=> {
         if (window.location.href.includes("projects")) {
             document.querySelector(".page-loader")?.classList.remove("is-loading")
         }
 
-        // Listen to event to inform that we must change the theme:
+        // Listen to event to inform that we must change the theme and set theme in localstorage
         document.addEventListener('themeChange', (e)=> {
             e.preventDefault()
-            if (document.body.getAttribute("data-theme") === "light") setTheme("light")
-            else setTheme("dark")
+            const theme = document.body.getAttribute("data-theme") || "light"
+            setTheme(theme || "light")
+            localStorage.setItem("theme", theme)
             e.stopPropagation()
         })
     }, [])
 
+
     return (
         <div className="main" data-theme={theme}>
             <Header links={ texts.header.links } mode={theme}/>
-            <TransitionImages/>
+            <TransitionImages mode={theme} />
                 <div className='page' id="page-content">
                         <Routes>
                             {routes.map((route, i) =>

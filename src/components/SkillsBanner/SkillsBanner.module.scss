@@ -19,10 +19,10 @@
     // --c-font-global: hsl(136, 0%, 96%);
     // --bg-white: hsl(0, 0%, 12%);
     // --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
-    // --c-br-dark-mode: hsl(136, 0%, 60%);
+    // --c-br-light: hsl(136, 0%, 60%);
 
     .banner {
-        border-color: var(--c-br-dark-mode);
+        border-color: var(--c-br-light);
         background-color: var(--bg-white);
     }
 
@@ -41,7 +41,7 @@
 
 .banner {
     height: auto;
-    padding: var(--pd-lg) var(--pd-xl);
+    padding: var(--pd-lg) var(--pd-xl) var(--pd-xl) var(--pd-xl);
     border-radius: 20px;
     border: 1px solid var(--c-font-global);
     background: var(--bg-main);
@@ -95,6 +95,7 @@
     max-width: 70px;
     align-self: center;
     opacity: 0.6;
+    filter: grayscale(1);
 
     @include mixins.mobile {
         height: 25px;

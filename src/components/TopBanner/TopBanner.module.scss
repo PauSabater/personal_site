@@ -33,7 +33,6 @@
 
     @include mixins.vertical {
         margin-top: -15vh;
-
     }
 
     div {
@@ -243,6 +242,10 @@ p.title, line {
     .date {
         bottom: 4vh;
         right: 3vw;
+
+        .dateContainer {
+            margin-top: 82vh;
+        }
     }
 }
 

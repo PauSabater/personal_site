@@ -24,7 +24,7 @@ export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: str
 
 
     return (
-        <div ref={refTextBanner} className={styles.container} id="text-banner">
+        <div ref={refTextBanner} className={styles.container} id="text-banner" data-theme={mode}>
             <div className={styles.wrap} >
                 <p className={styles.title}>{texts.title}</p>
                 {

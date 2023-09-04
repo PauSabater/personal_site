@@ -5,11 +5,13 @@ const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (m
 const mediaMobile: string = `screen and (max-width: 768px)`
 
 // Time animations
-export const msTransitionPage = 700
-export const msEnterPageLong = 900
+export const msTransitionPage = 600
+export const msTransitionPageLong = 2000
+export const msEnterPageLong = 1000
 export const scTransitionPage = msTransitionPage / 1000
+export const scTransitionPageLong = msTransitionPageLong / 1000
 export const scEnterPageLong = msEnterPageLong / 1000
-export const scOpacityFade = scTransitionPage - 0.3
+export const scOpacityFade = scTransitionPage - 0.1
 
 
 export function isMobileScreen(): boolean {
@@ -111,4 +113,8 @@ export function displayTransitionImage() {
 export function hidePageOverlay() {
     const elPageOverlay: HTMLElement | null = document.getElementById("page-overlay")
     if (elPageOverlay !== null) gsap.set(elPageOverlay, {opacity: 0})
+}
+
+export function hasPageBeenLoaded() {
+    return document.querySelector(".page-loader")?.classList.contains("loader-shown")
 }

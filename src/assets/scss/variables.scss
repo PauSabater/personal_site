@@ -69,7 +69,9 @@
     --c-black: hsl(0, 0%, 7%);
     --c-black: hsl(0, 0%, 6%);
     --c-blackest: hsl(0, 0%, 3%);
-   //  --c-black: black;
+
+    // Border color
+    --c-br-light: hsl(136, 0%, 80%);
 
     --c-font-global: var(--c-black);
     --c-font-global-light: hsl(0, 0%, 12%);
@@ -81,14 +83,12 @@
     --c-white: hsl(136, 0%, 96%);
     --bg-main: var(--c-white);
     --bg-white: white;
-    --bg-white-translucent: hsl(0, 0%, 100%, 1);
+    --bg-white-translucent: hsl(0, 0%, 100%, 0.7);
+    --bg-white-translucent-dark-mode: hsl(0, 0%, 100%, 1);
 
     // Transitions
     --tr-base: 0.3s;
     --tr-slow: 0.5s;
-
-    // Colors
-
 
     // Font weight
     --fw-boldest: 900;
@@ -141,8 +141,6 @@
     --br-base: 10px;
     --br-sm: 5px;
 
-    // Border color
-    --c-br-dark-mode: hsl(136, 0%, 80%);
 }
 
 body[data-theme="dark"] {
@@ -150,12 +148,13 @@ body[data-theme="dark"] {
     --c-primary: hsl(54, 67%, 68%);
 
     --bg-main: hsl(0, 0%, 7%);
-    --c-white: #121212;
+    --c-white: hsl(0, 0%, 7%);
     --c-font-global: hsl(136, 0%, 96%);
     --c-font-global-light: hsl(136, 0%, 86%);
     --bg-white: hsl(0, 0%, 12%);
     --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
-    --c-br-dark-mode: hsl(136, 0%, 60%);
+    --bg-white-translucent-dark-mode: hsla(0, 0%, 13%, 0.75);
+    --c-br-light: hsl(136, 0%, 60%);
 }
 
 body {

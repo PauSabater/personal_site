@@ -16,6 +16,12 @@
     // box-shadow: 5px 5px 43px 14px rgba(0,0,0,0.4);
     z-index: 1;
 
+    &[data-mode="light"] {
+        .img[data-filter-invert] {
+            filter: none;
+        }
+    }
+
     &:before {
         content: '';
         position: absolute;
@@ -75,14 +81,6 @@
     margin-bottom: var(--mg-sm);
 }
 
-.link {
-    display: inline-block;
-    padding: var(--pd-xs) var(--pd-md);
-    font-weight: var(--fw-bold);
-    color: grey;
-    transition: opacity var(--tr-base), transform var(--tr-base);
-}
-
 .imgContainer {
     position: relative;
     display: flex;
@@ -90,12 +88,13 @@
     justify-content: center;
     position: relative;
     height: var(--card-height);
-    width: calc(100%);
+    width: calc(100% - 1px);
     grid-column-start: 2;
     grid-row-start: 2;
     border-radius: 15px 0 15px 15px;
     overflow: hidden;
     transition: opacity var(--tr-base);
+    border: 1px solid grey;
 
     .img, svg, .imgMountainContainer {
         height: 100%;

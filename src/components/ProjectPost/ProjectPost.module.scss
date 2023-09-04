@@ -47,6 +47,10 @@
                 font-family: "inter-medium";
             }
         }
+
+        .gradient {
+            display: block;
+        }
     }
 }
 
@@ -71,7 +75,7 @@ div[data-img-mountain] {
     padding: var(--pd-lg) 7vw;
     margin: auto;
     margin-bottom: var(--mg-2xl);
-    background-color: var(--bg-white-translucent);
+    background-color: var(--bg-white-translucent-dark-mode);
     border-radius: 20px;
     z-index: 2;
     opacity: 0;
@@ -272,8 +276,9 @@ div[data-img-mountain] {
     z-index: -1;
 
     .gradient {
+        display: none;
         position: absolute;
-        height: 230px;
+        height: 200px;
         width: 100vw;
         left: 0;
         bottom: 0;

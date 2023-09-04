@@ -7,13 +7,26 @@ gsap.registerPlugin(ScrollToPlugin)
 export function scrollToFromHomePage(elTarget: HTMLLinkElement) {
     const elOverlay = document.getElementById("page-overlay")
 
+    console.log("click!!!")
+
             const idElScrollTo = elTarget.getAttribute("data-scroll-to")
             if (!idElScrollTo) return
 
-            const elScrollTo = document.getElementById(idElScrollTo)
-            if (elScrollTo === null) return
+            let elScrollTo: HTMLElement
+            let duration: number
 
-            const duration = 0.5
+            if (window.location.href.includes("projects")) {
+                elScrollTo = document.getElementById(idElScrollTo) as HTMLElement
+                duration = 0.5
+            } else {
+                elScrollTo = document.getElementById("foot-banner") as HTMLElement
+                duration = 1.5
+            }
+
+            console.log("scroll to is")
+            console.log(elScrollTo)
+
+            if (elScrollTo === null) return
 
             gsap.timeline()
                 .pause()

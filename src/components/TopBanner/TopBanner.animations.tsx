@@ -25,7 +25,6 @@ export function setTopBannerAnimations(el: HTMLElement | null) {
         // Set timeline
         let tlTopBanner = gsap.timeline().pause()
         tlTopBanner
-            .set(elHeader, {y: -200, opacity: 1})
             .set(elDateBanner, {y: 400, opacity: 1})
             // Header entering screen:
             .set([pathEllipse], {

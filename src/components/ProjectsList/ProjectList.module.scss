@@ -7,13 +7,20 @@
     width: 90vw;
     margin: 200px auto 100px auto;
 
-    &[data-theme="light"] .gradient {
-        display: none;
+    &[data-theme="light"] {
+
+        .gradient {
+             display: none;
+        }
+
+        img[data-filter-invert] {
+            filter: none;
+        }
     }
 
     p[data-tag-label] {
         background-color: transparent;
-        border: 1px solid var(--c-br-dark-mode);
+        border: 1px solid var(--c-br-light);
     }
 }
 
@@ -56,7 +63,7 @@
     height: var(--height-card);
     margin-bottom: var(--mg-xl);
     background: var(--bg-white);
-    border: 1px solid var(--c-br-dark-mode);
+    border: 1px solid var(--c-br-light);
     border-radius: 30px;
     box-sizing: border-box;
     text-decoration: none;

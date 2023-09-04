@@ -2,6 +2,51 @@
     min-height: calc(85vh - var(--height-footer));
     padding: var(--pd-fullwidth);
     padding-top: 15vh;
+
+    // &[data-theme="dark] {
+
+    // }
+    &[data-theme="dark"] {
+
+        h2, li, button {
+            color: var(--c-font-global);
+        }
+
+        li {
+            --bg-grey-selected: var(--c-blackest);
+        }
+
+        div div div {
+            --bg-grey-selected: var(--c-blackest);
+
+            div:last-child p,
+            div:nth-child(2) p {
+                color: var(--c-font-global);
+            }
+
+            div:first-child ul {
+                outline: 1px solid var(--c-br-light);
+                background-color: var(--bg-white);
+            }
+        }
+
+        svg {
+            fill: var(--c-font-global-light);
+        }
+
+        input {
+            background-color: var(--bg-main);
+            outline: 1px solid var(--c-br-light);
+            color: var(--c-font-global);
+        }
+
+        input:focus {
+            outline: 1px solid var(--c-br-light);
+        }
+        input::placeholder {
+            color: var(--c-font-global);
+        }
+    }
 }
 
 .title {

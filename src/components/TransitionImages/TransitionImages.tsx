@@ -15,7 +15,7 @@ export interface ISkillsBannerTexts {
     }[]
 }
 
-export function TransitionImages({}: {}) {
+export function TransitionImages({mode}: {mode: string}) {
 
     const refContainer: React.MutableRefObject<null> = useRef(null)
 
@@ -39,7 +39,7 @@ export function TransitionImages({}: {}) {
     }, [])
 
     return (
-        <div ref={refContainer} className={styles.container} id="transition-images">
+        <div ref={refContainer} className={styles.container} id="transition-images" data-theme={mode}>
             <div className={`${styles.imageContainer} transition-images-container`} id={`transition-img-${'papernest.svg'}`}>
                 {getImg("papernest.svg")}
             </div>

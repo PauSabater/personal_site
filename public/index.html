@@ -28,12 +28,18 @@
             transition: opacity 0.5s;
         }
 
+        body[data-theme="dark"] .page-loader {
+            --c-loader: hsl(0, 0%, 40%);
+
+            background-color: hsl(0, 0%, 7%);
+        }
+
         .page-loader.is-loading {
             pointer-events: all;
             opacity: 1;
         }
 
-        .page-loader__homepage {
+        .page-loader__container {
             position: absolute;
             display: flex;
             flex-direction: row;
@@ -49,12 +55,26 @@
         }
 
         .page-loader__title {
+            display: inline-block;
             margin: 0;
             color: var(--c-loader);
             font-size: 30px;
-            font-weight: 400;
+            font-weight: 700;
+            letter-spacing: 3px;
             font-family: system-ui, sans-serif, Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue";
-            animation: appear 1.5s;
+            /* animation: appear 1.5s; */
+            -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
+            -webkit-mask-size: 200%;
+            animation: shine 2.5s linear infinite, appear 2s;
+        }
+
+        body[data-theme="light"] .page-loader__title {
+            font-weight: 500;
+        }
+
+        @keyframes shine {
+          from { -webkit-mask-position: 150%; }
+          to { -webkit-mask-position: -50%; }
         }
 
         @keyframes appear {
@@ -67,77 +87,65 @@
             }
         }
 
-        @keyframes appear-long {
-            0%   {
-              opacity: 0;
-            }
-            80%   {
-              opacity: 1;
-            }
-            100% {
-              opacity: 1;
-            }
-        }
-
         @keyframes loader-animation {
-            0%   {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            25%   {
               transform: scale(0.7);
               opacity: 0;
-            }
-            25%  {
-              transform: scale(1);
-              opacity: 1;
             }
             75%  {
               transform: scale(1);
               opacity: 1;
-
             }
-            100% {
+            100%  {
               transform: scale(1);
-              opacity: 0;
+              opacity: 1;
+
             }
         }
 
         .page-loader__dots {
-            --dot-size: 18px;
+            --dot-size: 20px;
 
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin-left: 15px;
+            margin-left: 35px;
             margin-top: 8px;
-            opacity: 1;
-            animation: appear-long 2s ease-in-out;
+            opacity: 0;
+            animation: appear 1.5s ease-in-out 0.5s forwards;
         }
 
         .page-loader__dot {
             height: var(--dot-size);
             width: var(--dot-size);
             background-color: var(--c-loader);
-            margin-left: 3px;
+            margin-left: 5px;
             border-radius: 4px;
         }
 
         .page-loader__dot:nth-child(1) {
-            animation: loader-animation 2.5s ease-in-out infinite 1s;
+            animation: loader-animation 2.5s ease-in-out infinite 2s;
         }
 
         .page-loader__dot:nth-child(2) {
-            animation: loader-animation 2.5s ease-in-out infinite 1.25s;
+            animation: loader-animation 2.5s ease-in-out infinite 2.25s;
         }
 
         .page-loader__dot:nth-child(3) {
-            animation: loader-animation 2.5s ease-in-out infinite 1.5s;
+            animation: loader-animation 2.5s ease-in-out infinite 2.5s;
         }
 
     </style>
   </head>
-  <body data-theme="light">
+  <body>
     <noscript>You need to enable JavaScript to run this site.</noscript>
     <div id="root"></div>
     <div class="page-loader is-loading">
-        <div class="page-loader__homepage">
+        <div class="page-loader__container">
             <div class="page-loader__title-container">
                 <p class="page-loader__title">pau sabater is a</p>
             </div>
@@ -145,32 +153,21 @@
                 <div class="page-loader__dot"></div>
                 <div class="page-loader__dot"></div>
                 <div class="page-loader__dot"></div>
-              <!-- <svg viewBox="0 0 155 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="0.5" y="47.5" width="47" height="48" rx="10" transform="rotate(-90 0.5 47.5)" fill="#121212"/>
-                  <rect x="54.5" y="47.5" width="47" height="47" rx="10" transform="rotate(-90 54.5 47.5)" fill="#121212"/>
-                  <rect x="107.5" y="47.5" width="47" height="47" rx="10" transform="rotate(-90 107.5 47.5)" fill="#121212"/>
-              </svg> -->
           </div>
         </div>
-        <!-- <div>
-          <svg width="202" height="142" viewBox="0 0 202 142" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect y="2" width="43" height="43" rx="10" fill="#050505"/>
-            <rect y="50" width="43" height="44" rx="10" fill="#050505"/>
-            <rect y="99" width="43" height="43" rx="10" fill="#050505"/>
-            <path d="M52 142V2H105.258L122 15.4V77.8L105.258 91.2H72.2062V142H52ZM72.2062 26V67.2H101.794V26H72.2062Z" fill="black"/>
-            <path d="M132.434 70V13.4L149.073 0H185.362L202 13.4V40H181.919V24H152.515V57.4H185.362L202 70.8V128.6L185.362 142H147.638L131 128.6V102H151.081V118H181.919V83.4H149.073L132.434 70Z" fill="black"/>
-            </svg>
-        </div> -->
-
     </div>
     <script>
-        // This script is only for the loader
-        if (window.location.href.includes("projects")) {
+        // get active theme
+        const theme = localStorage.getItem("theme") || "light"
+        document.body.setAttribute("data-theme", theme)
 
-        } else {
-            const elLoader = document.querySelector(".page-loader")
-            setTimeout(()=> elLoader.classList.add("loader-shown"), 2000)
-        }
+        const isHomepage = window.location.href.includes("projects") === false
+        const delay = isHomepage ? 2000 : 1000
+        if (isHomepage === false) document.querySelector(".page-loader__title").style.display = "none"
+
+        // loading is delayed in homepage to show sentence
+        const elLoader = document.querySelector(".page-loader")
+        setTimeout(()=> elLoader.classList.add("loader-shown"), delay)
     </script>
   </body>
 </html>

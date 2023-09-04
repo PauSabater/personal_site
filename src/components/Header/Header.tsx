@@ -8,6 +8,7 @@ import parse from "html-react-parser"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
 import { disableScroll, enableScroll, isMobileScreen } from "../../assets/ts/utils/utils"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
+import { setPageFadeOutAnimation } from "../App/App.animations"
 
 gsap.registerPlugin(CustomEase, ScrollToPlugin)
 
@@ -69,6 +70,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
     },[])
 
     const handleBurgerClick = (e: React.MouseEvent)=> {
+
         if (isBurgerOpen === false) {
             animationOpenBurger()
             setIsBurgerOpen(true)
@@ -249,14 +251,44 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
         const elTarget: HTMLLinkElement = e.target as HTMLLinkElement
 
         if (elTarget.hasAttribute("data-scroll-to")) {
+            const isHomepage = window.location.href.includes("projects") === false
+            let duration = 1.5
+
+            if (isHomepage) {
+                const pageHeight = document.getElementById("page-home")?.getBoundingClientRect().height
+                const scrolledHeight = window.scrollY
+                console.log("page height "+pageHeight)
+                console.log("Scrolled "+scrolledHeight)
+
+                duration = 0
+            }
+
+            console.log(isHomepage)
+            const scrollTo = !isHomepage ? "footer-canvas" : "foot-banner"
+            console.log(document.getElementById(scrollTo))
             gsap.to(window, {
-                duration: 1.5,
+                duration: duration,
                 ease: "power2.inOut",
                 scrollTo: {
-                    y: document.getElementById(elTarget.getAttribute("data-scroll-to") as string) as Element,
+                    y: document.getElementById(scrollTo) as Element,
                 }
             })
+        } else {
+            console.log("FADE OUT!!")
+            setPageFadeOutAnimation()
         }
+
+        // if (elTarget.hasAttribute("data-scroll-to")) {
+        //     const isHomepage = window.location.href.includes("projects")
+        //     const idScrollTo = isHomepage ? "foot-banner" : elTarget.getAttribute('data-scroll-to')
+        //     gsap.to(window, {
+        //         duration: isHomepage ? 2.5 : 1.5,
+        //         ease: "power2.inOut",
+        //         scrollTo: {
+        //             y: document.getElementById(idScrollTo as string) as HTMLElement,
+        //         }
+        //     })
+        // }
 
     }
 
@@ -295,7 +327,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                             >projects
                             </NavLink>
                         </li>
-                        <li className={`${styles.item} header-iterm`} key={2}>
+                        <li className={`${styles.item} header-iterm`} key={3}>
                             <div
                                 onClick={(e) => {
                                     document.body.getAttribute("data-theme") === "light"
@@ -303,9 +335,9 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                                         : document.body.setAttribute("data-theme", "light")
                                     document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
                                 }}
-                                className={styles.darkModeContainer}
+                                className={`${styles.darkModeContainer} header-link`}
                             >
-                                <p>mode :</p>
+                                <p>mode</p>
                             <svg viewBox="0 0 125 125" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <title>{mode === "light" ? "set dark mode" : "set light mode"}</title>
                                 <circle cx="62.5" cy="61.5" r="39.5" fill="white" stroke="white" stroke-width="10"/>

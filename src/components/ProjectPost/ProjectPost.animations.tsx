@@ -233,8 +233,6 @@ export function executePageEnterAnimation(img: string) {
 
         if (elImgContainer === null) return
 
-        // const easeAnimations = "power2.inOut"
-        // const easeAnimations = CustomEase.create("custom", easeOutLong)
         const easeAnimations = CustomEase.create("custom", "M0,0,C0.29,0,0.359,0.227,0.406,0.328,0.462,0.448,0.41,0.34,0.464,0.458,0.484,0.548,0.552,0.77,0.615,0.864,0.69,0.975,0.704,1,1,1")
 
         gsap

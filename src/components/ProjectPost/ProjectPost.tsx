@@ -3,12 +3,13 @@ import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
 import parse from "html-react-parser"
 import { Link } from "react-router-dom"
-import { hidePageOverlay, msEnterPageLong } from "../../assets/ts/utils/utils"
+import { hasPageBeenLoaded, hidePageOverlay, msEnterPageLong } from "../../assets/ts/utils/utils"
 import { executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver } from "./ProjectPost.animations"
 import { INextProjects, NextProjects } from "./Components/NextProjects/NextProjects"
 import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
 import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
+import { setPageFadeInAnimation, setPageFadeOutAnimation } from "../App/App.animations"
 
 export interface IPropsProjectPost {
     element?: HTMLElement,
@@ -35,7 +36,18 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
         gsap.set(elImgTransition, {opacity: 1})
 
         removeOutlineHeader()
-        executePageEnterAnimation(props.imgPath)
+
+        if (hasPageBeenLoaded()) {
+            executePageEnterAnimation(props.imgPath)
+        } else {
+            setTimeout(()=> {
+                window.scrollTo(0, 0)
+                executePageEnterAnimation(props.imgPath)
+                setPageFadeInAnimation()
+            }, 750)
+        }
+
+        // executePageEnterAnimation(props.imgPath)
 
         if (props.imgPath === "mountains") {
             setMountainsAnimationObserver()
@@ -59,9 +71,9 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
 
             {props.wysiwyg}
 
-            {/* <div className={styles.moreProjectsContainer}>
+            <div className={styles.moreProjectsContainer}>
                 <NextProjects props={props.nextProjects}></NextProjects>
-            </div> */}
+            </div>
         </div>
     )
 }

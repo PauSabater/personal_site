@@ -6,7 +6,7 @@ import { getImg } from "../WorkBanner/Card/Card"
 import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
 import { setLeaveAnimation, setProjectListEnterAnimation } from "./ProjectList.animations"
-import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
+import { hasPageBeenLoaded, hideAllTransitionImages } from "../../assets/ts/utils/utils"
 import { removeOutlineHeader } from "../Header/Header.animations"
 
 export interface IProjectList {
@@ -27,7 +27,11 @@ export function ProjectList({props, mode}: {props: IProjectList, mode: string}) 
     useLayoutEffect(() => {
         removeOutlineHeader()
         hideAllTransitionImages()
-        setProjectListEnterAnimation()
+        if (hasPageBeenLoaded()) {
+            setProjectListEnterAnimation()
+        } else {
+            setTimeout(()=> setProjectListEnterAnimation(), 500)
+        }
     }, [])
 
 
