@@ -118,3 +118,17 @@ export function hidePageOverlay() {
 export function hasPageBeenLoaded() {
     return document.querySelector(".page-loader")?.classList.contains("loader-shown")
 }
+
+export function hasElementBeenScrolled(elCheckHeight: HTMLElement) {
+    const scrolledHeight = window.scrollY
+    let distance = 0
+
+    if (elCheckHeight && elCheckHeight.offsetParent) {
+        do {
+            distance += elCheckHeight.offsetTop;
+            elCheckHeight = elCheckHeight.offsetParent as HTMLElement
+        } while (elCheckHeight);
+    }
+
+    return scrolledHeight > distance
+}

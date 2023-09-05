@@ -87,14 +87,16 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     onLeave: () => {
                         tlClouds.play()
                         tlLightning.play()
-                        gsap.to(card3Rain, {display: "block", opacity: "0.3"})
+                        gsap.to(card3Rain, {display: "block", opacity: "0.45"})
+                        // console.log(card3ImgContainer.style.transform)
+                        // gsap.to(card3ImgContainer, {scale: "2.5", duration: "0.5"})
+
                     },
                     onEnterBack: () => {
                         removeOutlineHeader()
                         tlLightning.pause()
                         tlClouds.pause()
                         gsap.to(card3Rain, {display: "none", opacity: "0"})
-
                     },
                 }
             })

@@ -21,6 +21,7 @@ import { Overlay } from '../Overlay/Overlay'
 import { msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
+import { Contact } from '../../pages/contact';
 
 
 const routes = [
@@ -30,12 +31,15 @@ const routes = [
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
     {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
     {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
+    {path: '/contact', name: 'Contact', Component: Contact},
 ]
 
 
 function App() {
 
     const location = useLocation()
+    const [isHomepage, setIsHomepage] = useState(location.pathname.includes("projects") === false)
+
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
 
@@ -109,6 +113,7 @@ function App() {
         else if (route === "/projects/personal-site") return propsPersonalSite
         else if (route === "/projects") return texts.projectsList
         else if (route === "/projects/weather-app/live-result") return texts.projectsList
+        else if (route === "/contact") return texts.projectsList
 
         else return texts.home
     }

@@ -97,6 +97,8 @@ export const papernestContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"storybook.png"}
+                    applyFilter={false}
+                    text={"Image of design system colors on the company Storybook"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMain}>
@@ -119,7 +121,8 @@ export const papernestContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"feature_comparator.png"}
                     column={1}
-
+                    applyFilter={false}
+                    text={"Form for the comparator feature"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -135,6 +138,8 @@ export const papernestContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"feature_filtered_list.png"}
                     column={1}
+                    applyFilter={false}
+                    text={"Filtered list feature"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
@@ -147,6 +152,8 @@ export const papernestContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"feature_callback.png"}
                     column={1}
+                    applyFilter={false}
+                    text={"Web callback feature"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -161,7 +168,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Conclusion</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        Looking back, I am amazed at the amount of work and features I worked with. It was indeed a <span>great first professional experience</span> in the field. Being surrouded by a great team and colleagues, the environment was ideal to <span>learn and grow</span> my skills. I learned a lot and had a great time. However, life moves on and I had to move to Berlin for personal reasons, which was incompatible with my position. Had not been for that matter, I would gladly have kept working at papernest !
+                        Looking back, I am amazed at the amount of work and features I worked with. It was indeed a <span>great first professional experience</span> in the field. Being surrouded by a great team and colleagues, the environment was ideal to <span>learn and grow</span> my skills. I learned a lot and had a great time!
                     </p>
                 </div>
             </div>

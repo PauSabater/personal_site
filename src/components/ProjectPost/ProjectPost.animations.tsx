@@ -2,8 +2,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import CustomEase from "gsap/CustomEase"
 import { getCloudsAnimation } from "../WorkBanner/WorkBanner.animations"
-import { disableScroll, enableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, isElLeftOfScreen, isViewportPropHigherThanEl, scEnterPageLong, scTransitionPage, scOpacityFade } from "../../assets/ts/utils/utils"
-import { easeOutLong } from "../../assets/ts/styles/styles"
+import { disableScroll, enableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, isElLeftOfScreen, scEnterPageLong, scTransitionPage, scOpacityFade } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
@@ -198,7 +197,7 @@ export function getMountainsAnimation(container: HTMLElement): gsap.core.Timelin
                 }
             }, 0)
             .to((container.parentElement as HTMLElement).querySelector('#rain-container'),
-                {opacity: "0.4"})
+                {opacity: "1"})
         tl.pause()
 
         return tl

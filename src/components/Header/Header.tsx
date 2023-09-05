@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import styles from "./Header.module.scss"
 import gsap from "gsap"
 import { useLayoutEffect, useRef, useState } from "react"
@@ -6,7 +6,7 @@ import { easeOutLong } from "../../assets/ts/styles/styles"
 import { CustomEase } from "gsap/CustomEase"
 import parse from "html-react-parser"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
-import { disableScroll, enableScroll, isMobileScreen } from "../../assets/ts/utils/utils"
+import { disableScroll, enableScroll, hasElementBeenScrolled, isMobileScreen } from "../../assets/ts/utils/utils"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
 import { setPageFadeOutAnimation } from "../App/App.animations"
 
@@ -15,6 +15,8 @@ gsap.registerPlugin(CustomEase, ScrollToPlugin)
 export function Header({ links, mode }: { links: string[], mode: string}) {
 
     const [isBurgerOpen, setIsBurgerOpen] = useState(false)
+    const [isMobileView, setIsMobileView] = useState(isMobileScreen())
+    const navigate = useNavigate()
 
     let oldScrollY = 0
     const [direction, setDirection] = useState('up')
@@ -56,9 +58,11 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 if (mql.matches === false) {
                     animationCloseBurger(false)
                     setIsBurgerOpen(false)
+                    setIsMobileView(false)
                 } else {
                     animationCloseBurger(true)
                     setIsBurgerOpen(false)
+                    setIsMobileView(true)
                 }
         }
 
@@ -70,6 +74,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
     },[])
 
     const handleBurgerClick = (e: React.MouseEvent)=> {
+        setIsMobileView(isMobileScreen())
 
         if (isBurgerOpen === false) {
             animationOpenBurger()
@@ -198,8 +203,8 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 delay: 0.875,
             }, 0)
             .set(refLogoContainer.current, {
-                color: 'var(--c-white)',
-                delay: 0.875,
+                color: 'var(--c-white-no-change)',
+                delay: 0.95,
             }, 0)
             .set(refBurger.current, {
                 pointerEvents: 'all',
@@ -210,6 +215,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
 
     const animationCloseBurger = (isMobile = true, isLinkClicked = false) => {
         const tlCloseBurger = gsap.timeline().pause()
+        setIsBurgerOpen(false)
 
         const duration = isLinkClicked ? 0.5 : 0.4
         if (refBurger.current === null) return
@@ -249,47 +255,40 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
     const handleClickLink = (e: React.MouseEvent)=> {
         if(isMobileScreen()) animationCloseBurger(true, true)
         const elTarget: HTMLLinkElement = e.target as HTMLLinkElement
+        const currentLocation = window.location.href
 
         if (elTarget.hasAttribute("data-scroll-to")) {
-            const isHomepage = window.location.href.includes("projects") === false
+            const isHomepage = currentLocation.includes("projects") === false
             let duration = 1.5
 
-            if (isHomepage) {
-                const pageHeight = document.getElementById("page-home")?.getBoundingClientRect().height
-                const scrolledHeight = window.scrollY
-                console.log("page height "+pageHeight)
-                console.log("Scrolled "+scrolledHeight)
+            const homepagePastHalf = hasElementBeenScrolled(document.getElementById("homepage-second-half") as HTMLElement)
 
-                duration = 0
+            if (!isHomepage || homepagePastHalf) {
+                const scrollTo = !isHomepage ? "footer-canvas" : "foot-banner"
+                gsap.to(window, {
+                    duration: duration,
+                    ease: "power2.inOut",
+                    scrollTo: {
+                        y: document.getElementById(scrollTo) as Element,
+                    }
+                })
+            } else if (isHomepage === true) {
+                navigate("/contact")
             }
 
-            console.log(isHomepage)
-            const scrollTo = !isHomepage ? "footer-canvas" : "foot-banner"
-            console.log(document.getElementById(scrollTo))
-            gsap.to(window, {
-                duration: duration,
-                ease: "power2.inOut",
-                scrollTo: {
-                    y: document.getElementById(scrollTo) as Element,
-                }
-            })
         } else {
-            console.log("FADE OUT!!")
-            setPageFadeOutAnimation()
+            const hrefTarget = (e.target as HTMLLinkElement).href
+            if (currentLocation.includes(hrefTarget)) {
+                const splitLocation = currentLocation.split(hrefTarget)
+
+                // if second string is not empty means the string continues, so not the same page
+                if (splitLocation[1] !== "") {
+                    setPageFadeOutAnimation()
+                }
+            } else {
+                setPageFadeOutAnimation()
+            }
         }
-
-        // if (elTarget.hasAttribute("data-scroll-to")) {
-        //     const isHomepage = window.location.href.includes("projects")
-        //     const idScrollTo = isHomepage ? "foot-banner" : elTarget.getAttribute('data-scroll-to')
-        //     gsap.to(window, {
-        //         duration: isHomepage ? 2.5 : 1.5,
-        //         ease: "power2.inOut",
-        //         scrollTo: {
-        //             y: document.getElementById(idScrollTo as string) as HTMLElement,
-        //         }
-        //     })
-        // }
-
     }
 
     return (
@@ -301,11 +300,11 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 <div className={`${styles.burgerLine} burger-line`}></div>
             </div>
             <div className={styles.container}>
-                <Link ref={refLogoContainer} to={"/"} className={styles.logoContainer}>
+                <Link ref={refLogoContainer} to={"/"} className={`${styles.logoContainer} ${isBurgerOpen ? styles.logoWhenOpen : ''}` }>
                     <svg width="48" height="156" viewBox="0 0 48 156" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="48" rx="10" fill="var(--c-font-global)"/>
-                    <rect y="54" width="48" height="48" rx="10" fill="var(--c-font-global)"/>
-                    <rect y="108" width="48" height="48" rx="10" fill="var(--c-font-global)"/>
+                    <rect width="48" height="48" rx="10" fill="currentColor"/>
+                    <rect y="54" width="48" height="48" rx="10" fill="currentColor"/>
+                    <rect y="108" width="48" height="48" rx="10" fill="currentColor"/>
                     </svg>
                     <p className={styles.logoName}>PS</p>
                 </Link>
@@ -330,6 +329,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                         <li className={`${styles.item} header-iterm`} key={3}>
                             <div
                                 onClick={(e) => {
+                                    if(isMobileScreen() === true) animationCloseBurger()
                                     document.body.getAttribute("data-theme") === "light"
                                         ? document.body.setAttribute("data-theme", "dark")
                                         : document.body.setAttribute("data-theme", "light")
@@ -337,7 +337,12 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                                 }}
                                 className={`${styles.darkModeContainer} header-link`}
                             >
-                                <p>mode</p>
+                                <p>
+                                    {isMobileView
+                                        ? `set ${mode === "light" ? "dark" : "light"} mode`
+                                        : `mode`
+                                    }
+                                </p>
                             <svg viewBox="0 0 125 125" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <title>{mode === "light" ? "set dark mode" : "set light mode"}</title>
                                 <circle cx="62.5" cy="61.5" r="39.5" fill="white" stroke="white" stroke-width="10"/>
@@ -354,19 +359,18 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                             <div ref={refLinesContainer} className={styles.linesContainer}>
                                 <div></div><div></div><div></div><div></div>
                             </div>
-                            <NavLink
+                            <a
                                 onClick={(e) => {handleClickLink(e)}}
                                 ref={refLinkContact}
-                                to='#'
                                 data-scroll-to="footer-canvas"
                             >contact me
-                            </NavLink>
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div ref={refIconsContainer} className={styles.iconsContainer}>
                     <a className={styles.iconLink} href="https://github.com/PauSabater/weather_app" target="_blank">
-                        {parse(gitHubLogo("var(--c-white)"))}
+                        {parse(gitHubLogo("var(--c-white-no-change)"))}
                     </a>
                     <a className={styles.iconLink} href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989" target="_blank">
                         {parse(linkedInLogo("var(--c-black"))}

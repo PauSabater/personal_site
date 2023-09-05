@@ -8,7 +8,7 @@ export function Footer({mode}: {mode: string}) {
     return (
         <Fragment>
             <div className="footer-canvas" id="footer-canvas">
-                {window.location.href !== "http://localhost:3000/" ? <FooterCanvas mode={mode} /> : ''}
+                <FooterCanvas mode={mode} />
             </div>
             <div className="footer" id="footer">
                 <p>find me on</p>

@@ -12,9 +12,6 @@ export function executeEnterAnimations(pageId: string, node: HTMLElement, route?
         case 'page-projects':
             setProjectListEnterAnimation(node)
             break
-        // case 'page-home':
-        //     setPageFadeInAnimation(node)
-        //     break
     }
 }
 
@@ -25,7 +22,6 @@ export function executeExitAnimations(pageId: string, node: HTMLElement, route?:
             setProjectPostExitAnimation(node)
             break
         case 'page-projects':
-            // setProjectPostExitAnimation(node)
             break
         case 'page-home':
             setPageFadeOutAnimation()

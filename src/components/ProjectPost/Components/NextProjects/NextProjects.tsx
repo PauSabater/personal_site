@@ -6,7 +6,7 @@ import { arrowFilled } from "../../../../assets/svg/ts/arrowFilled"
 import parse from "html-react-parser"
 import { setLeaveAnimation } from "../../../ProjectsList/ProjectList.animations"
 import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort } from "../../../../assets/ts/utils/utils"
-import { leaveFromMoreProjectsClick } from '../../ProjectPost.animations'
+import { leaveFromArrowClick, leaveFromMoreProjectsClick } from '../../ProjectPost.animations'
 
 export interface INextProjects {
     title: string,
@@ -18,41 +18,15 @@ export interface INextProjects {
     }[]
 }
 
-export function NextProjects({ props }: { props: INextProjects }) {
-
-    // const handleLinkClick = (e: React.MouseEvent) => {
-    //     const elTarget: HTMLElement = e.target as HTMLElement
-    //     const elImgContainer: HTMLElement | null = elTarget.querySelector(".img-container")
-    //     const elImg: HTMLElement | null = elTarget.querySelector("[data-transitioned-image]")
-
-    //     if (elImgContainer === null || elImg === null) return
-
-    //     const tl = gsap.timeline()
-    //     // .set(document.body, {overflow: 'hidden'})
-    //     // .set(document.body, {height: 'auto'})
-    //     .set(elImg, {borderRadius: '0px'})
-    //     .to(elImg, {
-    //         y: getGsapDistToCenterElYAxis(elImg as HTMLElement),
-    //         x: getGsapDistToCenterElXAxis(elImg as HTMLElement),
-    //         scale: getScaleToCoverViewPort(elImg as HTMLElement),
-    //         duration: 1,
-    //         onStart: ()=> {
-    //             disableScroll()
-    //             const durSkew = 0.35
-    //             gsap.to(elImg, {skewY: '5deg', duration: durSkew})
-    //             gsap.to(elImg, {skewY: '0deg', duration: durSkew, delay: durSkew})
-    //         }
-    //     }, 'start')
-    //     tl.play()
-    // }
+export function NextProjects({ props, mode }: { props: INextProjects, mode: string }) {
 
     return (
-        <div className={`${styles.container}`}>
+        <div className={`${styles.container}`} data-theme={mode}>
             <h1 className={styles.heading}>{props.title}</h1>
             {   props.projects.map((project, i)=> {
                     return (
                         <Link
-                            onClick={(e)=> leaveFromMoreProjectsClick(e)}
+                            onClick={(e)=> leaveFromArrowClick()}
                             to={project.path}
                             className={`${styles.project} more-projects-link`}
                             id={`more-projects-link-${i}`}

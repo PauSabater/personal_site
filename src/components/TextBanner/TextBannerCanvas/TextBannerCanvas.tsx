@@ -71,7 +71,7 @@ function Model() {
             ) {
                 setScrollPercentage(percentage)
                 // @ts-ignore
-                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.5})
+                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.9})
                 gl.render(scene, camera)
 
             } else return null
@@ -88,6 +88,10 @@ function Model() {
                 if (entry.intersectionRatio > 0) setShouldRender(true)
                 else setShouldRender(false)
             })
+        },{
+            root: null,
+            rootMargin: "100px 0px 0px 100px",
+            threshold: 0.3
         }).observe(document.getElementById("text-banner-canvas") as Element)
     }, [])
 

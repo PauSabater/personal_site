@@ -139,6 +139,23 @@
             animation: loader-animation 2.5s ease-in-out infinite 2.5s;
         }
 
+        @media (max-width: 768px) {
+            .page-loader__container {
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .page-loader__title {
+                font-size: 22px;
+                white-space: nowrap;
+            }
+
+            .page-loader__dots {
+                margin-left: 0;
+                margin-top: 25px;
+            }
+        }
+
     </style>
   </head>
   <body>
@@ -161,7 +178,8 @@
         const theme = localStorage.getItem("theme") || "light"
         document.body.setAttribute("data-theme", theme)
 
-        const isHomepage = window.location.href.includes("projects") === false
+        const pageLocation = window.location.href
+        const isHomepage = pageLocation.includes("projects") === false && pageLocation.includes("contact") === false
         const delay = isHomepage ? 2000 : 1000
         if (isHomepage === false) document.querySelector(".page-loader__title").style.display = "none"
 

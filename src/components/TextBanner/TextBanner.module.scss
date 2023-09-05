@@ -12,7 +12,7 @@
 
     &[data-theme="dark"] {
         svg {
-            filter: grayscale(0.2) invert(1);
+            filter: grayscale(0.2) brightness(0.5);
         }
 
         .canvasContainer {

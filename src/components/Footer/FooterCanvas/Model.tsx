@@ -22,21 +22,21 @@ export default function Model(props: any) {
     return (
         <group position={[0, -2.5, 0]} rotation={[0, -3.2, 0]} ref={group} {...props} dispose={null} >
             <Reflector
-                resolution={1024}
+                resolution={512}
                 receiveShadow={false}
                 castShadow={false}
-                mirror={0.5}
+                mirror={0.7}
                 mixBlur={1}
                 mixStrength={0.3}
                 depthScale={1}
-                minDepthThreshold={0.8}
+                minDepthThreshold={0.85}
                 maxDepthThreshold={1}
                 position={[0, 0, 8]}
                 scale={[2, 2, 1]}
                 rotation={[-Math.PI / 2, 0, Math.PI]}
                 args={[70, 70]}>
                 {// @ts-ignore
-                (Material, props) => <Material metalness={0.25} color="hsl(248, 29%, 70%)" roughness={1} {...props} />}
+                (Material, props) => <Material metalness={0.8} color={"hsl(248, 29%, %)"} roughness={1} {...props} />}
             </Reflector>
 
           <planeGeometry  />

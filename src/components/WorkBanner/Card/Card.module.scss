@@ -146,14 +146,6 @@
     opacity: 0;
 }
 
-// .cloud.cloudFromLeft {
-//     transform: translate(-150%, -50%), scaleX(-1);
-// }
-
-// .cloud.cloudFromRight {
-//     transform: translate(49.5%, -50%), scaleX(-1);
-// }
-
 .overlay {
     position: absolute;
     height: calc(100% + 2px);
@@ -176,18 +168,11 @@
     }
 }
 
-// .halfHelper2 {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     height: 50%;
-//     width: 50%;
-//     border: 3px solid green;
-//     z-index: 1000;
-// }
 
 // RAIN
 .rain {
+    --size-drop: 20;
+
     display: none;
     position: absolute;
     pointer-events: none;
@@ -209,7 +194,7 @@
     }
 
     .drop {
-        $drops: 400;
+        $drops: 200;
         border: 0.15vmin solid transparent;
         border-bottom-color: #abc2e9;
         position: absolute;
@@ -219,8 +204,8 @@
             &:nth-child(#{$i}) {
                 opacity: random(90) * 0.01;
                 left: random(1200) * 0.1%;
-                border-left-width: random(40) * 0.1vmin;
-                animation: fall-#{$i} (random(12) * 0.10s) (random(20) * -0.5s) ease-in infinite;
+                border-left-width: random(20) * 0.1vmin;
+                animation: fall-#{$i} (random(12) * 0.13s) (random(20) * -0.5s) ease-in infinite;
             }
             @keyframes fall-#{$i} {
                 #{percentage( random(50) / 500 )} { transform: rotate(var(--angle)) translateX(0); }
@@ -228,4 +213,9 @@
             }
         }
     }
+}
+
+.rainReverse {
+    left: 10vw;
+
 }

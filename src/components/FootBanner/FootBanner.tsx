@@ -8,6 +8,8 @@ import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial, Environment } from '@react-three/drei'
 import { Perf } from "r3f-perf"
+import { EffectComposer, Noise } from "@react-three/postprocessing"
+import { BlendFunction } from "postprocessing"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
@@ -239,8 +241,6 @@ export function FootBanner({}: {}) {
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
             <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
-            <Perf position="top-left" />
-            <PerformanceMonitor />
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
             <Suspense fallback={null}>
@@ -266,6 +266,7 @@ export function FootBanner({}: {}) {
                 <spotLight position={[0, 10, 0]} intensity={2} />
             </Suspense>
             </Canvas>
+
             <div ref={refContactContainer} className={styles.contactContainer}>
                 <div className={styles.relativeContainer}>
                     <svg ref={refSvgBorder} className={styles.svgBorder} viewBox="0 0 500 95" fill="none" xmlns="http://www.w3.org/2000/svg">

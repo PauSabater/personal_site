@@ -5,6 +5,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, PerspectiveCamera } from '@react-three/drei'
 import Model from './Model'
 import { getViewportAspectRatio } from '../../../assets/ts/utils/utils'
+import { EffectComposer, Noise } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
 
 
 RectAreaLightUniformsLib.init()
@@ -27,13 +29,19 @@ export function FooterCanvas({mode}: {mode: string}) {
 
     return (
         <Canvas shadows dpr={[1, 1]} camera={{ position: [0, 160, 160], fov: 20 }}>
-            <fog attach="fog" args={[colorBackground, 70, 95]} />
+            <fog attach="fog" args={[colorBackground, 110, 130]} />
             <color attach="background" args={[colorBackground]} />
             <Suspense fallback={null}>
-                <Model />
+                <Model mode={mode} />
                 <pointLight position={[-26, -8, -10]} color="red" intensity={5} />
                 <Light />
-                <Environment files="city-smaller.hdr" blur={1}/>
+                <Environment files="city-test.hdr" path="/"></Environment>
+                {/* <EffectComposer multisampling={ 1 }>
+                    <Noise
+                        premultiply
+                        blendFunction={ BlendFunction.SOFT_LIGHT }
+                    />
+                </EffectComposer> */}
             </Suspense>
             <Camera/>
         </Canvas>
@@ -47,25 +55,30 @@ function Camera() {
     const vec = new THREE.Vector3
     const viewportAspectRatio = getViewportAspectRatio()
 
+    const [isHomepage, setIsHomePage] = useState(window.location.href.includes("projects") === false)
+
     // Camera setting for responsive view:
-    let xPos = 3
-    let zPos = 58
+    let xPos = 2
+    let zPos = 80
 
     if (viewportAspectRatio >= 1.2 && viewportAspectRatio < 1.4) {
-        xPos = 0
-        zPos = 63
+        xPos = -3
+        zPos = 95
     } else if (viewportAspectRatio >= 1 && viewportAspectRatio < 1.2) {
         xPos = -5.5
-        zPos = 65
+        zPos = 95
     } else if (viewportAspectRatio >= 0.8 && viewportAspectRatio < 1) {
         xPos = -6
-        zPos = 72
+        zPos = 105
     } else if (viewportAspectRatio < 0.8) {
-        zPos = 65
+        xPos = 4
+        zPos = 70
     }
 
     useLayoutEffect (()=> {
         const elFooter = document.getElementById("footer-canvas")
+
+        setIsHomePage(window.location.href.includes("projects") === false)
 
         // Set render boolean only when intersection is active
         const io = new IntersectionObserver((entries) => {
@@ -80,17 +93,19 @@ function Camera() {
 
     // Render when needed and add camera lerp based on mouse pos
     useFrame(({ gl, scene, camera }) => {
-        camera.position.lerp(vec.set((mouse.x * 2) + xPos, (mouse.y < 0 ? mouse.y : 0) + 3, zPos), 0.01)
-        if (shouldRender === true) gl.render(scene, camera)
+        camera.position.lerp(vec.set((mouse.x * 3.5) + xPos, (mouse.y < 0 ? mouse.y * 1.5 : 0) + 4.5, Math.abs(mouse.x * 6.5) + zPos), 0.01)
+        if (shouldRender === true && isHomepage === false) {
+            gl.render(scene, camera)
+        }
     }, 1)
 
     return (
         <PerspectiveCamera
             makeDefault
             near={30}
-            far={100}
-            fov={15}
-            position={[xPos, 3, zPos]}
+            far={150}
+            fov={14}
+            position={[xPos, 10, zPos]}
         />
     )
 }

@@ -21,7 +21,7 @@
     z-index: 1000;
 
     &[data-theme="dark"] .list:first-child a {
-        color: white;
+        color: var(--c-white-no-change);
     }
 }
 
@@ -35,6 +35,7 @@
     width: fit-content;
     margin-left: -1vw;
     text-decoration: none;
+    color: var(--c-font-global);
 
     img, svg {
         height: var(--height-header);
@@ -86,6 +87,22 @@
     a p {
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: grey;
+    }
+
+    svg rect {
+        fill: var(--c-white-no-change);
+    }
+}
+
+.header[data-theme="dark"] {
+    .list {
+        outline: 1px solid grey;
+    }
+
+    .logoName {
+        // -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: grey;
+        // color: var(--c-white-no-change);
     }
 }
 
@@ -183,15 +200,18 @@
             a {
                 color: white;
             }
-
         }
     }
 
+    [data-is-outlined],
     .header[data-theme="dark"] {
-            a {
-                color: white !important;
-            }
+        .list {
+            outline: none;
+        }
+    }
 
+    .iconsContainer .iconLink:last-of-type {
+        left: 100px;
     }
 
     .burger {
@@ -207,6 +227,13 @@
 
     .darkModeContainer {
         margin-top: var(--mg-xl);
+        margin-bottom: var(--mg-2xl);
+
+        svg {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+        }
     }
 
     .iconsContainer {
@@ -250,7 +277,6 @@
 
     .logoContainer {
         justify-content: left;
-        color: var(--c-font-global);
         transition: color var(--tr-base);
 
         .logoName {
@@ -268,6 +294,14 @@
         }
     }
 
+    .logoWhenOpen {
+        --c-font-global: var(--c-white-no-change);
+
+        svg {
+            fill: var(--c-white-no-change);
+        }
+    }
+
     .burgerLine {
         position: absolute;
         height: 2.5px;
@@ -275,7 +309,7 @@
         top: 50%;
         left: 50%;
         border-radius: 1.25px;
-        background-color: var(--bg-main);
+        background-color: hsl(136, 0%, 96%);
         border-radius: 1.5px;
         transform: translate(-50%, -50%);
 
@@ -432,16 +466,16 @@
     }
 
     .list:not(:last-child) .item a,
-    .list:not(:last-child) .item p  {
+    .list:not(:last-child) .item .darkModeContainer  {
         // color: black;
         font-family: 'inter-bold';
         font-size: clamp(var(--fs-lg), 9.5vw, 60px);
         -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
         -webkit-text-stroke-width: 1.5px;
-        -webkit-text-stroke-color: var(--c-white);
+        -webkit-text-stroke-color: var(--c-white-no-change);
 
         &:hover {
-            -webkit-text-fill-color: var(--c-white);
+            -webkit-text-fill-color: var(--c-white-no-change);
             background-color: transparent;
         }
     }
@@ -451,15 +485,16 @@
         font-size: clamp(var(--fs-global), 8vw, 45px);
 
         &:hover {
-            -webkit-text-fill-color: var(--c-white);
+            -webkit-text-fill-color: var(--c-white-no-change);
             background-color: transparent;
         }
     }
 
     .gradientLight {
+        pointer-events: none;
         position: absolute;
-        right: -50%;
-        bottom: -50%;
+        right: -60%;
+        bottom: -80%;
         height: 70vh;
         width: 70vh;
         border-radius: 20vw;
