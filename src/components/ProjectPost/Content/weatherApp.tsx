@@ -1,16 +1,12 @@
 import { Fragment } from "react"
 import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
-import { Callout } from "../Components/Callout/Callout"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
-import { Cta, ICtaProps } from '../../UI/Cta/Cta'
+import { Cta } from '../../UI/Cta/Cta'
 import { calendar } from "../../../assets/svg/ts/calendar"
 import parse from "html-react-parser"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
-import { Link } from "react-router-dom"
-import { arrowFilled } from "../../../assets/svg/ts/arrowFilled"
 import { getArrowLinkTemplate } from "../ProjectPost"
-import { leaveFromArrowClick } from "../ProjectPost.animations"
 import { setPageFadeOutAnimation } from "../../App/App.animations"
 
 export const weatherAppContent = (): JSX.Element => { return (
@@ -68,6 +64,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_stack.svg"}
+                    text={"used stack"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -82,6 +79,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_diagram.svg"}
+                    text={"app diagram"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
@@ -93,6 +91,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_wireframe.svg"}
+                    text={"app wireframe"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMain}>

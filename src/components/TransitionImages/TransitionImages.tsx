@@ -4,8 +4,6 @@ import gsap from "gsap"
 import { isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
 import { getImg } from "../WorkBanner/Card/Card"
 
-
-
 export interface ISkillsBannerTexts {
     title: string,
     skills: {

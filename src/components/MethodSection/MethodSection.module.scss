@@ -73,7 +73,6 @@
             calc(100% - var(--br-width-selected)) 100%,
             0 100%
         );
-        // border-radius: 15px;
     }
 }
 
@@ -146,7 +145,6 @@
     border-bottom: 0;
     border-left: 0;
     border: 4px solid;
-    //border-right: 3px solid;
     border-style: dotted;
     border-color: transparent;
     transition: transform var(--tr-base), background-color 0s, border-color 0s;
@@ -216,7 +214,6 @@
     opacity: 0;
     overflow: hidden;
     transition: var(--tr-base), opacity 0s, transform var(--tr-base);
-    // transform: translateY(30px);
 
     p {
         font-family: 'nunito-400';
@@ -237,7 +234,7 @@
         }
     }
     .fillAvailable {
-        width: -webkit-fill-available;
+        width: stretch;
     }
 }
 

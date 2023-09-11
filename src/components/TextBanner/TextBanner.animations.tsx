@@ -1,7 +1,7 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase";
-import { isMobileScreen, isVerticalMobileTablet } from "../../assets/ts/utils/utils";
+import { isMobileScreen } from "../../assets/ts/utils/utils";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {
@@ -34,7 +34,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             'start'
         )
         // Canvas:
-        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.7}, 'start')
+        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.5}, 'start')
         // Btn appear:
         .fromTo(elBtn,
             {opacity: 0},
@@ -42,7 +42,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
                 opacity: 1, duration: 0.3,
                 onComplete: ()=> {
                     elTextBanner?.setAttribute('data-animation-is-finished', '')
-                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.5 })
+                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
                 }
             },
             'end'

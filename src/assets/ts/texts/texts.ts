@@ -53,7 +53,7 @@ export const texts = {
             text: [
                 "Having acquired a good range",
                 "of good practises during my",
-                "time at papernest, I believe",
+                "previous professional experience",
                 "I can take bring forward a",
                 "good range of projects with",
                 "a mature perspective."
@@ -109,9 +109,9 @@ export const texts = {
                     icon: "git",
                     percentage: "75"
                 },{
-                    name: "SQL",
-                    icon: "sql",
-                    percentage: "15"
+                    name: "Threejs / R3F",
+                    icon: "three",
+                    percentage: "30"
                 },{
                     name: "Webpack",
                     icon: "webpack",
@@ -151,7 +151,7 @@ export const texts = {
     },
     projectsList: {
         title: "All projects",
-        intro: 'Here are displayed the main projects I have worked on and the corresponding cases. More projects to be added soon !',
+        intro: 'Here are displayed the main projects I have worked on and the corresponding cases. More projects to hopefully be added soon !',
         projects: [
             {
                 title: "/ WORK AT PAPERNEST",

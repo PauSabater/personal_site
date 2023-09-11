@@ -23,7 +23,6 @@ export function TextBannerCanvas({mode}:{mode: string}) {
 
   return (
     <Canvas gl={{ preserveDrawingBuffer: false, precision: "lowp" }} dpr={[1, 1]}>
-        {/* <color attach="background" args={["transparent"]} /> */}
               <PerspectiveCamera
                   ref={refCamera}
                   makeDefault
@@ -64,14 +63,13 @@ function Model() {
         if (shouldRender && windowHeight) {
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
             const percentage = (distToTop / windowHeight)
-            if (percentage < 0.95 && percentage > 0
-                && percentage !== scrollPercentage
-                || percentage === null
-                || Math.abs(distToTop) > windowHeight
+            if ((percentage < 0.95 && percentage > 0 && percentage !== scrollPercentage)
+                || (percentage === null)
+                || (Math.abs(distToTop) > windowHeight)
             ) {
                 setScrollPercentage(percentage)
                 // @ts-ignore
-                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.5})
+                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.9})
                 gl.render(scene, camera)
 
             } else return null
@@ -83,11 +81,15 @@ function Model() {
         setWindowHeight(window.innerHeight)
 
         // Observe to determine when we render:
-        const io = new IntersectionObserver((entries) => {
+        new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) setShouldRender(true)
                 else setShouldRender(false)
             })
+        },{
+            root: null,
+            rootMargin: "100px 0px 0px 100px",
+            threshold: 0.3
         }).observe(document.getElementById("text-banner-canvas") as Element)
     }, [])
 
@@ -95,7 +97,7 @@ function Model() {
     return (
         <>
         <group>
-            <Environment preset="warehouse"></Environment>
+            <Environment files="warehouse-small.hdr"></Environment>
                 <mesh
                     ref={refGlass}
                     position={[-8,1.35,4]}

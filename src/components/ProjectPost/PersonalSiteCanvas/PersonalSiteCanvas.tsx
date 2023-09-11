@@ -27,15 +27,8 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
                     <Suspense>
                         <Model mode={mode}/>
                     </Suspense>
-                    <Environment preset="city"  resolution={512}></Environment>
+                    <Environment files="city-small.hdr"  resolution={512}></Environment>
                     <CameraControls enabled={false} makeDefault dollyToCursor minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
-                    {/* <EffectComposer multisampling={ 4 }>
-                        <DepthOfField
-                            focusDistance={ -0.7 }
-                            focalLength={ 0.005 }
-                            bokehScale={ 6 }
-                        />
-                    </EffectComposer> */}
                 </group>
             </Canvas>
         </div>
@@ -48,9 +41,7 @@ function Model({mode}: {mode: string}) {
     const { size } = useThree()
     const [shouldRender, setShouldRender] = useState(true)
     const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
-    const [colorGrid, setColorGrid] = useState(mode === "light" ? "hsl(136, 0%, 80%)" : "hsl(136, 0%, 40%)")
-
-    const canvasHeight = size.height
+    const [colorGrid] = useState(mode === "light" ? "hsl(136, 0%, 80%)" : "hsl(136, 0%, 40%)")
 
     useLayoutEffect(()=> {
         setTimeout(()=> {

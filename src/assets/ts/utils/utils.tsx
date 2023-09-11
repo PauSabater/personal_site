@@ -1,6 +1,5 @@
 import gsap from "gsap"
 
-const mediaDesktop: string = `screen and (max-width: 900px)`
 const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (max-aspect-ratio: 1/1)`
 const mediaMobile: string = `screen and (max-width: 768px)`
 
@@ -21,9 +20,6 @@ export function isMobileScreen(): boolean {
 export function isVerticalMobileTablet(): boolean {
     return window.matchMedia(mediaVerticalMobileTablet).matches
 }
-
-//mobile-tablet
-
 
 export function getTodayDayNum(): string {
     return (new Date()).getDate().toString().padStart(2, '0')
@@ -66,9 +62,7 @@ export function getElXAxisDistCenterToCenterViewport(elTarget: HTMLElement | SVG
 }
 
 export function getElYAxisDistCenterToCenterViewport(elTarget: HTMLElement | SVGSVGElement) {
-    // return window.innerWidth / 2 - (elTarget.getBoundingClientRect().left + (elTarget.getBoundingClientRect().width / 2))
     return window.innerHeight / 2 - (elTarget.getBoundingClientRect().top + (elTarget.getBoundingClientRect().height / 2))
-
 }
 
 export function getGsapDistToCenterElXAxis(elTarget: HTMLElement | SVGSVGElement) {
@@ -117,4 +111,18 @@ export function hidePageOverlay() {
 
 export function hasPageBeenLoaded() {
     return document.querySelector(".page-loader")?.classList.contains("loader-shown")
+}
+
+export function hasElementBeenScrolled(elCheckHeight: HTMLElement) {
+    const scrolledHeight = window.scrollY
+    let distance = 0
+
+    if (elCheckHeight && elCheckHeight.offsetParent) {
+        do {
+            distance += elCheckHeight.offsetTop;
+            elCheckHeight = elCheckHeight.offsetParent as HTMLElement
+        } while (elCheckHeight);
+    }
+
+    return scrolledHeight > distance
 }

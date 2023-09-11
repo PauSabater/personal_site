@@ -8,7 +8,7 @@ import '../../assets/scss/fonts.scss'
 import { Header } from '../Header/Header'
 import { PapernestProject } from '../../pages/projects/Papernest'
 import { WeatherAppProject } from '../../pages/projects/WeatherApp'
-import { Routes, Route, useLocation, useOutlet } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { SwitchTransition, Transition } from 'react-transition-group'
 import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages'
@@ -18,9 +18,10 @@ import { executeEnterAnimations, executeExitAnimations } from './App.animations'
 import { Projects } from '../../pages/projects'
 import { PersonalSiteProject } from '../../pages/projects/PersonalSite'
 import { Overlay } from '../Overlay/Overlay'
-import { msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
+import { msTransitionPage } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
+import { Contact } from '../../pages/contact';
 
 
 const routes = [
@@ -30,12 +31,14 @@ const routes = [
     {path: '/projects/weather-app', name: 'WeatherAppProject', Component: WeatherAppProject},
     {path: '/projects/personal-site', name: 'PersonalSiteProject', Component: PersonalSiteProject},
     {path: '/projects/weather-app/live-result', name: 'WeatherAppProjectLiveResult', Component: WeatherAppLiveResult},
+    {path: '/contact', name: 'Contact', Component: Contact},
 ]
 
 
 function App() {
 
     const location = useLocation()
+
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
 
@@ -109,6 +112,7 @@ function App() {
         else if (route === "/projects/personal-site") return propsPersonalSite
         else if (route === "/projects") return texts.projectsList
         else if (route === "/projects/weather-app/live-result") return texts.projectsList
+        else if (route === "/contact") return texts.projectsList
 
         else return texts.home
     }

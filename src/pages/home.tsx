@@ -21,7 +21,7 @@ export function Home({mode, props}: {mode: string, props: any}) {
             <TextBanner texts={props.intro} mode={mode}/>
             <WorkBanner props={props.workBanner} mode={mode}/>
             <Suspense>
-            <div className={styles.containerSecondHalf}>
+            <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
                 <SkillsBanner texts={props.skillsBanner} mode={mode}/>
                 <MethodSection props={props.methodSectionTexts} mode={mode}/>
                 <FootBanner />

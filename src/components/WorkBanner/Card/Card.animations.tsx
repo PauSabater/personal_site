@@ -33,7 +33,6 @@ export function setCardTransitionAnimation(elImgContainer: HTMLElement, cardPath
     }
 
     // Image to transition to:
-    const elImgProject = document.querySelector('#transition-img-papernest')
     const tlTransition = gsap.timeline()
 
     if(elImg === null) return

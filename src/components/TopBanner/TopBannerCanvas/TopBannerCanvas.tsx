@@ -45,7 +45,7 @@ export function TopBannerCanvas({mode}: {mode: string}) {
             <Suspense>
                 {/* @ts-ignore */}
                 <SceneComponents mode={mode}></SceneComponents>
-                <Environment preset="warehouse"></Environment>
+                <Environment files="warehouse-small.hdr"></Environment>
             </Suspense>
             <OrbitControls
                 enabled={false}
@@ -90,7 +90,7 @@ function PhysicsScene({mode}:{mode: string}) {
                 rotation={[-Math.PI / 1.2, yRotate, -Math.PI / 1.3]}
                 ref={refYellowPencil}
                 colliders="cuboid"
-            ><Pencil color={"hsl(54, 67%, 28%)"} mode={mode}></Pencil>
+            ><Pencil color={"hsl(54, 67%, 45%)"} mode={mode}></Pencil>
             </RigidBody>
             <RigidBody
                 restitution={ 0.25 }
@@ -168,8 +168,8 @@ export function Pencil(props: any) {
             <group scale={getViewportAspectRatio() > 0.8 ? 0.2 : 0.3}>
             <mesh
                 raycast={ meshBounds }
-                castShadow={true}
-                receiveShadow={true}
+                castShadow={false}
+                receiveShadow={false}
                 material={material}
                 geometry={nodes.Pencil_1.geometry}
                 {...props}>
@@ -201,17 +201,17 @@ const Grid = ({mode}: {mode: string}) => {
     const height = 0.2
 
     const colorGrid = mode === "light" ? 'hsl(136, 0%, 86%)' : 'hsl(136, 0%, 16%)'
-    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%))' : 'hsl(136, 0%, 46%)'
+    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%)' : 'hsl(136, 0%, 36%)'
 
     return (
     // Renders a grid and crosses as instances
     <Instances position={[0, -0.1, -4]}>
-        <gridHelper args={[50, 50, colorGrid, colorGrid]} position={[0, -0.01, 0]} />
+        <gridHelper args={[50, 50, colorGrid, colorGrid]} position={[0, -0.03, 0]} />
         <planeGeometry args={[lineWidth, height]} />
         <meshBasicMaterial color={colorCross} />
         {Array.from({ length: number }, (_, y) =>
             Array.from({ length: number }, (_, x) => (
-                <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, -0.01, y * 2 - Math.floor(number / 2) * 2]}>
+                <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, 0, y * 2 - Math.floor(number / 2) * 2]}>
                     <Instance rotation={[-Math.PI / 2, 0, 0]} />
                     <Instance rotation={[-Math.PI / 2, 0, Math.PI / 2]} />
                 </group>
@@ -315,7 +315,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         setWindowHeight(window.innerHeight)
 
         // Observe to determine when we render:
-        const io = new IntersectionObserver((entries) => {
+        new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) setShouldRender(true)
                 else setShouldRender(false)
@@ -375,7 +375,9 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         duration: 0.9,
                         delay: 0.2,
                         ease: "power4.out",
-                        onComplete: ()=> {setTimeout(()=> setIsAnimationPlaying(false), 1500)}
+                        onComplete: ()=> {
+                            setTimeout(()=> setIsAnimationPlaying(false), 4000)
+                        }
                     })
 
                     setTimeout(() => {
@@ -480,14 +482,12 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     raycast={ meshBounds }
                     geometry={nodes.logoRounded.geometry}
                     onPointerEnter={(e) => {
-                        console.log("POINTER ENTEEER")
                         document.body.style.cursor = "pointer"
                         glassScaleEffect(true)
 
                     }
                     }
                     onPointerLeave={(e) => {
-                        console.log("POINTER LEAVE")
                         document.body.style.cursor = "auto"
                         // @ts-ignore
                         glassScaleEffect(false)
@@ -504,7 +504,6 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     {/* @ts-ignore */}
                     <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
                 </mesh>
-                {/* < GlassLogo coord = {[-3,1.35,8]} /> */}
             </group>
 
             <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} />
@@ -513,41 +512,6 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         </group>
         </>
     )
-}
-
-
-function GlassLogo({coord}: {coord: number[]}) {
-    const refGlass = useRef(null)
-
-
-    {/* @ts-ignore */}
-    const { nodes } = useGLTF("/logo3d.glb")
-
-    return (
-    <mesh
-            ref={refGlass}
-            receiveShadow
-            castShadow
-            position={[coord[0], coord[1], coord[2]]}
-            rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
-            scale={0.08}
-            raycast={ meshBounds }
-            geometry={nodes.logoRounded.geometry}
-            onPointerEnter={(e) => {
-                document.body.style.cursor = "pointer"
-                console.log('enteeeeer')}
-            }
-            onPointerLeave={(e) => {
-                document.body.style.cursor = "auto"
-                console.log('leaveeeee')}
-            }
-            // {...props}
-            >
-            {/* @ts-ignore */}
-        <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
-    </mesh>
-    )
-
 }
 
 function setTextPositionXCoordinate() {
@@ -570,11 +534,6 @@ function getTitleText() {
     return getViewportAspectRatio() > 0.8
         ? "giving shape+to ideas"
         : "giving+shape+to ideas"
-}
-
-function getPretitlePosition() {
-    if (getViewportAspectRatio() < 0.8)  return [3, 0.1, 3.5]
-    return [0, 0.1, 0.5]
 }
 
 function getDistanceFactor() {

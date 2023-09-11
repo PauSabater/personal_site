@@ -10,6 +10,13 @@
     .title, .imgContainer, svg {
         pointer-events: none;
     }
+
+    &[data-theme="light"] {
+        img[data-filter-invert] {
+            filter: none;
+        }
+
+    }
 }
 
 .title {
@@ -114,7 +121,11 @@
     }
 
     .project {
-        padding-bottom: var(--pd-ld);
+        padding: 0 0 var(--pd-sm) 0;
+    }
+
+    .project:last-child {
+        padding-left: 0;
     }
 
 }

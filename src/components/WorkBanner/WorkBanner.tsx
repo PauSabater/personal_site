@@ -23,7 +23,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
     const refContainer = useRef(null)
     const refFullContainer = useRef(null)
     const refContainerTexts = useRef(null)
-    const refGradient = useRef(null)
 
     useLayoutEffect(() => {
         const elContainer: HTMLElement | null = refFullContainer.current
@@ -39,13 +38,12 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
         const card3ImgContainer: HTMLElement = (card3 as HTMLElement).querySelector('.img-container') as HTMLElement
         const card3Svg: SVGSVGElement = (card3 as HTMLElement).querySelector('#sky-darkening') as SVGSVGElement
         const card3Rain: HTMLElement = (card3 as HTMLElement).querySelector('#rain-container') as HTMLElement
-        // // Card 3 illustration elements:
-        // const elWireframe: HTMLElement = (card3 as HTMLElement).querySelector('#mountains-wireframe') as HTMLElement
+        // Card 3 illustration elements:
         const elMoon: HTMLElement = (card3 as HTMLElement).querySelector('#moon') as HTMLElement
         const elDarkeningLayer: HTMLElement = (card3 as HTMLElement).querySelector('#darkening-layer') as HTMLElement
         const elSkyDarkeningImg: HTMLElement = (card3 as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
         const elLightning: HTMLElement = (card3 as HTMLElement).querySelector('#lightning') as HTMLElement
-        // // Clouds:
+        // Clouds:
         const elsClouds = (card3 as HTMLElement).querySelectorAll('.cloud') as NodeListOf<Element>
         const elFirstCloudsLayerOneCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-1-copy') as HTMLElement
         const elSecondCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-second-line-copy') as HTMLElement
@@ -70,12 +68,10 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             let timeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: isMobileScreen() ? cardsContainer : elContainer,
-                   // trigger: elContainer,
                     start: "top",
                     end: "bottom",
                     pin: true,
                     pinSpacing: true,
-                    // markers: true,
                     scrub: 1,
                     invalidateOnRefresh: true,
                     onEnter: () => {
@@ -87,14 +83,13 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     onLeave: () => {
                         tlClouds.play()
                         tlLightning.play()
-                        gsap.to(card3Rain, {display: "block", opacity: "0.3"})
+                        gsap.to(card3Rain, {display: "block", opacity: "0.45"})
                     },
                     onEnterBack: () => {
                         removeOutlineHeader()
                         tlLightning.pause()
                         tlClouds.pause()
                         gsap.to(card3Rain, {display: "none", opacity: "0"})
-
                     },
                 }
             })
@@ -113,7 +108,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             // Cards move to reveal
             timeline
                 .to(card2, {opacity: 1, duration: 0})
-                // .set(card1.querySelector(".img-container"), {opacity: 0})
                 .to([card1, card2], {yPercent: 0, opacity: 1})
                 .set(card1.querySelector(".overlay"), {opacity: 0.5})
                 .set(card3, {opacity: 1})
@@ -123,44 +117,44 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 .set(card1.querySelector(".overlay"), {opacity: 0.7})
                 .set(cardsContainer, {pointerEvents: "none"})
 
-            // Animate third card:
-            timeline.addLabel('forth')
-                .set(card3ImgContainer, {
-                    borderRadius: '15'
+                // Animate third card:
+                timeline.addLabel('forth')
+                    .set(card3ImgContainer, {
+                        borderRadius: '15'
+                    })
+                    .to(elContainerTexts, {
+                        opacity: 0,
+                        y: `-=100vh`
+                    }, 'end')
+                    .to(card3ImgContainer, {
+                        border: 'none',
+                        width: ()=> {
+                            // Wider viewport
+                            if(isViewportPropHigherThanEl(card3Svg)) {
+                                return card3Svg.getBoundingClientRect().width
+                            // Higher viewport
+                            } else {
+                                const dist = card3Svg.getBoundingClientRect().height * getViewportAspectRatio()
+                                return dist > card3ImgContainer.getBoundingClientRect().width ? dist : card3ImgContainer.getBoundingClientRect().width
+                            }}
+                    }, 'end')
+
+                // Animate third img:
+                timeline.addLabel('fifth')
+                    .set(card3ImgContainer, {borderRadius: 0})
+                    .to(card3ImgContainer, {
+                        x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
+                        y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
+                        scale: ()=> getScaleToCoverViewPort(card3Svg)
+                    }, 'start')
+
+                    .to(elMoon, {opacity: "0"}, 'start')
+                    .to(elDarkeningLayer, {
+                        opacity: "0.3",
+                    }, 'start')
+                    .to(elSkyDarkeningImg, {opacity: "0.6"}, 'start')
+                    .to(elsClouds, {opacity: "0.7"}, 'start')
                 })
-                .to(elContainerTexts, {
-                    opacity: 0,
-                    y: `-=100vh`
-                }, 'end')
-                .to(card3ImgContainer, {
-                    border: 'none',
-                    width: ()=> {
-                    // Wider viewport
-                    if(isViewportPropHigherThanEl(card3Svg)) {
-                        return card3Svg.getBoundingClientRect().width
-                    // Higher viewport
-                    } else {
-                        const dist = card3Svg.getBoundingClientRect().height * getViewportAspectRatio()
-                        return dist > card3ImgContainer.getBoundingClientRect().width ? dist : card3ImgContainer.getBoundingClientRect().width
-                    }
-                }}, 'end')
-
-            // Animate third img:
-            timeline.addLabel('fifth')
-                .set(card3ImgContainer, {borderRadius: 0})
-                .to(card3ImgContainer, {
-                    x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
-                    y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
-                    scale: ()=> getScaleToCoverViewPort(card3Svg)
-                }, 'start')
-
-                .to(elMoon, {opacity: "0"}, 'start')
-                .to(elDarkeningLayer, {
-                    opacity: "0.3",
-                }, 'start')
-                .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
-                .to(elsClouds, {opacity: "0.7"}, 'start')
-        })
         return () => ctx.revert()
 
     }, [])
@@ -168,7 +162,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
     return (
         <Fragment>
             <div ref={refFullContainer} className={styles.sectionContainer}>
-                {/* <div className={styles.halfHelper}></div> */}
                 <div ref={refContainer} className={styles.container}>
                     <div className={styles.cardsContainer} id="cards-container">
                         <div className={styles.cardContainer} id="card-1">

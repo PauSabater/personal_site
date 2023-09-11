@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals'
-// import { WeatherApp } from 'weather-app-ps/dist/cjs'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 
 const root = ReactDOM.createRoot(
@@ -13,10 +12,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <BrowserRouter>
-        {/* <React.StrictMode> */}
+        <React.StrictMode>
           <App></App>
-          {/* <WeatherApp texts={ texts.weatherApp }></WeatherApp> */}
-        {/* </React.StrictMode> */}
+        </React.StrictMode>
     </BrowserRouter>
 );
 

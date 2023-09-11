@@ -21,7 +21,7 @@
     z-index: 1000;
 
     &[data-theme="dark"] .list:first-child a {
-        color: white;
+        color: var(--c-white-no-change);
     }
 }
 
@@ -35,6 +35,7 @@
     width: fit-content;
     margin-left: -1vw;
     text-decoration: none;
+    color: var(--c-font-global);
 
     img, svg {
         height: var(--height-header);
@@ -50,11 +51,6 @@
         letter-spacing: -6px;
         color: var(--c-font-global);
         margin-left: -11px;
-        // margin-left: -4px;
-        // color: black;
-        // -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-        // -webkit-text-stroke-width: 1px;
-        // -webkit-text-stroke-color: black;
     }
 }
 
@@ -77,13 +73,28 @@
     display: none;
 }
 
-[data-is-outlined], .header[data-theme="dark"] {
+[data-is-outlined],
+.header[data-theme="dark"] {
     .list {
         outline: 1px solid grey;
     }
 
     a p {
         -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: grey;
+    }
+
+    svg rect {
+        fill: var(--c-white-no-change);
+    }
+}
+
+.header[data-theme="dark"] {
+    .list {
+        outline: 1px solid grey;
+    }
+
+    .logoName {
         -webkit-text-stroke-color: grey;
     }
 }
@@ -155,6 +166,7 @@
 }
 
 .item a,
+.item .contactBtn,
 .item .darkModeContainer {
     cursor: pointer;
     color: var(--c-white);
@@ -170,6 +182,11 @@
     }
 }
 
+.contactBtn {
+    background-color: unset;
+    border: none;
+}
+
 @include mixins.mobile {
     div.header {
         --height-burger: 38px;
@@ -177,6 +194,23 @@
 
         background-color: transparent;
         height: 0;
+
+        &[data-theme="dark"] {
+            a {
+                color: white;
+            }
+        }
+    }
+
+    [data-is-outlined],
+    .header[data-theme="dark"] {
+        .list {
+            outline: none;
+        }
+    }
+
+    .iconsContainer .iconLink:last-of-type {
+        left: 100px;
     }
 
     .burger {
@@ -188,6 +222,17 @@
         height: var(--height-burger);
         width: calc(var(--height-burger) + 15px);
         z-index: 999;
+    }
+
+    .darkModeContainer {
+        margin-top: var(--mg-xl);
+        margin-bottom: var(--mg-2xl);
+
+        svg {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+        }
     }
 
     .iconsContainer {
@@ -231,7 +276,6 @@
 
     .logoContainer {
         justify-content: left;
-        color: var(--c-font-global);
         transition: color var(--tr-base);
 
         .logoName {
@@ -249,6 +293,14 @@
         }
     }
 
+    .logoWhenOpen {
+        --c-font-global: var(--c-white-no-change);
+
+        svg {
+            fill: var(--c-white-no-change);
+        }
+    }
+
     .burgerLine {
         position: absolute;
         height: 2.5px;
@@ -256,7 +308,7 @@
         top: 50%;
         left: 50%;
         border-radius: 1.25px;
-        background-color: var(--bg-main);
+        background-color: hsl(136, 0%, 96%);
         border-radius: 1.5px;
         transform: translate(-50%, -50%);
 
@@ -294,7 +346,6 @@
             margin-left: 0;
             background-color: none;
             z-index: 1000;
-            // background: linear-gradient(to right, #743ad5,  #d53a9d);
             background: linear-gradient(to right, var(--c-tertiary),  var(--c-primary-light));
 
             .item {
@@ -311,7 +362,7 @@
                 }
             }
 
-            a {
+            .contactBtn {
                 display: block;
                 position: relative;
                 padding: var(--pd-lg) 0;
@@ -328,7 +379,6 @@
                 height: calc(100% - calc(var(--cta-br-width) * 2));
                 width:calc(100% - 20px);
                 z-index: 1001;
-                // background: linear-gradient(to right, #743ad5,  #d53a9d);
             }
         }
     }
@@ -400,47 +450,40 @@
 
     .item {
         justify-content: left;
-        // height: 90px;
         overflow: hidden;
     }
 
     .item a,
     .item p {
-        // color: black;
         font-family: 'inter-bold';
         font-size: 10vw;
         white-space: nowrap;
     }
 
     .list:not(:last-child) .item a,
-    .list:not(:last-child) .item p  {
-        // color: black;
+    .list:not(:last-child) .item .darkModeContainer  {
         font-family: 'inter-bold';
         font-size: clamp(var(--fs-lg), 9.5vw, 60px);
         -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
         -webkit-text-stroke-width: 1.5px;
-        -webkit-text-stroke-color: var(--c-white);
+        -webkit-text-stroke-color: var(--c-white-no-change);
 
         &:hover {
-            -webkit-text-fill-color: var(--c-white);
+            -webkit-text-fill-color: var(--c-white-no-change);
             background-color: transparent;
         }
     }
 
-    .list:last-child .item a {
-        // color: black;
+    .list:last-child .item .contactBtn {
+        font-family: 'inter-bold';
         font-size: clamp(var(--fs-global), 8vw, 45px);
-
-        &:hover {
-            -webkit-text-fill-color: var(--c-white);
-            background-color: transparent;
-        }
     }
 
     .gradientLight {
+        pointer-events: none;
         position: absolute;
-        right: -50%;
-        bottom: -50%;
+        right: -60%;
+        bottom: -80%;
         height: 70vh;
         width: 70vh;
         border-radius: 20vw;

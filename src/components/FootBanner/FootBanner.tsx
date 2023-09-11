@@ -6,13 +6,12 @@ import parse from 'html-react-parser'
 import * as THREE from 'three'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
-import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial, Environment } from '@react-three/drei'
-import { Perf } from "r3f-perf"
+import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
-export function FootBanner({}: {}) {
+export function FootBanner() {
 
     const refCanvas = useRef(null)
     const refContainer = useRef(null)
@@ -21,7 +20,7 @@ export function FootBanner({}: {}) {
     const refContactLink = useRef(null)
     const refSvgBorder = useRef(null)
 
-    const [colorMain, setColorMain] = useState("hsl(0, 0%, 10%)")
+    const [colorMain] = useState("hsl(0, 0%, 10%)")
     const [aspectRatio, setAspectRatio] = useState<number>(window.innerWidth / window.innerHeight)
     const refVideoTexture = useRef(null)
     const [isBannerExpanded, setIsBannerExpanded] = useState(false)
@@ -117,7 +116,7 @@ export function FootBanner({}: {}) {
 
 
         const [video] = useState(() => Object.assign(document.createElement('video'), {
-            src: '/video.mov',
+            src: '/video-comp.mp4',
             crossOrigin: 'Anonymous',
             loop: true,
             muted: true
@@ -141,7 +140,7 @@ export function FootBanner({}: {}) {
 
         useLayoutEffect(()=> {
             // Observe to determine when we render:
-            const io = new IntersectionObserver((entries) => {
+            new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.intersectionRatio > 0) setShouldRender(true)
                     else setShouldRender(false)
@@ -239,8 +238,6 @@ export function FootBanner({}: {}) {
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
             <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
-            <Perf position="top-left" />
-            <PerformanceMonitor />
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
             <Suspense fallback={null}>
@@ -266,6 +263,7 @@ export function FootBanner({}: {}) {
                 <spotLight position={[0, 10, 0]} intensity={2} />
             </Suspense>
             </Canvas>
+
             <div ref={refContactContainer} className={styles.contactContainer}>
                 <div className={styles.relativeContainer}>
                     <svg ref={refSvgBorder} className={styles.svgBorder} viewBox="0 0 500 95" fill="none" xmlns="http://www.w3.org/2000/svg">

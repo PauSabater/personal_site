@@ -1,12 +1,7 @@
-import { Fragment, useLayoutEffect, useRef } from "react"
+import { Fragment, useRef } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayDayNum, getTodayMonthName, isMobileScreen } from "../../assets/ts/utils/utils"
-import { setTopBannerAnimations } from "./TopBanner.animations"
-import parse from "html-react-parser"
-import { ellipse, highlights, underline } from "../../assets/svg/ts/strokes"
+import { getTodayMonthName } from "../../assets/ts/utils/utils"
 import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
-// import imgStroke from "../../assets/svg/brush_stroke.svg"
-
 
 export interface ITopBannerProps {
     desktop: {
@@ -23,7 +18,6 @@ export interface ITopBannerProps {
 export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: string}) {
 
     const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
-    const refContainerTitleMobile: React.MutableRefObject<null> = useRef(null)
 
     return (
         <Fragment>

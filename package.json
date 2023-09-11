@@ -6,7 +6,6 @@
     "@faker-js/faker": "^8.0.2",
     "@react-spring/core": "^9.7.2",
     "@react-spring/three": "^9.7.2",
-    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.66.6",
     "@react-three/fiber": "^8.13.0",
     "@react-three/postprocessing": "^2.15.0",
@@ -24,15 +23,11 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "gsap": "^3.12.2",
     "html-react-parser": "^4.0.0",
-    "leva": "^0.9.35",
     "lodash.throttle": "^4.1.1",
     "or": "^0.2.0",
-    "postprocessing": "^6.32.2",
-    "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-fps-stats": "^0.3.1",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
     "source-map-loader": "^4.0.1",
@@ -45,15 +40,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:storybook/recommended"
+      "react-app/jest"
     ]
   },
   "browserslist": {
@@ -70,23 +62,13 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@storybook/addon-essentials": "^7.0.23",
-    "@storybook/addon-interactions": "^7.0.23",
-    "@storybook/addon-links": "^7.0.23",
-    "@storybook/blocks": "^7.0.23",
-    "@storybook/preset-create-react-app": "^7.0.23",
-    "@storybook/react": "^7.0.23",
-    "@storybook/react-webpack5": "^7.0.23",
-    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/lodash.throttle": "^4.1.7",
     "@types/react-transition-group": "^4.4.6",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
-    "eslint-plugin-storybook": "^0.6.12",
     "prop-types": "^15.8.1",
     "react-router-dom": "^6.14.1",
     "sass": "^1.62.1",
-    "storybook": "^7.0.23",
     "webpack": "^5.88.0"
   }
 }
