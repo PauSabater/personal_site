@@ -51,6 +51,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"personal_site_pages_diagram.svg"}
+                    text={"pages diagram"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -67,6 +68,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                     imgName={"personal_site_homepage_wireframe.svg"}
                     maxHeight={400}
                     hasMediumMargin={true}
+                    text={"homepage wireframe"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
@@ -83,6 +85,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                         imgName={"personal_site_design_system.svg"}
                         maxHeight={450}
                         hasMediumMargin={true}
+                        text={"design system"}
                     ></ImageArticle>
             </div>
 
@@ -95,6 +98,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                     </div>
                     <ImageArticle
                         imgName={"personal_site_shapes.svg"}
+                        text={"used shapes"}
                     ></ImageArticle>
             </div>
 
@@ -115,6 +119,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"personal_site_stack.svg"}
                     maxHeight={100}
+                    text={"used stack"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -126,6 +131,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"personal_site_speed.svg"}
+                    text={"fast animations strategy"}
                     maxHeight={100}
                 ></ImageArticle>
             </div>

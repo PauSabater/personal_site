@@ -64,6 +64,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_stack.svg"}
+                    text={"used stack"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
@@ -78,6 +79,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_diagram.svg"}
+                    text={"app diagram"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
@@ -89,6 +91,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"weather_app_wireframe.svg"}
+                    text={"app wireframe"}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMain}>

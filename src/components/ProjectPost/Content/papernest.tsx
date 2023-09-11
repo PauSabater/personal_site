@@ -51,7 +51,7 @@ export const papernestContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"components_diagram.svg"}
-                    text={""}
+                    text={"components diagram"}
                     column={1}
                     maxHeight={400}
                     hasMargin={true}
@@ -66,6 +66,7 @@ export const papernestContent = (): JSX.Element => { return (
                 </div>
                 <ImageArticle
                     imgName={"design_system_diagram.svg"}
+                    text={"design system diagram"}
                     column={1}
                     maxHeight={400}
                     hasMargin={true}

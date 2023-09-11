@@ -8,7 +8,6 @@ export function TagLabels({ tags, color }: { tags: string[], color: string}) {
                 {tags.map((tag, i) => {
                     return <p className={`${styles.tag} ${styles[color]}`} data-tag-label="" key={`tag-${i}`}>{tag}</p>
                 })}
-
             </div>
         </Fragment>
     )

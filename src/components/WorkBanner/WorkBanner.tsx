@@ -23,7 +23,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
     const refContainer = useRef(null)
     const refFullContainer = useRef(null)
     const refContainerTexts = useRef(null)
-    const refGradient = useRef(null)
 
     useLayoutEffect(() => {
         const elContainer: HTMLElement | null = refFullContainer.current
@@ -39,13 +38,12 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
         const card3ImgContainer: HTMLElement = (card3 as HTMLElement).querySelector('.img-container') as HTMLElement
         const card3Svg: SVGSVGElement = (card3 as HTMLElement).querySelector('#sky-darkening') as SVGSVGElement
         const card3Rain: HTMLElement = (card3 as HTMLElement).querySelector('#rain-container') as HTMLElement
-        // // Card 3 illustration elements:
-        // const elWireframe: HTMLElement = (card3 as HTMLElement).querySelector('#mountains-wireframe') as HTMLElement
+        // Card 3 illustration elements:
         const elMoon: HTMLElement = (card3 as HTMLElement).querySelector('#moon') as HTMLElement
         const elDarkeningLayer: HTMLElement = (card3 as HTMLElement).querySelector('#darkening-layer') as HTMLElement
         const elSkyDarkeningImg: HTMLElement = (card3 as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
         const elLightning: HTMLElement = (card3 as HTMLElement).querySelector('#lightning') as HTMLElement
-        // // Clouds:
+        // Clouds:
         const elsClouds = (card3 as HTMLElement).querySelectorAll('.cloud') as NodeListOf<Element>
         const elFirstCloudsLayerOneCopy = (card3 as HTMLElement).querySelector('#cloud-first-line-1-copy') as HTMLElement
         const elSecondCloudsLayerCopy = (card3 as HTMLElement).querySelector('#cloud-second-line-copy') as HTMLElement
@@ -86,8 +84,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                         tlClouds.play()
                         tlLightning.play()
                         gsap.to(card3Rain, {display: "block", opacity: "0.45"})
-
-
                     },
                     onEnterBack: () => {
                         removeOutlineHeader()
@@ -156,7 +152,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     .to(elDarkeningLayer, {
                         opacity: "0.3",
                     }, 'start')
-                    .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
+                    .to(elSkyDarkeningImg, {opacity: "0.6"}, 'start')
                     .to(elsClouds, {opacity: "0.7"}, 'start')
                 })
         return () => ctx.revert()

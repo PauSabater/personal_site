@@ -31,22 +31,22 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
         return (
             <Fragment>
                 <div className={styles.imgMountainContainer} data-img-mountain="" data-transitioned-image="" id="card-3-img-wrap">
-                    <img id="sky" src={SvgSky}/>
+                    <img id="sky" src={SvgSky} alt="sky"/>
                     <SvgSkyDarkening/>
-                    <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg}/>
-                    <img id="lightning" className={styles.lightning} src={SvgLightning}/>
-                    <img id="mountains" src={SvgMountains}/>
-                    <img loading="lazy" id="cloud-third-line" className={`${`${styles.cloud} cloud`} cloud`} src={ImgCloudThirdLine}/>
-                    <img loading="lazy" id="cloud-third-line-copy" className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudThirdLine}/>
-                    <img id="trees-third-layer" src={SvgTreesThirdLayer}/>
-                    <img id="trees-second-layer" src={SvgTreesSecondLayer}/>
-                    <img id="moon" src={SvgMoon}/>
-                    <img id="cloud-second-line-copy" className={`${styles.cloud} ${styles.cloudFromRight} cloud`} src={ImgCloudSecondLine}/>
-                    <img loading="lazy" id="cloud-second-line" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine}/>
-                    <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer}/>
-                    <img id="trees-first-layer" src={SvgTreesFirstLayer}/>
-                    <img loading="lazy" id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1}/>
-                    <img loading="lazy" id="cloud-first-line-1-copy"className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudFirstLine1}/>
+                    <img id="sky-darkening-img" className={styles.skyDarkening} src={SvgSkyDarkeningImg} alt="sly darkening layer"/>
+                    <img id="lightning" className={styles.lightning} src={SvgLightning} alt="lightning"/>
+                    <img id="mountains" src={SvgMountains} alt="mountains"/>
+                    <img loading="lazy" id="cloud-third-line" className={`${`${styles.cloud} cloud`} cloud`} src={ImgCloudThirdLine} alt="clouds"/>
+                    <img loading="lazy" id="cloud-third-line-copy" className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudThirdLine} alt="clouds"/>
+                    <img id="trees-third-layer" src={SvgTreesThirdLayer} alt="threes third layer"/>
+                    <img id="trees-second-layer" src={SvgTreesSecondLayer} alt="threes second layer"/>
+                    <img id="moon" src={SvgMoon} alt="moon"/>
+                    <img id="cloud-second-line-copy" className={`${styles.cloud} ${styles.cloudFromRight} cloud`} src={ImgCloudSecondLine} alt="clouds second line copy"/>
+                    <img loading="lazy" id="cloud-second-line" className={`${styles.cloud} cloud`} src={ImgCloudSecondLine} alt="clouds second line"/>
+                    <img id="darkening-layer" className={styles.darkeningLayer} src={SvgDarkeningLayer} alt="darkening layer"/>
+                    <img id="trees-first-layer" src={SvgTreesFirstLayer} alt="threes first layer"/>
+                    <img loading="lazy" id="cloud-first-line-1"className={`${styles.cloud} cloud`} src={ImgCloudFirstLine1} alt="clouds first line"/>
+                    <img loading="lazy" id="cloud-first-line-1-copy"className={`${styles.cloud} ${styles.cloudFromLeft} cloud`} src={ImgCloudFirstLine1} alt="cloud first line copy"/>
                 </div>
                 {
                     includeRain === true
@@ -54,23 +54,16 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
                                 <div className={styles.rain} id="rain-container">
                                     {[...Array(200)].map((_, i) => <div key={`drop-${i}`} className={styles.drop}></div>)}
                                 </div>
-                                <div className={`${styles.rain} ${styles.rainReverse}`} id="rain-container">
-                                    {[...Array(200)].map((_, i) => <div key={`drop-${i}`} className={styles.drop}></div>)}
-                                 </div>
                             </Fragment>
                         : ''
                 }
             </Fragment>
         )
-    // } else if(img === "personal-site.svg") {return (
-    //     <svg width="2560" height="1600" viewBox="0 0 2560 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         {parse(personalSiteSvgContent())}
-    //     </svg>
-    // )
+
     } else if(img === "personal-site.svg") {return (
-            <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-filter-invert="" data-transitioned-image=""></img>
+            <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-filter-invert="" data-transitioned-image="" alt={img}></img>
     )
-    } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-transitioned-image=""></img>
+    } else return <img className={styles.img} src={require(`../../../assets/svg/${img}`)} data-transitioned-image="" alt={img}></img>
 }
 
 export function getMountainImgs() {
