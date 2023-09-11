@@ -3,7 +3,6 @@ import "./Footer.css"
 import { FooterCanvas } from "./FooterCanvas/FooterCanvas"
 
 export function Footer({mode}: {mode: string}) {
-    const currentUrl = window.location.href
 
     return (
         <Fragment>

@@ -1,4 +1,4 @@
-import { Fragment, MouseEventHandler, useLayoutEffect, useRef } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./MethodSection.module.scss"
 import { setMethodSectionAnimation } from "./MethodSection.animations"
 import parse from "html-react-parser"

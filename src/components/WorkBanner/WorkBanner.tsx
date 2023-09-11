@@ -125,44 +125,44 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 .set(card1.querySelector(".overlay"), {opacity: 0.7})
                 .set(cardsContainer, {pointerEvents: "none"})
 
-            // Animate third card:
-            timeline.addLabel('forth')
-                .set(card3ImgContainer, {
-                    borderRadius: '15'
+                // Animate third card:
+                timeline.addLabel('forth')
+                    .set(card3ImgContainer, {
+                        borderRadius: '15'
+                    })
+                    .to(elContainerTexts, {
+                        opacity: 0,
+                        y: `-=100vh`
+                    }, 'end')
+                    .to(card3ImgContainer, {
+                        border: 'none',
+                        width: ()=> {
+                            // Wider viewport
+                            if(isViewportPropHigherThanEl(card3Svg)) {
+                                return card3Svg.getBoundingClientRect().width
+                            // Higher viewport
+                            } else {
+                                const dist = card3Svg.getBoundingClientRect().height * getViewportAspectRatio()
+                                return dist > card3ImgContainer.getBoundingClientRect().width ? dist : card3ImgContainer.getBoundingClientRect().width
+                            }}
+                    }, 'end')
+
+                // Animate third img:
+                timeline.addLabel('fifth')
+                    .set(card3ImgContainer, {borderRadius: 0})
+                    .to(card3ImgContainer, {
+                        x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
+                        y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
+                        scale: ()=> getScaleToCoverViewPort(card3Svg)
+                    }, 'start')
+
+                    .to(elMoon, {opacity: "0"}, 'start')
+                    .to(elDarkeningLayer, {
+                        opacity: "0.3",
+                    }, 'start')
+                    .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
+                    .to(elsClouds, {opacity: "0.7"}, 'start')
                 })
-                .to(elContainerTexts, {
-                    opacity: 0,
-                    y: `-=100vh`
-                }, 'end')
-                .to(card3ImgContainer, {
-                    border: 'none',
-                    width: ()=> {
-                    // Wider viewport
-                    if(isViewportPropHigherThanEl(card3Svg)) {
-                        return card3Svg.getBoundingClientRect().width
-                    // Higher viewport
-                    } else {
-                        const dist = card3Svg.getBoundingClientRect().height * getViewportAspectRatio()
-                        return dist > card3ImgContainer.getBoundingClientRect().width ? dist : card3ImgContainer.getBoundingClientRect().width
-                    }
-                }}, 'end')
-
-            // Animate third img:
-            timeline.addLabel('fifth')
-                .set(card3ImgContainer, {borderRadius: 0})
-                .to(card3ImgContainer, {
-                    x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
-                    y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
-                    scale: ()=> getScaleToCoverViewPort(card3Svg)
-                }, 'start')
-
-                .to(elMoon, {opacity: "0"}, 'start')
-                .to(elDarkeningLayer, {
-                    opacity: "0.3",
-                }, 'start')
-                .to(elSkyDarkeningImg, {opacity: "0.6", /* onStart: myFunction},*/}, 'start')
-                .to(elsClouds, {opacity: "0.7"}, 'start')
-        })
         return () => ctx.revert()
 
     }, [])

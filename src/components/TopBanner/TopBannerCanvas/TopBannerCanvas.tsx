@@ -201,17 +201,17 @@ const Grid = ({mode}: {mode: string}) => {
     const height = 0.2
 
     const colorGrid = mode === "light" ? 'hsl(136, 0%, 86%)' : 'hsl(136, 0%, 16%)'
-    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%))' : 'hsl(136, 0%, 46%)'
+    const colorCross = mode === "light" ? 'hsl(136, 0%, 50%)' : 'hsl(136, 0%, 36%)'
 
     return (
     // Renders a grid and crosses as instances
     <Instances position={[0, -0.1, -4]}>
-        <gridHelper args={[50, 50, colorGrid, colorGrid]} position={[0, -0.01, 0]} />
+        <gridHelper args={[50, 50, colorGrid, colorGrid]} position={[0, -0.03, 0]} />
         <planeGeometry args={[lineWidth, height]} />
         <meshBasicMaterial color={colorCross} />
         {Array.from({ length: number }, (_, y) =>
             Array.from({ length: number }, (_, x) => (
-                <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, -0.01, y * 2 - Math.floor(number / 2) * 2]}>
+                <group key={x + ':' + y} position={[x * 2 - Math.floor(number / 2) * 2, 0, y * 2 - Math.floor(number / 2) * 2]}>
                     <Instance rotation={[-Math.PI / 2, 0, 0]} />
                     <Instance rotation={[-Math.PI / 2, 0, Math.PI / 2]} />
                 </group>

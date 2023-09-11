@@ -1,6 +1,4 @@
 import styles from "./Overlay.module.scss"
-// import { setSkillsBannerAnimation } from "./SkillsBanner-animations"
-
 
 export function Overlay() {
     return (

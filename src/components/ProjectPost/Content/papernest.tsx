@@ -1,15 +1,10 @@
 import { Fragment } from "react"
 import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
-import { Callout } from "../Components/Callout/Callout"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
 import parse from "html-react-parser"
 import { calendar } from "../../../assets/svg/ts/calendar"
-import { arrowFilled } from "../../../assets/svg/ts/arrowFilled"
-import { Link } from "react-router-dom"
-import { INextProjects, NextProjects } from "../Components/NextProjects/NextProjects"
-import { leaveFromArrowClick } from "../ProjectPost.animations"
 import { getArrowLinkTemplate } from "../ProjectPost"
 
 
@@ -21,7 +16,7 @@ export const papernestContent = (): JSX.Element => { return (
                     Frontend developer at papernest
                 </h1>
                 <TagLabels tags={['professional experience']} color={"secondary"}></TagLabels>
-                <TagLabels tags={['TypeScript', 'LITElement', 'Django', 'PHP', 'Wordpress', 'SEO', 'Performance']} color={"primary"}></TagLabels>
+                <TagLabels tags={['TypeScript', 'LITElement', 'Performance', 'Webpack', 'Django', 'PHP', 'Wordpress', 'SEO']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
                     {parse(calendar("var(--c-grey)"))}<p>March 2021 - April 2023</p>
                 </div>
@@ -61,18 +56,6 @@ export const papernestContent = (): JSX.Element => { return (
                     maxHeight={400}
                     hasMargin={true}
                 ></ImageArticle>
-                {/* <ImageArticle
-                    imgName={"individual_components.svg"}
-                    text={""}
-                    row={3}
-                    column={1}
-                ></ImageArticle>
-                <ImageArticle
-                    imgName={"common_components.svg"}
-                    text={""}
-                    row={3}
-                    column={2}
-                ></ImageArticle> */}
             </div>
             <div className={styles.sectionLeft}>
                 <h2 className={styles.sectionTitle}>A first common design system</h2>
@@ -129,10 +112,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Filtered List</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        <LinkInline text={"This feature"} href={"https://www.fournisseur-energie.com/comparateur/estimation/"}/> allows the display of energy offers based on a form that requires user information like appartment surface, heating type and location and consumtion. This was a challenging task due to the <span>multiple private and public apis</span> to consume and the non static wording the data had to be combined with. The user management was also challenging, as this feature could be added on any site and was not integrated in a specific app.
-                    </p>
-                    <p className={styles.paragraphRight}>
-                        The feature is currently not working due to an error from an api response, however, not linked to my work !
+                         <LinkInline text={"This component "} href={"https://www.fournisseur-energie.com/fournisseurs-electricite/"}/> allows the creation of lists of cards that can be filtered through different lists of inputs. Everything is customisable and a Wordpress custom backoffice interface was developed to allow redactors to create their own lists, use key variables linked to a database and even prefilter it through url params.
                     </p>
                 </div>
                 <ImageArticle
@@ -157,20 +137,38 @@ export const papernestContent = (): JSX.Element => { return (
                 ></ImageArticle>
             </div>
             <div className={styles.sectionLeft}>
+                <h2 className={styles.sectionTitle}>Company brand page</h2>
+                <div>
+                    <p className={styles.paragraphRight}>
+                        The company's <LinkInline text={"brand page"} href={"https://www.papernest.com/"}/> was redesigned and remade from scratch in order to be fully customisable. A Wordpress custom interface was developed in order to allow the redactors to create their own pages and be able to use a list of customisable components that could be arranged on any order.
+                    </p>
+                </div>
+                <ImageArticle
+                    imgName={"feature_papernest-brand.png"}
+                    column={1}
+                    applyFilter={false}
+                    text={"Papernest brand page"}
+                ></ImageArticle>
+            </div>
+            <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>Cookies feature</h2>
                 <div>
                     <p className={styles.paragraphRight}>
                         Having multiple domains, developing a multiple cookies system was a challenging task as it had to be <span>cross-browser</span> and <span>cross-domain</span>. In addition, any site could personalise the cookies workings. The cookies choises were stored in an external database through a Flask API, which returns the cookie if it already exists.
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"feature_cookies.png"}
+                    column={1}
+                    applyFilter={false}
+                    text={"Cookies feature"}
+                ></ImageArticle>
             </div>
-            <div className={styles.sectionRight}>
+            <div className={styles.sectionMain}>
                 <h2 className={styles.sectionTitle}>Conclusion</h2>
-                <div>
-                    <p className={styles.paragraphRight}>
-                        Looking back, I am amazed at the amount of work and features I worked with. It was indeed a <span>great first professional experience</span> in the field. Being surrouded by a great team and colleagues, the environment was ideal to <span>learn and grow</span> my skills. I learned a lot and had a great time!
-                    </p>
-                </div>
+                <p className={styles.mainParagraph}>
+                    Looking back, I am amazed at the amount of work and features I worked with. It was indeed a <span>great first professional experience</span> in the field. Being surrouded by a great team and colleagues, the environment was ideal to <span>learn and grow</span> my skills. I learned a lot and had a great time!
+                </p>
             </div>
         </div>
     </Fragment>

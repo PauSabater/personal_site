@@ -1,14 +1,11 @@
 import { Fragment } from "react"
 import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
-import { Callout } from "../Components/Callout/Callout"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
-import { Cta, ICtaProps } from '../../UI/Cta/Cta'
+import { Cta } from '../../UI/Cta/Cta'
 import { calendar } from "../../../assets/svg/ts/calendar"
 import parse from "html-react-parser"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
-import { arrowFilled } from "../../../assets/svg/ts/arrowFilled"
-import { Link } from "react-router-dom"
 import { getArrowLinkTemplate } from "../ProjectPost"
 
 export const personalSiteContent = (): JSX.Element => { return (
@@ -60,42 +57,52 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Shaping the pages</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        On the homepage I used <span>storytelling</span> to give an introduction of who I am, skills and how I work in a light and short way. To do so, information should be revealed on scroll in a visual way. A <span>visual effect on the middle</span> would differentiate half a page with a light mode, and a second with a dark mode in order to add a visual change. The illustration used is based and redrawn  <LinkInline text={"from this one"} href={"https://www.vecteezy.com/vector-art/5565275-silhouette-landscape-with-fog-forest-pine-trees-purple-mountains-illustration-of-view-mist-and-sunset-good-for-wallpaper-background-banner-cover-poster"}/>
+                        On the homepage I used <span>storytelling</span> to give an introduction of who I am, skills and how I work in a light and short way. To do so, information should be revealed on scroll in a visual way. A <span>visual effect on the middle</span> would differentiate half a page with a light mode, and a second with a dark mode in order to add a visual change.
                     </p>
                     <p className={styles.paragraphRight}>
-                        On the projects pages, I tried to add <span>two columns</span>, exchanging big titles, some highlighted text, images and schemas. A Z pattern has been used hoping to make it more <span>visually dynamic</span>. Maybe at the cost of some readability, but this is not a dissertation ! The article would be preceded with a fullwidth image representing the project, optionally with some animations and surprises.
+                        On the projects pages, I tried to add <span>two columns</span>, exchanging big titles, some highlighted text, images and schemas. A Z pattern has been used hoping to make it more <span>visually dynamic</span>. Maybe at the cost of some readability. The article would be preceded with a fullwidth image representing the project, optionally with some animations and surprises.
                     </p>
                 </div>
                 <ImageArticle
                     imgName={"personal_site_homepage_wireframe.svg"}
-                    maxHeight={475}
-                    hasMargin={true}
+                    maxHeight={400}
+                    hasMediumMargin={true}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>Looking for an image</h2>
                     <div>
                         <p className={styles.paragraphRight}>
-                            Some <span>design system</span> was needed to give <span>consistency</span> to the site, and it had to be related to myself. I always found myself enjoying the early stages of product conception and refinement. I decided to play with elements that relate to ideas and conception, such as a grid to sketch on, pencils, sketches and shapes. Also light, which can give two same objects a totally different aspect. Both grids and light relate to my previous professional experiences. All right, <span>grids, sketches, light and fun</span>, we have a theme, let's work on it !
+                            Some <span>design system</span> was needed to give <span>consistency</span> to the site, and it had to be related to myself. I always found myself enjoying the early stages of product conception and refinement. I decided to play with elements that relate to ideas and conception, such as a grid to sketch on, pencils, sketches and shapes. Also light, which can give two same objects a totally different aspect. Both grids and light relate to my previous professional experiences.                             A logo has been created as well. I am not good with logos, but I have tried it to be linked to the theme of the site. The colors used are yellow, which relates to light, and two shades of purple, which relate to fun.
                         </p>
                         <p className={styles.paragraphRight}>
-                            A logo has been created as well. I am not good with logos, but I have tried it to be linked to the theme of the site. The colors used are yellow, which relates to light, and two shades of purple, which relate to fun.
+                            All right, <span>grids, sketches, light and fun</span>, we have a theme, let's work on it !
                         </p>
                     </div>
                     <ImageArticle
                         imgName={"personal_site_design_system.svg"}
-                        maxHeight={600}
-                        hasMargin={true}
+                        maxHeight={450}
+                        hasMediumMargin={true}
                     ></ImageArticle>
             </div>
 
-
+            <div className={styles.sectionLeft}>
+                <h2 className={styles.sectionTitle}>Some bits of fun</h2>
+                    <div>
+                        <p className={styles.paragraphRight}>
+                            The page suddenly turning into a 3d scene, an image scaling fullwidth, transitions... I tried to add some surprises through the page, with the intention to showcase some skills, keep the user engaged with the content, and have some fun myself developing the page as well. This parts should be related to the theme of the page in order to keep some consistency.
+                        </p>
+                    </div>
+                    <ImageArticle
+                        imgName={"personal_site_shapes.svg"}
+                    ></ImageArticle>
+            </div>
 
             <div className={styles.sectionMain}>
                 <p className={styles.preTitle}>/ Coding the ideas </p>
                 <h2 className={styles.sectionTitle}>Development of the project</h2>
                 <p className={styles.mainParagraph}>
-                    Choosing the right stack came from the requirements of the page. I wanted a smooth experience (no flash between pages please!). Since there are no SEO requirenments and it is a small simple site, I opted for a <span>single page application</span> as a design pattern.
+                    Choosing the right stack came from the requirements of the page. I wanted a smooth experience (no flash between pages !). Since there are no SEO requirenments and it is a small simple site, I opted for a <span>single page application</span> as a design pattern.
                 </p>
             </div>
             <div className={styles.sectionRight}>
@@ -114,15 +121,31 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>An eye on performance</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        When dealing with a lot of animations, it is easy to have janky result, as browsers can require lots of resources as a result of repainting and re rendering. That is why most animations on this site are limited to <span>opacity and transforms</span> to avoid rerenderings and keep most work at the <span>GPU</span>. In addition, some Threejs scenes are lazyly loaded, and the render frames are executed only when the scene is in view. Sadly, some scenes cool effects have been abandoned to keep frame rate good, since maintaining a good browsing experience is more important.
+                        When dealing with a lot of animations, it is easy to have janky result, as browsers can require lots of resources as a result of repainting and reflows. That is why most animations on this site are limited to <span>opacity and transforms</span> to avoid rerenderings and keep most work at the <span>GPU</span>. In addition, some Threejs scenes are lazyly loaded, and the render frames are executed only when the scene is in view. Sadly, some scenes cool effects have been abandoned to keep frame rate good, since maintaining a good browsing experience is more important.
                     </p>
                 </div>
+                <ImageArticle
+                    imgName={"personal_site_speed.svg"}
+                    maxHeight={100}
+                ></ImageArticle>
             </div>
-            <div className={styles.sectionMain}>
+            <div className={styles.sectionMainRight}>
                 <h2 className={styles.sectionTitle}>Conclusion</h2>
                 <p className={styles.mainParagraph}>
-                    Depeloping a page from scratch from design to coding is quite a challenge, and even more if the purpose is to make the site stand out. I hope I have achieved it, that is up to you to say. In any case I have learned a lot!
+                    Depeloping a page from scratch from design to coding is quite a challenge and a lot of work, and even more if the purpose is to make the site stand out. I hope I have achieved it, that is up to you to say. In any case I have learned and had lots of fun developing it !
                 </p>
+            </div>
+            <div className={styles.sectionLeft}>
+                <h2 className={styles.sectionTitle}>References</h2>
+                <div>
+                    <p className={styles.paragraphRight}>
+                        As with any project, some references for inspiration have been used:
+                        <br/><LinkInline text={"Mountains illustration: "} href={"https://www.vecteezy.com/vector-art/5565275-silhouette-landscape-with-fog-forest-pine-trees-purple-mountains-illustration-of-view-mist-and-sunset-good-for-wallpaper-background-banner-cover-poster"}/> This illustration has been redrawn from the original.
+                        <br/><LinkInline text={"Rain effect: "} href={"https://codepen.io/josetxu/pen/gOKJKKx"}/> This codepen has been adapted. I chose a css effect which requires less resources than a high resolution video. in order to use less re, as opposed to a video one.
+                        <br/><LinkInline text={"Threejs scenes: "} href={"https://docs.pmnd.rs/react-three-fiber/getting-started/examples"}/> Some examples from the library has been used as inspiration and starting point, although they have ended up being quite different.
+                        <br/><LinkInline text={"Content structure: "} href={"https://bepatrickdavid.com/"}/> This portfolio has been used as a starting point to structure the content of the pages.
+                    </p>
+                </div>
             </div>
         </div>
     </Fragment>

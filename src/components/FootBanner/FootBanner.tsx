@@ -6,10 +6,7 @@ import parse from 'html-react-parser'
 import * as THREE from 'three'
 import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
-import { PerspectiveCamera, Reflector, Text, useTexture, PerformanceMonitor, MeshTransmissionMaterial, OrbitControls, MeshReflectorMaterial, Environment } from '@react-three/drei'
-import { Perf } from "r3f-perf"
-import { EffectComposer, Noise } from "@react-three/postprocessing"
-import { BlendFunction } from "postprocessing"
+import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
@@ -119,7 +116,7 @@ export function FootBanner({}: {}) {
 
 
         const [video] = useState(() => Object.assign(document.createElement('video'), {
-            src: '/video.mov',
+            src: '/video-comp.mp4',
             crossOrigin: 'Anonymous',
             loop: true,
             muted: true

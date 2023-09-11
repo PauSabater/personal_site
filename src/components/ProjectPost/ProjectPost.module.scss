@@ -241,6 +241,7 @@ div[data-img-mountain] {
     }
 }
 .sectionMain,
+.sectionMainRight,
 .sectionRight,
 .sectionLeft {
     --gap-column: var(--mg-xl);
@@ -250,6 +251,12 @@ div[data-img-mountain] {
     column-gap: var(--gap-column);
     margin-bottom: var(--mg-2xl);
     padding-right: var(--gap-column);
+}
+
+.sectionMainRight {
+    h2, p, div, img, svg {
+        grid-column-start: 2;
+    }
 }
 
 .sectionRight,
@@ -363,6 +370,7 @@ div[data-img-mountain] {
     }
 
     .sectionMain,
+    .sectionMainRight,
     .sectionRight,
     .sectionLeft {
         display: flex;

@@ -10,7 +10,6 @@ export function executeEnterAnimations(pageId: string, node: HTMLElement, route?
             setProjectPostEnterAnimation(node)
             break
         case 'page-projects':
-            setProjectListEnterAnimation(node)
             break
     }
 }
@@ -19,7 +18,6 @@ export function executeExitAnimations(pageId: string, node: HTMLElement, route?:
 
     switch (pageId) {
         case 'page-project-post':
-            setProjectPostExitAnimation(node)
             break
         case 'page-projects':
             break
@@ -30,7 +28,6 @@ export function executeExitAnimations(pageId: string, node: HTMLElement, route?:
 }
 
 export function setPageFadeOutAnimation() {
-    // window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })
         .to(document.getElementById('page-overlay'), {
@@ -43,7 +40,6 @@ export function setPageFadeOutAnimation() {
 }
 
 export function setPageFadeInAnimation() {
-    // window.scrollTo(0, 0)
     gsap
         .timeline({ paused: true })
         .to(document.getElementById('page-overlay'), {
@@ -59,13 +55,4 @@ export function setProjectPostEnterAnimation(node: HTMLElement) {
     const elTransitionImages: HTMLElement | null = document.querySelector("#transition-images")
     gsap.set(elTransitionImages, {opacity: 1})
     window.scrollTo(0, 0)
-}
-
-export function setProjectPostExitAnimation(node: HTMLElement) {
-
-}
-
-export function setProjectListEnterAnimation(node: HTMLElement) {
-    // window.scrollTo(0, 0)
-
 }
