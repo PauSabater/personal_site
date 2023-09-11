@@ -1,8 +1,6 @@
 import styles from "./Card.module.scss"
 import { Fragment, useRef } from "react"
 import { setCardTransitionAnimation } from "./Card.animations"
-
-import parse from 'html-react-parser'
 import ImgCloudFirstLine1 from "../../../assets/img/clouds/cloud-first-line-1.png"
 import ImgCloudSecondLine from "../../../assets/img/clouds/cloud-second-line.png"
 import ImgCloudThirdLine from "../../../assets/img/clouds/cloud-third-line.png"
@@ -16,7 +14,6 @@ import SvgLightning from "../../../assets/svg/mountains/lightning.svg"
 import {ReactComponent as SvgSkyDarkening} from "../../../assets/svg/mountains/sky-darkening.svg"
 import SvgSky from "../../../assets/svg/mountains/sky.svg"
 import SvgSkyDarkeningImg from "../../../assets/svg/mountains/sky-darkening.svg"
-import { personalSiteSvgContent } from "../../../assets/svg/ts/varied"
 
 export interface ICardProps {
     title: string,
@@ -27,7 +24,7 @@ export interface ICardProps {
 
 export const getImg = (img: string, includeRain = true): JSX.Element => {
     if (img === 'mountains') {
-        const images: string[] = ["cloud-first-line-1", "cloud-first-line-2"]
+
         return (
             <Fragment>
                 <div className={styles.imgMountainContainer} data-img-mountain="" data-transitioned-image="" id="card-3-img-wrap">
@@ -69,12 +66,12 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
 export function getMountainImgs() {
     return (
         <Fragment>
-            <img src={SvgSky}/>
-            <img src={SvgMountains}/>
-            <img src={SvgTreesThirdLayer}/>
-            <img src={SvgTreesSecondLayer}/>
-            <img src={SvgMoon}/>
-            <img src={SvgTreesFirstLayer}/>
+            <img src={SvgSky} alt={"sky"} />
+            <img src={SvgMountains} alt={"mountains"}/>
+            <img src={SvgTreesThirdLayer} alt={"layer of trees"}/>
+            <img src={SvgTreesSecondLayer} alt={"layer of trees"}/>
+            <img src={SvgMoon} alt={"moon"}/>
+            <img src={SvgTreesFirstLayer} alt={"trees first layer"}/>
         </Fragment>
     )
 }

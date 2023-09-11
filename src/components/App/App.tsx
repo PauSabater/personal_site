@@ -38,7 +38,6 @@ const routes = [
 function App() {
 
     const location = useLocation()
-    const [isHomepage, setIsHomepage] = useState(location.pathname.includes("projects") === false)
 
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}

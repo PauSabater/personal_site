@@ -1,5 +1,4 @@
-import { Fragment, Suspense, useLayoutEffect } from "react"
-import { ProjectList } from "../components/ProjectsList/ProjectList"
+import { useLayoutEffect } from "react"
 import { showHeader } from "../components/Header/Header.animations"
 import { FootBanner } from "../components/FootBanner/FootBanner"
 import { hasPageBeenLoaded } from "../assets/ts/utils/utils"

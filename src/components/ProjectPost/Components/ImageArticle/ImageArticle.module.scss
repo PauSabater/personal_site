@@ -13,14 +13,12 @@
 }
 
 .imgContainer {
-    // overflow: hidden;
     display: flex;
     justify-content: center;
 
     img {
         width: 100%;
-        width: fill-available;
-        width: -webkit-fill-available;
+        width: stretch;
         opacity: 1;
         border-radius: 10px;
     }

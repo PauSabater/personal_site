@@ -1,6 +1,5 @@
 import gsap from "gsap"
 
-const mediaDesktop: string = `screen and (max-width: 900px)`
 const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (max-aspect-ratio: 1/1)`
 const mediaMobile: string = `screen and (max-width: 768px)`
 

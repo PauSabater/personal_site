@@ -11,7 +11,7 @@ import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMateria
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
-export function FootBanner({}: {}) {
+export function FootBanner() {
 
     const refCanvas = useRef(null)
     const refContainer = useRef(null)
@@ -20,7 +20,7 @@ export function FootBanner({}: {}) {
     const refContactLink = useRef(null)
     const refSvgBorder = useRef(null)
 
-    const [colorMain, setColorMain] = useState("hsl(0, 0%, 10%)")
+    const [colorMain] = useState("hsl(0, 0%, 10%)")
     const [aspectRatio, setAspectRatio] = useState<number>(window.innerWidth / window.innerHeight)
     const refVideoTexture = useRef(null)
     const [isBannerExpanded, setIsBannerExpanded] = useState(false)
@@ -140,7 +140,7 @@ export function FootBanner({}: {}) {
 
         useLayoutEffect(()=> {
             // Observe to determine when we render:
-            const io = new IntersectionObserver((entries) => {
+            new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.intersectionRatio > 0) setShouldRender(true)
                     else setShouldRender(false)

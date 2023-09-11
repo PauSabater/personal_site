@@ -51,11 +51,6 @@
         letter-spacing: -6px;
         color: var(--c-font-global);
         margin-left: -11px;
-        // margin-left: -4px;
-        // color: black;
-        // -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-        // -webkit-text-stroke-width: 1px;
-        // -webkit-text-stroke-color: black;
     }
 }
 
@@ -100,9 +95,7 @@
     }
 
     .logoName {
-        // -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: grey;
-        // color: var(--c-white-no-change);
     }
 }
 
@@ -173,6 +166,7 @@
 }
 
 .item a,
+.item .contactBtn,
 .item .darkModeContainer {
     cursor: pointer;
     color: var(--c-white);
@@ -186,6 +180,11 @@
     &:hover {
         background-color: grey;
     }
+}
+
+.contactBtn {
+    background-color: unset;
+    border: none;
 }
 
 @include mixins.mobile {
@@ -347,7 +346,6 @@
             margin-left: 0;
             background-color: none;
             z-index: 1000;
-            // background: linear-gradient(to right, #743ad5,  #d53a9d);
             background: linear-gradient(to right, var(--c-tertiary),  var(--c-primary-light));
 
             .item {
@@ -364,7 +362,7 @@
                 }
             }
 
-            a {
+            .contactBtn {
                 display: block;
                 position: relative;
                 padding: var(--pd-lg) 0;
@@ -381,7 +379,6 @@
                 height: calc(100% - calc(var(--cta-br-width) * 2));
                 width:calc(100% - 20px);
                 z-index: 1001;
-                // background: linear-gradient(to right, #743ad5,  #d53a9d);
             }
         }
     }
@@ -453,13 +450,11 @@
 
     .item {
         justify-content: left;
-        // height: 90px;
         overflow: hidden;
     }
 
     .item a,
     .item p {
-        // color: black;
         font-family: 'inter-bold';
         font-size: 10vw;
         white-space: nowrap;
@@ -467,7 +462,6 @@
 
     .list:not(:last-child) .item a,
     .list:not(:last-child) .item .darkModeContainer  {
-        // color: black;
         font-family: 'inter-bold';
         font-size: clamp(var(--fs-lg), 9.5vw, 60px);
         -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
@@ -480,14 +474,9 @@
         }
     }
 
-    .list:last-child .item a {
-        // color: black;
+    .list:last-child .item .contactBtn {
+        font-family: 'inter-bold';
         font-size: clamp(var(--fs-global), 8vw, 45px);
-
-        &:hover {
-            -webkit-text-fill-color: var(--c-white-no-change);
-            background-color: transparent;
-        }
     }
 
     .gradientLight {

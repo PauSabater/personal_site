@@ -13,7 +13,6 @@
     grid-template-rows: var(--card-title-height) 410px;
     text-decoration: none;
     color: var(--c-font-global);
-    // box-shadow: 5px 5px 43px 14px rgba(0,0,0,0.4);
     z-index: 1;
 
     &[data-mode="light"] {
@@ -99,11 +98,6 @@
     .img, svg, .imgMountainContainer {
         height: 100%;
         width: auto;
-
-        #trees-first-layer path {
-            transform-origin: bottom !important;
-            animation: skewTree 2s;
-        }
     }
 
     @include mixins.mobile-tablet {
@@ -158,16 +152,6 @@
     transition: opacity var(--tr-base);
 }
 
-@keyframes skewTree {
-    from {
-      transform: skewX(0deg);
-    }
-
-    to {
-      transform: skewX(246deg);
-    }
-}
-
 
 // RAIN
 .rain {
@@ -205,17 +189,12 @@
                 opacity: random(90) * 0.01;
                 left: random(1200) * 0.1%;
                 border-left-width: random(20) * 0.1vmin;
-                animation: fall-#{$i} (random(12) * 0.13s) (random(20) * -0.5s) ease-in infinite;
+                animation: fall#{$i} (random(12) * 0.13s) ease-in infinite;
             }
-            @keyframes fall-#{$i} {
+            @keyframes fall#{$i} {
                 #{percentage( random(50) / 500 )} { transform: rotate(var(--angle)) translateX(0); }
                 to { transform: rotate(var(--angle)) translateX(calc(100vh + 5vmin)); }
             }
         }
     }
-}
-
-.rainReverse {
-    left: 10vw;
-
 }

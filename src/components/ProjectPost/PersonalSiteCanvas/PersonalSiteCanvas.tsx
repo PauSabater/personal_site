@@ -41,8 +41,7 @@ function Model({mode}: {mode: string}) {
     const { size } = useThree()
     const [shouldRender, setShouldRender] = useState(true)
     const [previousCanvasWidth, setPreviousCanvasWidth] = useState(size.width)
-    const [colorGrid, setColorGrid] = useState(mode === "light" ? "hsl(136, 0%, 80%)" : "hsl(136, 0%, 40%)")
-    const canvasHeight = size.height
+    const [colorGrid] = useState(mode === "light" ? "hsl(136, 0%, 80%)" : "hsl(136, 0%, 40%)")
 
     useLayoutEffect(()=> {
         setTimeout(()=> {

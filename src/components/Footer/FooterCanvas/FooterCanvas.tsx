@@ -41,10 +41,10 @@ export function FooterCanvas({mode}: {mode: string}) {
 }
 
 function Camera() {
-    const { camera, mouse } = useThree()
+    const { mouse } = useThree()
     const [shouldRender, setShouldRender] = useState(true)
 
-    const vec = new THREE.Vector3
+    const vec = new THREE.Vector3()
     const viewportAspectRatio = getViewportAspectRatio()
 
     const [isHomepage, setIsHomePage] = useState(window.location.href.includes("projects") === false)

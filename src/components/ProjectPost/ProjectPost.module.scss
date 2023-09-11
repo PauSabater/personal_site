@@ -389,7 +389,7 @@ div[data-img-mountain] {
         flex-direction: column;
 
         a {
-            width: fill-available;
+            width: stretch;
             margin-top: var(--mg-md);
         }
     }

@@ -63,10 +63,9 @@ function Model() {
         if (shouldRender && windowHeight) {
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
             const percentage = (distToTop / windowHeight)
-            if (percentage < 0.95 && percentage > 0
-                && percentage !== scrollPercentage
-                || percentage === null
-                || Math.abs(distToTop) > windowHeight
+            if ((percentage < 0.95 && percentage > 0 && percentage !== scrollPercentage)
+                || (percentage === null)
+                || (Math.abs(distToTop) > windowHeight)
             ) {
                 setScrollPercentage(percentage)
                 // @ts-ignore
@@ -82,7 +81,7 @@ function Model() {
         setWindowHeight(window.innerHeight)
 
         // Observe to determine when we render:
-        const io = new IntersectionObserver((entries) => {
+        new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) setShouldRender(true)
                 else setShouldRender(false)

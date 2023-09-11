@@ -359,20 +359,21 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                             <div ref={refLinesContainer} className={styles.linesContainer}>
                                 <div></div><div></div><div></div><div></div>
                             </div>
-                            <a
+                            <button
                                 onClick={(e) => {handleClickLink(e)}}
                                 ref={refLinkContact}
                                 data-scroll-to="footer-canvas"
+                                className={styles.contactBtn}
                             >contact me
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </div>
                 <div ref={refIconsContainer} className={styles.iconsContainer}>
-                    <a className={styles.iconLink} href="https://github.com/PauSabater/weather_app" target="_blank">
+                    <a className={styles.iconLink} href="https://github.com/PauSabater/weather_app" target="_blank" rel="noreferrer">
                         {parse(gitHubLogo("var(--c-white-no-change)"))}
                     </a>
-                    <a className={styles.iconLink} href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989" target="_blank">
+                    <a className={styles.iconLink} href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989" target="_blank" rel="noreferrer">
                         {parse(linkedInLogo("var(--c-black"))}
                     </a>
                     <div className={styles.gradientLight}></div>

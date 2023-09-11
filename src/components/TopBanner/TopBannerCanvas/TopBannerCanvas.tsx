@@ -315,7 +315,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         setWindowHeight(window.innerHeight)
 
         // Observe to determine when we render:
-        const io = new IntersectionObserver((entries) => {
+        new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.intersectionRatio > 0) setShouldRender(true)
                 else setShouldRender(false)
@@ -534,11 +534,6 @@ function getTitleText() {
     return getViewportAspectRatio() > 0.8
         ? "giving shape+to ideas"
         : "giving+shape+to ideas"
-}
-
-function getPretitlePosition() {
-    if (getViewportAspectRatio() < 0.8)  return [3, 0.1, 3.5]
-    return [0, 0.1, 0.5]
 }
 
 function getDistanceFactor() {
