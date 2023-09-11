@@ -109,9 +109,9 @@ export const texts = {
                     icon: "git",
                     percentage: "75"
                 },{
-                    name: "SQL",
-                    icon: "sql",
-                    percentage: "15"
+                    name: "Threejs / R3F",
+                    icon: "three",
+                    percentage: "30"
                 },{
                     name: "Webpack",
                     icon: "webpack",

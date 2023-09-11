@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
 import parse from "html-react-parser"
@@ -9,8 +9,7 @@ import { INextProjects, NextProjects } from "./Components/NextProjects/NextProje
 import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
 import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
-import { setPageFadeInAnimation, setPageFadeOutAnimation } from "../App/App.animations"
-import { Footer } from "../Footer/Footer"
+import { setPageFadeInAnimation } from "../App/App.animations"
 
 export interface IPropsProjectPost {
     element?: HTMLElement,
@@ -49,8 +48,6 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
                 setPageFadeInAnimation()
             }, 750)
         }
-
-        // executePageEnterAnimation(props.imgPath)
 
         if (props.imgPath === "mountains") {
             setMountainsAnimationObserver()

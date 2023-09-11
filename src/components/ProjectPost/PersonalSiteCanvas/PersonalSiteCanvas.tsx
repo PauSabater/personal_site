@@ -27,7 +27,7 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
                     <Suspense>
                         <Model mode={mode}/>
                     </Suspense>
-                    <Environment files="city-test.hdr"  resolution={512}></Environment>
+                    <Environment files="city-small.hdr"  resolution={512}></Environment>
                     <CameraControls enabled={false} makeDefault dollyToCursor minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
                 </group>
             </Canvas>

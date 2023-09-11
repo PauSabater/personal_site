@@ -1,12 +1,7 @@
-import gsap from 'gsap'
 import { Link } from "react-router-dom"
 import { getImg, getMountainImgs } from "../../../WorkBanner/Card/Card"
 import styles from "./NextProjects.module.scss"
-import { arrowFilled } from "../../../../assets/svg/ts/arrowFilled"
-import parse from "html-react-parser"
-import { setLeaveAnimation } from "../../../ProjectsList/ProjectList.animations"
-import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort } from "../../../../assets/ts/utils/utils"
-import { leaveFromArrowClick, leaveFromMoreProjectsClick } from '../../ProjectPost.animations'
+import { leaveFromArrowClick } from '../../ProjectPost.animations'
 
 export interface INextProjects {
     title: string,

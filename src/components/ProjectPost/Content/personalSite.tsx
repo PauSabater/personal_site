@@ -16,9 +16,9 @@ export const personalSiteContent = (): JSX.Element => { return (
                     Personal site
                 </h1>
                 <TagLabels tags={['personal side project']} color={"secondary"}></TagLabels>
-                <TagLabels tags={['TypeScript', 'React', 'React Three Fiber', 'GSAP', 'CSS Modules', 'SCSS']} color={"primary"}></TagLabels>
+                <TagLabels tags={['TypeScript', 'React', 'React Three Fiber', 'GSAP', 'CSS Modules', 'SCSS', 'Blender']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
-                    {parse(calendar("var(--c-grey)"))}<p>July / August 2023</p>
+                    {parse(calendar("var(--c-grey)"))}<p>July / September 2023</p>
                 </div>
                 <p className={styles.intro}>
                     This is a site to <span>present my work and myself</span>. Having quited my job to <span>move to Berlin</span>, I found myself in a situation where I did not have anything to showcase my abilities. Having changed careers, my experience was not very long either to catch attention. Despite having been told that I have good skills, when in a new place that does not matter as you have to start from scratch. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
@@ -90,7 +90,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Some bits of fun</h2>
                     <div>
                         <p className={styles.paragraphRight}>
-                            The page suddenly turning into a 3d scene, an image scaling fullwidth, transitions... I tried to add some surprises through the page, with the intention to showcase some skills, keep the user engaged with the content, and have some fun myself developing the page as well. This parts should be related to the theme of the page in order to keep some consistency.
+                            The page suddenly turning into a 3d scene, an image scaling fullwidth, transitions... I tried to add some surprises through the page, with the intention to showcase some skills, <span>keep the user engaged with the content</span>, and have some fun myself developing the page as well. This parts should be related to the theme of the page in order to keep some consistency.
                         </p>
                     </div>
                     <ImageArticle

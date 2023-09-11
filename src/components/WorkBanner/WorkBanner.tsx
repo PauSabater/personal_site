@@ -70,12 +70,10 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             let timeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: isMobileScreen() ? cardsContainer : elContainer,
-                   // trigger: elContainer,
                     start: "top",
                     end: "bottom",
                     pin: true,
                     pinSpacing: true,
-                    // markers: true,
                     scrub: 1,
                     invalidateOnRefresh: true,
                     onEnter: () => {
@@ -88,8 +86,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                         tlClouds.play()
                         tlLightning.play()
                         gsap.to(card3Rain, {display: "block", opacity: "0.45"})
-                        // console.log(card3ImgContainer.style.transform)
-                        // gsap.to(card3ImgContainer, {scale: "2.5", duration: "0.5"})
+
 
                     },
                     onEnterBack: () => {
@@ -115,7 +112,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             // Cards move to reveal
             timeline
                 .to(card2, {opacity: 1, duration: 0})
-                // .set(card1.querySelector(".img-container"), {opacity: 0})
                 .to([card1, card2], {yPercent: 0, opacity: 1})
                 .set(card1.querySelector(".overlay"), {opacity: 0.5})
                 .set(card3, {opacity: 1})
@@ -170,7 +166,6 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
     return (
         <Fragment>
             <div ref={refFullContainer} className={styles.sectionContainer}>
-                {/* <div className={styles.halfHelper}></div> */}
                 <div ref={refContainer} className={styles.container}>
                     <div className={styles.cardsContainer} id="cards-container">
                         <div className={styles.cardContainer} id="card-1">

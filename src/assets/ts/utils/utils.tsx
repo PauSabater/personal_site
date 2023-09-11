@@ -22,9 +22,6 @@ export function isVerticalMobileTablet(): boolean {
     return window.matchMedia(mediaVerticalMobileTablet).matches
 }
 
-//mobile-tablet
-
-
 export function getTodayDayNum(): string {
     return (new Date()).getDate().toString().padStart(2, '0')
 }
@@ -66,9 +63,7 @@ export function getElXAxisDistCenterToCenterViewport(elTarget: HTMLElement | SVG
 }
 
 export function getElYAxisDistCenterToCenterViewport(elTarget: HTMLElement | SVGSVGElement) {
-    // return window.innerWidth / 2 - (elTarget.getBoundingClientRect().left + (elTarget.getBoundingClientRect().width / 2))
     return window.innerHeight / 2 - (elTarget.getBoundingClientRect().top + (elTarget.getBoundingClientRect().height / 2))
-
 }
 
 export function getGsapDistToCenterElXAxis(elTarget: HTMLElement | SVGSVGElement) {

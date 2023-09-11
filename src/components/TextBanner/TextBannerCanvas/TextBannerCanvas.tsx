@@ -23,7 +23,6 @@ export function TextBannerCanvas({mode}:{mode: string}) {
 
   return (
     <Canvas gl={{ preserveDrawingBuffer: false, precision: "lowp" }} dpr={[1, 1]}>
-        {/* <color attach="background" args={["transparent"]} /> */}
               <PerspectiveCamera
                   ref={refCamera}
                   makeDefault

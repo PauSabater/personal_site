@@ -33,7 +33,7 @@ export function FooterCanvas({mode}: {mode: string}) {
                 <Model mode={mode} />
                 <pointLight position={[-26, -8, -10]} color="red" intensity={5} />
                 <Light />
-                <Environment files="city-test.hdr" path="/"></Environment>
+                <Environment files="city-small.hdr" path="/"></Environment>
             </Suspense>
             <Camera/>
         </Canvas>

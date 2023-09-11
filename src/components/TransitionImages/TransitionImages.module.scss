@@ -18,17 +18,13 @@
 }
 
 .imageContainer {
-    // display: flex;
     position: relative;
     grid-row-start: 1;
     grid-column-start: 1;
-    // align-items: center;
-    // justify-content: center;
     height: 100vh;
     width: 100vw;
     opacity: 0;
     overflow: hidden;
-    // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%)
 
     img {
         transform-origin: center;
