@@ -14,7 +14,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
 
         const elsTextLines: NodeListOf<HTMLParagraphElement> =
             (elTextBanner as HTMLElement).querySelectorAll(`${isMobileScreen() ? '.text-mobile p' : '.text-desktop p'}`)
-        const elBtn = (elTextBanner as HTMLElement).querySelector("Cta")
+        const elBtn = (elTextBanner as HTMLElement).querySelector(".cta")
         const elCanvas = document.querySelector("#text-banner-canvas")
 
         let tlTBanner = gsap.timeline()

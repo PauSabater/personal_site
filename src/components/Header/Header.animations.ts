@@ -20,9 +20,6 @@ export function scrollToFromHomePage(elTarget: HTMLLinkElement) {
         duration = 1.5
     }
 
-    console.log("scroll to is")
-    console.log(elScrollTo)
-
     if (elScrollTo === null) return
 
     gsap.timeline()

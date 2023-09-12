@@ -1,3 +1,5 @@
+import React, { lazy } from 'react'
+
 import { useLayoutEffect, useState } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
 import './App.css'
@@ -21,7 +23,7 @@ import { Overlay } from '../Overlay/Overlay'
 import { msTransitionPage } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
-import { Contact } from '../../pages/contact';
+import { Contact } from '../../pages/contact'
 
 
 const routes = [
@@ -106,7 +108,6 @@ function App() {
     }
 
     function getProjectProps(route: string): any {
-        console.log("ROUTEEE: "+location.pathname)
         if (route === "/projects/papernest") return propsPpn
         else if (route === "/projects/weather-app") return propsWeatherApp
         else if (route === "/projects/personal-site") return propsPersonalSite

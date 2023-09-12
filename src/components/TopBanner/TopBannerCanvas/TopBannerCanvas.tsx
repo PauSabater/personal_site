@@ -103,7 +103,7 @@ function PhysicsScene({mode}:{mode: string}) {
             </RigidBody>
             <RigidBody type="fixed">
                 <mesh position={[0, 0, 0]} receiveShadow={false} rotation={[Math.PI / 2, Math.PI, 0]} scale={[50, 50, 50]}>
-                    <planeBufferGeometry />
+                    <planeGeometry />
                     <meshBasicMaterial attach="material" transparent opacity={0} />
                 </mesh>
             </RigidBody>

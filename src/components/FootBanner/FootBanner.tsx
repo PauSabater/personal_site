@@ -245,15 +245,15 @@ export function FootBanner() {
                     <Ground />
                     <VideoText text="let's+light some+ideas ?" position={[-1.7, 1.55, -2] as Vector3} />
                     <mesh position={[0.1, 4.8, -2.05] as Vector3}>
-                        <planeBufferGeometry attach="geometry" args={[10, 10]} />
+                        <planeGeometry attach="geometry" args={[10, 10]} />
                         <meshBasicMaterial reflectivity={1} attach="material" color={colorMain} />
                     </mesh>
                     <mesh rotation={[Math.PI / -2, 0, 0 ]} position={[-5.95, 0.05, -1.5] as Vector3}>
-                        <planeBufferGeometry attach="geometry" args={[0.075, 13]} />
+                        <planeGeometry attach="geometry" args={[0.075, 13]} />
                         <meshStandardMaterial emissive="#a29520" emissiveIntensity={1} toneMapped={false} />
                     </mesh>
                     <mesh rotation={[0, Math.PI / 2, 0 ]} position={[-6, 7.4, -3.0] as Vector3}>
-                        <planeBufferGeometry attach="geometry" args={[12, 15]} />
+                        <planeGeometry attach="geometry" args={[12, 15]} />
                         <meshBasicMaterial reflectivity={1} attach="material" color={colorMain} />
                     </mesh>
                     <Glass position={[-3.55, 0.55, 0.65] as Vector3} radius={0.65} size={0.65} />
