@@ -54,11 +54,14 @@ export function setProjectListEnterAnimation() {
             duration: scOpacityFade,
             ease: "power2.in",
         }, 'start')
-        .from(document.getElementById("page-projects"), {
+        .fromTo(document.getElementById("page-projects"), {
             opacity: 0,
             duration: scEnterPageLong,
             y: "10vh",
             ease: "power1.inOut",
+        }, {
+            opacity: 1,
+            y: "0"
         }, 'start')
     .play();
 }

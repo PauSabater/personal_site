@@ -25,8 +25,6 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
     const refPostImageContainer = useRef(null)
     const [showCanvas, setShowCanvas] = useState(false)
 
-    // console.log(props)
-
     useEffect(()=> {
         window.scroll(0, 0)
     }, [])

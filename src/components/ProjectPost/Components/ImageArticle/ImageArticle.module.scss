@@ -18,7 +18,7 @@
 
     img {
         width: 100%;
-        width: stretch;
+        width: -webkit-fill-available;
         opacity: 1;
         border-radius: 10px;
     }
@@ -60,12 +60,20 @@
 
         .imgContainer {
             img.imgWithMargin {
-            margin-top: 0;
-        }
+                margin-top: 0;
+            }
 
-        img {
-            height: auto;
-            max-width: 100%;
+            img {
+                height: auto;
+                max-width: 100%;
+            }
+
+            .hasMargin {
+                margin-top: var(--mg-sm);
+            }
+
+            .hasMediumMargin {
+                margin-top: var(--mg-sm);
+            }
         }
-    }
 }
