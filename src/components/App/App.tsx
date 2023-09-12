@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import { Suspense, lazy } from 'react'
 
 import { useLayoutEffect, useState } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
@@ -8,22 +8,28 @@ import '../../assets/scss/classes.scss'
 import '../../assets/scss/fonts.scss'
 
 import { Header } from '../Header/Header'
-import { PapernestProject } from '../../pages/projects/Papernest'
-import { WeatherAppProject } from '../../pages/projects/WeatherApp'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { SwitchTransition, Transition } from 'react-transition-group'
 import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages'
-import { IPropsProjectPost } from '../ProjectPost/ProjectPost'
-import { papernestContent } from '../ProjectPost/Content/papernest'
 import { executeEnterAnimations, executeExitAnimations } from './App.animations'
-import { Projects } from '../../pages/projects'
-import { PersonalSiteProject } from '../../pages/projects/PersonalSite'
 import { Overlay } from '../Overlay/Overlay'
-import { msTransitionPage } from '../../assets/ts/utils/utils'
+import { msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
-import { WeatherAppLiveResult } from '../../pages/projectsLive/WeatherAppLiveResult'
-import { Contact } from '../../pages/contact'
+import Projects from '../../pages/projects'
+import Contact from '../../pages/contact'
+import PersonalSiteProject from '../../pages/projects/PersonalSite'
+import PapernestProject from '../../pages/projects/Papernest'
+import WeatherAppProject from '../../pages/projects/WeatherApp'
+// import WeatherAppLiveResult from '../../pages/projectsLive/WeatherAppLiveResult'
+
+
+// const Contact = lazy(() => import('../../pages/contact'))
+// const Projects = lazy(() => import('../../pages/projects'))
+// const PersonalSiteProject = lazy(() => import('../../pages/projects/PersonalSite'))
+// const PapernestProject = lazy(() => import('../../pages/projects/Papernest'))
+// const WeatherAppProject = lazy(() => import('../../pages/projects/WeatherApp'))
+const WeatherAppLiveResult = lazy(() => import('../../pages/projectsLive/WeatherAppLiveResult'))
 
 
 const routes = [
@@ -36,87 +42,12 @@ const routes = [
     {path: '/contact', name: 'Contact', Component: Contact},
 ]
 
-
 function App() {
 
     const location = useLocation()
 
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
-
-    const propsPpn: IPropsProjectPost = {
-        indexTitle: "CONTENT",
-        wysiwyg: papernestContent(),
-        imgPath: "papernest.svg",
-        pathNextProject: "weather-app",
-        currentPath: "papernest",
-        nextProjects: {
-            title: "More projects",
-            projects: [{
-                title: "/ personal site",
-                description: "",
-                path: "/projects/personal-site",
-                img: "personal-site.svg"
-            },{
-                title: "/ weather forecast app",
-                description: "",
-                path: "/projects/weather-app",
-                img: "mountains"
-        }]}
-    }
-
-    const propsWeatherApp: IPropsProjectPost = {
-        indexTitle: "CONTENT",
-        wysiwyg: papernestContent(),
-        imgPath: "personal-site.svg",
-        pathNextProject: "weather-app",
-        currentPath: "weather-app",
-        nextProjects: {
-            title: "More projects",
-            projects: [{
-                title: "/ personal site",
-                description: "",
-                path: "/projects/personal-site",
-                img: "personal-site.svg"
-            },{
-                title: "/ weather forecast app",
-                description: "",
-                path: "/projects/weather-app",
-                img: "mountains"
-        }]}
-    }
-
-    const propsPersonalSite: IPropsProjectPost = {
-        indexTitle: "CONTENT",
-        wysiwyg: papernestContent(),
-        imgPath: "personal-site.svg",
-        pathNextProject: "weather-app",
-        currentPath: "personal-site",
-        nextProjects: {
-            title: "More projects",
-            projects: [{
-                title: "/ personal site",
-                description: "",
-                path: "projects/personal-site",
-                img: "personal-site.svg"
-            },{
-                title: "/ weather forecast app",
-                description: "",
-                path: "projects/weather-app",
-                img: "mountains"
-        }]}
-    }
-
-    function getProjectProps(route: string): any {
-        if (route === "/projects/papernest") return propsPpn
-        else if (route === "/projects/weather-app") return propsWeatherApp
-        else if (route === "/projects/personal-site") return propsPersonalSite
-        else if (route === "/projects") return texts.projectsList
-        else if (route === "/projects/weather-app/live-result") return texts.projectsList
-        else if (route === "/contact") return texts.projectsList
-
-        else return texts.home
-    }
 
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
@@ -135,12 +66,21 @@ function App() {
         })
     }, [])
 
+    function getTransitionLength(route: string) {
+        if (route.includes("projects") && route.includes("projects/") === false) {
+            return msTransitionPageLong
+        } else {
+            return msTransitionPage
+        }
+    }
+
 
     return (
         <div className="main" data-theme={theme}>
             <Header links={ texts.header.links } mode={theme}/>
             <TransitionImages mode={theme} />
                 <div className='page' id="page-content">
+                    <Suspense fallback={<div>Loading...</div>}>
                         <Routes>
                             {routes.map((route, i) =>
                                 <Route path={route.path} key={`route-${i}`} element={
@@ -148,9 +88,9 @@ function App() {
                                         <Transition
                                             key={location.pathname}
                                             nodeRef={nodeRef}
-                                            timeout={msTransitionPage}
+                                            timeout={getTransitionLength(route.path)}
                                             classNames="page"
-                                            unmountOnExit
+                                            unmountOnExit={false}
                                             onExit={(node: HTMLElement) => {
                                                 executeExitAnimations(node.id || '', node, route.path)
                                             }}
@@ -160,7 +100,6 @@ function App() {
                                         >
                                             <route.Component
                                                 mode={theme}
-                                                props={getProjectProps(location.pathname)}
                                             ></route.Component>
                                         </Transition>
                                     </SwitchTransition>
@@ -168,6 +107,7 @@ function App() {
                                 ></Route>
                             )}
                         </Routes>
+                    </Suspense>
                 </div>
             <Footer mode={theme} />
             <Overlay/>

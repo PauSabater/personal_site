@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
 import parse from 'html-react-parser'
 import * as THREE from 'three'
-import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
 
@@ -240,7 +240,6 @@ export function FootBanner() {
             <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
-            <Suspense fallback={null}>
                 <group position={[0, -1, 0]}>
                     <Ground />
                     <VideoText text="let's+light some+ideas ?" position={[-1.7, 1.55, -2] as Vector3} />
@@ -261,7 +260,6 @@ export function FootBanner() {
                     <Glass position={[-1.3, 0.45, -1] as Vector3} radius={0.2} size={0.55}/>
                 </group>
                 <spotLight position={[0, 10, 0]} intensity={2} />
-            </Suspense>
             </Canvas>
 
             <div ref={refContactContainer} className={styles.contactContainer}>

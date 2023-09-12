@@ -8,20 +8,20 @@ import {
   MeshTransmissionMaterial,
   PerspectiveCamera,
   Html,
-  ContactShadows,
+//   ContactShadows,
   useGLTF,
   meshBounds,
 } from '@react-three/drei'
 
 import { RigidBody, Physics } from '@react-three/rapier'
-import { Fragment, Suspense, useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, useLayoutEffect, useRef, useState } from 'react'
 import parse from 'html-react-parser'
 import styles from "./TopBanner.module.scss"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { ellipse, underline } from '../../../assets/svg/ts/strokes'
 import { setTopBannerAnimations } from '../TopBanner.animations'
-import { getViewportAspectRatio, hideAllTransitionImages, scTransitionPage } from '../../../assets/ts/utils/utils'
+import { getViewportAspectRatio, hideAllTransitionImages, isMobileScreen, scTransitionPage } from '../../../assets/ts/utils/utils'
 import * as THREE from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -42,11 +42,9 @@ export function TopBannerCanvas({mode}: {mode: string}) {
         <Canvas gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
             <color attach="background" args={[mode === "dark" ? 'hsl(0, 0%, 7%)' : 'hsl(136, 0%, 96%)']} />
             <Camera />
-            <Suspense>
                 {/* @ts-ignore */}
                 <SceneComponents mode={mode}></SceneComponents>
                 <Environment files="warehouse-small.hdr"></Environment>
-            </Suspense>
             <OrbitControls
                 enabled={false}
                 enablePan={true}
@@ -314,13 +312,15 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         setElCanvas(document.querySelector("#top-banner-container") as HTMLElement)
         setWindowHeight(window.innerHeight)
 
-        // Observe to determine when we render:
-        new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.intersectionRatio > 0) setShouldRender(true)
-                else setShouldRender(false)
-            })
-        }).observe(document.getElementById("top-banner-container") as Element)
+        // Observe only on desktop to determine when we render. On mobile the glass effect is not added:
+        if (isMobileScreen() === false) {
+            new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.intersectionRatio > 0) setShouldRender(true)
+                    else setShouldRender(false)
+                })
+            }).observe(document.getElementById("top-banner-container") as Element)
+        } else setShouldRender(false)
 
 
         if (refPretitle.current !== null && refPretitleMaterial !== null && refTitle.current !== null && refTitleMaterial !== null) {
@@ -394,8 +394,9 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             }
 
             const elPageLoader = document.querySelector(".page-loader")
+            const isMobile = isMobileScreen()
             if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
-            else setTimeout(() => initiateTopBanner(), 1000)
+            else setTimeout(() => initiateTopBanner(), isMobile ? 4000 : 2000)
         }
     }, [])
 
@@ -506,7 +507,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                 </mesh>
             </group>
 
-            <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} />
+            {/* <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> */}
             <Grid mode={mode} />
             {physics === true ? <PhysicsScene mode={mode}/> : ''}
         </group>

@@ -4,7 +4,7 @@ import { FootBanner } from "../components/FootBanner/FootBanner"
 import { hasPageBeenLoaded } from "../assets/ts/utils/utils"
 import { setPageFadeInAnimation } from "../components/App/App.animations"
 
-export function Contact({props, mode}:{props: any, mode: string}) {
+export default function Contact({mode}:{mode: string}) {
 
     useLayoutEffect(()=> {
         setPageFadeInAnimation()

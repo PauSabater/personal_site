@@ -76,6 +76,7 @@
     font-size: var(--fs-text-banner);
     font-weight: var(--fw-regular);
     z-index: 10;
+    transform: translateY(100px);
 
     span {
         position: relative;
@@ -135,5 +136,11 @@
             width: 150px;
             transform: rotateZ(10deg) scaleX(0.9);
         }
+    }
+}
+
+@include mixins.mobile-tablet {
+    .text {
+        transform: translateY(0);
     }
 }

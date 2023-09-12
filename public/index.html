@@ -177,10 +177,13 @@
         // get active theme
         const theme = localStorage.getItem("theme") || "light"
         document.body.setAttribute("data-theme", theme)
+        const isMobileView = window.innerWidth < 768
 
         const pageLocation = window.location.href
         const isHomepage = pageLocation.includes("projects") === false && pageLocation.includes("contact") === false
-        const delay = isHomepage ? 2000 : 1000
+        const delay = isHomepage
+            ? isMobileView ? 4000 : 2000
+            : isMobileView ? 2000 : 1000
         if (isHomepage === false) document.querySelector(".page-loader__title").style.display = "none"
 
         // loading is delayed in homepage to show sentence

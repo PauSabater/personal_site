@@ -1,8 +1,9 @@
 import { useLayoutEffect } from "react"
 import { ProjectList } from "../components/ProjectsList/ProjectList"
 import { showHeader } from "../components/Header/Header.animations"
+import {texts} from "../assets/ts/texts/texts"
 
-export function Projects({props, mode}:{props: any, mode: string}) {
+export default function Projects({mode}:{mode: string}) {
 
     useLayoutEffect(()=> {
         showHeader()
@@ -10,6 +11,6 @@ export function Projects({props, mode}:{props: any, mode: string}) {
     }, [])
 
     return (
-        <ProjectList props={props} mode={mode}></ProjectList>
+        <ProjectList props={texts.projectsList} mode={mode}></ProjectList>
     )
 }

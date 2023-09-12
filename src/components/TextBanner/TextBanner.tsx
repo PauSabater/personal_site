@@ -1,10 +1,11 @@
-import { useLayoutEffect, useRef } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./TextBanner.module.scss"
 import parse from 'html-react-parser'
 import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
 import { TextBannerCanvas } from "./TextBannerCanvas/TextBannerCanvas"
 import { ReactComponent as NoteLogo } from '../../assets/svg/note-logo.svg'
+import { isMobileScreen } from "../../assets/ts/utils/utils"
 
 export interface ITextBannerTexts {
     title: string,
@@ -21,7 +22,6 @@ export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: str
     useLayoutEffect(() => {
         setTextBannerAnimations(refTextBanner)
     }, [])
-
 
     return (
         <div ref={refTextBanner} className={styles.container} id="text-banner" data-theme={mode}>
@@ -40,10 +40,13 @@ export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: str
                 )}
                 <Cta props={texts.Cta}></Cta>
 
-                <div className={styles.canvasContainer} id="text-banner-canvas">
-                <TextBannerCanvas mode={mode}/>
-                <NoteLogo/>
-            </div>
+                {!isMobileScreen() ?
+                    <div className={styles.canvasContainer} id="text-banner-canvas">
+                        <TextBannerCanvas mode={mode}/>
+                        <NoteLogo/>
+                    </div>
+                    : ''
+                }
             </div>
         </div>
     )

@@ -69,27 +69,35 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 scrollTrigger: {
                     trigger: isMobileScreen() ? cardsContainer : elContainer,
                     start: "top",
-                    end: "bottom",
+                    end: `bottom -=${window.innerHeight * 1.25}`,
                     pin: true,
                     pinSpacing: true,
                     scrub: 1,
                     invalidateOnRefresh: true,
+                    anticipatePin: 1,
+                    fastScrollEnd: 3000,
                     onEnter: () => {
                         addOutlineHeader()
                         tlClouds.pause()
                         tlLightning.pause()
-                        gsap.to(card3Rain, {display: "block", opacity: "0"})
+                        if(!isMobileScreen()) {
+                            gsap.to(card3Rain, {display: "block", opacity: "0"})
+                        }
                     },
                     onLeave: () => {
                         tlClouds.play()
                         tlLightning.play()
-                        gsap.to(card3Rain, {display: "block", opacity: "0.45"})
+                        if(!isMobileScreen()) {
+                            gsap.to(card3Rain, {display: "block", opacity: "0.45"})
+                        }
                     },
                     onEnterBack: () => {
                         removeOutlineHeader()
                         tlLightning.pause()
                         tlClouds.pause()
-                        gsap.to(card3Rain, {display: "none", opacity: "0"})
+                        if(!isMobileScreen()) {
+                            gsap.to(card3Rain, {display: "none", opacity: "0"})
+                        }
                     },
                 }
             })
@@ -108,10 +116,10 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             // Cards move to reveal
             timeline
                 .to(card2, {opacity: 1, duration: 0})
-                .to([card1, card2], {yPercent: 0, opacity: 1})
+                .to([card1, card2], {yPercent: 0, opacity: 1, duration: 1.1})
                 .set(card1.querySelector(".overlay"), {opacity: 0.5})
                 .set(card3, {opacity: 1})
-                .to(card3, {yPercent: 0})
+                .to(card3, {yPercent: 0, duration: 1.1})
                 .set(card2.querySelector(".overlay"), {opacity: 0.5})
                 .set(card2.querySelector(".img-container"), {opacity: 0})
                 .set(card1.querySelector(".overlay"), {opacity: 0.7})
@@ -136,7 +144,9 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                         } else {
                             const dist = card3Svg.getBoundingClientRect().height * getViewportAspectRatio()
                             return dist > card3ImgContainer.getBoundingClientRect().width ? dist : card3ImgContainer.getBoundingClientRect().width
-                        }}
+                        }},
+                    duration: 0,
+                    ...!isMobileScreen() && {duration: 1.5}
                 }, 'end')
 
             // Animate third img:
@@ -145,7 +155,8 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 .to(card3ImgContainer, {
                     x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
                     y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
-                    scale: ()=> getScaleToCoverViewPort(card3Svg)
+                    scale: ()=> getScaleToCoverViewPort(card3Svg),
+                    duration: 2.2
                 }, 'start')
 
                 .to(elMoon, {opacity: "0"}, 'start')

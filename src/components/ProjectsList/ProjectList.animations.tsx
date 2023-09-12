@@ -1,5 +1,5 @@
 import gsap from "gsap"
-import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort, isElLeftOfScreen, isMobileScreen, scEnterPageLong, scOpacityFade, scTransitionPage } from "../../assets/ts/utils/utils"
+import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort, isElLeftOfScreen, isMobileScreen, scEnterPageLong, scOpacityFade, scTransitionPage, scTransitionPageLong } from "../../assets/ts/utils/utils"
 
 export function setLeaveAnimation(elTarget: HTMLElement) {
     // setCardTransitionAnimation()
@@ -9,7 +9,7 @@ export function setLeaveAnimation(elTarget: HTMLElement) {
 
     const tlTransition = gsap.timeline()
     const elsCardsToFade = document.querySelectorAll(`.project-card:not(#${elTarget.id})`)
-    const skewAngle = isMobileScreen() ? 0 : 5
+    const skewAngle = isMobileScreen() ? 0 : 0
 
     tlTransition
         .set(elImg, {borderRadius: '0px'})
@@ -17,11 +17,11 @@ export function setLeaveAnimation(elTarget: HTMLElement) {
             y: getGsapDistToCenterElYAxis(elImg),
             x: getGsapDistToCenterElXAxis(elImg),
             scale: getScaleToCoverViewPort(elImg as HTMLElement),
-            duration: scTransitionPage,
-            ease: "power1.inOut",
+            duration: scTransitionPageLong,
+            ease: "power4.easeOut",
             onStart: ()=> {
                 disableScroll()
-                const durSkew = scTransitionPage - 0.30
+                const durSkew = scTransitionPageLong - 0.50
                 gsap.to(elImg, {
                     skewY: isElLeftOfScreen(elImg) ? `-${skewAngle}deg` : `${skewAngle}deg`,
                     duration: durSkew
