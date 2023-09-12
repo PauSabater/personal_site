@@ -3,7 +3,7 @@ import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
 import parse from "html-react-parser"
 import { Link } from "react-router-dom"
-import { hasPageBeenLoaded, hidePageOverlay, msEnterPageLong } from "../../assets/ts/utils/utils"
+import { hasPageBeenLoaded, hidePageOverlay, isMobileScreen, msEnterPageLong } from "../../assets/ts/utils/utils"
 import { executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver } from "./ProjectPost.animations"
 import { INextProjects, NextProjects } from "./Components/NextProjects/NextProjects"
 import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
@@ -51,7 +51,7 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
             setMountainsAnimationObserver()
         }
 
-        if (props.imgPath === "personal-site.svg") {
+        if (props.imgPath === "personal-site.svg" && isMobileScreen() === false) {
             setTimeout(()=> setShowCanvas(true), msEnterPageLong + 200)
         }
     }, [])

@@ -236,6 +236,7 @@
     }
 
     .iconsContainer {
+        pointer-events: none;
         position: fixed;
         display: flex;
         flex-direction: row;
@@ -389,6 +390,7 @@
     }
 
     .listContainer {
+        pointer-events: none;
         position: fixed;
         top: 25vh;
         height: fit-content;

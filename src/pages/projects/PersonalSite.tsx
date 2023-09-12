@@ -1,9 +1,9 @@
 import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/ProjectPost"
 import { personalSiteContent } from "../../components/ProjectPost/Content/personalSite"
 
-export function PersonalSiteProject({ props, mode }: { props: IPropsProjectPost, mode: string }) {
+export default function PersonalSiteProject({ mode }: { mode: string }) {
 
-    const propss: IPropsProjectPost = {
+    const props: IPropsProjectPost = {
         indexTitle: "CONTENT",
         wysiwyg: personalSiteContent(),
         imgPath: "personal-site.svg",
@@ -24,10 +24,6 @@ export function PersonalSiteProject({ props, mode }: { props: IPropsProjectPost,
         }]}
     }
 
-    return <ProjectPost props={propss} mode={mode}></ProjectPost>
+    return <ProjectPost props={props} mode={mode}></ProjectPost>
 }
-
-// export function PersonalSiteProject(props: IPropsProjectPost) {
-//     return <ProjectPost props={props}></ProjectPost>
-// }
 

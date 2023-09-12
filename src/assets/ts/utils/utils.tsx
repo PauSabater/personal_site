@@ -2,10 +2,11 @@ import gsap from "gsap"
 
 const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (max-aspect-ratio: 1/1)`
 const mediaMobile: string = `screen and (max-width: 768px)`
+export const matchMediaMobile: string = `(max-width: 768px)`
 
 // Time animations
 export const msTransitionPage = 600
-export const msTransitionPageLong = 2000
+export const msTransitionPageLong = 1100
 export const msEnterPageLong = 1000
 export const scTransitionPage = msTransitionPage / 1000
 export const scTransitionPageLong = msTransitionPageLong / 1000

@@ -6,9 +6,12 @@ import { SkillsBanner } from "../components/SkillsBanner/SkillsBanner";
 import { MethodSection } from "../components/MethodSection/MethodSection";
 import { FootBanner } from "../components/FootBanner/FootBanner";
 import styles from "./pages.module.scss"
+import {texts} from "../assets/ts/texts/texts"
 
 
-export function Home({mode, props}: {mode: string, props: any}) {
+export function Home({mode}: {mode: string}) {
+
+    const textsPage = texts.home
 
     useLayoutEffect(()=> {
         window.scrollTo(0,0)
@@ -17,13 +20,13 @@ export function Home({mode, props}: {mode: string, props: any}) {
 
     return (
         <div id="page-home">
-            <TopBanner props={props.topBanner} mode={mode}/>
-            <TextBanner texts={props.intro} mode={mode}/>
-            <WorkBanner props={props.workBanner} mode={mode}/>
+            <TopBanner props={textsPage.topBanner} mode={mode}/>
+            <TextBanner texts={textsPage.intro} mode={mode}/>
+            <WorkBanner props={textsPage.workBanner} mode={mode}/>
             <Suspense>
             <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
-                <SkillsBanner texts={props.skillsBanner} mode={mode}/>
-                <MethodSection props={props.methodSectionTexts} mode={mode}/>
+                <SkillsBanner texts={textsPage.skillsBanner} mode={mode}/>
+                <MethodSection props={textsPage.methodSectionTexts} mode={mode}/>
                 <FootBanner />
             </div>
             </Suspense>

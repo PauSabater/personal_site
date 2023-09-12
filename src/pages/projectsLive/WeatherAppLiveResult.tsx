@@ -5,7 +5,7 @@ import { WeatherApp } from "weather-app-ps/dist/esm/index"
 import { setPageFadeInAnimation } from "../../components/App/App.animations"
 
 
-export function WeatherAppLiveResult({props, mode}: {props: any, mode: any}) {
+export default function WeatherAppLiveResult({mode}: {mode: any}) {
 
     useEffect(() => {
         hideAllTransitionImages()

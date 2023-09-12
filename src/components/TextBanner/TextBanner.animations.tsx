@@ -5,7 +5,9 @@ import { isMobileScreen } from "../../assets/ts/utils/utils";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {
+
     let ctx = gsap.context(() => {
+        const isMobile = isMobileScreen()
 
         // Reference element from component:
         let elTextBanner: HTMLElement | null = refTextBanner.current
@@ -19,34 +21,44 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
 
         let tlTBanner = gsap.timeline()
 
-        tlTBanner
-        // Full banner opacity and translate:
-        .fromTo(
-            elTextBanner,
-            {opacity: 0, y: 200},
-            {opacity: 1, y: 0, duration: 0.4},
-            'start'
+        tlTBanner.pause()
+            // Full banner opacity and translate:
+            .fromTo(
+                elTextBanner,
+                {y: window.innerHeight / 4},
+                {y: 0, duration: 0.5},
+                'start'
+            )
+            .fromTo(
+                elTextBanner,
+                {opacity: 0},
+                {opacity: 1, duration: 0.75},
+                'start'
+            )
+            // Btn appear:
+            .fromTo(elBtn,
+                {opacity: 0},
+                {
+                    opacity: 1, duration: 0.5,
+                    onComplete: ()=> {
+                        elTextBanner?.setAttribute('data-animation-is-finished', '')
+                        gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
+                    }
+                },
+                'end'
         )
-        // Text lines reveal effect:
-        .fromTo(Array.from(elsTextLines),
-            {opacity: 0, y: 100},
-            {opacity: 1, y: 0, duration: 0.5, stagger: 0.05},
-            'start'
-        )
-        // Canvas:
-        .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.5}, 'start')
-        // Btn appear:
-        .fromTo(elBtn,
-            {opacity: 0},
-            {
-                opacity: 1, duration: 0.3,
-                onComplete: ()=> {
-                    elTextBanner?.setAttribute('data-animation-is-finished', '')
-                    gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
-                }
-            },
-            'end'
-        )
+
+        // Add lines animation only on desktop
+        if (!isMobileScreen()) {
+            tlTBanner
+                // Text lines reveal effect:
+                .fromTo(Array.from(elsTextLines),
+                {opacity: 0},
+                {opacity: 1, y: 0, duration: 0.7, stagger: 0.05},
+                'start')
+                // Canvas:
+                .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.5}, 'start')
+        }
 
         tlTBanner.pause()
 
