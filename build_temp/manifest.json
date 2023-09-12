@@ -1,0 +1,12 @@
+{
+  "short_name": "Pau Sabater",
+  "name": "Pau Sabater Portfolio",
+  "icons": [{
+      "src": "favicon-large.png",
+      "sizes": "512x512"
+  }],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
