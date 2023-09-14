@@ -83,12 +83,13 @@ function Camera() {
         if (elFooter !== null) io.observe(elFooter)
     }, [])
 
+
     // Render when needed and add camera lerp based on mouse pos
     useFrame(({ gl, scene, camera }) => {
         camera.position.lerp(vec.set((
-            mouse.x * (mouse.x > 0 ? 9 : 2)) + xPos,
-            (mouse.y < 0 ? mouse.y * 1.5 : 0) + 4.5,
-            Math.abs(mouse.x > 0 ? 6 : -3) + zPos)
+            mouse.x * (mouse.x > 0 ? 9 : 2) * viewportAspectRatio > 1 ? 1 : 0.2) + xPos,
+            (mouse.y < 0 ? mouse.y * 1.5 : 0 * viewportAspectRatio > 1 ? 1 : 0.1) + 4.5,
+            Math.abs(mouse.x > 0 ? 6 : -3 * viewportAspectRatio > 1 ? 1 : 0.2) + zPos)
         , 0.01)
         if (shouldRender === true && isHomepage === false) {
             gl.render(scene, camera)

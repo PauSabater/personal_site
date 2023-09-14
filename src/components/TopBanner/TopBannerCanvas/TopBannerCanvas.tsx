@@ -474,13 +474,12 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
                     {...props}>
                     {/* @ts-ignore */}
-                    <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 0 : 8} thickness={isMobileScreen() ? 0.5 : 2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
+                    <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 2 : 8} thickness={2} chromaticAberration={isMobileScreen() ? 0 : 0.5} anisotropy={isMobileScreen() ? 0 : 2.5} envMapIntensity={isMobileScreen() ? 2 : 5}/>
                 </mesh>
             </group>
 
-            {/* <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> */}
+            {/* {isMobileScreen() === false ? <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={256} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> : ''} */}
             <Grid mode={mode} />
-            {/* {physics === true ? <PencilsDuo mode={mode}/> : ''} */}
             <PencilsDuo mode={mode}/>
         </group>
         </>

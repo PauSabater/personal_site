@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
+import { isMobileScreen } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
@@ -114,7 +115,9 @@ export function FootBanner() {
         const [shouldRender, setShouldRender] = useState(false)
 
 
-        const [video] = useState(() => Object.assign(document.createElement('video'), {
+        const [video] = useState(() => isMobileScreen()
+        ? null
+        : Object.assign(document.createElement('video'), {
             src: '/video-comp.mp4',
             crossOrigin: 'Anonymous',
             loop: true,
@@ -122,7 +125,7 @@ export function FootBanner() {
         }))
 
         useEffect(() => {
-            void video.pause()
+            if (video !== null) void video.pause()
 
             if (isBannerExpanded === false && camera !== null) {
                 gsap
@@ -148,7 +151,7 @@ export function FootBanner() {
         }, [])
 
         const setVideo = ()=> {
-            setTimeout(()=> void video.play(), 0)
+            if(video !== null ) setTimeout(()=> void video.play(), 0)
         }
 
         const [isAnimating, setIsAnimating] = useState(false)
@@ -196,7 +199,7 @@ export function FootBanner() {
             <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
                 {text.split('+').join('\n')}
                 <meshBasicMaterial ref={refVideoTexture} toneMapped={false}>
-                <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
+                {!isMobileScreen() ? <videoTexture attach="map" args={[video as HTMLVideoElement]} encoding={THREE.sRGBEncoding} /> : ''}
                 </meshBasicMaterial>
             </Text>
         )
@@ -241,7 +244,10 @@ export function FootBanner() {
             <Camera />
                 <group position={[0, -1, 0]}>
                     <Ground />
-                    <VideoText text="let's+light some+ideas ?" position={[-1.7, 1.55, -2] as Vector3} />
+                    <VideoText
+                        text={isMobileScreen() ? "let's+shape some+ideas ?" : "let's+light some+ideas ?"}
+                        position={[-1.7, 1.55, -2] as Vector3}
+                    />
                     <mesh position={[0.1, 4.8, -2.05] as Vector3}>
                         <planeGeometry attach="geometry" args={[10, 10]} />
                         <meshBasicMaterial reflectivity={1} attach="material" color={colorMain} />

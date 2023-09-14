@@ -57,10 +57,6 @@ function Model() {
 
     {/* @ts-ignore */}
     const { nodes } = useGLTF("/logo3d_3000.glb")
-    console.log("heyyy")
-    console.log(nodes)
-
-    console.log(nodes)
 
     useFrame(({ gl, scene, camera }) => {
 
