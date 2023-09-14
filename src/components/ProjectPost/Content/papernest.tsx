@@ -3,9 +3,8 @@ import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
-import parse from "html-react-parser"
-import { calendar } from "../../../assets/svg/ts/calendar"
 import { getArrowLinkTemplate } from "../ProjectPost"
+import { ReactComponent as Calendar } from '../../../assets/svg/icons/calendar.svg'
 
 
 export const papernestContent = (): JSX.Element => { return (
@@ -18,7 +17,8 @@ export const papernestContent = (): JSX.Element => { return (
                 <TagLabels tags={['professional experience']} color={"secondary"}></TagLabels>
                 <TagLabels tags={['TypeScript', 'LITElement', 'Performance', 'Webpack', 'Django', 'PHP', 'Wordpress', 'SEO']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
-                    {parse(calendar("var(--c-grey)"))}<p>March 2021 - April 2023</p>
+                    <Calendar></Calendar>
+                    <p>March 2021 - April 2023</p>
                 </div>
                 <p className={styles.intro}>
                     <LinkInline text={"papernest"} href={"https://papernest.com/"}/> is a french <span>tech startup</span> with a worforce of around 1000 employees, which automates the moving process of telecom contracts, energy contracts or even its home insurance through partnerships with its suppliers. I had the pleasure to work for them as a <span>frontend developer</span>. Having the tech department strongly integrated <span>good coding practises</span>, this period was very benefitial for me to grow professionally.

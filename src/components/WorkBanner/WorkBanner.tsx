@@ -73,7 +73,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     pin: true,
                     pinSpacing: true,
                     scrub: 1,
-                    invalidateOnRefresh: true,
+                    invalidateOnRefresh: false,
                     anticipatePin: 1,
                     fastScrollEnd: 3000,
                     onEnter: () => {
@@ -156,7 +156,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
                     y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
                     scale: ()=> getScaleToCoverViewPort(card3Svg),
-                    duration: 2.2
+                    duration: isMobileScreen() ? 3 : 2.2
                 }, 'start')
 
                 .to(elMoon, {opacity: "0"}, 'start')

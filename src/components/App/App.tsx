@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 
 import { useLayoutEffect, useState } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
@@ -21,14 +21,6 @@ import Contact from '../../pages/contact'
 import PersonalSiteProject from '../../pages/projects/PersonalSite'
 import PapernestProject from '../../pages/projects/Papernest'
 import WeatherAppProject from '../../pages/projects/WeatherApp'
-// import WeatherAppLiveResult from '../../pages/projectsLive/WeatherAppLiveResult'
-
-
-// const Contact = lazy(() => import('../../pages/contact'))
-// const Projects = lazy(() => import('../../pages/projects'))
-// const PersonalSiteProject = lazy(() => import('../../pages/projects/PersonalSite'))
-// const PapernestProject = lazy(() => import('../../pages/projects/Papernest'))
-// const WeatherAppProject = lazy(() => import('../../pages/projects/WeatherApp'))
 const WeatherAppLiveResult = lazy(() => import('../../pages/projectsLive/WeatherAppLiveResult'))
 
 
@@ -45,11 +37,20 @@ const routes = [
 function App() {
 
     const location = useLocation()
+    const [homepageClass, setHomePageClass] = useState(
+        !location.pathname.includes('projects') && !location.pathname.includes('contact')
+            ? 'homepage' : ''
+    )
 
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
 
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
+
+    useEffect(()=> {
+        setHomePageClass(!location.pathname.includes('projects') && !location.pathname.includes('contact')
+        ? 'homepage' : '')
+    }, [location])
 
     useLayoutEffect(()=> {
         if (window.location.href.includes("projects")) {
@@ -79,7 +80,7 @@ function App() {
         <div className="main" data-theme={theme}>
             <Header links={ texts.header.links } mode={theme}/>
             <TransitionImages mode={theme} />
-                <div className='page' id="page-content">
+                <div className={`page ${homepageClass}`} id="page-content">
                     <Suspense fallback={<div>Loading...</div>}>
                         <Routes>
                             {routes.map((route, i) =>

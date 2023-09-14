@@ -3,11 +3,11 @@ import styles from "./ProjectList.module.scss"
 import { TagLabels } from "../ProjectPost/Components/TagLabels/TagLabels"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
 import { getImg } from "../WorkBanner/Card/Card"
-import parse from 'html-react-parser'
 import { Link } from "react-router-dom"
 import { setLeaveAnimation, setProjectListEnterAnimation } from "./ProjectList.animations"
 import { hasPageBeenLoaded, hideAllTransitionImages } from "../../assets/ts/utils/utils"
 import { removeOutlineHeader } from "../Header/Header.animations"
+
 
 export interface IProjectList {
     title: string,
@@ -46,7 +46,7 @@ export function ProjectList({props, mode}: {props: IProjectList, mode: string}) 
             <div className={styles.gradient}></div>
             <div className={"intro-container"}>
                 <h1 className={styles.title}>{props.title}</h1>
-                <p className={styles.intro}>{parse(props.intro)}</p>
+                <p className={styles.intro}>{props.intro}</p>
             </div>
             {props.projects.map((project, i)=> {
                 return (

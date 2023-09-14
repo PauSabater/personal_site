@@ -17,7 +17,7 @@ export default function Model(props: any) {
     const group = useRef()
     const viewportAspectRatio = getViewportAspectRatio()
     // @ts-ignore
-    const { nodes } = useGLTF('/shapes-footer.glb')
+    const { nodes } = useGLTF('/shapes_low.glb')
 
     return (
         <group position={[0, -2.5, 0]} rotation={[0, -3.2, 0]} ref={group} {...props} dispose={null} >
@@ -76,7 +76,7 @@ export default function Model(props: any) {
             receiveShadow={false}
             castShadow={false}
             material={material}
-            geometry={nodes.logoRounded.geometry}
+            geometry={nodes.logo3000.geometry}
             position={[-0.36, 0.37, 0.0]}
             rotation={[0.25, 0.5, -2.8]}
             scale={[0.055, 0.055, 0.055]}
@@ -116,19 +116,21 @@ export default function Model(props: any) {
               rotation={[Math.PI / 2, 0, -1.87]}
               scale={[1.55, 1.8, 1.55]}
           />
+          {/* standing next to screen */}
           <mesh
               receiveShadow={false}
               castShadow={false}
               material={material}
-              geometry={nodes.Cylinder002.geometry}
-              position={[3.15, 3.38, 14.39]}
+              geometry={nodes.Cylinder001.geometry}
+              position={[3.15, 3.45, 14.39]}
               rotation={[0, Math.PI, 0]}
+              scale={[3.5, 3.5, 3.5]}
           />
           <mesh
               receiveShadow={false}
               castShadow={false}
               material={material}
-              geometry={nodes.logoRounded.geometry}
+              geometry={nodes.logo3000.geometry}
               position={[5.29, 1.2, -13.63]}
               rotation={[-Math.PI / 2, 0, 0]}
               scale={[0.055, 0.055, 0.055]}
@@ -189,4 +191,4 @@ function CanvasScreenContent() {
         )
 }
 
-useGLTF.preload('/shapes-footer.glb')
+useGLTF.preload('/shapes_low.glb')

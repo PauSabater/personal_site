@@ -2,7 +2,6 @@ import gsap from "gsap"
 import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort, isElLeftOfScreen, isMobileScreen, scEnterPageLong, scOpacityFade, scTransitionPage, scTransitionPageLong } from "../../assets/ts/utils/utils"
 
 export function setLeaveAnimation(elTarget: HTMLElement) {
-    // setCardTransitionAnimation()
     const elImg: HTMLElement | null = elTarget.querySelector("[data-transitioned-image]")
 
     if (elImg === null) return

@@ -9,7 +9,7 @@ import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import gsap from "gsap"
 
-useGLTF.preload("/logo3d.gbl")
+useGLTF.preload("/logo3d_3000.gbl")
 
 const material = new THREE.MeshPhysicalMaterial({
     color: new THREE.Color('rgb(135, 135, 135)').convertSRGBToLinear(),
@@ -56,7 +56,7 @@ function Model() {
     const [shouldRender, setShouldRender] = useState(false)
 
     {/* @ts-ignore */}
-    const { nodes } = useGLTF("/logo3d.glb")
+    const { nodes } = useGLTF("/logo3d_3000.glb")
 
     useFrame(({ gl, scene, camera }) => {
 
@@ -102,7 +102,7 @@ function Model() {
                     ref={refGlass}
                     position={[-8,1.35,4]}
                     rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
-                    geometry={nodes.logoRounded.geometry}
+                    geometry={nodes.logo3000.geometry}
                     scale={0.095}
                     material={material}
                 >

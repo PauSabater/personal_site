@@ -15,7 +15,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
         if (elTextBanner === null) return
 
         const elsTextLines: NodeListOf<HTMLParagraphElement> =
-            (elTextBanner as HTMLElement).querySelectorAll(`${isMobileScreen() ? '.text-mobile p' : '.text-desktop p'}`)
+            (elTextBanner as HTMLElement).querySelectorAll(`${isMobile ? '.text-mobile p' : '.text-desktop p'}`)
         const elBtn = (elTextBanner as HTMLElement).querySelector(".cta")
         const elCanvas = document.querySelector("#text-banner-canvas")
 
@@ -25,7 +25,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             // Full banner opacity and translate:
             .fromTo(
                 elTextBanner,
-                {y: window.innerHeight / 4},
+                {y: isMobile ? window.innerHeight / 8 : window.innerHeight / 4},
                 {y: 0, duration: 0.5},
                 'start'
             )

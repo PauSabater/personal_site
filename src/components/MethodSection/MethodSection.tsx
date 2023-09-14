@@ -1,8 +1,6 @@
 import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./MethodSection.module.scss"
 import { setMethodSectionAnimation } from "./MethodSection.animations"
-import parse from "html-react-parser"
-
 
 export interface IMethodSectionTexts {
     title: string,
@@ -119,7 +117,7 @@ export function MethodSection({props, mode}: {props: IMethodSectionTexts, mode: 
                                 </svg>
                             </div>
                             <div className={`${styles.collapsible} collapsible`}>
-                                <p>{parse(method.description)}</p>
+                                <p dangerouslySetInnerHTML={{__html: method.description}}></p>
                             </div>
                             <div className={`${styles.line} line`}/>
                         </div>

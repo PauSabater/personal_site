@@ -131,6 +131,7 @@
         font-size: 28px;
         margin: var(--mg-lg) 0;
         padding: 0 var(--pd-2xl) 0 var(--pd-md);
+        transform: translateY(0);
     }
 
     @include mixins.desktop-lg {

@@ -3,8 +3,7 @@ import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
 import { Cta } from '../../UI/Cta/Cta'
-import { calendar } from "../../../assets/svg/ts/calendar"
-import parse from "html-react-parser"
+import { ReactComponent as Calendar } from '../../../assets/svg/icons/calendar.svg'
 import { LinkInline } from "../Components/LinkInline/LinkInline"
 import { getArrowLinkTemplate } from "../ProjectPost"
 
@@ -18,7 +17,8 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <TagLabels tags={['personal side project']} color={"secondary"}></TagLabels>
                 <TagLabels tags={['TypeScript', 'React', 'React Three Fiber', 'GSAP', 'CSS Modules', 'SCSS', 'Blender']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
-                    {parse(calendar("var(--c-grey)"))}<p>July / September 2023</p>
+                    <Calendar></Calendar>
+                    <p>July / September 2023</p>
                 </div>
                 <p className={styles.intro}>
                     This is a site to <span>present my work and myself</span>. Having quited my job to <span>move to Berlin</span>, I found myself in a situation where I did not have anything to showcase my abilities. Having changed careers, my experience was not very long either to catch attention. Despite having been told that I have good skills, when in a new place that does not matter as you have to start from scratch. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
