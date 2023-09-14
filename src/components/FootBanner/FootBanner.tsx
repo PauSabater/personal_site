@@ -2,7 +2,6 @@ import styles from "./FootBanner.module.scss"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
-import parse from 'html-react-parser'
 import * as THREE from 'three'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
@@ -195,7 +194,7 @@ export function FootBanner() {
 
         return (
             <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
-                {parse(text.split('+').join('\n'))}
+                {text.split('+').join('\n')}
                 <meshBasicMaterial ref={refVideoTexture} toneMapped={false}>
                 <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
                 </meshBasicMaterial>

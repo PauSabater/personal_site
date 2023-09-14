@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
-import parse from "html-react-parser"
 import { Link } from "react-router-dom"
 import { hasPageBeenLoaded, hidePageOverlay, isMobileScreen, msEnterPageLong } from "../../assets/ts/utils/utils"
 import { executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver } from "./ProjectPost.animations"
@@ -10,6 +9,8 @@ import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
 import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
 import { setPageFadeInAnimation } from "../App/App.animations"
+import { ReactComponent as ArrowFilled } from '../../assets/svg/icons/arrowFilled.svg'
+
 
 export interface IPropsProjectPost {
     element?: HTMLElement,
@@ -80,7 +81,7 @@ export const getArrowLinkTemplate = (path: string)=> {
     return (
         <Link to={path} onClick={() => leaveFromArrowClick()} className={styles.nextProjectContainer}>
             Next project
-            {parse(arrowFilled())}
+            <ArrowFilled></ArrowFilled>
         </Link>
     )
 }

@@ -1,3 +1,5 @@
+@use '../../../assets/scss/mixins.scss';
+
 .gradientLight {
     pointer-events: none;
     position: absolute;
@@ -17,8 +19,23 @@
 [data-svg-ellipse], [data-svg-underline] {
     pointer-events: none;
     position: absolute;
-    width: 700px;
-    height: 850px;
+    width: 27vw;
+    height: 15vw;
+    min-width: 500px;
+    min-height: 300px;
     opacity: 0.8;
-    transform: translateX(25%)
+}
+
+@include mixins.mobile-tablet {
+    [data-svg-ellipse], [data-svg-underline] {
+        min-width: 400px;
+        min-height: 250px;
+    }
+}
+
+@include mixins.mobile {
+    [data-svg-ellipse], [data-svg-underline] {
+        min-width: 280px;
+        min-height: 190px;
+    }
 }

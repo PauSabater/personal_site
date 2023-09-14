@@ -3,7 +3,13 @@ import styles from "./PersonalSiteCanvas.module.scss"
 import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Center, Environment, CameraControls, MeshTransmissionMaterial, useGLTF, PerspectiveCamera } from '@react-three/drei'
-import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
+// import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
+// import { Physics, useBox } from '@react-three/cannon'
+
+// import { RigidBody } from '@react-three/rapier/dist/declarations/src/components/RigidBody'
+// import { Physics } from '@react-three/rapier/dist/declarations/src/components/Physics'
+// import { CuboidCollider } from '@react-three/rapier/dist/declarations/src/components/AnyCollider'
+
 import * as THREE from 'three'
 import gsap from "gsap"
 import { getViewportAspectRatio } from "../../../assets/ts/utils/utils"
@@ -87,14 +93,11 @@ function Model({mode}: {mode: string}) {
 
     return (
         <group ref={refGroup}>
-            <Physics gravity={[0, -60, 0]}>
                 <Logo position={[-4, 50, 0]} rotation={[0, 0, 0]} />
                 <Logo position={[0, 80, 0.5]} rotation={[0, 1, 2]} />
                 <Pencil scale={0.6} position={[4, 110, 40]} rotation={[0, 0.55, 0]} color={"hsl(54, 67%, 75%)"} />
                 <Pencil scale={0.6} position={[-6, 110, 45]} rotation={[0, 0.55, Math.PI / 2]} color={"hsl(248, 30%, 50%)"} />
                 {/** @ts-ignore */}
-                <CuboidCollider position={[0, -6, 0]} type="fixed" args={[100, 1, 100]} />
-            </Physics>
             <gridHelper
                 scale={4}
                 args={[150, 150, colorGrid, colorGrid]}
@@ -133,8 +136,6 @@ function Logo({ stencilBuffer = false, ...props }) {
     const { nodes } = useGLTF('/shapes-footer.glb')
 
     return (
-        /** A physics rigid body */
-        <RigidBody restitution={0.1} colliders="cuboid" {...props}>
             <Center>
               <mesh
                     scale={[0.2, 0.2, 0.3]}
@@ -143,7 +144,6 @@ function Logo({ stencilBuffer = false, ...props }) {
                     <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={1.5} envMapIntensity={3} distortionScale={0} temporalDistortion={0}/>
               </mesh>
             </Center>
-        </RigidBody>
     )
 }
 
@@ -161,7 +161,6 @@ function Pencil({...props}) {
 
     return (
         /** A physics rigid body */
-        <RigidBody restitution={0.1} colliders="cuboid" {...props}>
             <Center>
                 <group>
                     <mesh
@@ -188,7 +187,6 @@ function Pencil({...props}) {
                     </mesh>
                 </group>
             </Center>
-        </RigidBody>
     )
 }
 

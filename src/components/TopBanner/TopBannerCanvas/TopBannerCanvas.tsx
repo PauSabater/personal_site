@@ -13,9 +13,7 @@ import {
   meshBounds,
 } from '@react-three/drei'
 
-import { RigidBody, Physics } from '@react-three/rapier'
 import { Fragment, useLayoutEffect, useRef, useState } from 'react'
-import parse from 'html-react-parser'
 import styles from "./TopBanner.module.scss"
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
@@ -26,8 +24,8 @@ import * as THREE from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
 
-useGLTF.preload("/pencil.gbl")
-useGLTF.preload("/logo3d.gbl")
+useGLTF.preload("/pencil_low.gbl")
+useGLTF.preload("/logo3d_lowRhino.gbl")
 
 export function TopBannerCanvas({mode}: {mode: string}) {
 
@@ -55,10 +53,7 @@ export function TopBannerCanvas({mode}: {mode: string}) {
     )
 }
 
-function PhysicsScene({mode}:{mode: string}) {
-    const refYellowPencil = useRef(null)
-    const refPurplePencil = useRef(null)
-
+function PencilsDuo({mode}:{mode: string}) {
     // Coordinates depending on aspect ratio
     const aspectRatio = getViewportAspectRatio()
     let xPos: number
@@ -70,42 +65,21 @@ function PhysicsScene({mode}:{mode: string}) {
         zPos = -5.25
         yRotate = 0
     } else if (aspectRatio > 1) {
-        xPos = 6
-        zPos = -5.25
+        xPos = 10
+        zPos = -9.25
         yRotate = 0
     } else {
-        xPos = -3
-        zPos = 6
-        yRotate = Math.PI / 0.95
+        xPos = -5
+        zPos = 8.5
+        yRotate = Math.PI / 0.7
     }
 
     return (
-        <Physics >
-            <RigidBody
-                restitution={ 0.25 }
-                friction={1}
-                position={[xPos + 1, 4.7, zPos]}
-                rotation={[-Math.PI / 1.2, yRotate, -Math.PI / 1.3]}
-                ref={refYellowPencil}
-                colliders="cuboid"
-            ><Pencil color={"hsl(54, 67%, 45%)"} mode={mode}></Pencil>
-            </RigidBody>
-            <RigidBody
-                restitution={ 0.25 }
-                friction={1}
-                position={[xPos, 10.7, zPos]}
-                rotation={[-Math.PI / 2.7, yRotate, -Math.PI / 1.8]}
-                ref={refPurplePencil}
-                colliders="cuboid"
-            ><Pencil color={"hsl(248, 30%, 50%)"} mode={mode}></Pencil>
-            </RigidBody>
-            <RigidBody type="fixed">
-                <mesh position={[0, 0, 0]} receiveShadow={false} rotation={[Math.PI / 2, Math.PI, 0]} scale={[50, 50, 50]}>
-                    <planeGeometry />
-                    <meshBasicMaterial attach="material" transparent opacity={0} />
-                </mesh>
-            </RigidBody>
-        </Physics>
+        <group position={[xPos, 1, zPos]} rotation={[0, yRotate, 0]}>
+            {/* //YELLOW */}
+            <Pencil color={"hsl(54, 67%, 45%)"} rotation={[1, Math.PI / -0.9, 1]} position={[0, 1, 8]} mode={mode}></Pencil>
+            <Pencil color={"hsl(248, 30%, 50%)"} rotation={[1,  Math.PI / -1, 1]} position={[0, 1, 0]} mode={mode}></Pencil>
+        </group>
     )
 }
 
@@ -141,7 +115,7 @@ function Camera() {
     return (
         <PerspectiveCamera
             makeDefault
-            near={55}
+            near={5} //55
             far={cameraPositionYZ[0] + 3}
             fov={20}
             position={[0, cameraPositionYZ[0], 0]}
@@ -151,7 +125,7 @@ function Camera() {
 
 export function Pencil(props: any) {
     // @ts-ignore
-    const { nodes } = useGLTF("/pencil.glb")
+    const { nodes } = useGLTF("/pencil_low.glb")
     const colorCone = props.mode === "light" ? "grey" : "rgb(70, 70, 70)"
 
     const material = new THREE.MeshPhysicalMaterial({
@@ -159,6 +133,7 @@ export function Pencil(props: any) {
         roughness: 0,
         clearcoat: 1,
         clearcoatRoughness: 0,
+        // reflectivity: 1
     })
 
     return (
@@ -169,14 +144,14 @@ export function Pencil(props: any) {
                 castShadow={false}
                 receiveShadow={false}
                 material={material}
-                geometry={nodes.Pencil_1.geometry}
+                geometry={nodes.wood.geometry}
                 {...props}>
             </mesh>
             <mesh
                 raycast={ meshBounds }
                 castShadow={false}
                 receiveShadow={false}
-                geometry={nodes.Pencil_2.geometry}
+                geometry={nodes.cone.geometry}
                 {...props}>
                 <meshBasicMaterial attach="material" color={colorCone} />
             </mesh>
@@ -184,7 +159,7 @@ export function Pencil(props: any) {
                 raycast={ meshBounds }
                 castShadow={false}
                 receiveShadow={false}
-                geometry={nodes.Pencil_3.geometry}
+                geometry={nodes.color.geometry}
                 {...props}>
                 <meshBasicMaterial attach="material" color={props.color} />
             </mesh>
@@ -231,8 +206,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
     const { size } = useThree()
 
     {/* @ts-ignore */}
-    const { nodes } = useGLTF("/logo3d.glb")
-
+    const { nodes } = useGLTF("/logo3d_3000.glb")
     const [elCanvas, setElCanvas] = useState<HTMLElement | null>(null)
     const [windowHeight, setWindowHeight] = useState<number>(0)
     const [physics, setPhysics] = useState(false)
@@ -245,11 +219,11 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
     // Responsive states:
     const aspRatVertBreakpoint = 0.8
-    const [isVerticalBreakpoint, setIsVerticalBreakpoint] = useState(getViewportAspectRatio() < aspRatVertBreakpoint)
+    const [isBiggerVerticalBreakpoint, setIsBiggerVerticalBreakpoint] = useState(getViewportAspectRatio() < aspRatVertBreakpoint)
     const [textXCoordinate, setTextXCoordinate] = useState(setTextPositionXCoordinate())
 
-    const glassXCoordinate = isVerticalBreakpoint ? -3 : -6
-    const glassZCoordinate = isVerticalBreakpoint ? 8 :  9.5
+    const glassXCoordinate = isBiggerVerticalBreakpoint ? -3 : -6
+    const glassZCoordinate = isBiggerVerticalBreakpoint ? 8 :  9.5
 
     const colorMainText = mode === "light" ? "black" : "hsl(136, 0%, 96%)"
     const colorPretitle = mode === "light" ? "hsl(54, 67%, 38%)" : "hsl(54, 67%, 65%)"
@@ -304,7 +278,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         }
 
         // Aspect Ratio
-        setIsVerticalBreakpoint(getViewportAspectRatio() < aspRatVertBreakpoint)
+        setIsBiggerVerticalBreakpoint(getViewportAspectRatio() < aspRatVertBreakpoint)
     }
 
     useLayoutEffect(() => {
@@ -441,8 +415,9 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     rotation={[-Math.PI / 2, 0, 0]}
                     fontSize={1.6} lineHeight={1}
                     letterSpacing={-0.01}
-                    position={isVerticalBreakpoint  ? [3, 0.1, -1.25] : [0, 0.1, 0.5]}>
-                    {parse((getPreTitleText()).split('+').join('\n'))}
+                    position={isBiggerVerticalBreakpoint  ? [3, 0.1, -1.25] : [0, 0.1, 0.5]}
+                    >
+                    {getPreTitleText().split('+').join('\n')}
                     <meshStandardMaterial ref={refPretitleMaterial} attach='material' opacity={0} color={colorPretitle}/>
                 </Text>
 
@@ -453,23 +428,21 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     fontSize={2.9} lineHeight={1.2}
                     letterSpacing={-0.05}
                     position={[3 ,0.1, 7]}>
-                    {parse((getTitleText()).split('+').join('\n'))}
+                    {getTitleText().split('+').join('\n')}
                         <meshBasicMaterial opacity={0} ref={refTitleMaterial} attach='material' color={colorMainText}/>
                 </Text>
 
-                <group>
+                <group position={[1, 0, 2]}>
                     <Html
-                        position={ isVerticalBreakpoint ? [-4, 0.1, -0.5] : [2.25, 0.1, -1.5] }
-                        distanceFactor={ getDistanceFactor()  }
+                        position={ isBiggerVerticalBreakpoint ? [-4, 0.1, -0.5] : [2.25, 0.1, -1.5] }
                     >
                         <div ref={refGradiendLight} className={styles.gradientLight} id="top-banner-gradient"></div>
-                        <div id="top-banner-ellipse">{parse(ellipse)}</div>
+                        <div id="top-banner-ellipse" dangerouslySetInnerHTML={{__html: ellipse}}></div>
                     </Html>
                     <Html
-                        position={ isVerticalBreakpoint ?  [-3, 0.1, 4.5] : [-3, 0.1, 3.5] }
-                        distanceFactor={ getDistanceFactor() }
+                        position={ isBiggerVerticalBreakpoint ?  [-3, 0.1, 4.5] : [-3, 0.1, 3.5] }
                     >
-                        <div id="top-banner-underline">{parse(underline)}</div>
+                        <div id="top-banner-underline" dangerouslySetInnerHTML={{__html: underline}}></div>
                     </Html>
                 </group>
 
@@ -481,13 +454,11 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
                     scale={0.08}
                     raycast={ meshBounds }
-                    geometry={nodes.logoRounded.geometry}
+                    geometry={nodes.logo3000.geometry}
                     onPointerEnter={(e) => {
                         document.body.style.cursor = "pointer"
                         glassScaleEffect(true)
-
-                    }
-                    }
+                    }}
                     onPointerLeave={(e) => {
                         document.body.style.cursor = "auto"
                         // @ts-ignore
@@ -503,13 +474,14 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
                     {...props}>
                     {/* @ts-ignore */}
-                    <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
+                    <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 0 : 8} thickness={isMobileScreen() ? 0.5 : 2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5}/>
                 </mesh>
             </group>
 
             {/* <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={512} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> */}
             <Grid mode={mode} />
-            {physics === true ? <PhysicsScene mode={mode}/> : ''}
+            {/* {physics === true ? <PencilsDuo mode={mode}/> : ''} */}
+            <PencilsDuo mode={mode}/>
         </group>
         </>
     )

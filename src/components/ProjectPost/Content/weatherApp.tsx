@@ -3,11 +3,11 @@ import styles from "../ProjectPost.module.scss"
 import { TagLabels } from "../Components/TagLabels/TagLabels"
 import { ImageArticle } from "../Components/ImageArticle/ImageArticle"
 import { Cta } from '../../UI/Cta/Cta'
-import { calendar } from "../../../assets/svg/ts/calendar"
-import parse from "html-react-parser"
 import { LinkInline } from "../Components/LinkInline/LinkInline"
 import { getArrowLinkTemplate } from "../ProjectPost"
 import { setPageFadeOutAnimation } from "../../App/App.animations"
+import { ReactComponent as Calendar } from '../../../assets/svg/icons/calendar.svg'
+
 
 export const weatherAppContent = (): JSX.Element => { return (
     <Fragment>
@@ -19,7 +19,8 @@ export const weatherAppContent = (): JSX.Element => { return (
                 <TagLabels tags={['personal side project']} color={"secondary"}></TagLabels>
                 <TagLabels tags={['TypeScript', 'React', 'Styled Components', 'Chart.js', 'NPM', 'Rollup']} color={"primary"}></TagLabels>
                 <div className={styles.projectDateContainer}>
-                    {parse(calendar("var(--c-grey)"))}<p>July 2023</p>
+                    <Calendar></Calendar>
+                    <p>July 2023</p>
                 </div>
                 <p className={styles.intro}>
                     I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! In addition, I always had a thing for weather. Despite that there are many tutorials out there about a project like this, I did not follow any and did all from scratch, using the React documentation instead.

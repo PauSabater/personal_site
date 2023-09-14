@@ -4,7 +4,6 @@ import gsap from "gsap"
 import { useLayoutEffect, useRef, useState } from "react"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 import { CustomEase } from "gsap/CustomEase"
-import parse from "html-react-parser"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
 import { disableScroll, enableScroll, hasElementBeenScrolled, isMobileScreen } from "../../assets/ts/utils/utils"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
@@ -370,11 +369,20 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                     </ul>
                 </div>
                 <div ref={refIconsContainer} className={styles.iconsContainer}>
-                    <a className={styles.iconLink} href="https://github.com/PauSabater/weather_app" target="_blank" rel="noreferrer">
-                        {parse(gitHubLogo("var(--c-white-no-change)"))}
+                    <a
+                        className={styles.iconLink}
+                        href="https://github.com/PauSabater/weather_app"
+                        target="_blank" rel="noreferrer"
+                        dangerouslySetInnerHTML={{__html: gitHubLogo("var(--c-white-no-change)")}}
+                        >
                     </a>
-                    <a className={styles.iconLink} href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989" target="_blank" rel="noreferrer">
-                        {parse(linkedInLogo("var(--c-black"))}
+                    <a
+                        className={styles.iconLink}
+                        href="https://www.linkedin.com/in/pau-sabater-vilar-b0189989"
+                        target="_blank"
+                        rel="noreferrer"
+                        dangerouslySetInnerHTML={{__html: linkedInLogo("var(--c-black")}}
+                        >
                     </a>
                     <div className={styles.gradientLight}></div>
                 </div>
