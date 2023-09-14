@@ -450,7 +450,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     ref={refGlass}
                     receiveShadow
                     castShadow
-                    position={[-20,1.35,4]}
+                    position={[-20,4,4]}
                     rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
                     scale={0.08}
                     raycast={ meshBounds }

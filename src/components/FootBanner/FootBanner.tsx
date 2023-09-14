@@ -10,7 +10,6 @@ import { isMobileScreen } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
-
 export function FootBanner() {
 
     const refCanvas = useRef(null)
