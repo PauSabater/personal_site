@@ -22,9 +22,19 @@ body {
     z-index: 1;
 }
 
-/* #page-content:not(:has(#page-project-post)) {
-    transform: translateY(0) !important;
-} */
+.homepage ~ .footer-canvas {
+    display: none;
+}
+
+.homepage ~ .footer {
+    height: 80px;
+    margin-top: -80px;
+}
+
+.homepage ~ .footer a {
+    color: var(--c-white-no-change);
+}
+
 
 [data-svg-ellipse] {
     top: 0;

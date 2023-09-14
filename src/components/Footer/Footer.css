@@ -23,23 +23,6 @@
     color: lightgrey;
 }
 
-#page-content:has(#page-home) ~ #footer,
-#page-content:has(#page-contact) ~ #footer {
-    height: 80px;
-    margin-top: -80px;
-}
-
-#page-content:has(#page-home) ~ #footer a,
-#page-content:has(#page-contact) ~ #footer a {
-    color: var(--c-white-no-change);
-}
-
-#page-content:has(#page-home) ~ #footer-canvas,
-#page-content:has(#page-contact) ~ #footer-canvas {
-    display: none;
-    /* opacity: 0; */
-}
-
 .footer-canvas {
     position: relative;
     width: 100vw;
