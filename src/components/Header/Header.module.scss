@@ -153,7 +153,7 @@
     height: 18px;
 
     p {
-        color: white;
+        color: var(--c-white-no-change);
         margin-right: 7px;
     }
 
@@ -313,13 +313,13 @@
         border-radius: 1.5px;
         transform: translate(-50%, -50%);
 
-        &:nth-child(2) {
-            top: calc(50% - var(--dist-burger-lines));
-        }
+        // &:nth-child(2) {
+        //     transform: translate(-50%, calc(50% - var(--dist-burger-lines)));
+        // }
 
-        &:last-child {
-            top: calc(50% + var(--dist-burger-lines));
-        }
+        // &:last-child {
+        //     transform: translate(-50%, calc(50% + var(--dist-burger-lines)));
+        // }
     }
 
     .container {
@@ -367,6 +367,7 @@
                 display: block;
                 position: relative;
                 padding: var(--pd-lg) 0;
+                color: var(--c-white-no-change);
                 z-index: 1002;
             }
 

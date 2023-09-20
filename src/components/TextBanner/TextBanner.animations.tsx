@@ -40,23 +40,22 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
                 {opacity: 0},
                 {
                     opacity: 1, duration: 0.5,
-                    onComplete: ()=> {
-                        elTextBanner?.setAttribute('data-animation-is-finished', '')
-                        gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })
-                    }
+                    onStart: ()=> {elTextBanner?.setAttribute('data-animation-is-finished', '')},
+                    onComplete: ()=> {gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })}
                 },
                 'end'
         )
 
-        // Add lines animation only on desktop
+        tlTBanner
+            // Text lines reveal effect:
+            .fromTo(Array.from(elsTextLines),
+            {opacity: 0},
+            {opacity: 1, y: 0, duration: 0.7, stagger: 0.05},
+            'start')
+
+        // Canvas is not showing on mobile
         if (!isMobileScreen()) {
             tlTBanner
-                // Text lines reveal effect:
-                .fromTo(Array.from(elsTextLines),
-                {opacity: 0},
-                {opacity: 1, y: 0, duration: 0.7, stagger: 0.05},
-                'start')
-                // Canvas:
                 .to(elCanvas,{opacity: 1, duration: 0.5, delay: 0.5}, 'start')
         }
 

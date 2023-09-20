@@ -106,7 +106,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             timeline
                 .set([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy], {xPercent: -150, scaleX: -1})
                 .set([elSecondCloudsLayerCopy], {xPercent: 50, scaleX: -1})
-                .set(card1, {yPercent: 30, opacity: 1})
+                .set(card1, {yPercent: isMobileScreen() ? 20 : 30, opacity: 1})
                 .set([card2, card3], {yPercent: 150, opacity: 0})
                 .set([
                     card1.querySelector(".overlay"),
@@ -155,16 +155,26 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 .to(card3ImgContainer, {
                     x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
                     y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
-                    scale: ()=> getScaleToCoverViewPort(card3Svg),
+                    scale: ()=> isMobileScreen() ? getScaleToCoverViewPort(card3Svg) + 0.35 : getScaleToCoverViewPort(card3Svg),
                     duration: isMobileScreen() ? 3 : 2.2
                 }, 'start')
 
-                .to(elMoon, {opacity: "0"}, 'start')
+                .to(elMoon, {
+                    opacity: "0",
+                    duration: 1,
+                }, 'start')
                 .to(elDarkeningLayer, {
                     opacity: "0.3",
+                    duration: 2,
                 }, 'start')
-                .to(elSkyDarkeningImg, {opacity: "0.6"}, 'start')
-                .to(elsClouds, {opacity: "0.7"}, 'start')
+                .to(elSkyDarkeningImg, {
+                    opacity: "0.6",
+                    duration: 2,
+                }, 'start')
+                .to(elsClouds, {
+                    opacity: "0.7",
+                    duration: 2,
+                }, 'start')
             })
         return () => ctx.revert()
 

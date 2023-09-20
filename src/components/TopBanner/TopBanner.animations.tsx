@@ -6,7 +6,7 @@ import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 
-export function setTopBannerAnimations(el: HTMLElement | null) {
+export function setTopBannerAnimations(el?: HTMLElement | null) {
 
     let ctx = gsap.context(() => {
         // Query elements from DOM:
@@ -27,13 +27,13 @@ export function setTopBannerAnimations(el: HTMLElement | null) {
         tlTopBanner
             .set(elDateBanner, {y: 400, opacity: 1})
             // Header entering screen:
-            .set([pathEllipse], {
+            .set(pathEllipse, {
                 strokeDashoffset: 0,
-                delay: 0
+                delay: 0.4
             })
             .set([pathUnderline], {
                 strokeDashoffset: 0,
-                delay: 0.8
+                delay: 0.6
             })
             .to(elHeader, {
                 opacity: 1,
@@ -91,7 +91,7 @@ export function executeInitialPageAnimation() {
     return () => ctx.revert()
 }
 
-function setDayNumCounter(elDayNumber: HTMLElement, delayExec: number) {
+export function setDayNumCounter(elDayNumber: HTMLElement, delayExec: number) {
     if (elDayNumber === null) return
     const numToday: number = parseInt(getTodayDayNum())
     let numCount: number = 0

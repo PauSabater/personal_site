@@ -23,6 +23,16 @@
         --card-left: 4vw;
     }
 
+    @include mixins.mobile {
+        --container-pd-top: 100px;
+        --card-width: 85vw;
+        --card-height: 60svh;
+        --card-title-width: 0;
+        --card-title-height: 100px;
+        --card-img-width: calc(var(--card-width) - var(--card-title-width));
+        --card-left: 4vw;
+    }
+
     position: relative;
     padding-top: var(--container-pd-top);
     width: 100vw;
@@ -47,7 +57,6 @@
     }
 
     @include mixins.mobile {
-        grid-template-columns: 100%;
         height: auto;
     }
 }
@@ -80,6 +89,10 @@
         max-width: 450px;
         margin: 0;
         color: var(--c-font-global);
+    }
+
+    a {
+        opacity: 0;
     }
 
     @include mixins.mobile {
@@ -136,10 +149,8 @@ p.preTitle {
         color: var(--c-primary);
     }
 
-    &:hover ~ div {
-        // transform: translateY(100%) !important;
-        // background: green;
-
+    @include mixins.mobile {
+        left: 0;
     }
 }
 

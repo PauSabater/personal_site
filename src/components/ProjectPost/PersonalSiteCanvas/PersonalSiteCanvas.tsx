@@ -2,7 +2,7 @@
 import styles from "./PersonalSiteCanvas.module.scss"
 import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Center, Environment, CameraControls, MeshTransmissionMaterial, useGLTF, PerspectiveCamera } from '@react-three/drei'
+import { Environment, CameraControls, MeshTransmissionMaterial, useGLTF, PerspectiveCamera } from '@react-three/drei'
 // import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 // import { Physics, useBox } from '@react-three/cannon'
 
@@ -20,14 +20,16 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
 
     useLayoutEffect(()=> {
         // Page load animation only for this project:
-        gsap.to(siteCanvas.current, {opacity: 1, duration: 0.5, delay: 0})
-        gsap.to(document.getElementById("transition-img-personal-site.svg"), {opacity: 0, duration: 0.5, delay: 0})
+        gsap.to(siteCanvas.current, {opacity: 1, duration: 0.75, delay: 0})
+        gsap.to(document.getElementById("transition-img-personal-site.svg"), {opacity: 0, duration: 0.75, delay: 0.2})
     }, [])
 
+    console.log("mode is "+mode)
 
     return (
         <div className={styles.canvasContainer} ref={siteCanvas} id="personal-site-canvas">
             <Canvas dpr={[1, 1]}>
+            <fog attach="fog" args={[mode === "light" ? "hsl(136, 0%, 96%)" : "hsl(0, 0%, 7%)", 50, 130]} />
                 <group >
                     <Camera />
                     <Suspense>
@@ -78,7 +80,7 @@ function Model({mode}: {mode: string}) {
             gsap.set(refGroup.current.rotation, {y: scrolledHeight * 0.001})
             // @ts-ignore
             gsap.set(refGroup.current.position, {
-                y: -1 - scrolledHeight * 0.025,
+                y: -0.5 - scrolledHeight * 0.025,
                 z: 0 + scrolledHeight * 0.025
             })
             gl.render(scene, camera)
@@ -93,15 +95,15 @@ function Model({mode}: {mode: string}) {
 
     return (
         <group ref={refGroup}>
-                <Logo position={[-4, 50, 0]} rotation={[0, 0, 0]} />
-                <Logo position={[0, 80, 0.5]} rotation={[0, 1, 2]} />
-                <Pencil scale={0.6} position={[4, 110, 40]} rotation={[0, 0.55, 0]} color={"hsl(54, 67%, 75%)"} />
-                <Pencil scale={0.6} position={[-6, 110, 45]} rotation={[0, 0.55, Math.PI / 2]} color={"hsl(248, 30%, 50%)"} />
+                <Logo position={[0, 1, -5]} rotation={[-Math.PI / 2, 0, 0]} />
+                {/* <Logo position={[0, 80, 0.5]} rotation={[0, 1, 2]} /> */}
+                <Pencil scale={0.4} mode={mode} position={[8, -3.5, 38]} rotation={[0, 0.55, Math.PI / 2]} color={"hsl(54, 67%, 75%)"} />
+                <Pencil scale={0.4} mode={mode} position={[-6, -3.5, 30]} rotation={[0, -0.45, Math.PI / 2]} color={"hsl(248, 30%, 50%)"} />
                 {/** @ts-ignore */}
             <gridHelper
                 scale={4}
                 args={[150, 150, colorGrid, colorGrid]}
-                position={[0, -6, 0]}
+                position={[0, -4, 0]}
             />
         </group>
     )
@@ -109,8 +111,8 @@ function Model({mode}: {mode: string}) {
 
 function Camera() {
 
-    let yPos = 10
-    let zPos = -40
+    let yPos = 6
+    let zPos = -30
     let far = 200
 
     // Camera setting for vertical viewport:
@@ -124,7 +126,7 @@ function Camera() {
         <PerspectiveCamera
             makeDefault
             position={[-10, yPos, zPos]}
-            fov={22}
+            fov={19}
             near={1}
             far={far}
         ></PerspectiveCamera>
@@ -133,17 +135,17 @@ function Camera() {
 
 function Logo({ stencilBuffer = false, ...props }) {
     // @ts-ignore
-    const { nodes } = useGLTF('/shapes-footer.glb')
+    const { nodes } = useGLTF('/logo3d.glb')
 
     return (
-            <Center>
               <mesh
                     scale={[0.2, 0.2, 0.3]}
+                    position={props.position}
+                    rotation={props.rotation}
                     geometry={nodes.logoRounded.geometry}
                 >
-                    <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={1.5} envMapIntensity={3} distortionScale={0} temporalDistortion={0}/>
+                        <MeshTransmissionMaterial backside backsideThickness={8} thickness={2} chromaticAberration={0.5} anisotropy={2.5} envMapIntensity={5} distortionScale={0} temporalDistortion={0}/>
               </mesh>
-            </Center>
     )
 }
 
@@ -157,62 +159,36 @@ function Pencil({...props}) {
     })
 
     // @ts-ignore
-    const {nodes} = useGLTF('/pencil2.glb')
+    const {nodes} = useGLTF('/pencil_low.glb')
+    const colorCone = props.mode === "light" ? "grey" : "rgb(70, 70, 70)"
 
     return (
         /** A physics rigid body */
-            <Center>
                 <group>
-                    <mesh
-                        castShadow={true}
-                        receiveShadow={false}
-                        material={material}
-                        geometry={nodes.Pencil_1.geometry}
-                        {...props}>
-                        {/* <meshBasicMaterial attach="material" color={props.color} /> */}
-                    </mesh>
-                    <mesh
-                        castShadow={false}
-                        receiveShadow={false}
-                        geometry={nodes.Pencil_2.geometry}
-                        {...props}>
-                        <meshBasicMaterial attach="material" color={"grey"} />
-                    </mesh>
-                    <mesh
-                        castShadow={false}
-                        receiveShadow={false}
-                        geometry={nodes.Pencil_3.geometry}
-                        {...props}>
-                        <meshBasicMaterial attach="material" color={props.color} />
-                    </mesh>
+            <mesh
+                castShadow={false}
+                receiveShadow={false}
+                material={material}
+                geometry={nodes.wood.geometry}
+                {...props}>
+            </mesh>
+            <mesh
+                castShadow={false}
+                receiveShadow={false}
+                geometry={nodes.cone.geometry}
+                {...props}>
+                <meshBasicMaterial attach="material" color={colorCone} />
+            </mesh>
+            <mesh
+                castShadow={false}
+                receiveShadow={false}
+                geometry={nodes.color.geometry}
+                {...props}>
+                <meshBasicMaterial attach="material" color={props.color} />
+            </mesh>
                 </group>
-            </Center>
     )
 }
 
-useGLTF.preload('/shapes-footer.glb')
-useGLTF.preload('/pencil2.glb')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+useGLTF.preload('/logo3d.glb')
+useGLTF.preload('/pencil_low.glb')

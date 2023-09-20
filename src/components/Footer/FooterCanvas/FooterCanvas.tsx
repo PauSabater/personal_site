@@ -4,7 +4,7 @@ import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLigh
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, PerspectiveCamera } from '@react-three/drei'
 import Model from './Model'
-import { getViewportAspectRatio } from '../../../assets/ts/utils/utils'
+import { getViewportAspectRatio, isMobileScreen } from '../../../assets/ts/utils/utils'
 
 
 RectAreaLightUniformsLib.init()
@@ -12,8 +12,10 @@ RectAreaLightUniformsLib.init()
 function Light() {
     const ref = useRef()
 
+    const speed = isMobileScreen() ? 0.25 : 0.1
+
     // @ts-ignore
-    useFrame((_) => (ref.current.rotation.x = _.clock.elapsedTime * 0.1))
+    useFrame((_) => (ref.current.rotation.x = _.clock.elapsedTime * speed))
     // @ts-ignore
     return (<group ref={ref}>
           <rectAreaLight width={15} height={100} position={[30, 30, -10]} intensity={5} onUpdate={(self) => self.lookAt(0, 0, 0)} />

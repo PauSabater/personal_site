@@ -197,7 +197,7 @@ export function FootBanner() {
         return (
             <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
                 {text.split('+').join('\n')}
-                <meshBasicMaterial ref={refVideoTexture} toneMapped={false}>
+                <meshBasicMaterial ref={refVideoTexture} toneMapped={false} color={isMobileScreen() ? "hsl(54, 67%, 90%)" : "transparent"} >
                 {!isMobileScreen() ? <videoTexture attach="map" args={[video as HTMLVideoElement]} encoding={THREE.sRGBEncoding} /> : ''}
                 </meshBasicMaterial>
             </Text>
@@ -244,7 +244,7 @@ export function FootBanner() {
                 <group position={[0, -1, 0]}>
                     <Ground />
                     <VideoText
-                        text={isMobileScreen() ? "let's+shape some+ideas ?" : "let's+light some+ideas ?"}
+                        text={isMobileScreen() ? "let's+shape some+ideas ?" : "let's+shape some+ideas ?"}
                         position={[-1.7, 1.55, -2] as Vector3}
                     />
                     <mesh position={[0.1, 4.8, -2.05] as Vector3}>

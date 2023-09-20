@@ -49,7 +49,7 @@ export const getImg = (img: string, includeRain = true): JSX.Element => {
                     includeRain === true
                         ?   <Fragment>
                                 <div className={styles.rain} id="rain-container">
-                                    {[...Array(500)].map((_, i) => <div key={`drop-${i}`} className={styles.drop}></div>)}
+                                    {[...Array(50)].map((_, i) => <div key={`drop-${i}`} className={styles.drop}></div>)}
                                 </div>
                             </Fragment>
                         : ''
