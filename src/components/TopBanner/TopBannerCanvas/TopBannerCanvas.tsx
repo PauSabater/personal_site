@@ -21,11 +21,12 @@ import { ellipse, underline } from '../../../assets/svg/ts/strokes'
 import { setTopBannerAnimations } from '../TopBanner.animations'
 import { getViewportAspectRatio, hideAllTransitionImages, isMobileScreen, scTransitionPage } from '../../../assets/ts/utils/utils'
 import * as THREE from 'three'
+// import { TextureLoader } from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
 
 useGLTF.preload("/pencil_low.gbl")
-useGLTF.preload("/logo3d_lowRhino.gbl")
+useGLTF.preload("/logo3d_3000.gbl")
 
 export function TopBannerCanvas({mode}: {mode: string}) {
 
@@ -139,30 +140,30 @@ export function Pencil(props: any) {
     return (
         <Fragment>
             <group scale={getViewportAspectRatio() > 0.8 ? 0.2 : 0.3}>
-            <mesh
-                raycast={ meshBounds }
-                castShadow={false}
-                receiveShadow={false}
-                material={material}
-                geometry={nodes.wood.geometry}
-                {...props}>
-            </mesh>
-            <mesh
-                raycast={ meshBounds }
-                castShadow={false}
-                receiveShadow={false}
-                geometry={nodes.cone.geometry}
-                {...props}>
-                <meshBasicMaterial attach="material" color={colorCone} />
-            </mesh>
-            <mesh
-                raycast={ meshBounds }
-                castShadow={false}
-                receiveShadow={false}
-                geometry={nodes.color.geometry}
-                {...props}>
-                <meshBasicMaterial attach="material" color={props.color} />
-            </mesh>
+                <mesh
+                    raycast={ meshBounds }
+                    castShadow={false}
+                    receiveShadow={false}
+                    material={material}
+                    geometry={nodes.wood.geometry}
+                    {...props}>
+                </mesh>
+                <mesh
+                    raycast={ meshBounds }
+                    castShadow={false}
+                    receiveShadow={false}
+                    geometry={nodes.cone.geometry}
+                    {...props}>
+                    <meshBasicMaterial attach="material" color={colorCone} />
+                </mesh>
+                <mesh
+                    raycast={ meshBounds }
+                    castShadow={false}
+                    receiveShadow={false}
+                    geometry={nodes.color.geometry}
+                    {...props}>
+                    <meshBasicMaterial attach="material" color={props.color} />
+                </mesh>
             </group>
         </Fragment>
     )
@@ -209,7 +210,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
     const { nodes } = useGLTF("/logo3d_3000.glb")
     const [elCanvas, setElCanvas] = useState<HTMLElement | null>(null)
     const [windowHeight, setWindowHeight] = useState<number>(0)
-    const [physics, setPhysics] = useState(false)
+    const [pencils, setPencils] = useState(false)
     const [isAnimationPlaying, setIsAnimationPlaying] = useState(true)
     const [shouldRender, setShouldRender] = useState(true)
     const [isAnimating, setIsAnimating] = useState(false)
@@ -259,7 +260,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             }
 
             const percentage = (windowHeight - Math.abs(distToTop)) / windowHeight
-            if (percentage < 0.95 && percentage > 0) {
+            if (percentage < 0.95 && percentage > 0 && size.width > 768) {
                 setPreviousDistToTop(distToTop)
                 // @ts-ignore
                 gsap.set(refGlass.current.position, {x: glassXCoordinate - 2 + percentage * 2, z: glassZCoordinate})
@@ -342,20 +343,25 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         ease: "power1.in"
                     })
 
-                    // @ts-ignore
-                    gsap.to(refGlass.current.position, {
-                        x: glassXCoordinate,
-                        z: glassZCoordinate,
-                        duration: 0.9,
-                        delay: 0.2,
-                        ease: "power4.out",
-                        onComplete: ()=> {
-                            setTimeout(()=> setIsAnimationPlaying(false), 4000)
-                        }
-                    })
+
+
+
+
+                    if (!isMobileScreen()) {
+                        // @ts-ignore
+                        gsap.to(refGlass.current.position, {
+                            x: glassXCoordinate,
+                            z: glassZCoordinate,
+                            duration: 0.9,
+                            delay: 0.2,
+                            ease: "power4.out",
+                        })
+                    }
+
+                    setTimeout(() => setIsAnimationPlaying(false), 3000)
 
                     setTimeout(() => {
-                        setPhysics(true)
+                        setPencils(true)
                         setTopBannerAnimations(refGradiendLight.current)
                     }, 100)
                 }
@@ -369,7 +375,14 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
             const elPageLoader = document.querySelector(".page-loader")
             const isMobile = isMobileScreen()
-            if (elPageLoader?.classList.contains("loader-shown")) initiateTopBanner()
+            if (elPageLoader?.classList.contains("loader-shown")) {
+                document.querySelector(".page-loader")?.classList.add("is-loading")
+
+                setTimeout(() => {
+                    document.querySelector(".page-loader")?.classList.remove("is-loading")
+                    setTimeout(() => initiateTopBanner(), isMobile ? 500 : 0)
+                }, isMobile ? 500 : 1500)
+            }
             else setTimeout(() => initiateTopBanner(), isMobile ? 4000 : 2000)
         }
     }, [])
@@ -402,6 +415,8 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             onComplete: ()=> setIsAnimating(false),
         })
     }
+
+    // const glassShadow = useLoader(TextureLoader, 'logoshade.jpg')
 
     return (
         <>
@@ -446,36 +461,50 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                     </Html>
                 </group>
 
-                <mesh
-                    ref={refGlass}
-                    receiveShadow
-                    castShadow
-                    position={[-20,1.35,4]}
-                    rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
-                    scale={0.08}
-                    raycast={ meshBounds }
-                    geometry={nodes.logo3000.geometry}
-                    onPointerEnter={(e) => {
-                        document.body.style.cursor = "pointer"
-                        glassScaleEffect(true)
-                    }}
-                    onPointerLeave={(e) => {
-                        document.body.style.cursor = "auto"
-                        // @ts-ignore
-                        glassScaleEffect(false)
-                    }}
-                    onClick={(e) => {
-                        glassScaleEffect(true, true)
-                        document.body.getAttribute("data-theme") === "light"
-                            ? document.body.setAttribute("data-theme", "dark")
-                            : document.body.setAttribute("data-theme", "light")
-                        document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
-                    }}
+                {!isMobileScreen() ?
+                <group>
+                    <mesh
+                        ref={refGlass}
+                        receiveShadow
+                        castShadow
+                        position={[-20,4,4]}
+                        rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
+                        scale={0.08}
+                        raycast={ meshBounds }
+                        geometry={nodes.logo3000.geometry}
+                        onPointerEnter={(e) => {
+                            document.body.style.cursor = "pointer"
+                            glassScaleEffect(true)
+                        }}
+                        onPointerLeave={(e) => {
+                            document.body.style.cursor = "auto"
+                            // @ts-ignore
+                            glassScaleEffect(false)
+                        }}
+                        onClick={(e) => {
+                            glassScaleEffect(true, true)
+                            document.body.getAttribute("data-theme") === "light"
+                                ? document.body.setAttribute("data-theme", "dark")
+                                : document.body.setAttribute("data-theme", "light")
+                            document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
+                        }}
 
-                    {...props}>
-                    {/* @ts-ignore */}
-                    <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 2 : 8} thickness={2} chromaticAberration={isMobileScreen() ? 0 : 0.5} anisotropy={isMobileScreen() ? 0 : 2.5} envMapIntensity={isMobileScreen() ? 2 : 5}/>
-                </mesh>
+                        {...props}>
+                        {/* @ts-ignore */}
+                        <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 2 : 8} thickness={2} chromaticAberration={isMobileScreen() ? 0 : 0.5} anisotropy={isMobileScreen() ? 0 : 2.5} envMapIntensity={isMobileScreen() ? 2 : 5}/>
+                    </mesh>
+                    {/* <mesh position={[-2.75, 1, 5.2]} rotation={[-Math.PI / 2, 0, 0]}>
+                        <planeBufferGeometry args={[8.7, 8.7]} />
+                        <meshBasicMaterial
+                            color="0x000000"
+                            // opacity={0.8}
+                            transparent
+                            map={glassShadow}
+                            // alphaMap={simpleShadow}
+                        />
+                    </mesh> */}
+                </group>
+                : ""}
             </group>
 
             {/* {isMobileScreen() === false ? <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={256} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> : ''} */}

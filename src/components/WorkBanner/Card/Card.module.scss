@@ -35,6 +35,11 @@
     .drop {
         transform: scale(0.3);
     }
+
+    @include mixins.mobile {
+        grid-template-columns: 100%;
+    }
+
 }
 
 .title {
@@ -54,6 +59,11 @@
         left: 15px;
         font-size: 22px;
     }
+
+    @include mixins.mobile {
+        top: 15px;
+        transform: none;
+    }
 }
 
 .containerText {
@@ -67,6 +77,17 @@
 
         p {
             margin-bottom: 0;
+        }
+    }
+
+    @include mixins.mobile {
+        grid-column-start: 1;
+        margin-left: var(--mg-lg);
+        margin-top: 30px;
+
+        p {
+            line-height: 1.2;
+            color: var(--c-font-global-lighter);
         }
     }
 }
@@ -101,6 +122,11 @@
 
     @include mixins.mobile-tablet {
         width: var(--card-img-width);
+    }
+
+    @include mixins.mobile {
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 }
 

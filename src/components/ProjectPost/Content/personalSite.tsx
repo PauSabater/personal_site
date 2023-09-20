@@ -126,7 +126,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>An eye on performance</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        When dealing with a lot of animations, it is easy to have janky result, as browsers can require lots of resources as a result of repainting and reflows. That is why most animations on this site are limited to <span>opacity and transforms</span> to avoid rerenderings and keep most work at the <span>GPU</span>. In addition, some Threejs scenes are lazyly loaded, and the render frames are executed only when the scene is in view. Sadly, some scenes cool effects have been abandoned to keep frame rate good, since maintaining a good browsing experience is more important.
+                        When dealing with a lot of animations, it is easy to have janky result, as browsers can require lots of resources as a result of repainting and reflows. That is why most animations on this site are limited to <span>opacity and transforms</span> to avoid rerenderings and keep most work at the <span>GPU</span>. In addition, some Threejs scenes are lazyly loaded, and the render frames are executed only when the scene is in view. Sadly, some scenes cool effects have been abandoned to keep frame rate good, since maintaining a good browsing experience is more important. However, the nature on three.js requirements will make the site execute slow on low end mobiles, t
                     </p>
                 </div>
                 <ImageArticle

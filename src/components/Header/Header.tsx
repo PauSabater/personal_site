@@ -65,6 +65,29 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 }
         }
 
+        const elsBurgerLines = Array.from((refBurger.current as unknown as HTMLElement).querySelectorAll(".burger-line"))
+
+        gsap.timeline()
+        .set(elsBurgerLines[0], {
+            y: '8',
+            duration: 0.4,
+            onStart: () => disableScroll()
+        }, 0)
+        .set(elsBurgerLines[2], {
+            y: '-8',
+            duration: 0.4
+        }, 0)
+        // .set([elsBurgerLines[0],elsBurgerLines[1]], {
+        //     rotate: '45deg',
+        //     duration: 0.45,
+        //     delay: 0.4
+        // }, 0)
+        // .set(elsBurgerLines[2], {
+        //     rotate: '-45deg',
+        //     duration: 0.4,
+        //     delay: 0.4
+        // }, 0)
+
         window.addEventListener('scroll', controlDirection)
         return () => {
             window.removeEventListener('scroll', controlDirection)
@@ -130,12 +153,12 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 pointerEvents: 'all'
             })
             .to(elsBurgerLines[0], {
-                y: '8',
+                y: '-1.25',
                 duration: 0.4,
                 onStart: () => disableScroll()
             }, 0)
             .to(elsBurgerLines[2], {
-                y: '-8',
+                y: '-1.25',
                 duration: 0.4
             }, 0)
             .to([elsBurgerLines[0],elsBurgerLines[1]], {
@@ -230,8 +253,13 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 rotate: '0deg',
                 duration: duration,
             }, 0)
-            .to([elsBurgerLines[0], elsBurgerLines[2]], {
-                y: '0',
+            .to([elsBurgerLines[0]], {
+                y: '8',
+                duration: duration,
+                delay: duration
+            }, 0)
+            .to([elsBurgerLines[2]], {
+                y: '-8',
                 duration: duration,
                 delay: duration
             }, 0)
@@ -299,11 +327,16 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 <div className={`${styles.burgerLine} burger-line`}></div>
             </div>
             <div className={styles.container}>
-                <Link ref={refLogoContainer} to={"/"} className={`${styles.logoContainer} ${isBurgerOpen ? styles.logoWhenOpen : ''}` }>
+                <Link
+                    onClick={(e) => {handleClickLink(e)}}
+                    ref={refLogoContainer}
+                    to={"/"}
+                    className={`${styles.logoContainer} ${isBurgerOpen ? styles.logoWhenOpen : ''}`
+                }>
                     <svg width="48" height="156" viewBox="0 0 48 156" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="48" rx="10" fill="currentColor"/>
-                    <rect y="54" width="48" height="48" rx="10" fill="currentColor"/>
-                    <rect y="108" width="48" height="48" rx="10" fill="currentColor"/>
+                        <rect width="48" height="48" rx="10" fill="currentColor"/>
+                        <rect y="54" width="48" height="48" rx="10" fill="currentColor"/>
+                        <rect y="108" width="48" height="48" rx="10" fill="currentColor"/>
                     </svg>
                     <p className={styles.logoName}>PS</p>
                 </Link>

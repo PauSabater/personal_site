@@ -75,6 +75,7 @@
 
     --c-font-global: var(--c-black);
     --c-font-global-light: hsl(0, 0%, 12%);
+    --c-font-global-lighter: hsl(0, 0%, 30%);
 
     --c-font-h: hsl(0, 0%, 15%);
     --c-font-white: var(--c-white);
@@ -88,6 +89,7 @@
     --bg-white-translucent-dark-mode: hsl(0, 0%, 100%, 1);
 
     // Transitions
+    --tr-fast: 0.2s;
     --tr-base: 0.3s;
     --tr-slow: 0.5s;
 
@@ -152,6 +154,7 @@ body[data-theme="dark"] {
     --c-white: hsl(0, 0%, 7%);
     --c-font-global: hsl(136, 0%, 96%);
     --c-font-global-light: hsl(136, 0%, 86%);
+    --c-font-global-lighter: hsl(136, 0%, 75%);
     --bg-white: hsl(0, 0%, 12%);
     --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
     --bg-white-translucent-dark-mode: hsla(0, 0%, 13%, 0.75);
@@ -160,5 +163,6 @@ body[data-theme="dark"] {
 
 body {
     background-color: var(--bg-main);
+    transition: background-color var(--tr-fast);
 }
 

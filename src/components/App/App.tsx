@@ -44,16 +44,17 @@ function App() {
 
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
-
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
 
     useEffect(()=> {
-        setHomePageClass(!location.pathname.includes('projects') && !location.pathname.includes('contact')
-        ? 'homepage' : '')
+        setHomePageClass(
+            !location.pathname.includes('projects') && !location.pathname.includes('contact')
+                ? 'homepage'
+                : location.pathname.includes('contact') ? 'contact' : '')
     }, [location])
 
     useLayoutEffect(()=> {
-        if (window.location.href.includes("projects")) {
+        if (window.location.href.includes("projects") || window.location.href.includes("contact")) {
             document.querySelector(".page-loader")?.classList.remove("is-loading")
         }
 

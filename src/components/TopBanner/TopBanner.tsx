@@ -1,7 +1,8 @@
-import { Fragment, useRef } from "react"
+import { Fragment, useRef, useState } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayMonthName } from "../../assets/ts/utils/utils"
+import { getTodayMonthName, isMobileScreen } from "../../assets/ts/utils/utils"
 import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
+import { MobileTopBanner } from "./MobileTopBanner/MobileTopBanner"
 
 export interface ITopBannerProps {
     desktop: {
@@ -18,11 +19,18 @@ export interface ITopBannerProps {
 export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: string}) {
 
     const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
+    const mql = window.matchMedia('(max-width: 768px)')
+
+    const [isMobile, setIsMobile] = useState(isMobileScreen())
+    mql.onchange = () => setIsMobile(mql.matches)
 
     return (
         <Fragment>
             <div className={styles.canvasContainer} id="top-banner" data-theme={mode}>
-                <TopBannerCanvas mode={mode} />
+                {isMobile
+                    ? <MobileTopBanner mode={mode}/>
+                    : <TopBannerCanvas mode={mode}
+                />}
             </div>
             <div className={styles.container} id={"top-banner-container"}>
                 <div ref={refsizedTopBanner} className={styles.sizedTopBanner} />

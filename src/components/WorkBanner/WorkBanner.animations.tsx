@@ -1,9 +1,11 @@
 import gsap from "gsap"
+import { isMobileScreen } from "../../assets/ts/utils/utils"
 
 export function setTextAnimation(elContainerTexts: HTMLElement) {
 
     const elHeadingContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-heading") as HTMLElement
     const elLinesTextContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-texts") as HTMLElement
+    const elLink: HTMLElement = (elContainerTexts as HTMLElement).querySelector("a") as HTMLElement
     const elsHeadings: NodeListOf<HTMLHeadingElement> = (elHeadingContainer as HTMLElement).querySelectorAll("h1")
     const elsLinesText: NodeListOf<HTMLParagraphElement> = (elLinesTextContainer as HTMLElement).querySelectorAll("p")
     const elGradient = (elContainerTexts as HTMLElement).querySelector("#work-banner-gradient")
@@ -23,12 +25,12 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
             if (entry.isIntersecting && entry.target.className === elHeadingContainer.className) {
                 gsap.fromTo(elHeadingContainer, {opacity: 0}, {opacity: 1, duration: 0.6})
                 gsap.to(elGradient, {opacity: 0.6, duration: 0.8, delay: 0.5})
-                gsap.fromTo(Array.from(elsHeadings), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.5, stagger: 0.1})
                 observer.unobserve(elHeadingContainer)
             }
 
             if (entry.isIntersecting && entry.target.className === elLinesTextContainer.className) {
-                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.5, stagger: 0.1})
+                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.5, stagger: 0})
+                gsap.fromTo(elLink, {opacity: 0}, {opacity: 1, duration: 0.7, delay: 0.3})
                 observer.unobserve(elLinesTextContainer)
             }
         })
@@ -45,11 +47,13 @@ export function getCloudsAnimation(container: HTMLElement, placeClouds = false) 
     const elThirdCloudsLayer = (container as HTMLElement).querySelector('#cloud-third-line') as HTMLElement
     const elThirdCloudsLayerCopy = (container as HTMLElement).querySelector('#cloud-third-line-copy') as HTMLElement
 
+    const duration = isMobileScreen() ? 75 : 150
+
     return gsap.timeline({ repeat: -1 })
         // Clouds to the right
-        .to([elFirstCloudsLayerOne, elThirdCloudsLayer], {xPercent: 50, duration: 150, ease: 'none'}, 0)
-        .to([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy,], {xPercent: -50, duration: 150, ease: 'none'}, 0)
+        .to([elFirstCloudsLayerOne, elThirdCloudsLayer], {xPercent: 50, duration: duration, ease: 'none'}, 0)
+        .to([elFirstCloudsLayerOneCopy, elThirdCloudsLayerCopy,], {xPercent: -50, duration: duration, ease: 'none'}, 0)
         // Clouds to the left
-        .to([elSecondCloudsLayer,], {xPercent: -150, duration: 150, ease: 'none'}, 0)
-        .to([elSecondCloudsLayerCopy,], {xPercent: -50, duration: 150, ease: 'none'}, 0)
+        .to([elSecondCloudsLayer,], {xPercent: -150, duration: duration, ease: 'none'}, 0)
+        .to([elSecondCloudsLayerCopy,], {xPercent: -50, duration: duration, ease: 'none'}, 0)
 }
