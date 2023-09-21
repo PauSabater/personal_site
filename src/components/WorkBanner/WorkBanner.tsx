@@ -69,7 +69,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 scrollTrigger: {
                     trigger: isMobileScreen() ? cardsContainer : elContainer,
                     start: "top",
-                    end: `bottom -=${window.innerHeight * 1.25}`,
+                    end: `bottom -=${window.innerHeight * 1.5}`,
                     pin: true,
                     pinSpacing: true,
                     scrub: 1,
@@ -156,7 +156,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
                     y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
                     scale: ()=> isMobileScreen() ? getScaleToCoverViewPort(card3Svg) + 0.35 : getScaleToCoverViewPort(card3Svg),
-                    duration: isMobileScreen() ? 3 : 2.2
+                    duration: isMobileScreen() ? 4 : 3.5
                 }, 'start')
 
                 .to(elMoon, {
