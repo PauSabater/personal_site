@@ -114,13 +114,12 @@ export function FootBanner() {
         const [shouldRender, setShouldRender] = useState(false)
 
 
-        const [video] = useState(() => isMobileScreen()
-        ? null
-        : Object.assign(document.createElement('video'), {
-            src: '/video-comp.mp4',
-            crossOrigin: 'Anonymous',
-            loop: true,
-            muted: true
+        const [video] = useState(() =>
+            Object.assign(document.createElement('video'), {
+                src: '/video-comp.mp4',
+                crossOrigin: 'Anonymous',
+                loop: true,
+                muted: true
         }))
 
         useEffect(() => {
