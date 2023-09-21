@@ -74,7 +74,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
             onStart: () => disableScroll()
         }, 0)
         .set(elsBurgerLines[2], {
-            y: '-8',
+            y: '-10.5',
             duration: 0.4
         }, 0)
         // .set([elsBurgerLines[0],elsBurgerLines[1]], {
@@ -259,7 +259,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 delay: duration
             }, 0)
             .to([elsBurgerLines[2]], {
-                y: '-8',
+                y: '-10.5',
                 duration: duration,
                 delay: duration
             }, 0)

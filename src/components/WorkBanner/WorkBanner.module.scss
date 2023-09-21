@@ -37,7 +37,6 @@
     padding-top: var(--container-pd-top);
     width: 100vw;
     height: calc(100vh - var(--container-pd-top));
-    //overflow: hidden;
 
     @include mixins.mobile {
         height: auto;

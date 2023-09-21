@@ -1,4 +1,4 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import {
   Text,
   Instance,
@@ -21,7 +21,7 @@ import { ellipse, underline } from '../../../assets/svg/ts/strokes'
 import { setTopBannerAnimations } from '../TopBanner.animations'
 import { getViewportAspectRatio, hideAllTransitionImages, isMobileScreen, scTransitionPage } from '../../../assets/ts/utils/utils'
 import * as THREE from 'three'
-// import { TextureLoader } from 'three'
+import { TextureLoader } from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -79,7 +79,9 @@ function PencilsDuo({mode}:{mode: string}) {
         <group position={[xPos, 1, zPos]} rotation={[0, yRotate, 0]}>
             {/* //YELLOW */}
             <Pencil color={"hsl(54, 67%, 45%)"} rotation={[1, Math.PI / -0.9, 1]} position={[0, 1, 8]} mode={mode}></Pencil>
+            <PencilShadow mode={mode} rotation={[Math.PI / -2, 0 , Math.PI / -4.8]} position={[1.55, -1, 2.6]}/>
             <Pencil color={"hsl(248, 30%, 50%)"} rotation={[1,  Math.PI / -1, 1]} position={[0, 1, 0]} mode={mode}></Pencil>
+            <PencilShadow mode={mode} rotation={[Math.PI / -2, 0 , Math.PI / -7.1]} position={[1.7, -1, 0.65]}/>
         </group>
     )
 }
@@ -167,7 +169,27 @@ export function Pencil(props: any) {
             </group>
         </Fragment>
     )
-  }
+}
+
+const PencilShadow = (props: any) => {
+    const pencilShadow = useLoader(TextureLoader, 'pencilShade.svg')
+
+    return (
+        <mesh
+            // rotation={[0.5, Math.PI / 1, 2]}
+            rotation={props.rotation}
+            position={props.position}
+        >
+            <planeBufferGeometry args={[10.5, 0.75]} />
+            <meshBasicMaterial
+                // opacity={mode === "light" ? 0.8 : 0.8}
+                transparent
+                map={pencilShadow}
+                color={props.mode === "light" ? "transparent" : "black"}
+            />
+        </mesh>
+    )
+}
 
 const Grid = ({mode}: {mode: string}) => {
     const number = 7
@@ -202,6 +224,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
     const refTitle = useRef(null)
     const refTitleMaterial = useRef(null)
     const refGlass = useRef(null)
+    const refGlassShade = useRef(null)
     const refGradiendLight = useRef(null)
 
     const { size } = useThree()
@@ -263,7 +286,16 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             if (percentage < 0.95 && percentage > 0 && size.width > 768) {
                 setPreviousDistToTop(distToTop)
                 // @ts-ignore
-                gsap.set(refGlass.current.position, {x: glassXCoordinate - 2 + percentage * 2, z: glassZCoordinate})
+                gsap.set(refGlass.current.position, {
+                    x: glassXCoordinate - 2 + percentage * 2,
+                    z: glassZCoordinate
+                })
+                // @ts-ignore
+                gsap.set(refGlassShade.current.position, {
+                    x: -2.25 - 2 + percentage * 2,
+                    z: 5.75
+                })
+
                 gl.render(scene, camera)
             }
 
@@ -343,15 +375,20 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         ease: "power1.in"
                     })
 
-
-
-
-
                     if (!isMobileScreen()) {
                         // @ts-ignore
                         gsap.to(refGlass.current.position, {
                             x: glassXCoordinate,
                             z: glassZCoordinate,
+                            duration: 0.9,
+                            delay: 0.2,
+                            ease: "power4.out",
+                        })
+
+                        // @ts-ignore
+                        gsap.to(refGlassShade.current.position, {
+                            x: -2.25,
+                            z: 5.75,
                             duration: 0.9,
                             delay: 0.2,
                             ease: "power4.out",
@@ -394,6 +431,9 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
         const scale = isEnter && !isClick ? 0.0825
             : isClick ? 0.084 : 0.08
 
+        const scaleShade = isEnter && !isClick ? 1.04
+            : isClick ? 1.1 : 1
+
         // @ts-ignore
         gsap.to(refGlass.current.scale, {
             x: scale,
@@ -403,20 +443,48 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             ease: !isClick ? "bounce.out" : "power1.out",
             onComplete: ()=> setIsAnimating(false),
         })
+
         // @ts-ignore
-        if(isClick) gsap.to(refGlass.current.scale, {
-            onStart: ()=> setIsAnimating(true),
-            x: 0.0825,
-            y: 0.0825,
-            z: 0.0825,
-            duration: 0.25,
-            delay: 0.15,
-            ease: "power1.out",
+        gsap.to(refGlassShade.current.scale, {
+            x: scaleShade,
+            y: scaleShade,
+            z: scaleShade,
+            duration: isClick ? 0.15 : 0.5,
+            ease: !isClick ? "bounce.out" : "power1.out",
             onComplete: ()=> setIsAnimating(false),
         })
+
+
+        // Click on the logo
+        if(isClick) {
+            // @ts-ignore
+            gsap.to(refGlass.current.scale, {
+                onStart: ()=> setIsAnimating(true),
+                x: 0.0825,
+                y: 0.0825,
+                z: 0.0825,
+                duration: 0.25,
+                delay: 0.15,
+                ease: "power1.out",
+                onComplete: ()=> setIsAnimating(false),
+            })
+
+            // @ts-ignore
+            gsap.to(refGlassShade.current.scale, {
+                onStart: ()=> setIsAnimating(true),
+                x: 1.1,
+                y: 1.1,
+                z: 1.1,
+                duration: 0.25,
+                delay: 0.15,
+                ease: "power1.out",
+                onComplete: ()=> setIsAnimating(false),
+            })
+        }
     }
 
-    // const glassShadow = useLoader(TextureLoader, 'logoshade.jpg')
+    const glassShadow = useLoader(TextureLoader, 'logoshade.svg')
+    const glassShadowDark = useLoader(TextureLoader, 'logoShadeDark.svg')
 
     return (
         <>
@@ -467,7 +535,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         ref={refGlass}
                         receiveShadow
                         castShadow
-                        position={[-20,4,4]}
+                        position={[-20,4,4]} //                        // -3 / 8
                         rotation={[-Math.PI / 2, -Math.PI / 1, -Math.PI / 1]}
                         scale={0.08}
                         raycast={ meshBounds }
@@ -493,16 +561,18 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         {/* @ts-ignore */}
                         <MeshTransmissionMaterial backside backsideThickness={isMobileScreen() ? 2 : 8} thickness={2} chromaticAberration={isMobileScreen() ? 0 : 0.5} anisotropy={isMobileScreen() ? 0 : 2.5} envMapIntensity={isMobileScreen() ? 2 : 5}/>
                     </mesh>
-                    {/* <mesh position={[-2.75, 1, 5.2]} rotation={[-Math.PI / 2, 0, 0]}>
-                        <planeBufferGeometry args={[8.7, 8.7]} />
+                    <mesh
+                        ref={refGlassShade}
+                        position={[-19.25, 1, 1.75]}
+                        rotation={[-Math.PI / 2, 0, 0]}
+                    >
+                        <planeBufferGeometry args={[10.8, 10.8]} />
                         <meshBasicMaterial
-                            color="0x000000"
-                            // opacity={0.8}
+                            // opacity={mode === "light" ? 0.8 : 0.8}
                             transparent
-                            map={glassShadow}
-                            // alphaMap={simpleShadow}
+                            map={mode === "light" ? glassShadow : glassShadowDark}
                         />
-                    </mesh> */}
+                    </mesh>
                 </group>
                 : ""}
             </group>
