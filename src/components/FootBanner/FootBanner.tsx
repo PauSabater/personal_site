@@ -196,7 +196,7 @@ export function FootBanner() {
         return (
             <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
                 {text.split('+').join('\n')}
-                <meshBasicMaterial ref={refVideoTexture} toneMapped={false} color={isMobileScreen() ? "hsl(54, 67%, 90%)" : "transparent"} >
+                <meshBasicMaterial ref={refVideoTexture} toneMapped={false} color={isMobileScreen() ? "hsl(54, 67%, 90%)" : "white"} >
                 {!isMobileScreen() ? <videoTexture attach="map" args={[video as HTMLVideoElement]} encoding={THREE.sRGBEncoding} /> : ''}
                 </meshBasicMaterial>
             </Text>

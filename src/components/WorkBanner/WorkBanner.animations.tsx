@@ -6,7 +6,6 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
     const elHeadingContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-heading") as HTMLElement
     const elLinesTextContainer: HTMLElement = (elContainerTexts as HTMLElement).querySelector("#work-banner-texts") as HTMLElement
     const elLink: HTMLElement = (elContainerTexts as HTMLElement).querySelector("a") as HTMLElement
-    const elsHeadings: NodeListOf<HTMLHeadingElement> = (elHeadingContainer as HTMLElement).querySelectorAll("h1")
     const elsLinesText: NodeListOf<HTMLParagraphElement> = (elLinesTextContainer as HTMLElement).querySelectorAll("p")
     const elGradient = (elContainerTexts as HTMLElement).querySelector("#work-banner-gradient")
 
@@ -23,15 +22,12 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
     const observerCallback = (entries: any) => {
         entries.forEach((entry: any) => {
             if (entry.isIntersecting && entry.target.className === elHeadingContainer.className) {
-                gsap.fromTo(elHeadingContainer, {opacity: 0}, {opacity: 1, duration: 0.6})
+                gsap.fromTo(elHeadingContainer, {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.6})
                 gsap.to(elGradient, {opacity: 0.6, duration: 0.8, delay: 0.5})
-                observer.unobserve(elHeadingContainer)
-            }
-
-            if (entry.isIntersecting && entry.target.className === elLinesTextContainer.className) {
-                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.5, stagger: 0})
-                gsap.fromTo(elLink, {opacity: 0}, {opacity: 1, duration: 0.7, delay: 0.3})
+                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.7, stagger: 0, delay: 0.4})
+                gsap.fromTo(elLink, {opacity: 0}, {opacity: 1, duration: 0.7, delay: 0.4})
                 observer.unobserve(elLinesTextContainer)
+                observer.unobserve(elHeadingContainer)
             }
         })
     }

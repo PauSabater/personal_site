@@ -182,10 +182,9 @@ const PencilShadow = (props: any) => {
         >
             <planeBufferGeometry args={[10.5, 0.75]} />
             <meshBasicMaterial
-                // opacity={mode === "light" ? 0.8 : 0.8}
                 transparent
                 map={pencilShadow}
-                color={props.mode === "light" ? "transparent" : "black"}
+                color={props.mode === "light" ? "#727088" : "black"}
             />
         </mesh>
     )
@@ -412,6 +411,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
 
             const elPageLoader = document.querySelector(".page-loader")
             const isMobile = isMobileScreen()
+
             if (elPageLoader?.classList.contains("loader-shown")) {
                 document.querySelector(".page-loader")?.classList.add("is-loading")
 
@@ -423,6 +423,8 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
             else setTimeout(() => initiateTopBanner(), isMobile ? 4000 : 2000)
         }
     }, [])
+
+
 
     function glassScaleEffect(isEnter: boolean, isClick = false) {
         if (refGlass.current === null) return
@@ -577,7 +579,6 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                 : ""}
             </group>
 
-            {/* {isMobileScreen() === false ? <ContactShadows frames={500} scale={40} position={[-0.1, 0, 0]} blur={0.7} far={50} resolution={256} opacity={0.6} color={mode === "light" ? "hsl(248, 57%, 42%)" : "yellow"} /> : ''} */}
             <Grid mode={mode} />
             <PencilsDuo mode={mode}/>
         </group>

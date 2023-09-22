@@ -1,15 +1,11 @@
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./MobileTopBanner.module.scss"
 import { setMobileTopBannerAnimations } from "./MobileTopBanner.animations"
-import { setTopBannerAnimations } from "../TopBanner.animations"
 import { ellipse, underline } from "../../../assets/svg/ts/strokes"
 import { gridMobile } from "./grid"
 
-
 export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
 
-    const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
-    const mql = window.matchMedia('(max-width: 768px)')
     const refContainer = useRef(null)
 
     useLayoutEffect(()=> {
@@ -19,13 +15,12 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
             if (refContainer.current !== null) {
                 setMobileTopBannerAnimations(refContainer.current as HTMLElement)
             }
-
         }, 1500)
     }, [])
 
     return (
         <Fragment>
-            <div className={styles.gridMobile} dangerouslySetInnerHTML={{__html: gridMobile()}}></div>
+            <div className={`${styles.gridMobile} ${mode === "dark" ? styles.gridDark : ''}`} dangerouslySetInnerHTML={{__html: gridMobile()}}></div>
             <div ref={refContainer} className={styles.container}>
                 <p className={styles.pretitle}>frontend dev</p>
                 <p className={`${styles.line} line`}>giving</p>

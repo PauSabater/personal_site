@@ -78,15 +78,16 @@ export function getMountainImgs() {
 
 export function Card({ props, mode = "light" }: { props: ICardProps, mode?: string}) {
     const refImgContainer = useRef(null)
-    const handleCardClick = ()=> {
-        const elImgContainer: HTMLElement | null = refImgContainer.current
-        if (elImgContainer === null) return
-        setCardTransitionAnimation(elImgContainer, props.path)
-}
 
+    // Right now we do not activate the link
+    // const handleCardClick = ()=> {
+    //     const elImgContainer: HTMLElement | null = refImgContainer.current
+    //     if (elImgContainer === null) return
+    //     setCardTransitionAnimation(elImgContainer, props.path)
+    // }
 
     return (
-        <div onClick={handleCardClick} className={`${styles.container} card-container`} data-mode={mode} data-card-container="" data-path={props.path}>
+        <div className={`${styles.container} card-container`} data-mode={mode} data-card-container="" data-path={props.path}>
             <p className={styles.title}>{props.title}</p>
             <div className={`${styles.containerText}`}>
                 <p className={`${styles.text} card-text`}>{props.text}</p>

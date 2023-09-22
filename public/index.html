@@ -66,6 +66,7 @@
             -webkit-mask-image: linear-gradient(-75deg, rgba(0,0,0,.6) 30%, #000 50%, rgba(0,0,0,.6) 70%);
             -webkit-mask-size: 200%;
             animation: shine 2.5s linear infinite, appear 2s;
+            transition: opacity 10s;
         }
 
         body[data-theme="light"] .page-loader__title {
@@ -138,6 +139,10 @@
         .page-loader__dot:nth-child(3) {
             animation: loader-animation 2.5s ease-in-out infinite 2.5s;
         }
+
+        /* .loader-shown .page-loader__title {
+            opacity: 0;
+        } */
 
         @media (max-width: 768px) {
             .page-loader__container {

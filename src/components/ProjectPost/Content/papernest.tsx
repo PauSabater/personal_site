@@ -21,7 +21,7 @@ export const papernestContent = (): JSX.Element => { return (
                     <p>March 2021 - April 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    <LinkInline text={"papernest"} href={"https://papernest.com/"}/> is a french <span>tech startup</span> with a worforce of around 1000 employees, which automates the moving process of telecom contracts, energy contracts or even its home insurance through partnerships with its suppliers. I had the pleasure to work for them as a <span>frontend developer</span>. Having the tech department strongly integrated <span>good coding practises</span>, this period was very benefitial for me to grow professionally.
+                    <LinkInline text={"papernest"} href={"https://papernest.com/"}/> is a french <span>tech startup</span> with a worforce of around 1000 employees, which automates the moving process of telecom contracts, energy contracts or even its home insurance through partnerships with its suppliers. I had the pleasure to work for them as a <span>frontend developer</span>. Having the tech department strongly integrated <span>good coding practices</span>, this period was very beneficial for me to grow professionally.
                 </p>
             </div>
         </div>
@@ -31,14 +31,14 @@ export const papernestContent = (): JSX.Element => { return (
                 <p className={styles.preTitle}>/ A long epic </p>
                 <h2 className={styles.sectionTitle}>Refactoring and optimising a range of projects</h2>
                 <p className={styles.mainParagraph}>
-                    As most of startups, papernest needed during its first years a <span>rapid growth</span>, which means a lot of development during a short period of time with limited resourses. I entered the company in a period of consolidation, which meant more resources for <span>optimising and improving</span> the existing product.
+                    As most of startups, papernest needed during its first years a <span>fast growth</span>. This means a lot of development during a short period of time with limited resourses. I entered the company in a consolidation period, which meant more resources for <span>optimizing and improving</span> the existing product.
                 </p>
                 <div>
                     <p className={styles.paragraphRight}>
                         On the front side, there were many duplicated features for each project with just a few variations. That led to a tedious process each time a new feature was developed or had to be modified, easily leading to bugs and with not enough time for testing.
                     </p>
                     <p className={styles.paragraphRight}>
-                        I was in charge of developing most of the <span>frontend refactors</span>. Some of the most important features were stored in a common repository and imported to every project, improving this way the <span>scalability and testability</span> of the features.
+                        I was in charge of developing most of the <span>frontend refactors</span>. Some of the most important features were stored in a common repository and imported to every project, improving this way their <span>scalability and testability</span>.
                     </p>
                 </div>
             </div>
@@ -46,7 +46,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>A library of reusable web components</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        When having a wide range of platforms, web components are a great idea to share features through any project. Many features linked to monolothic projects were <span>refactored to web components</span> through the framework <LinkInline text={"LITElement"} href={"https://lit.dev/"}/>, multipliying their potential to be used anywhere. These components were stored in a new repository for which I was the lead developer, and was exported to an <span>npm Github package</span> and a cdn. They could even be used on no-code pages !
+                        When having a wide range of platforms, web components are a great idea to share functionalities through any project. Many features linked to monolithic projects were <span>refactored to web components</span> through the framework <LinkInline text={"LITElement"} href={"https://lit.dev/"}/>, multiplying their potential to be used anywhere. These components were stored in a new repository for which I was the lead developer, and were exported to an <span>npm Github package</span> and a cdn. They could even be used on no-code pages !
                     </p>
                 </div>
                 <ImageArticle
@@ -76,7 +76,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Deploying a Storybook</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        Deploying a <LinkInline text={"Storybook"} href={"https://storybook.js.org/"}/> to document all the new components and design system was the natural next step. Unlike tooks like <LinkInline text={"Figma"} href={"https://www.figma.com/"}/> or <LinkInline text={"Notion"} href={"https://www.notion.so/"}/>, Storybook is based on the project code, so it is possible to interact with the component's properties and generate the corresponding code. This fact makes possible to integrate a code playground for devs to test the component behaviour, as well as integrating automated tests.
+                        Deploying a <LinkInline text={"Storybook"} href={"https://storybook.js.org/"}/> to document all the new components and design system was the natural next step. Unlike tools like <LinkInline text={"Figma"} href={"https://www.figma.com/"}/> or <LinkInline text={"Notion"} href={"https://www.notion.so/"}/>, Storybook is based on the project code, so it is possible to interact with the component's properties and generate the corresponding code. This fact makes it possible to integrate a code playground for devs to test the component behavior, as well as integrating automated tests.
                     </p>
                 </div>
                 <ImageArticle
@@ -89,14 +89,14 @@ export const papernestContent = (): JSX.Element => { return (
                 <p className={styles.preTitle}>/ Smaller tasks </p>
                 <h2 className={styles.sectionTitle}>Development of new features</h2>
                 <p className={styles.mainParagraph}>
-                    During my period on papernest I had also had the pleasure to develop multiple new features. Some of them are explained here, although I also worked on many other smalled tasks.
+                    During my period on papernest I had also had the pleasure to develop multiple new features. Some of them are explained here, although I also worked on many other smaller tasks.
                 </p>
             </div>
             <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>Energy offers comparator</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        This feature allows the display of <span>energy offers based on a form</span> that requires user information like appartment surface, heating type and location and consumtion. This was a challenging task due to the <span>multiple private and public apis</span> to consume and the non static wording the data had to be combined with. The <span>user management</span> was also challenging, as this feature could be added on any site and was not integrated in a specific app.
+                        This feature allows the display of <span>energy offers based on a form</span> that requires user information such as apartment surface, heating type, location and consumption. This was a challenging task due to the <span>multiple private and public apis</span> to consume and the dynamic wording the data had to be combined with. The <span>user management</span> was also challenging, as this feature could be added on any site and was not integrated in a specific app.
                     </p>
                     <p className={styles.paragraphRight}>
                         The feature is currently not working due to an error from an api response, however, not linked to my work !
@@ -113,7 +113,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Filtered List</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                         <LinkInline text={"This component "} href={"https://www.fournisseur-energie.com/fournisseurs-electricite/"}/> allows the creation of lists of cards that can be filtered through different lists of inputs. Everything is customisable and a Wordpress custom backoffice interface was developed to allow redactors to create their own lists, use key variables linked to a database and even prefilter it through url params.
+                         <LinkInline text={"This component "} href={"https://www.fournisseur-energie.com/fournisseurs-electricite/"}/> allows the creation of lists of cards that can be filtered through different lists of inputs. Everything is customisable and a Wordpress custom backoffice interface was developed to allow redactors to create their own lists, use key variables linked to a database and even pre-filter it through url params.
                     </p>
                 </div>
                 <ImageArticle
@@ -141,7 +141,7 @@ export const papernestContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Company brand page</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        The company's <LinkInline text={"brand page"} href={"https://www.papernest.com/"}/> was redesigned and remade from scratch in order to be fully customisable. A Wordpress custom interface was developed in order to allow the redactors to create their own pages and be able to use a list of customisable components that could be arranged on any order.
+                        The company's <LinkInline text={"brand page"} href={"https://www.papernest.com/"}/> was redesigned and remade from scratch in order for it to be fully customisable. A Wordpress custom interface was developed to allow redactors to create their own pages and content and be able to use a list of customisable components that could be arranged in any order. I collaborated on some of the features.
                     </p>
                 </div>
                 <ImageArticle
