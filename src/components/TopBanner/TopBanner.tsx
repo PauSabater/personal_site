@@ -1,6 +1,6 @@
-import { Fragment, useRef, useState } from "react"
+import { Fragment, useLayoutEffect, useRef, useState } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayMonthName, isMobileScreen } from "../../assets/ts/utils/utils"
+import { getTodayMonthName, hideAllTransitionImages, isMobileScreen } from "../../assets/ts/utils/utils"
 import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
 import { MobileTopBanner } from "./MobileTopBanner/MobileTopBanner"
 
@@ -23,6 +23,10 @@ export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: strin
 
     const [isMobile, setIsMobile] = useState(isMobileScreen())
     mql.onchange = () => setIsMobile(mql.matches)
+
+    useLayoutEffect(()=> {
+        hideAllTransitionImages()
+    }, [])
 
     return (
         <Fragment>

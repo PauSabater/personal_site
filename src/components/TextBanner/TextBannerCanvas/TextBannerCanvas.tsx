@@ -32,7 +32,6 @@ export function TextBannerCanvas({mode}:{mode: string}) {
                   position={[0, 27, 0]}
               />
               <Suspense>
-                  <ambientLight intensity={0.5} />
                   {/* @ts-ignore */}
                   <Model rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, -5.25]}>{""}</Model>
               </Suspense>
@@ -69,7 +68,7 @@ function Model() {
             ) {
                 setScrollPercentage(percentage)
                 // @ts-ignore
-                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.9})
+                gsap.set(refGlass.current.rotation, {y: Math.PI / 1 - percentage * 0.5})
                 gl.render(scene, camera)
 
             } else return null

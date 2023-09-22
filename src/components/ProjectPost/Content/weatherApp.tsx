@@ -23,7 +23,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                     <p>July 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! In addition, I always had a thing for weather. Despite that there are many tutorials out there about a project like this, I did not follow any and did all from scratch, using the React documentation instead.
+                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! In addition, I always had a thing for weather. Despite the fact that there are many tutorials out there about a project like this, I did not follow any and did it all from scratch, using the React documentation instead.
                 </p>
                 <div className={styles.ctaContainer}>
                     <Cta props={{
@@ -50,14 +50,14 @@ export const weatherAppContent = (): JSX.Element => { return (
                 <p className={styles.preTitle}>/ Testing the waters </p>
                 <h2 className={styles.sectionTitle}>Leveraging the reusability of react components</h2>
                 <p className={styles.mainParagraph}>
-                    React components are a great tool to break down complex system into reusable pieces. Altough they will be limited to React ecosystem, their quick development and easy way they can be integrated bring many benefits.
+                    Having a good experience with native web components, I wanted to test how React components compared with the former, and their advantages considering they cannot be used outside a React project.
                 </p>
             </div>
             <div className={styles.sectionRight}>
                 <h2 className={styles.sectionTitle}>A fully js component</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        Reusability is easier when there are less mix of stacks. This is why this component is made only with js. For styling, CSS-in-JS through <LinkInline text={"Styled Components"} href={"https://styled-components.com/"}/> has been used, preventing any styling conflicts between the components. Typescript has been added as well in order to add a safety layer when developing.
+                        Reusability is easier when there is no mix of stacks. This is why this component is made only with js. For styling, CSS-in-JS through <LinkInline text={"Styled Components"} href={"https://styled-components.com/"}/> has been used, preventing any styling conflicts between the components. Typescript has been added as well in order to add a safety layer when developing.
                     </p>
                     <p className={styles.paragraphRight}>
                         A fully js component will work better when installed in node modules, so imports to the project will require less complexity.
@@ -87,7 +87,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>A simple interface</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        I wanted an interface where the user can find <span>all the information at first sight</span>, without need to scroll or opening elements. It is a bit inspired by Google's weather widget. However, since it takes more space, there is more information showing at the same time.
+                        I wanted an interface where the user can find <span>all the information at first sight</span>, without needing to scroll or opening elements. It is a bit inspired by Google's weather widget. However, since it takes more space, there is more information showing at the same time.
                     </p>
                 </div>
                 <ImageArticle
@@ -98,7 +98,7 @@ export const weatherAppContent = (): JSX.Element => { return (
             <div className={styles.sectionMain}>
                 <h2 className={styles.sectionTitle}>Conclusion</h2>
                 <p className={styles.mainParagraph}>
-                    React components are a great tool to break down complex system into reusable pieces. Main downside is that they will be limited to React ecosystem, however their quick development and the easy way in which they can be integrated bring many benefits.
+                    React components are a great and easy tool to encapsulate functionalities into reusable pieces. Main downside is that they will be limited to the React ecosystem, however their quick and easy development and vast ecosystem make them a top valued option.
                 </p>
             </div>
         </div>

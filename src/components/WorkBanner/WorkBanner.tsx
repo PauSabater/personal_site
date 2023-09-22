@@ -69,10 +69,10 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                 scrollTrigger: {
                     trigger: isMobileScreen() ? cardsContainer : elContainer,
                     start: "top",
-                    end: `bottom -=${window.innerHeight * 1.5}`,
+                    end: `bottom -=${window.innerHeight * 2}`,
                     pin: true,
                     pinSpacing: true,
-                    scrub: 1,
+                    scrub: isMobileScreen() ? 0 : 1,
                     invalidateOnRefresh: false,
                     anticipatePin: 1,
                     fastScrollEnd: 3000,

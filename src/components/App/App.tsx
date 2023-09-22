@@ -69,6 +69,7 @@ function App() {
     }, [])
 
     function getTransitionLength(route: string) {
+
         if (route.includes("projects") && route.includes("projects/") === false) {
             return msTransitionPageLong
         } else {

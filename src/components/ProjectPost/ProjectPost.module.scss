@@ -249,7 +249,7 @@ div[data-img-mountain] {
     display: grid;
     grid-template-columns: 50% 50%;
     column-gap: var(--gap-column);
-    margin-bottom: var(--mg-2xl);
+    margin-bottom: calc(var(--mg-2xl) + var(--mg-sm));
     padding-right: var(--gap-column);
 }
 
@@ -265,7 +265,7 @@ div[data-img-mountain] {
         grid-column-start: 2;
         font-size: var(--fs-3xl);
         max-width: var(--width-paragraph);
-        margin: 0 0 var(--mg-md);
+        margin: 0 0 var(--mg-lg);
     }
 
     div {
@@ -405,12 +405,3 @@ div[data-img-mountain] {
         }
     }
 }
-
-// @include mixins.desktop-sm {
-//     margin-left: -50px;
-// }
-
-// @include mixins.desktop-lg {
-//     --width-index: 350px;
-//     margin-left: -110px;
-// }

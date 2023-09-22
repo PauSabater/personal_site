@@ -25,7 +25,7 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
 
     return (
         <Fragment>
-            <div className={styles.gridMobile} dangerouslySetInnerHTML={{__html: gridMobile()}}></div>
+            <div className={`${styles.gridMobile} ${mode === "dark" ? styles.gridDark : ''}`} dangerouslySetInnerHTML={{__html: gridMobile()}}></div>
             <div ref={refContainer} className={styles.container}>
                 <p className={styles.pretitle}>frontend dev</p>
                 <p className={`${styles.line} line`}>giving</p>

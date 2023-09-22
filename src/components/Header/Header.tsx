@@ -77,16 +77,6 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
             y: '-10.5',
             duration: 0.4
         }, 0)
-        // .set([elsBurgerLines[0],elsBurgerLines[1]], {
-        //     rotate: '45deg',
-        //     duration: 0.45,
-        //     delay: 0.4
-        // }, 0)
-        // .set(elsBurgerLines[2], {
-        //     rotate: '-45deg',
-        //     duration: 0.4,
-        //     delay: 0.4
-        // }, 0)
 
         window.addEventListener('scroll', controlDirection)
         return () => {
@@ -295,9 +285,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
                 gsap.to(window, {
                     duration: duration,
                     ease: "power2.inOut",
-                    scrollTo: {
-                        y: document.getElementById(scrollTo) as Element,
-                    }
+                    scrollTo: {y: document.getElementById(scrollTo) as Element}
                 })
             } else if (isHomepage === true) {
                 navigate("/contact")

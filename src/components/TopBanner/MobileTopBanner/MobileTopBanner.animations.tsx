@@ -83,6 +83,24 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
 
             tl.play()
 
+
+            const initiateTopBanner = ()=> {
+                window.scrollTo(0,0)
+                document.querySelector(".page-loader")?.classList.remove("is-loading")
+                tl.play()
+            }
+
+            const elPageLoader = document.querySelector(".page-loader")
+
+            if (elPageLoader?.classList.contains("loader-shown")) {
+                document.querySelector(".page-loader")?.classList.add("is-loading")
+
+                setTimeout(() => {
+                    document.querySelector(".page-loader")?.classList.remove("is-loading")
+                    initiateTopBanner()
+                }, 1000)
+            }
+            else initiateTopBanner()
     })
 
 
