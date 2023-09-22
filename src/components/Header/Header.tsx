@@ -5,7 +5,7 @@ import { useLayoutEffect, useRef, useState } from "react"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 import { CustomEase } from "gsap/CustomEase"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
-import { disableScroll, enableScroll, hasElementBeenScrolled, isMobileScreen } from "../../assets/ts/utils/utils"
+import { disableScroll, enableScroll, hasElementBeenScrolled, isMobileScreen, matchMediaMobile } from "../../assets/ts/utils/utils"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
 import { setPageFadeOutAnimation } from "../App/App.animations"
 
@@ -52,7 +52,7 @@ export function Header({ links, mode }: { links: string[], mode: string}) {
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {},[]);
 
-        const mql = window.matchMedia('(max-width: 768px)');
+        const mql = window.matchMedia(matchMediaMobile);
             mql.onchange = (e) => {
                 if (mql.matches === false) {
                     animationCloseBurger(false)

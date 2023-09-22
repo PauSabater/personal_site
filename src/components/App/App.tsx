@@ -14,7 +14,7 @@ import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages'
 import { executeEnterAnimations, executeExitAnimations } from './App.animations'
 import { Overlay } from '../Overlay/Overlay'
-import { msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
+import { matchMediaMobile, msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import Projects from '../../pages/projects'
 import Contact from '../../pages/contact'
@@ -45,6 +45,14 @@ function App() {
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
+    const [counter, increaseCounter] = useState(0)
+
+    const mql = window.matchMedia(matchMediaMobile)
+    mql.onchange = () => {
+        const location = window.location.href
+        if (!location.includes("projects") && !location.includes("contact"))
+            window.location.href = window.location.href
+    }
 
     useEffect(()=> {
         setHomePageClass(

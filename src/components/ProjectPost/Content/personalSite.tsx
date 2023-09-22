@@ -132,7 +132,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"personal_site_speed.svg"}
                     text={"fast animations strategy"}
-                    maxHeight={100}
+                    maxHeight={350}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionRight}>
@@ -143,9 +143,9 @@ export const personalSiteContent = (): JSX.Element => { return (
                     </p>
                 </div>
                 <ImageArticle
-                    imgName={"personal_site_speed.svg"}
+                    imgName={"personal_site_workflow.svg"}
                     text={"fast animations strategy"}
-                    maxHeight={100}
+                    // maxHeight={150}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMainLeft}>

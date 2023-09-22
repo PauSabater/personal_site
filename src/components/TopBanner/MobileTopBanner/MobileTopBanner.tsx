@@ -1,15 +1,11 @@
-import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { Fragment, useLayoutEffect, useRef } from "react"
 import styles from "./MobileTopBanner.module.scss"
 import { setMobileTopBannerAnimations } from "./MobileTopBanner.animations"
-import { setTopBannerAnimations } from "../TopBanner.animations"
 import { ellipse, underline } from "../../../assets/svg/ts/strokes"
 import { gridMobile } from "./grid"
 
-
 export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
 
-    const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
-    const mql = window.matchMedia('(max-width: 768px)')
     const refContainer = useRef(null)
 
     useLayoutEffect(()=> {
@@ -19,7 +15,6 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
             if (refContainer.current !== null) {
                 setMobileTopBannerAnimations(refContainer.current as HTMLElement)
             }
-
         }, 1500)
     }, [])
 

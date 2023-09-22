@@ -7,7 +7,7 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { getCloudsAnimation, setTextAnimation } from "./WorkBanner.animations"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
-import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis } from "../../assets/ts/utils/utils"
+import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, matchMediaMobile } from "../../assets/ts/utils/utils"
 import { addOutlineHeader, removeOutlineHeader } from "../Header/Header.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -175,7 +175,12 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     opacity: "0.7",
                     duration: 2,
                 }, 'start')
+
+
+                const mql = window.matchMedia(matchMediaMobile)
+                mql.onchange = () => timeline.scrollTrigger?.refresh()
             })
+
         return () => ctx.revert()
 
     }, [])
