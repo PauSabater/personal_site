@@ -22,7 +22,9 @@ export function Home({mode}: {mode: string}) {
         <div id="page-home">
             <TopBanner props={textsPage.topBanner} mode={mode}/>
             <TextBanner texts={textsPage.intro} mode={mode}/>
-            <WorkBanner props={textsPage.workBanner} mode={mode}/>
+            <Suspense>
+                <WorkBanner props={textsPage.workBanner} mode={mode}/>
+            </Suspense>
             <Suspense>
             <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
                 <SkillsBanner texts={textsPage.skillsBanner} mode={mode}/>
