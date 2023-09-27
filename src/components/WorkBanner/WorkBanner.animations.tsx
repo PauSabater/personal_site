@@ -1,5 +1,6 @@
 import gsap from "gsap"
-import { isMobileScreen } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
 
 export function setTextAnimation(elContainerTexts: HTMLElement) {
 

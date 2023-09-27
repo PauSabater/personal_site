@@ -5,7 +5,8 @@ import { useLayoutEffect, useRef, useState } from "react"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 import { CustomEase } from "gsap/CustomEase"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
-import { disableScroll, dispatchChangePerfEvent, dispatchChangeThemeEvent, enableScroll, getPerfMode, hasElementBeenScrolled, isHighPerf, isMobileScreen, matchMediaMobile } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { disableScroll, dispatchChangePerfEvent, dispatchChangeThemeEvent, enableScroll, getPerfMode, hasElementBeenScrolled, isHighPerf, isMobileScreen, matchMediaMobile } from "@pausabater/utils/dist/index.esm.js"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
 import { setPageFadeOutAnimation } from "../App/App.animations"
 

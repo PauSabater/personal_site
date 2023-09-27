@@ -3,16 +3,10 @@ import styles from "./PersonalSiteCanvas.module.scss"
 import { Suspense, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, CameraControls, MeshTransmissionMaterial, useGLTF, PerspectiveCamera } from '@react-three/drei'
-// import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
-// import { Physics, useBox } from '@react-three/cannon'
-
-// import { RigidBody } from '@react-three/rapier/dist/declarations/src/components/RigidBody'
-// import { Physics } from '@react-three/rapier/dist/declarations/src/components/Physics'
-// import { CuboidCollider } from '@react-three/rapier/dist/declarations/src/components/AnyCollider'
-
 import * as THREE from 'three'
 import gsap from "gsap"
-import { getViewportAspectRatio } from "../../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getViewportAspectRatio } from "@pausabater/utils/dist/index.esm.js"
 
 export function PersonalSiteCanvas({mode}: {mode: string}) {
 

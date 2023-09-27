@@ -4,7 +4,8 @@ import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
 import { TextBannerCanvas } from "./TextBannerCanvas/TextBannerCanvas"
 import { ReactComponent as NoteLogo } from '../../assets/svg/note-logo.svg'
-import { isHighPerf, isMobileScreen } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isHighPerf, isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
 import { LowPerfLogo } from "./LowPerfLogo/LowPerfLogo"
 
 export interface ITextBannerTexts {

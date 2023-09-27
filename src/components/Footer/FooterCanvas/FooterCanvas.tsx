@@ -4,7 +4,8 @@ import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLigh
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, PerspectiveCamera } from '@react-three/drei'
 import Model from './Model'
-import { getViewportAspectRatio, isHighPerf, isMobileScreen } from '../../../assets/ts/utils/utils'
+// @ts-ignore -- TODO: solve declaration file from package
+import { getViewportAspectRatio, isHighPerf, isMobileScreen } from '@pausabater/utils/dist/index.esm.js'
 
 
 RectAreaLightUniformsLib.init()

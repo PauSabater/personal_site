@@ -7,7 +7,8 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { getCloudsAnimation, setTextAnimation } from "./WorkBanner.animations"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
-import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, matchMediaMobile } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, matchMediaMobile } from "@pausabater/utils/dist/index.esm.js"
 import { addOutlineHeader, removeOutlineHeader } from "../Header/Header.animations"
 
 gsap.registerPlugin(ScrollTrigger)

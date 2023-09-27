@@ -1,6 +1,8 @@
 import { Fragment, useLayoutEffect, useRef, useState } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayMonthName, hideAllTransitionImages, highPerf, isHighPerf, isMobileScreen } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getTodayMonthName, highPerf, isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
+import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
 import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
 import { MobileTopBanner } from "./MobileTopBanner/MobileTopBanner"
 

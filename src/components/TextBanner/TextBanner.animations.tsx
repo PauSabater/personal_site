@@ -1,7 +1,8 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase";
-import { isMobileScreen } from "../../assets/ts/utils/utils";
+// @ts-ignore -- TODO: solve declaration file from package
+import { isMobileScreen } from "@pausabater/utils/dist/index.esm.js";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {

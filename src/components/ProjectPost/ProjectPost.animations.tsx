@@ -2,7 +2,8 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import CustomEase from "gsap/CustomEase"
 import { getCloudsAnimation } from "../WorkBanner/WorkBanner.animations"
-import { disableScroll, enableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, isElLeftOfScreen, scEnterPageLong, scTransitionPage, scOpacityFade } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { disableScroll, enableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getProportionRelToElement, getScaleToCoverViewPort, isElLeftOfScreen, scEnterPageLong, scTransitionPage, scOpacityFade } from "@pausabater/utils/dist/index.esm.js"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
+    "@pausabater/utils": "npm:@PauSabater/utils@^1.0.3",
     "@react-spring/core": "^9.7.2",
     "@react-spring/three": "^9.7.2",
     "@react-three/cannon": "^6.6.0",

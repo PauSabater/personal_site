@@ -3,7 +3,8 @@ import styles from "./MobileTopBanner.module.scss"
 import { setMobileTopBannerAnimations } from "./MobileTopBanner.animations"
 import { ellipse, ticks, underline } from "../../../assets/svg/ts/strokes"
 import { gridHorizontal, gridMobile } from "./grid"
-import { dispatchChangeThemeEvent, matchMediaIsVertical } from "../../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { dispatchChangeThemeEvent, matchMediaIsVertical } from "@pausabater/utils/dist/index.esm.js"
 import gsap from "gsap"
 
 

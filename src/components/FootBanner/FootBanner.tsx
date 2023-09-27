@@ -6,7 +6,8 @@ import * as THREE from 'three'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
-import { isHighPerf, isMobileScreen } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isHighPerf, isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 

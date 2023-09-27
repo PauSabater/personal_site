@@ -3,7 +3,8 @@ import * as THREE from 'three'
 import { Fragment, useRef } from 'react'
 import { useGLTF, Reflector, MeshTransmissionMaterial, Html } from '@react-three/drei'
 import { Pencil } from '../../TopBanner/TopBannerCanvas/TopBannerCanvas'
-import { getViewportAspectRatio, isHighPerf } from "../../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getViewportAspectRatio, isHighPerf } from "@pausabater/utils/dist/index.esm.js"
 
 // Material used on shapes:
 const material = new THREE.MeshPhysicalMaterial({

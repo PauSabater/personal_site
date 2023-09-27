@@ -1,6 +1,7 @@
+// @ts-ignore -- TODO: solve declaration file from package
+import { scOpacityFade } from "@pausabater/utils/dist/index.esm.js"
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
-import { scOpacityFade } from "../../assets/ts/utils/utils"
 gsap.registerPlugin(CustomEase)
 
 export function executeEnterAnimations(pageId: string, node: HTMLElement, route?: string) {

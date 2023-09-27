@@ -5,7 +5,9 @@ import { Cta, ICtaProps } from "../UI/Cta/Cta"
 import { getImg } from "../WorkBanner/Card/Card"
 import { Link } from "react-router-dom"
 import { setLeaveAnimation, setProjectListEnterAnimation } from "./ProjectList.animations"
-import { hasPageBeenLoaded, hideAllTransitionImages } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { hasPageBeenLoaded } from "@pausabater/utils/dist/index.esm.js"
+import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
 import { removeOutlineHeader } from "../Header/Header.animations"
 
 
