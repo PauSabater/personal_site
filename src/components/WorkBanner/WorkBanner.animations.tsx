@@ -22,9 +22,11 @@ export function setTextAnimation(elContainerTexts: HTMLElement) {
     const observerCallback = (entries: any) => {
         entries.forEach((entry: any) => {
             if (entry.isIntersecting && entry.target.className === elHeadingContainer.className) {
-                gsap.fromTo(elHeadingContainer, {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.6})
+                gsap.fromTo(elHeadingContainer, {opacity: 0}, {opacity: 1, duration: 0.4})
+                gsap.fromTo([elHeadingContainer.querySelectorAll("h1")],
+                    {opacity: 0, y: 150}, {opacity: 1, y: 0, duration: 0.8})
                 gsap.to(elGradient, {opacity: 0.6, duration: 0.8, delay: 0.5})
-                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 0.7, stagger: 0, delay: 0.4})
+                gsap.fromTo(Array.from(elsLinesText), {opacity: 0, y: 100}, {opacity: 1, y: 0, duration: 1, stagger: 0.075, delay: 0.4})
                 gsap.fromTo(elLink, {opacity: 0}, {opacity: 1, duration: 0.7, delay: 0.4})
                 observer.unobserve(elLinesTextContainer)
                 observer.unobserve(elHeadingContainer)

@@ -242,6 +242,7 @@ div[data-img-mountain] {
 }
 .sectionMain,
 .sectionMainRight,
+.sectionMainLeft,
 .sectionRight,
 .sectionLeft {
     --gap-column: var(--mg-xl);
@@ -257,6 +258,12 @@ div[data-img-mountain] {
     h2, p, div, img, svg {
         grid-column-start: 2;
     }
+}
+
+.sectionMain .ctaContainer,
+.sectionMainLeft .ctaContainer {
+    grid-column-start: 1;
+    margin-bottom: var(--mg-sm);
 }
 
 .sectionRight,
@@ -355,7 +362,7 @@ div[data-img-mountain] {
     }
 
     .introArticle {
-        margin-bottom: 110px;
+        margin-bottom: 120px;
     }
 
     .nextProjectContainer {
@@ -382,6 +389,11 @@ div[data-img-mountain] {
             max-width: 100%;
         }
     }
+
+    .sectionLeft .containerTextRight {
+        grid-column-start: 2 !important;
+        grid-row-start: 2;
+    }
 }
 
 @include mixins.mobile {
@@ -394,8 +406,25 @@ div[data-img-mountain] {
         }
     }
 
+    .sectionLeft .containerTextRight {
+        grid-column-start: 1;
+        grid-row-start: 3;
+    }
+
+    .sectionMain,
+    .sectionMainRight,
+    .sectionMainLeft,
+    .sectionRight,
+    .sectionLeft {
+        padding-right: var(--pd-xs);
+    }
+
+    [data-mg-bt] {
+        margin-bottom: 50px;
+    }
+
     .nextProjectContainer {
-        top: -15px;
+        top: -22px;
         right: 30px;
 
         svg {
@@ -403,5 +432,9 @@ div[data-img-mountain] {
             height: 55px;
             width: 75px;
         }
+    }
+
+    .mainParagraph {
+        margin-bottom: var(--mg-lg);
     }
 }

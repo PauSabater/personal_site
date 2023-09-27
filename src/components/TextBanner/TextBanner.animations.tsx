@@ -63,7 +63,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             // Text lines reveal effect:
             .fromTo(Array.from(elsTextLines),
             {opacity: 0},
-            {opacity: 1, y: 0, duration: 0.7, stagger: 0.05},
+            {opacity: 1, y: 0, duration: 1, stagger: 0.075},
             'start')
 
         // Canvas is not showing on mobile
