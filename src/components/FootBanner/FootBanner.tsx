@@ -6,11 +6,11 @@ import * as THREE from 'three'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, Vector3, useFrame, useThree } from '@react-three/fiber'
 import { PerspectiveCamera, Text, MeshTransmissionMaterial, MeshReflectorMaterial } from '@react-three/drei'
-import { isMobileScreen } from "../../assets/ts/utils/utils"
+import { isHighPerf, isMobileScreen } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
-export function FootBanner() {
+export function FootBanner({perfMode}: {perfMode: string}) {
 
     const refCanvas = useRef(null)
     const refContainer = useRef(null)
@@ -196,8 +196,11 @@ export function FootBanner() {
         return (
             <Text font="/Inter-ExtraBold.ttf" fontSize={1} lineHeight={1} letterSpacing={-0.05} position={position}>
                 {text.split('+').join('\n')}
-                <meshBasicMaterial ref={refVideoTexture} toneMapped={false} color={isMobileScreen() ? "hsl(54, 67%, 90%)" : "white"} >
-                {!isMobileScreen() ? <videoTexture attach="map" args={[video as HTMLVideoElement]} encoding={THREE.sRGBEncoding} /> : ''}
+                <meshBasicMaterial ref={refVideoTexture} toneMapped={false} color={"hsl(54, 67%, 90%)"} >
+                {isMobileScreen()
+                    ? ''
+                    : isHighPerf(perfMode) === true ? <videoTexture attach="map" args={[video as HTMLVideoElement]} encoding={THREE.sRGBEncoding} /> : ''
+                }
                 </meshBasicMaterial>
             </Text>
         )

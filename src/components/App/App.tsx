@@ -1,5 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react'
-
+import { Suspense, lazy, useEffect, useRef } from 'react'
 import { useLayoutEffect, useState } from 'react';
 import {texts} from "../../assets/ts/texts/texts"
 import './App.css'
@@ -14,7 +13,7 @@ import { Home } from '../../pages/home'
 import { TransitionImages } from '../TransitionImages/TransitionImages'
 import { executeEnterAnimations, executeExitAnimations } from './App.animations'
 import { Overlay } from '../Overlay/Overlay'
-import { matchMediaMobile, msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
+import { getPerfMode, matchMediaMobile, msTransitionPage, msTransitionPageLong } from '../../assets/ts/utils/utils'
 import { Footer } from '../Footer/Footer'
 import Projects from '../../pages/projects'
 import Contact from '../../pages/contact'
@@ -23,6 +22,12 @@ import PapernestProject from '../../pages/projects/Papernest'
 import WeatherAppProject from '../../pages/projects/WeatherApp'
 const WeatherAppLiveResult = lazy(() => import('../../pages/projectsLive/WeatherAppLiveResult'))
 
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// import { ScrollSmoother } from 'gsap-trial/ScrollSmoother'
+// import { gsap, ScrollTrigger } from "gsap-trial/all";
+// gsap.registerPlugin(ScrollSmoother);
 
 const routes = [
     {path: '/', name: 'Home', Component: Home},
@@ -42,13 +47,22 @@ function App() {
             ? 'homepage' : ''
     )
 
+    const main = useRef(null)
+    const smoother = useRef()
+
+    const mqMobile = window.matchMedia(matchMediaMobile)
+
     // @ts-ignore
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
-    const [counter, increaseCounter] = useState(0)
+    const [perfMode, setPerfMode] = useState(getPerfMode(navigator.hardwareConcurrency))
+    const [isMobileView, setIsMobileView] = useState(mqMobile.matches)
 
-    const mql = window.matchMedia(matchMediaMobile)
-    mql.onchange = () => {
+    console.log("PERF IN APP")
+    console.log(perfMode)
+
+    mqMobile.onchange = () => {
+        setIsMobileView(mqMobile.matches)
         const location = window.location.href
         if (!location.includes("projects") && !location.includes("contact"))
             window.location.href = window.location.href
@@ -62,6 +76,7 @@ function App() {
     }, [location])
 
     useLayoutEffect(()=> {
+
         if (window.location.href.includes("projects") || window.location.href.includes("contact")) {
             document.querySelector(".page-loader")?.classList.remove("is-loading")
         }
@@ -74,7 +89,16 @@ function App() {
             localStorage.setItem("theme", theme)
             e.stopPropagation()
         })
-    }, [])
+
+        document.addEventListener('perfChange', (e)=> {
+            console.log("heyy change perf")
+            e.preventDefault()
+            // const theme = document.body.getAttribute("data-theme") || "light"
+            setPerfMode(perfMode === "high" ? "low" : "high")
+            // localStorage.setItem("theme", theme)
+            e.stopPropagation()
+        })
+    }, [perfMode])
 
     function getTransitionLength(route: string) {
 
@@ -87,8 +111,9 @@ function App() {
 
 
     return (
-        <div className="main" data-theme={theme}>
-            <Header links={ texts.header.links } mode={theme}/>
+        <div className="main" data-theme={theme} id="scrollsmoother-container">
+            <div id="smooth-content">
+            <Header links={ texts.header.links } mode={theme} isMobile={isMobileView} perfMode={perfMode}/>
             <TransitionImages mode={theme} />
                 <div className={`page ${homepageClass}`} id="page-content">
                     <Suspense fallback={<div>Loading...</div>}>
@@ -110,7 +135,9 @@ function App() {
                                             }}
                                         >
                                             <route.Component
+                                                perfMode={perfMode}
                                                 mode={theme}
+                                                isMobile={isMobileView}
                                             ></route.Component>
                                         </Transition>
                                     </SwitchTransition>
@@ -120,8 +147,9 @@ function App() {
                         </Routes>
                     </Suspense>
                 </div>
-            <Footer mode={theme} />
+            <Footer mode={theme} perfMode={perfMode}/>
             <Overlay/>
+            </div>
         </div>
     )
 }

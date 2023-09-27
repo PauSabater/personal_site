@@ -66,8 +66,8 @@
     --c-grey: hsl(0, 0%, 50%);
 
 
-    --c-black: hsl(0, 0%, 7%);
     --c-black: hsl(0, 0%, 6%);
+    --c-black-light: hsl(0, 0%, 12%);
     --c-blackest: hsl(0, 0%, 3%);
 
     // Border color
@@ -80,6 +80,7 @@
     --c-font-h: hsl(0, 0%, 15%);
     --c-font-white: var(--c-white);
 
+    --c-black-no-change: hsl(0, 0%, 6%);
     --c-white-no-change: hsl(136, 0%, 96%);
     --c-whitest: white;
     --c-white: hsl(136, 0%, 96%);
@@ -92,6 +93,7 @@
     --tr-fast: 0.2s;
     --tr-base: 0.3s;
     --tr-slow: 0.5s;
+    --tr-slower: 0.9s;
 
     // Font weight
     --fw-boldest: 900;

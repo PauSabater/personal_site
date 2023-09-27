@@ -1,8 +1,10 @@
 import gsap from "gsap"
 
+// Medias
 const mediaVerticalMobileTablet: string = `screen and (max-width: 1023px) and (max-aspect-ratio: 1/1)`
 const mediaMobile: string = `screen and (max-width: 768px)`
 export const matchMediaMobile: string = `(max-width: 768px)`
+export const matchMediaIsVertical: string = `(max-aspect-ratio: 1/1)`
 
 // Time animations
 export const msTransitionPage = 600
@@ -12,6 +14,22 @@ export const scTransitionPage = msTransitionPage / 1000
 export const scTransitionPageLong = msTransitionPageLong / 1000
 export const scEnterPageLong = msEnterPageLong / 1000
 export const scOpacityFade = scTransitionPage - 0.1
+
+// PerfMode
+export const highPerf = "high"
+export const lowPerf = "low"
+
+export const getPerfMode = (cores: number)=> {
+    return cores > 4 ? highPerf : lowPerf
+}
+
+export const isHighPerf = (perfMode: string)=> {
+    return perfMode === highPerf
+}
+
+// View
+export const mobile = "mobile"
+export const tabletDesktop = "tabletDesktop"
 
 
 export function isMobileScreen(): boolean {
@@ -126,4 +144,19 @@ export function hasElementBeenScrolled(elCheckHeight: HTMLElement) {
     }
 
     return scrolledHeight > distance
+}
+
+
+export function dispatchChangeThemeEvent() {
+    document.body.getAttribute("data-theme") === "light"
+        ? document.body.setAttribute("data-theme", "dark")
+        : document.body.setAttribute("data-theme", "light")
+    document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
+}
+
+export function dispatchChangePerfEvent() {
+    // document.body.getAttribute("data-theme") === "light"
+    //     ? document.body.setAttribute("data-theme", "dark")
+    //     : document.body.setAttribute("data-theme", "light")
+    document.dispatchEvent(new CustomEvent('perfChange', {bubbles: false}))
 }

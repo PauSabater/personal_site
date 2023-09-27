@@ -9,7 +9,7 @@ import styles from "./pages.module.scss"
 import {texts} from "../assets/ts/texts/texts"
 
 
-export function Home({mode}: {mode: string}) {
+export function Home({mode, perfMode, isMobile}: {mode: string, perfMode: string, isMobile: boolean}) {
 
     const textsPage = texts.home
 
@@ -20,8 +20,8 @@ export function Home({mode}: {mode: string}) {
 
     return (
         <div id="page-home">
-            <TopBanner props={textsPage.topBanner} mode={mode}/>
-            <TextBanner texts={textsPage.intro} mode={mode}/>
+            <TopBanner props={textsPage.topBanner} mode={mode} perfMode={perfMode}/>
+            <TextBanner texts={textsPage.intro} mode={mode} perfMode={perfMode}/>
             <Suspense>
                 <WorkBanner props={textsPage.workBanner} mode={mode}/>
             </Suspense>
@@ -29,7 +29,7 @@ export function Home({mode}: {mode: string}) {
             <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
                 <SkillsBanner texts={textsPage.skillsBanner} mode={mode}/>
                 <MethodSection props={textsPage.methodSectionTexts} mode={mode}/>
-                <FootBanner />
+                <FootBanner perfMode={perfMode} />
             </div>
             </Suspense>
         </div>

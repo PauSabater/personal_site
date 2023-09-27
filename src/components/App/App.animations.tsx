@@ -22,7 +22,7 @@ export function executeExitAnimations(pageId: string, node: HTMLElement, route?:
         case 'page-projects':
             break
         case 'page-home':
-            setPageFadeOutAnimation()
+            // setPageFadeOutAnimation()
             break
     }
 }

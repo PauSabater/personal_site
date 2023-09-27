@@ -2,12 +2,12 @@ import { Fragment } from "react"
 import "./Footer.css"
 import { FooterCanvas } from "./FooterCanvas/FooterCanvas"
 
-export function Footer({mode}: {mode: string}) {
+export function Footer({mode, perfMode}: {mode: string, perfMode: string}) {
 
     return (
         <Fragment>
             <div className="footer-canvas" id="footer-canvas">
-                <FooterCanvas mode={mode} />
+                <FooterCanvas mode={mode} perfMode={perfMode} />
             </div>
             <div className="footer" id="footer">
                 <p>find me on</p>

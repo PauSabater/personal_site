@@ -1,7 +1,7 @@
 import {IPropsProjectPost, ProjectPost} from "../../components/ProjectPost/ProjectPost"
 import { personalSiteContent } from "../../components/ProjectPost/Content/personalSite"
 
-export default function PersonalSiteProject({ mode }: { mode: string }) {
+export default function PersonalSiteProject({ mode, perfMode }: { mode: string, perfMode: string }) {
 
     const props: IPropsProjectPost = {
         indexTitle: "CONTENT",
@@ -24,6 +24,6 @@ export default function PersonalSiteProject({ mode }: { mode: string }) {
         }]}
     }
 
-    return <ProjectPost props={props} mode={mode}></ProjectPost>
+    return <ProjectPost props={props} mode={mode} perfMode={perfMode}></ProjectPost>
 }
 

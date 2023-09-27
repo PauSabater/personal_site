@@ -1,6 +1,6 @@
 import { Fragment, useLayoutEffect, useRef, useState } from "react"
 import styles from "./TopBanner.module.scss"
-import { getTodayMonthName, hideAllTransitionImages, isMobileScreen } from "../../assets/ts/utils/utils"
+import { getTodayMonthName, hideAllTransitionImages, highPerf, isHighPerf, isMobileScreen } from "../../assets/ts/utils/utils"
 import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
 import { MobileTopBanner } from "./MobileTopBanner/MobileTopBanner"
 
@@ -16,7 +16,7 @@ export interface ITopBannerProps {
     dateText: string
 }
 
-export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: string}) {
+export function TopBanner({ props, mode, perfMode }: { props: ITopBannerProps, mode: string, perfMode: string}) {
 
     const refsizedTopBanner: React.MutableRefObject<null> = useRef(null)
     const mql = window.matchMedia('(max-width: 768px)')
@@ -26,14 +26,14 @@ export function TopBanner({ props, mode }: { props: ITopBannerProps, mode: strin
 
     useLayoutEffect(()=> {
         hideAllTransitionImages()
-    }, [])
+    }, [perfMode])
 
     return (
         <Fragment>
             <div className={styles.canvasContainer} id="top-banner" data-theme={mode}>
                 {isMobile
                     ? <MobileTopBanner mode={mode}/>
-                    : <TopBannerCanvas mode={mode}
+                    : perfMode === highPerf ? <TopBannerCanvas mode={mode}/> : <MobileTopBanner mode={mode}
                 />}
             </div>
             <div className={styles.container} id={"top-banner-container"}>

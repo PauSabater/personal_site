@@ -1,10 +1,10 @@
 import * as THREE from 'three'
-import { Suspense, useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, Suspense, useLayoutEffect, useRef, useState } from 'react'
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, PerspectiveCamera } from '@react-three/drei'
 import Model from './Model'
-import { getViewportAspectRatio, isMobileScreen } from '../../../assets/ts/utils/utils'
+import { getViewportAspectRatio, isHighPerf, isMobileScreen } from '../../../assets/ts/utils/utils'
 
 
 RectAreaLightUniformsLib.init()
@@ -23,7 +23,7 @@ function Light() {
     )
 }
 
-export function FooterCanvas({mode}: {mode: string}) {
+export function FooterCanvas({mode, perfMode}: {mode: string, perfMode: string}) {
     const colorBackground = mode === "light" ? 'hsl(136, 0%, 96%)' : 'hsl(136, 0%, 7%)'
     // const colorBackground = mode === "light" ? 'hsl(136, 0%, 96%)' : 'hsl(136, 0%, 96%)'
 
@@ -32,9 +32,9 @@ export function FooterCanvas({mode}: {mode: string}) {
             <fog attach="fog" args={[colorBackground, 110, 130]} />
             <color attach="background" args={[colorBackground]} />
             <Suspense fallback={null}>
-                <Model mode={mode} />
+                <Model mode={mode} perfMode={perfMode} />
                 <pointLight position={[-26, -8, -10]} color="red" intensity={5} />
-                <Light />
+                {isHighPerf(perfMode) ? <Light /> : <Fragment/>}
                 <Environment files="city-small.hdr" path="/"></Environment>
             </Suspense>
             <Camera/>

@@ -30,7 +30,7 @@
     z-index: 11;
     transition: opacity var(--tr-base);
 
-    svg {
+    svg:last-child {
         position: absolute;
         top: 20%;
         right: 10%;
