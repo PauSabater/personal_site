@@ -2,15 +2,15 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import styles from "./ProjectPost.module.scss"
 import gsap from "gsap"
 import { Link } from "react-router-dom"
-import { hasPageBeenLoaded, hidePageOverlay, isMobileScreen, msEnterPageLong } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { hasPageBeenLoaded, isHighPerf, isMobileScreen, msEnterPageLong } from "@pausabater/utils/dist/index.esm.js"
+import { hidePageOverlay } from "../../assets/ts/utils/utils"
 import { executePageEnterAnimation, leaveFromArrowClick, setMountainsAnimationObserver } from "./ProjectPost.animations"
 import { INextProjects, NextProjects } from "./Components/NextProjects/NextProjects"
-import { arrowFilled } from "../../assets/svg/ts/arrowFilled"
 import { removeOutlineHeader } from "../Header/Header.animations"
 import { PersonalSiteCanvas } from "./PersonalSiteCanvas/PersonalSiteCanvas"
 import { setPageFadeInAnimation } from "../App/App.animations"
 import { ReactComponent as ArrowFilled } from '../../assets/svg/icons/arrowFilled.svg'
-
 
 export interface IPropsProjectPost {
     element?: HTMLElement,
@@ -22,7 +22,7 @@ export interface IPropsProjectPost {
     nextProjects: INextProjects
 }
 
-export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: string}) {
+export function ProjectPost({ props, mode, perfMode }: { props: IPropsProjectPost, mode: string, perfMode?: string}) {
     const refPostImageContainer = useRef(null)
     const [showCanvas, setShowCanvas] = useState(false)
 
@@ -52,7 +52,7 @@ export function ProjectPost({ props, mode }: { props: IPropsProjectPost, mode: s
             setMountainsAnimationObserver()
         }
 
-        if (props.imgPath === "personal-site.svg" && isMobileScreen() === false) {
+        if (props.imgPath === "personal-site.svg" && isMobileScreen() === false && perfMode && isHighPerf(perfMode)) {
             setTimeout(()=> setShowCanvas(true), msEnterPageLong + 200)
         }
     }, [])

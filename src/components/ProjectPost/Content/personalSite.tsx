@@ -21,11 +21,11 @@ export const personalSiteContent = (): JSX.Element => { return (
                     <p>July / September 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    This is a site to <span>present my work and myself</span>. Having quited my job to <span>move to Berlin</span>, I found myself in a situation where I did not have anything to showcase my abilities. Having changed careers, my experience was not very long either to catch attention. Despite having been told that I have good skills, when starting from scratch in a new place that does not matter if not proved. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
+                    This is a site to <span>present my work and myself</span>. Having quitted my job to <span>move to Berlin</span>, I found that I needed a space to showcase my abilities as my experience was not long enough to catch attention. Despite having been told that I have good skills, when starting from scratch in a new place that does not matter if not proved. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
                 </p>
                 <div className={styles.ctaContainer}>
                     <Cta props={{
-                        text: "Visit the repository",
+                        text: "Check out the code",
                         href: "https://github.com/PauSabater/weather_app",
                         color: "black",
                         isBold: false
@@ -58,7 +58,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <h2 className={styles.sectionTitle}>Shaping the pages</h2>
                 <div>
                     <p className={styles.paragraphRight}>
-                        In order to give an introduction of who I am, skills and how I work in a light and short way, I used <span>storytelling</span> on the homepage. This implies that information should be revealed on scroll in a visual way. A <span>visual effect on the middle</span> differentiates half a page with a light mode, and a second with a dark mode in order to add a visual change.
+                        In order to give an introduction of who I am, skills and how I work in a light and short way, I used <span>storytelling</span> on the homepage. This implies that information should be revealed on scroll in a visual way. A visual effect on the middle differentiates half a page with a light mode, and a second with a dark mode in order to add a visual change.
                     </p>
                     <p className={styles.paragraphRight}>
                         On the projects pages, I used <span>two columns</span>, exchanging big titles, some highlighted text, images and schemas. A Z pattern has been used hoping to make it more <span>visually dynamic</span>. An optionally animated image representing the project precedes the article.
@@ -145,7 +145,6 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <ImageArticle
                     imgName={"personal_site_workflow.svg"}
                     text={"fast animations strategy"}
-                    // maxHeight={150}
                 ></ImageArticle>
             </div>
             <div className={styles.sectionMainLeft}>
@@ -153,15 +152,27 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <p className={styles.mainParagraph}>
                     Depeloping a page from scratch from design to coding is quite a challenge and a lot of work, and even more if the purpose is to make the site stand out. I hope I have achieved it, that is up to you to say. In any case I have learned and had lots of fun developing it !
                 </p>
+                <div className={styles.ctaContainer}>
+                    <Cta props={{
+                        text: "Check out the code",
+                        href: "https://github.com/PauSabater/weather_app",
+                        color: "black",
+                        isBold: false
+                    }}></Cta>
+                </div>
             </div>
-            <div className={styles.sectionRight}>
+            <div className={styles.sectionLeft}>
                 <h2 className={styles.sectionTitle}>References</h2>
                 <div>
                     <p className={styles.paragraphRight}>
                         As with any project, some references for inspiration have been used:
                         <br/><LinkInline text={"Mountains illustration: "} href={"https://www.vecteezy.com/vector-art/5565275-silhouette-landscape-with-fog-forest-pine-trees-purple-mountains-illustration-of-view-mist-and-sunset-good-for-wallpaper-background-banner-cover-poster"}/> This illustration has been redrawn from the original.
                         <br/><LinkInline text={"Rain effect: "} href={"https://codepen.io/josetxu/pen/gOKJKKx"}/> This codepen has been adapted. I chose a css effect which requires less resources than a high resolution video.
-                        <br/><LinkInline text={"Threejs scenes: "} href={"https://docs.pmnd.rs/react-three-fiber/getting-started/examples"}/> Some examples from the library has been used as inspiration and starting point, although they have ended up being quite different.
+                    </p>
+                </div>
+                <div className={styles.containerTextRight}>
+                    <p className={styles.paragraphRight}>
+                        <LinkInline text={"Threejs scenes: "} href={"https://docs.pmnd.rs/react-three-fiber/getting-started/examples"}/> Some examples from the library has been used as inspiration and starting point, although they have ended up being quite different.
                         <br/><LinkInline text={"Content structure: "} href={"https://bepatrickdavid.com/"}/> This portfolio has been used as a starting point to structure the content of the pages.
                     </p>
                 </div>

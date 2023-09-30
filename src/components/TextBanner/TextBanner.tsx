@@ -4,7 +4,9 @@ import { Cta, ICtaProps } from '../UI/Cta/Cta'
 import { setTextBannerAnimations } from "./TextBanner.animations"
 import { TextBannerCanvas } from "./TextBannerCanvas/TextBannerCanvas"
 import { ReactComponent as NoteLogo } from '../../assets/svg/note-logo.svg'
-import { isMobileScreen } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isHighPerf, isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
+import { LowPerfLogo } from "./LowPerfLogo/LowPerfLogo"
 
 export interface ITextBannerTexts {
     title: string,
@@ -14,7 +16,7 @@ export interface ITextBannerTexts {
 }
 
 
-export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: string}) {
+export function TextBanner({ texts, mode, perfMode }: { texts: ITextBannerTexts, mode: string, perfMode: string}) {
 
     const refTextBanner = useRef(null)
 
@@ -41,7 +43,7 @@ export function TextBanner({ texts, mode }: { texts: ITextBannerTexts, mode: str
 
                 {!isMobileScreen() ?
                     <div className={styles.canvasContainer} id="text-banner-canvas">
-                        <TextBannerCanvas mode={mode}/>
+                        {isHighPerf(perfMode) ? <TextBannerCanvas mode={mode}/> : <LowPerfLogo/>}
                         <NoteLogo/>
                     </div>
                     : ''

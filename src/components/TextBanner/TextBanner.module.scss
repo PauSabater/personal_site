@@ -30,7 +30,7 @@
     z-index: 11;
     transition: opacity var(--tr-base);
 
-    svg {
+    svg:last-child {
         position: absolute;
         top: 20%;
         right: 10%;
@@ -122,7 +122,7 @@
     }
 
     .title {
-        font-size: clamp(28px, 7vw, 35px);
+        font-size: clamp(30px, 7vw, 35px);
     }
 
     .canvasContainer {

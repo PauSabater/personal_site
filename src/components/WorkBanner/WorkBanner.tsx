@@ -7,7 +7,8 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { getCloudsAnimation, setTextAnimation } from "./WorkBanner.animations"
 import { Cta, ICtaProps } from "../UI/Cta/Cta"
-import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, matchMediaMobile } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isViewportPropHigherThanEl, isMobileScreen, getViewportAspectRatio, getScaleToCoverViewPort, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, matchMediaMobile } from "@pausabater/utils/dist/index.esm.js"
 import { addOutlineHeader, removeOutlineHeader } from "../Header/Header.animations"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -153,8 +154,13 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
             timeline.addLabel('fifth')
                 .set(card3ImgContainer, {borderRadius: 0})
                 .to(card3ImgContainer, {
-                    x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
-                    y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
+                    ...!isMobileScreen() && {
+                        x: (): string => getGsapDistToCenterElXAxis(card3ImgContainer),
+                        y: (): string => getGsapDistToCenterElYAxis(card3ImgContainer),
+                    },
+                    ...isMobileScreen() && {
+                        y: -50,
+                    },
                     scale: ()=> isMobileScreen() ? getScaleToCoverViewPort(card3Svg) + 0.35 : getScaleToCoverViewPort(card3Svg),
                     duration: isMobileScreen() ? 4 : 3.5
                 }, 'start')
@@ -192,7 +198,7 @@ export function WorkBanner({props, mode}: { props: IWorkBannerProps, mode: strin
                     <div className={styles.cardsContainer} id="cards-container">
                         <div className={styles.cardContainer} id="card-1">
                             <Card props={{
-                                title: "WORK IN PAPERNEST",
+                                title: "WORK AT PAPERNEST",
                                 text: "// Work developed for papernest during my frontend contract",
                                 img: "papernest.svg",
                                 path: "projects/papernest"

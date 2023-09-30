@@ -1,6 +1,7 @@
 import gsap from "gsap"
 import { CustomEase } from "gsap/CustomEase"
-import { getProportionRelToElement, isViewportPropHigherThanEl } from "../../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getProportionRelToElement, isViewportPropHigherThanEl } from "@pausabater/utils/dist/index.esm.js"
 import { easeOutLong } from "../../../assets/ts/styles/styles"
 gsap.registerPlugin(CustomEase)
 

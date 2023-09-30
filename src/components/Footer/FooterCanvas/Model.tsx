@@ -1,9 +1,10 @@
 import styles from "./FooterCanvas.module.scss"
 import * as THREE from 'three'
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
 import { useGLTF, Reflector, MeshTransmissionMaterial, Html } from '@react-three/drei'
 import { Pencil } from '../../TopBanner/TopBannerCanvas/TopBannerCanvas'
-import { getViewportAspectRatio } from "../../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getViewportAspectRatio, isHighPerf } from "@pausabater/utils/dist/index.esm.js"
 
 // Material used on shapes:
 const material = new THREE.MeshPhysicalMaterial({
@@ -49,29 +50,49 @@ export default function Model(props: any) {
             rotation={[-0.26, 0.04, -0.16]}
             scale={[5, 5, 5]}
           />
-          <mesh
-              receiveShadow={false}
-              castShadow={false}
-              material={material}
-              geometry={nodes.Sphere002.geometry}
-              position={[-5.28, 4.8, 5.12]}
-          />
-          <mesh
-              receiveShadow={false}
-              castShadow={false}
-              material={material}
-              geometry={nodes.Sphere003.geometry}
-              position={[15.13, 1.3, -3.95]}
-              rotation={[-0.15, 0.01, -0.02]}
-          />
-          <mesh
-              receiveShadow={false}
-              castShadow={false}
-              material={material}
-              geometry={nodes.Icosphere001.geometry}
-              position={[-18.17, 1.4, -2.35]}
-              scale={[1.5, 1.5, 1.5]}
-          />
+          {isHighPerf(props.perfMode) ?
+                <group>
+                    <mesh
+                        receiveShadow={false}
+                        castShadow={false}
+                        material={material}
+                        geometry={nodes.Sphere002.geometry}
+                        position={[-5.28, 4.8, 5.12]}
+                    />
+                    <mesh
+                        receiveShadow={false}
+                        castShadow={false}
+                        material={material}
+                        geometry={nodes.Sphere003.geometry}
+                        position={[15.13, 1.3, -3.95]}
+                        rotation={[-0.15, 0.01, -0.02]}
+                    />
+                    <mesh
+                        receiveShadow={false}
+                        castShadow={false}
+                        material={material}
+                        geometry={nodes.Icosphere001.geometry}
+                        position={[-18.17, 1.4, -2.35]}
+                        scale={[1.5, 1.5, 1.5]}
+                    />
+                    <mesh
+                        receiveShadow={false}
+                        castShadow={false}
+                        material={material}
+                        geometry={nodes.Cone.geometry}
+                        position={[-22.3, 1.5, 2.41]}
+                        scale={[1.5, 1.5, 1.5]}
+                    />
+                    <mesh
+                        receiveShadow={false}
+                        castShadow={false}
+                        material={material}
+                        geometry={nodes.Cone001.geometry}
+                        position={[-4.82, 0.47, -5.51]}
+                        rotation={[2.14, 0, -0.58]}
+                    />
+                </group>
+          : <Fragment/>}
           <mesh
             receiveShadow={false}
             castShadow={false}
@@ -80,23 +101,6 @@ export default function Model(props: any) {
             position={[-0.36, 0.37, 0.0]}
             rotation={[0.25, 0.5, -2.8]}
             scale={[0.055, 0.055, 0.055]}
-          />
-
-          <mesh
-              receiveShadow={false}
-              castShadow={false}
-              material={material}
-              geometry={nodes.Cone.geometry}
-              position={[-22.3, 1.5, 2.41]}
-              scale={[1.5, 1.5, 1.5]}
-          />
-          <mesh
-              receiveShadow={false}
-              castShadow={false}
-              material={material}
-              geometry={nodes.Cone001.geometry}
-              position={[-4.82, 0.47, -5.51]}
-              rotation={[2.14, 0, -0.58]}
           />
           <mesh
               receiveShadow={false}

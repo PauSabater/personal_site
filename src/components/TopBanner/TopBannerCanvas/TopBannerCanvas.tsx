@@ -19,7 +19,9 @@ import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { ellipse, underline } from '../../../assets/svg/ts/strokes'
 import { setTopBannerAnimations } from '../TopBanner.animations'
-import { getViewportAspectRatio, hideAllTransitionImages, isMobileScreen, scTransitionPage } from '../../../assets/ts/utils/utils'
+// @ts-ignore -- TODO: solve declaration file from package
+import { getViewportAspectRatio, isMobileScreen, scTransitionPage, toggleDarkMode } from '@pausabater/utils/dist/index.esm.js'
+import { hideAllTransitionImages } from "../../../assets/ts/utils/utils"
 import * as THREE from 'three'
 import { TextureLoader } from 'three'
 
@@ -553,9 +555,7 @@ function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...props }
                         }}
                         onClick={(e) => {
                             glassScaleEffect(true, true)
-                            document.body.getAttribute("data-theme") === "light"
-                                ? document.body.setAttribute("data-theme", "dark")
-                                : document.body.setAttribute("data-theme", "light")
+                            toggleDarkMode()
                             document.dispatchEvent(new CustomEvent('themeChange', {bubbles: false}))
                         }}
 

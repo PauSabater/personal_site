@@ -18,27 +18,28 @@ export const texts = {
         intro: {
             title: "hello. i'm pau",
             textDesktop: [
-                "I am a <span>frontend developer</span> recently",
-                "installed in <span>Berlin</span>. After an enriching",
-                "first professional experience as a developer ",
-                "in a startup based in Paris, I am looking",
-                " forward to continue this journey.",
+                "I am a <span>frontend developer</span> striving",
+                "for the <span>highest quality interfaces</span> . With",
+                "an eye for design and a multidisciplinary",
+                "background, I can tackle with success and",
+                "enjoyment complex projects and goals.",
                 "<span>Scroll down</span> to learn more about me !"
             ],
             textMobile: [
                 "I am a <span>frontend developer</span>",
-                "recently installed in <span>Berlin</span>.",
-                "After an enriching first",
-                " professional experience as",
-                "a developer in a startup",
-                "based in Paris, I am",
-                "looking forward to continue",
-                "this journey. <span>Scroll down</span>",
-                "to learn more about me !"
+                "striving for the <span>highest</span>",
+                "<span>quality interfaces.</span> With",
+                "an eye for design and a",
+                "multidisciplinary background",
+                "I can tackle with success",
+                "and enjoyment complex",
+                "projects and goals.",
+                "<span>Scroll down</span> to learn more",
+                "about me !"
             ],
             Cta: {
                 text: "Contact me",
-                href: "www.test.com",
+                href: "/contact",
                 color: "black"
             }
         },
@@ -51,12 +52,13 @@ export const texts = {
                 align: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             },
             text: [
-                "Having acquired a good range",
-                "of good practises during my",
-                "previous professional experience",
-                "I can take bring forward a",
-                "good range of projects with",
-                "a mature perspective."
+                "I enjoy all stages of projects,",
+                "from conception to release,",
+                "testing and further improvements.",
+                "Thanks to my professional",
+                "experience, studies and",
+                "self-teaching, I can bring work",
+                "forward with a mature perspective."
             ],
             Cta: {
                 text: "Check out all the projects",
@@ -120,38 +122,38 @@ export const texts = {
             ]
         },
         methodSectionTexts: {
-            title: "How do I $like to work?",
+            title: "How do I $work?",
             methods: [
                 {
                     title: "+ Think about the users, think about the devs",
-                    description: "A feature could be awesome for the users, but a nightmare for your colleagues. And the other way round. A product will only really succeed if it works for both sides. That means: clean and maintainable code, avoid over-engineering, good UX and design and good performance"
+                    description: "A feature could be awesome for the users, but a nightmare for your colleagues. And the other way round. A product will only really succeed if it works for both sides. That means: clean and maintainable code, avoid over-engineering, good UX and design and good performance."
                 },
                 {
                     title: "+ Keep in mind native solutions",
-                    description: "Frameworks are a great way to deal with complexity and to avoid reinventing the wheel. However, on some occasions, native solutions can be better a better fit as they can be the most performant, light and future proof."
+                    description: "Frameworks are a great way to deal with complexity and to avoid reinventing the wheel. However, on some occasions, native solutions can be a better a better fit as they can be the most performant, light and future proof."
                 },
                 {
                     title: "+ Good communication makes a better product",
-                    description: "Product is best shaped when all sides have a say from their area of experteese. Developers have unique insights and ideas from their perspective. <span>Good communication</span> on all sides will improve working athmosphere and create much better solutions !"
+                    description: "Product is best shaped when all sides have a say from their area of expertise. Developers have unique insights and ideas from their perspective. <span>Good communication</span> on all sides will improve the working atmosphere and create much better solutions !"
                 },
                 {
                     title: "+ Keep it simple",
-                    description: "Simple solutions to complex problems are sometimes the most difficult to achieve and they might require a lot of planning and research, some call it simple complexity. But when found, they are the most maintainable and pleasant to work with. On the other side, complex solutions to simple problems are a red light !"
+                    description: "Simple solutions to complex problems are sometimes the most difficult to achieve and they might require a lot of planning and research, some call it simple complexity. But when found, they are the most maintainable and pleasant to work with. On the other hand, complex solutions to simple problems are a red light !"
                 },
                 {
                     title: "+ Aim for pretty",
-                    description: "Pretty things can improve our well being on our every day life. From a nicely platted breakfast to a nice interface, a tidy documentation or clean piece of code. The effort is worth it !"
+                    description: "Pretty things can improve our well being in our every day life. From a nicely plated breakfast to a nice interface, a tidy documentation or clean piece of code. The effort is worth it !"
                 },
                 {
                     title: "+ Listen to and give contructive critics",
-                    description: "Critics and feedbacks should be considered and should be given to others when needed. It is in part through critics that we grow and we get aware of sides to improve. So, do me a favour and give me some feedback !"
+                    description: "Critics and feedback should be considered and should be given to others when needed as they are useful to grow and get aware of sides to improve. So, do me a favor and give me some feedback !"
                 }
             ]
         }
     },
     projectsList: {
         title: "All projects",
-        intro: 'Here are displayed the main projects I have worked on and the corresponding cases. More projects to hopefully be added soon !',
+        intro: 'Here are displayed the main projects I have worked on and the corresponding cases. More projects to be added soon !',
         projects: [
             {
                 title: "/ WORK AT PAPERNEST",

@@ -1,5 +1,6 @@
 import gsap from "gsap"
-import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort, isElLeftOfScreen, isMobileScreen, scEnterPageLong, scOpacityFade, scTransitionPage, scTransitionPageLong } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { disableScroll, getGsapDistToCenterElXAxis, getGsapDistToCenterElYAxis, getScaleToCoverViewPort, isElLeftOfScreen, isMobileScreen, scEnterPageLong, scOpacityFade, scTransitionPage, scTransitionPageLong } from "@pausabater/utils/dist/index.esm.js"
 
 export function setLeaveAnimation(elTarget: HTMLElement) {
     const elImg: HTMLElement | null = elTarget.querySelector("[data-transitioned-image]")

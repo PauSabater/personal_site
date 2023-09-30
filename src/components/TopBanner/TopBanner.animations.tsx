@@ -1,7 +1,8 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase"
-import { getTodayDayNum, scTransitionPage } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { getTodayDayNum, scTransitionPage } from "@pausabater/utils/dist/index.esm.js"
 import { easeOutLong } from "../../assets/ts/styles/styles"
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 

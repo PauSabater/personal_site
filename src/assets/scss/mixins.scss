@@ -14,8 +14,16 @@
     @media (max-aspect-ratio: 1/1) { @content; }
 }
 
+@mixin horizontal {
+    @media (min-aspect-ratio: 1/1) { @content; }
+}
+
 @mixin tablet {
     @media (min-width: 769px) and (max-width: 1023px) { @content; }
+}
+
+@mixin tablet-desktop {
+    @media (min-width: 769px) { @content; }
 }
 
 @mixin desktop-sm {

@@ -1,7 +1,8 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { CustomEase } from "gsap/CustomEase";
-import { isMobileScreen } from "../../assets/ts/utils/utils";
+// @ts-ignore -- TODO: solve declaration file from package
+import { isMobileScreen } from "@pausabater/utils/dist/index.esm.js";
 gsap.registerPlugin(ScrollTrigger, CustomEase)
 
 export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<null>) {
@@ -18,6 +19,8 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             (elTextBanner as HTMLElement).querySelectorAll(`${isMobile ? '.text-mobile p' : '.text-desktop p'}`)
         const elBtn = (elTextBanner as HTMLElement).querySelector(".cta")
         const elCanvas = document.querySelector("#text-banner-canvas")
+        const elNoteLogo = document.querySelector("#note-logo")
+        const elLowPerfLogo = document.querySelector("#low-perf-logo")
 
         let tlTBanner = gsap.timeline()
 
@@ -40,8 +43,19 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
                 {opacity: 0},
                 {
                     opacity: 1, duration: 0.5,
-                    onStart: ()=> {elTextBanner?.setAttribute('data-animation-is-finished', '')},
-                    onComplete: ()=> {gsap.to((elTextBanner as HTMLElement).querySelector("svg"), { opacity: 1, duration: 0.5, delay: 0.3 })}
+                    onStart: ()=> {
+                        elTextBanner?.setAttribute('data-animation-is-finished', '')
+                        if (elLowPerfLogo) {
+                            gsap.set(elLowPerfLogo.querySelectorAll("path"), {
+                                strokeDashoffset: 0,
+                                stagger: 0.15
+                                // opacity: 1, duration: 0.5, delay: 0.3
+                            })
+                        }
+                    },
+                    onComplete: ()=> {
+                        gsap.to(elNoteLogo, { opacity: 1, duration: 0.5, delay: 0.3 })
+                    }
                 },
                 'end'
         )
@@ -50,7 +64,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
             // Text lines reveal effect:
             .fromTo(Array.from(elsTextLines),
             {opacity: 0},
-            {opacity: 1, y: 0, duration: 0.7, stagger: 0.05},
+            {opacity: 1, y: 0, duration: 1, stagger: 0.075},
             'start')
 
         // Canvas is not showing on mobile

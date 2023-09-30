@@ -35,10 +35,10 @@ export const papernestContent = (): JSX.Element => { return (
                 </p>
                 <div>
                     <p className={styles.paragraphRight}>
-                        On the front side, there were many duplicated features for each project with just a few variations. That led to a tedious process each time a new feature was developed or had to be modified, easily leading to bugs and with not enough time for testing.
+                        I was in charge of developing most of the <span>frontend refactors</span>, solving many code duplications and <span>modernising</span> the stack and code.
                     </p>
                     <p className={styles.paragraphRight}>
-                        I was in charge of developing most of the <span>frontend refactors</span>. Some of the most important features were stored in a common repository and imported to every project, improving this way their <span>scalability and testability</span>.
+                    Some of the most important features were stored in a common repository and imported to every project, improving this way their <span>scalability and testability</span>.
                     </p>
                 </div>
             </div>

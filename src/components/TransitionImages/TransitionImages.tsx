@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef } from "react"
 import styles from "./TransitionImages.module.scss"
 import gsap from "gsap"
-import { isViewportPropHigherThanEl } from "../../assets/ts/utils/utils"
+// @ts-ignore -- TODO: solve declaration file from package
+import { isViewportPropHigherThanEl } from "@pausabater/utils/dist/index.esm.js"
 import { getImg } from "../WorkBanner/Card/Card"
 
 export interface ISkillsBannerTexts {

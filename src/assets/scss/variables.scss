@@ -66,8 +66,8 @@
     --c-grey: hsl(0, 0%, 50%);
 
 
-    --c-black: hsl(0, 0%, 7%);
     --c-black: hsl(0, 0%, 6%);
+    --c-black-light: hsl(0, 0%, 12%);
     --c-blackest: hsl(0, 0%, 3%);
 
     // Border color
@@ -80,6 +80,7 @@
     --c-font-h: hsl(0, 0%, 15%);
     --c-font-white: var(--c-white);
 
+    --c-black-no-change: hsl(0, 0%, 6%);
     --c-white-no-change: hsl(136, 0%, 96%);
     --c-whitest: white;
     --c-white: hsl(136, 0%, 96%);
@@ -92,6 +93,7 @@
     --tr-fast: 0.2s;
     --tr-base: 0.3s;
     --tr-slow: 0.5s;
+    --tr-slower: 0.9s;
 
     // Font weight
     --fw-boldest: 900;
@@ -121,7 +123,7 @@
     --fs-text-banner-sm: clamp(22px, 1.8vw, var(--fs-lg));
 
     @include mixins.mobile-tablet-vertical {
-        --fs-text-banner: var(--fs-lg);
+        --fs-text-banner: var(--fs-xl);
     }
 
     @include mixins.mobile-tablet {
@@ -129,8 +131,8 @@
         --fs-4xl: 2.4rem;
         --fs-3xl: 2rem;
         --fs-2xl: 1.8rem;
-        --fs-xl: 1.5rem;
-        --fs-lg: 1.35rem;
+        --fs-xl: 1.55rem;
+        --fs-lg: 1.4rem;
         --fs-global: 1.15rem;
         --fs-sm: 1rem;
         --fs-xs: 0.85rem;
@@ -146,7 +148,7 @@
 
 }
 
-body[data-theme="dark"] {
+html[data-theme="dark"] {
 
     --c-primary: hsl(54, 67%, 68%);
 

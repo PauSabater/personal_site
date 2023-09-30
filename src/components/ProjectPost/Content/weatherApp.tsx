@@ -23,18 +23,18 @@ export const weatherAppContent = (): JSX.Element => { return (
                     <p>July 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! In addition, I always had a thing for weather. Despite the fact that there are many tutorials out there about a project like this, I did not follow any and did it all from scratch, using the React documentation instead.
+                    I did this project to start learning React. Yes I know, another weather app? I really did not want to spend much time thinking of projects, and a weather app is a great project due to its different data requests and interactions between components! Despite the fact that there are many tutorials out there about a project like this, I did not follow any and did it all from scratch, using the React documentation instead.
                 </p>
                 <div className={styles.ctaContainer}>
                     <Cta props={{
-                        text: "Visit the repository",
+                        text: "Check out the code",
                         href: "https://github.com/PauSabater/weather_app",
                         color: "black",
                         isBold: false
                     }}></Cta>
                     <div onClick={() => setPageFadeOutAnimation()}>
                         <Cta props={{
-                            text: "Checkout the live result",
+                            text: "Check out the live result",
                             href: "live-result",
                             color: "black",
                             target: "_self",
@@ -100,6 +100,23 @@ export const weatherAppContent = (): JSX.Element => { return (
                 <p className={styles.mainParagraph}>
                     React components are a great and easy tool to encapsulate functionalities into reusable pieces. Main downside is that they will be limited to the React ecosystem, however their quick and easy development and vast ecosystem make them a top valued option.
                 </p>
+                <div className={styles.ctaContainer}>
+                    <Cta props={{
+                        text: "Check out the code",
+                        href: "https://github.com/PauSabater/weather_app",
+                        color: "black",
+                        isBold: false
+                    }}></Cta>
+                    <div onClick={() => setPageFadeOutAnimation()}>
+                        <Cta props={{
+                            text: "Check out the live result",
+                            href: "live-result",
+                            color: "black",
+                            target: "_self",
+                            isBold: false
+                        }}></Cta>
+                    </div>
+                </div>
             </div>
         </div>
     </Fragment>
