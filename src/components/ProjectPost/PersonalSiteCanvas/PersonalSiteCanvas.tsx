@@ -18,8 +18,6 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
         gsap.to(document.getElementById("transition-img-personal-site.svg"), {opacity: 0, duration: 0.75, delay: 0.2})
     }, [])
 
-    console.log("mode is "+mode)
-
     return (
         <div className={styles.canvasContainer} ref={siteCanvas} id="personal-site-canvas">
             <Canvas dpr={[1, 1]}>

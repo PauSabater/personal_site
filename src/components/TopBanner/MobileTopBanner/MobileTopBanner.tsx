@@ -19,8 +19,11 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
 
     useLayoutEffect(()=> {
         window.scrollTo(0,0)
+        const elPageLoader = document.querySelector(".page-loader")
+        const delay = elPageLoader?.classList.contains("loader-shown") ? 0 : 1500
+
         setTimeout(()=> {
-            document.querySelector(".page-loader")?.classList.remove("is-loading")
+            elPageLoader?.classList.remove("is-loading")
             if (refContainer.current !== null) {
                 setTimeout(()=> {
                     gsap.to(document.getElementById("page-overlay"), {
@@ -30,7 +33,7 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
                     setMobileTopBannerAnimations(refContainer.current as unknown as HTMLElement)
                 }, 0)
             }
-        }, 1500)
+        }, delay)
     }, [])
 
     const getAnimatedText = ()=> {

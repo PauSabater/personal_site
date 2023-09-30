@@ -6,9 +6,10 @@ import { easeOutLong } from "../../assets/ts/styles/styles"
 import { CustomEase } from "gsap/CustomEase"
 import { gitHubLogo, linkedInLogo } from "../../assets/svg/ts/varied"
 // @ts-ignore -- TODO: solve declaration file from package
-import { disableScroll, dispatchChangePerfEvent, dispatchChangeThemeEvent, enableScroll, getPerfMode, hasElementBeenScrolled, isHighPerf, isMobileScreen, matchMediaMobile } from "@pausabater/utils/dist/index.esm.js"
+import { isLocationHomepage, showLoadingPage, disableScroll, dispatchChangePerfEvent, dispatchChangeThemeEvent, enableScroll, getPerfMode, hasElementBeenScrolled, isHighPerf, isMobileScreen, matchMediaMobile } from "@pausabater/utils/dist/index.esm.js"
 import ScrollToPlugin from "gsap/ScrollToPlugin"
 import { setPageFadeOutAnimation } from "../App/App.animations"
+import { scrollToContact } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(CustomEase, ScrollToPlugin)
 
@@ -53,6 +54,7 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
     }
 
     useLayoutEffect(() => {
+
         let ctx = gsap.context(() => {},[]);
 
         const mql = window.matchMedia(matchMediaMobile);
@@ -71,15 +73,15 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
         const elsBurgerLines = Array.from((refBurger.current as unknown as HTMLElement).querySelectorAll(".burger-line"))
 
         gsap.timeline()
-        .set(elsBurgerLines[0], {
-            y: '8',
-            duration: 0.4,
-            onStart: () => disableScroll()
-        }, 0)
-        .set(elsBurgerLines[2], {
-            y: '-10.5',
-            duration: 0.4
-        }, 0)
+            .set(elsBurgerLines[0], {
+                y: '8',
+                duration: 0.4,
+                onStart: () => disableScroll()
+            }, 0)
+            .set(elsBurgerLines[2], {
+                y: '-10.5',
+                duration: 0.4
+            }, 0)
 
         window.addEventListener('scroll', controlDirection)
         return () => {
@@ -273,29 +275,25 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
     }
 
     const handleClickLink = (e: React.MouseEvent)=> {
-        if(isMobileScreen()) animationCloseBurger(true, true)
+
+        if (isMobileScreen()) animationCloseBurger(true, true)
+
         const elTarget: HTMLLinkElement = e.target as HTMLLinkElement
         const currentLocation = window.location.href
+        const isHomepage = isLocationHomepage(currentLocation)
 
         if (elTarget.hasAttribute("data-scroll-to")) {
-            const isHomepage = currentLocation.includes("projects") === false
-            let duration = 1.5
-
             const homepagePastHalf = hasElementBeenScrolled(document.getElementById("homepage-second-half") as HTMLElement)
 
             if (!isHomepage || homepagePastHalf) {
-                const scrollTo = !isHomepage ? "footer-canvas" : "foot-banner"
-                gsap.to(window, {
-                    duration: duration,
-                    ease: "power2.inOut",
-                    scrollTo: {y: document.getElementById(scrollTo) as Element}
-                })
+                scrollToContact(1.5, isHomepage)
             } else if (isHomepage === true) {
                 navigate("/contact")
             }
 
         } else {
             const hrefTarget = (e.target as HTMLLinkElement).href
+
             if (currentLocation.includes(hrefTarget)) {
                 const splitLocation = currentLocation.split(hrefTarget)
 
@@ -303,8 +301,13 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
                 if (splitLocation[1] !== "") {
                     setPageFadeOutAnimation()
                 }
-            } else {
+            } else if (typeof hrefTarget !== "undefined") {
                 setPageFadeOutAnimation()
+            }
+
+            // Show load page if home page is clicked
+            if ((e.target as HTMLLinkElement).hasAttribute("data-reload-home")) {
+                if (!isHomepage) showLoadingPage()
             }
         }
     }
@@ -320,12 +323,7 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
                     }}
                     className={`${styles.darkModeContainer} header-link`}
                 >
-                    <p>
-                        {isMobileView
-                            ? `set ${mode === "light" ? "dark" : "light"} mode`
-                            : `settings`
-                        }
-                    </p>
+                    <p>{isMobileView ? `set ${mode === "light" ? "dark" : "light"} mode` : `settings`}</p>
                 {modeIcon()}
                 </div>
             </li>
@@ -350,8 +348,14 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
     }
 
     const clickPerfMode = ()=> {
-        // if(isMobileScreen() === true) animationCloseBurger()
-        dispatchChangePerfEvent()
+        let timeout = 0
+        // If on homepage we display loading screen to avoid abrupt visual changes:
+        if (isLocationHomepage(window.location.href)) {
+            showLoadingPage()
+            timeout = 400
+        }
+
+        setTimeout(()=> dispatchChangePerfEvent(), timeout)
     }
 
     const menuSettings = ()=> {
@@ -359,41 +363,41 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
             <li className={`${styles.item} ${styles.itemWithMenu} header-iterm`} key={3}>
                 <div className={`${styles.darkModeContainer} header-link`}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                        <path fill="var(--c-white-no-change)" d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm48-60h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Zm44-210q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-130Z"/>
-                    </svg>
                     <p>page settings</p>
+                    <svg viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.9994 27.5L0.410976 0.500003L31.5879 0.5L15.9994 27.5Z" fill="var(--c-white-no-change)"/>
+                    </svg>
                 </div>
 
                 <ul className={styles.settings}>
                     <li onClick={(e) => {clickToggleMode()}} className={`${styles.item} header-iterm`} key={4}>
                         {modeIcon()}
-                        <p>set {mode} mode</p>
+                        <p>set {mode === "light" ? "dark" : "light"} mode</p>
                     </li>
                     <li onClick={(e) => {clickPerfMode()}} className={`${styles.item} ${styles.perfItem} header-iterm`} key={5}>
                         <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill="var(--c-white-no-change)" d="M10 20C7.56667 20 5.44167 19.2417 3.625 17.725C1.80833 16.2083 0.666666 14.3 0.2 12H3.3C3.73333 13.4667 4.55833 14.6667 5.775 15.6C6.99167 16.5333 8.4 17 10 17C11.9333 17 13.5833 16.3167 14.95 14.95C16.3167 13.5833 17 11.9333 17 10C17 8.06667 16.3167 6.41667 14.95 5.05C13.5833 3.68333 11.9333 3 10 3C9.03333 3 8.13333 3.175 7.3 3.525C6.46667 3.875 5.73333 4.36667 5.1 5H8V8H0V0H3V2.85C3.9 1.98333 4.95 1.29167 6.15 0.775001C7.35 0.258334 8.63333 0 10 0C12.7667 0 15.125 0.975 17.075 2.925C19.025 4.875 20 7.23333 20 10C20 12.7667 19.025 15.125 17.075 17.075C15.125 19.025 12.7667 20 10 20Z"/>
                         </svg>
                         <p>
-                            {isHighPerf(perfMode) ? "low" : "high"} requirements version
+                            set {isHighPerf(perfMode) ? "low" : "high"} requirements version
                         </p>
                         <div className={styles.extraInfo}>
                         <svg className={styles.iconInfo} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.1009 22V11.0909H16.5739V22H13.1009ZM14.8409 9.8196C14.3532 9.8196 13.9342 9.65862 13.5838 9.33665C13.2334 9.00994 13.0582 8.61695 13.0582 8.15767C13.0582 7.70312 13.2334 7.31487 13.5838 6.9929C13.9342 6.66619 14.3532 6.50284 14.8409 6.50284C15.3333 6.50284 15.7524 6.66619 16.098 6.9929C16.4484 7.31487 16.6236 7.70312 16.6236 8.15767C16.6236 8.61695 16.4484 9.00994 16.098 9.33665C15.7524 9.65862 15.3333 9.8196 14.8409 9.8196Z" fill="var(--c-font-global)"/>
                             <circle cx="15" cy="15" r="14.5" stroke="var(--c-font-global)"/>
                         </svg>
-
-                            {initialPerf === perfMode
-                                ? <p>You have loaded a {isHighPerf(perfMode) ? "high" : "lower"} requirements page version given your device's number of logical processors available.
-                                {isHighPerf(perfMode)
-                                    ? " If you are unfortunately experiencing janky scroll, please try with the lower requirements version."
-                                    : " You can test the high requirements one, however you may experience a janky scroll."}
+                        {initialPerf === perfMode
+                            ? <p>You have loaded a {isHighPerf(perfMode) ? "high" : "lower"} requirements page version given your device's number of logical processors available.
+                            {isHighPerf(perfMode)
+                                ? " If you are unfortunately not experiencing a smooth scroll, please try with the lower requirements version."
+                                : " You can test the high requirements one, however you may experience a janky scroll."}
+                            </p>
+                            : isHighPerf(perfMode)
+                                ? <p>You are viewing a version with high performance requirements, click to load a less demanding version.</p>
+                                : <p>You are browsing on a lighter version of the site. Click to view a mode demanding version for your device. {
+                                    initialPerf === "low" ? "You may experience a lesser smooth scroll given your device" : ""}
                                 </p>
-                                : isHighPerf(perfMode)
-                                    ? <p>You are viewing a version with high performance requirements, click to load a less demanding version.</p>
-                                    : <p>You are browsing on a lighter version of the site. Click to view a mode demanding version for your device.</p>
-                            }
-
+                        }
                         </div>
                     </li>
                 </ul>
@@ -421,7 +425,7 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
                         <rect y="54" width="48" height="48" rx="10" fill="currentColor"/>
                         <rect y="108" width="48" height="48" rx="10" fill="currentColor"/>
                     </svg>
-                    <p className={styles.logoName}>PS</p>
+                    <p className={styles.logoName} data-reload-home="">PS</p>
                 </Link>
                 <div ref={refHeaderListContainer} className={styles.listContainer}>
                     <ul className={styles.list}>
@@ -429,6 +433,7 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
                             <NavLink
                                 onClick={(e) => {handleClickLink(e)}}
                                 className={'header-link'}
+                                data-reload-home=""
                                 to='/'
                             >about
                             </NavLink>

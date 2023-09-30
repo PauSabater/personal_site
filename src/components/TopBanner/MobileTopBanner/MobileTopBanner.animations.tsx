@@ -18,7 +18,7 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
         const pathEllipse: SVGPathElement | null = elEllipse.querySelector("path")
         const pathUnderline: SVGPathElement | null = elUnderline.querySelector("path")
         const pathsTicks = document.querySelector("[data-svg-ticks]")?.querySelectorAll("path")
-
+        const baseDelay = 0.5
 
         const tl = gsap.timeline().pause()
             .set(elTopBanner, {
@@ -51,7 +51,7 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
                 y: 0,
                 duration: 1.1,
                 ease: "power4.out",
-                delay: 0,
+                delay: baseDelay,
                 onStart: ()=> {
                     setTimeout(()=> spanAnimated.setAttribute("data-animated", ""), 300)
                 }
@@ -61,21 +61,21 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
                 yPercent: 0,
                 duration: 1.1,
                 stagger: 0.05,
-                delay: 0,
+                delay: baseDelay,
                 ease: "power4.out"
             }, 'end')
             // Gradient element appear:
             .to(elGradient, {
                 opacity: 0.9,
                 duration: 1.5,
-                delay: 0.3
+                delay: baseDelay + 0.3
             }, 'end')
             .to(elHeader, {
                 opacity: 1,
                 y: 0,
                 duration: 1,
                 ease: "power4.out",
-                delay: 0.15
+                delay: baseDelay + 0.15
             }, 'end')
             // Date entering screen:
             .to(elDateBanner, {
@@ -85,10 +85,8 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
                 ease: "power4.out",
                 onStartParams:[elDayNumber, 500],
                 onStart: setDayNumCounter,
-                delay: 0.15
+                delay: baseDelay + 0.15
             }, 'end')
-
-            // tl.play()
 
             tl.play()
     })

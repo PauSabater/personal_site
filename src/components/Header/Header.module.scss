@@ -12,12 +12,12 @@
 }
 
 .header {
-    --height-header: 50px;
+    --header-height: 50px;
+    --header-fs: 0.95rem;
 
     position: fixed;
     width: 100vw;
     top: 20px;
-    // opacity: 0;
     z-index: 1000;
 
     &[data-theme="dark"] .list:first-child a {
@@ -31,14 +31,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: var(--height-header);
+    height: var(--header-height);
     width: fit-content;
     margin-left: -1vw;
     text-decoration: none;
     color: var(--c-font-global);
 
     img, svg {
-        height: var(--height-header);
+        height: var(--header-height);
         width: auto;
     }
 
@@ -118,7 +118,7 @@
 
     &:first-child {
         justify-content: space-evenly;
-        min-width: 460px;
+        min-width: 400px;
         background-color: var(--c-black);
 
         &[data-theme="dark"] a {
@@ -158,10 +158,10 @@
     }
 
     svg {
-        height: 18px;
-        height: 18px;
+        height: 10px;
+        height: 10px;
         margin: auto;
-        margin-right: var(--mg-sm);
+        margin-left: var(--mg-sm);
     }
 }
 
@@ -172,7 +172,8 @@
     color: var(--c-white);
     padding: var(--pd-sm) var(--pd-md);
     font-weight: var(--fw-medium);
-    font-size: var(--fs-sm);
+    font-size: var(--header-fs);
+    font-family: "inter-medium";
     text-decoration: none;
     border-radius: var(--br-sm);
     transition: background-color var(--tr-base);
@@ -325,7 +326,7 @@
     .container {
         flex-direction: column;
         width: 70vw;
-        height: var(--height-header);
+        height: var(--header-height);
         margin-left: 5vw;
     }
 
@@ -522,7 +523,7 @@
         border-radius: 5px;
         outline: 1px solid grey;
         opacity: 0;
-        transform: translate(35px, 0px);
+        transform: translate(60px, 0px);
         transition: opacity var(--tr-base);
 
         &:after {
@@ -548,6 +549,11 @@
                 margin: var(--mg-sm);
             }
 
+            &.perfItem p {
+                font-size: var(--header-fs);
+                font-family: "inter-medium";
+            }
+
             &:hover {
                 background-color: grey;
 
@@ -566,7 +572,7 @@
 
                 position: absolute;
                 top: -20px;
-                right: 270px;
+                right: 310px;
                 opacity: 0;
                 transition: opacity var(--tr-base);
 
@@ -580,12 +586,14 @@
                 p {
                     width: 400px;
                     font-size: 14px;
+                    font-family: "nunito-400";
                     color: var(--c-font-global);
                     background-color: var(--bg-info);
                     padding: var(--pd-lg) var(--pd-xl);
                     border-radius: 10px;
                     border: 1px solid grey;
-                    box-shadow: 1px 1px 12px 0px rgba(0,0,0,0.7);
+
+                    box-shadow: 1px 1px 14px 0px rgba(0,0,0,0.4);
                 }
 
                 &:after {

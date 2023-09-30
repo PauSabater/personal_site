@@ -12,3 +12,12 @@ export function hidePageOverlay() {
     const elPageOverlay: HTMLElement | null = document.getElementById("page-overlay")
     if (elPageOverlay !== null) gsap.set(elPageOverlay, {opacity: 0})
 }
+
+export function scrollToContact(duration: number, isHomepage: boolean) {
+    const scrollTo = !isHomepage ? "footer-canvas" : "foot-banner"
+    gsap.to(window, {
+        duration: duration,
+        ease: "power2.inOut",
+        scrollTo: {y: document.getElementById(scrollTo) as Element}
+    })
+}

@@ -376,8 +376,13 @@ div[data-img-mountain] {
         }
     }
 
+    .paragraphRight {
+        padding-right: var(--pd-sm);
+    }
+
     .sectionMain,
     .sectionMainRight,
+    .sectionMainLeft,
     .sectionRight,
     .sectionLeft {
         display: flex;
@@ -387,6 +392,12 @@ div[data-img-mountain] {
         img {
             margin-top: var(--mg-md);
             max-width: 100%;
+            padding-right: 20px;
+            box-sizing: border-box;
+        }
+
+        .mainParagraph {
+            padding-right: var(--pd-sm);
         }
     }
 
@@ -424,7 +435,6 @@ div[data-img-mountain] {
     }
 
     .nextProjectContainer {
-        top: -22px;
         right: 30px;
 
         svg {

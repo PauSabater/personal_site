@@ -26,10 +26,9 @@
             opacity: 0;
             z-index: 10000;
             transition: opacity 0.5s;
-            display: none;
         }
 
-        body[data-theme="dark"] .page-loader {
+        html[data-theme="dark"] .page-loader {
             --c-loader: hsl(0, 0%, 40%);
 
             background-color: hsl(0, 0%, 7%);
@@ -70,7 +69,7 @@
             transition: opacity 10s;
         }
 
-        body[data-theme="light"] .page-loader__title {
+        html[data-theme="light"] .page-loader__title {
             font-weight: 500;
         }
 
@@ -181,8 +180,15 @@
     </div>
     <script>
         // get active theme
-        const theme = localStorage.getItem("theme") || "light"
-        document.body.setAttribute("data-theme", theme)
+        let theme = localStorage.getItem("theme") || null
+        let mediaTheme
+
+        if (theme === null) {
+            mediaTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            theme = mediaTheme === true ? "dark" : "light"
+        }
+
+        document.body.parentElement?.setAttribute("data-theme", theme)
         const isMobileView = window.innerWidth < 768
 
         const pageLocation = window.location.href
@@ -190,11 +196,13 @@
         const delay = isHomepage
             ? isMobileView ? 4000 : 2000
             : isMobileView ? 2000 : 1000
-        if (isHomepage === false) document.querySelector(".page-loader__title").style.display = "none"
 
         // loading is delayed in homepage to show sentence
         const elLoader = document.querySelector(".page-loader")
-        setTimeout(()=> elLoader.classList.add("loader-shown"), delay)
+        setTimeout(()=> {
+            setTimeout(()=> document.querySelector(".page-loader__title").style.display = "none", 1000)
+            elLoader.classList.add("loader-shown")
+        }, delay)
     </script>
   </body>
 </html>
