@@ -34,7 +34,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                     }}></Cta>
                     <div onClick={() => setPageFadeOutAnimation()}>
                         <Cta props={{
-                            text: "Check out the live result",
+                            text: "Visit the live result",
                             href: "live-result",
                             color: "black",
                             target: "_self",
@@ -109,7 +109,7 @@ export const weatherAppContent = (): JSX.Element => { return (
                     }}></Cta>
                     <div onClick={() => setPageFadeOutAnimation()}>
                         <Cta props={{
-                            text: "Check out the live result",
+                            text: "Visit the live result",
                             href: "live-result",
                             color: "black",
                             target: "_self",

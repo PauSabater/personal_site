@@ -91,7 +91,7 @@ function App() {
             // const perfMode = document.body.getAttribute("data-perf") || lowPerf
             const nextMode = perfMode === highPerf ? lowPerf : highPerf
             setPerfMode(nextMode)
-            localStorage.setItem("perfMode", perfMode)
+            localStorage.setItem("perfMode", nextMode)
             e.stopPropagation()
         })
     }, [perfMode])

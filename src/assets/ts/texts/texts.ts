@@ -21,8 +21,8 @@ export const texts = {
                 "I am a <span>frontend developer</span> striving",
                 "for the <span>highest quality interfaces</span> . With",
                 "an eye for design and a multidisciplinary",
-                "background, I can tackle with success and",
-                "enjoyment complex projects and goals.",
+                "background, I can tackle with success",
+                "complex projects and goals.",
                 "<span>Scroll down</span> to learn more about me !"
             ],
             textMobile: [
@@ -32,8 +32,7 @@ export const texts = {
                 "an eye for design and a",
                 "multidisciplinary background",
                 "I can tackle with success",
-                "and enjoyment complex",
-                "projects and goals.",
+                "complex projects and goals.",
                 "<span>Scroll down</span> to learn more",
                 "about me !"
             ],
