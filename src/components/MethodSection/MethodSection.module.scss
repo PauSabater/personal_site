@@ -130,9 +130,9 @@
     transform: translateY(100%);
 
     @include mixins.mobile-tablet {
-        font-size: 28px;
+        font-size: 25px;
         margin: var(--mg-lg) 0;
-        padding: 0 var(--pd-2xl) 0 var(--pd-md);
+        padding: 0 var(--pd-2xl) 0 var(--pd-xs);
         transform: translateY(0);
     }
 
@@ -187,6 +187,12 @@
         opacity: 1;
         overflow: hidden;
         transition: var(--tr-base), opacity 0.2s ease-in var(--tr-base), transform var(--tr-base);
+
+        @include mixins.mobile-tablet {
+            p {
+                padding: 0 var(--pd-md) var(--pd-xl) var(--pd-md);
+            }
+        }
     }
 
     .line {
