@@ -32,7 +32,7 @@ export function SkillsBanner({texts, mode}: {texts: ISkillsBannerTexts, mode: st
                         <div className={`${styles.skillContainer} skill-container`} key={`skill-${i}`}>
                             <img
                                 alt={`skill ${skill}`}
-                                loading="lazy"
+                                // loading="lazy"
                                 className={styles.img}
                                 src={require(`../../assets/svg/logos/${skill.icon}.svg`)}
                             ></img>

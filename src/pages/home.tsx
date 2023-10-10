@@ -22,16 +22,14 @@ export function Home({mode, perfMode, isMobile}: {mode: string, perfMode: string
         <div id="page-home">
             <TopBanner props={textsPage.topBanner} mode={mode} perfMode={perfMode}/>
             <TextBanner texts={textsPage.intro} mode={mode} perfMode={perfMode}/>
-            <Suspense>
-                <WorkBanner props={textsPage.workBanner} mode={mode}/>
-            </Suspense>
-            <Suspense>
+            <WorkBanner props={textsPage.workBanner} mode={mode}/>
             <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
                 <SkillsBanner texts={textsPage.skillsBanner} mode={mode}/>
                 <MethodSection props={textsPage.methodSectionTexts} mode={mode}/>
-                <FootBanner perfMode={perfMode} />
+                <Suspense>
+                    <FootBanner perfMode={perfMode} />
+                </Suspense>
             </div>
-            </Suspense>
         </div>
     )
 }
