@@ -123,7 +123,7 @@
     --fs-text-banner-sm: clamp(22px, 1.8vw, var(--fs-lg));
 
     @include mixins.mobile-tablet-vertical {
-        --fs-text-banner: var(--fs-xl);
+        --fs-text-banner: 1.4rem;
     }
 
     @include mixins.mobile-tablet {

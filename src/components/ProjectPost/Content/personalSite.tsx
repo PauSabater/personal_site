@@ -21,7 +21,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                     <p>July / September 2023</p>
                 </div>
                 <p className={styles.intro}>
-                    This is a site to <span>present my work and myself</span>. Having quitted my job to <span>move to Berlin</span>, I found that I needed a space to showcase my abilities as my experience was not long enough to catch attention. Despite having been told that I have good skills, when starting from scratch in a new place that does not matter if not proved. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
+                    This is a site to <span>present my work and myself</span>. Having quitted my job to <span>move to Berlin</span>, I found that I needed a space to showcase my abilities as my experience was not long enough to catch attention. This site aims to showcase my capabilities in a transparent way, and remain as a <span>personal playground</span> to learn and have fun !
                 </p>
                 <div className={styles.ctaContainer}>
                     <Cta props={{

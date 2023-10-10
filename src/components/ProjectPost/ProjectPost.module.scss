@@ -349,6 +349,11 @@ div[data-img-mountain] {
     margin-bottom: 0;
 }
 
+.sectionLeft .containerTextRight {
+    grid-column-start: 2 !important;
+    grid-row-start: 2;
+}
+
 
 @include mixins.mobile-tablet {
     .articleContent,
@@ -402,8 +407,7 @@ div[data-img-mountain] {
     }
 
     .sectionLeft .containerTextRight {
-        grid-column-start: 2 !important;
-        grid-row-start: 2;
+        grid-column-start: 1 !important;
     }
 }
 
