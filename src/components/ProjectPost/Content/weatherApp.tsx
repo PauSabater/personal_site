@@ -98,7 +98,7 @@ export const weatherAppContent = (): JSX.Element => { return (
             <div className={styles.sectionMain}>
                 <h2 className={styles.sectionTitle}>Conclusion</h2>
                 <p className={styles.mainParagraph}>
-                    React components are a great and easy tool to encapsulate functionalities into reusable pieces. Main downside is that they will be limited to the React ecosystem, however their quick and easy development and vast ecosystem make them a top valued option.
+                    As a first contact with React I am very happy with it and plan to keep expanding my practice. However, it will not make me forget my beloved <LinkInline text={"LIT"} href={"https://lit.dev/"}/> , which I would like to keep using and even combining with frameworks like React.
                 </p>
                 <div className={styles.ctaContainer}>
                     <Cta props={{
