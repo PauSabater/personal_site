@@ -2,7 +2,7 @@ import styles from "./FooterCanvas.module.scss"
 import * as THREE from 'three'
 import { Fragment, useRef } from 'react'
 import { useGLTF, Reflector, MeshTransmissionMaterial, Html } from '@react-three/drei'
-import { Pencil } from '../../TopBanner/TopBannerCanvas/TopBannerCanvas'
+import { Pencil } from '../../TopBanner/TopBannerCanvas/components/PencilsDuo'
 // @ts-ignore -- TODO: solve declaration file from package
 import { getViewportAspectRatio, isHighPerf } from "@pausabater/utils/dist/index.esm.js"
 
@@ -183,7 +183,7 @@ function CanvasScreenContent() {
 
         return (
             <div className={styles.container} onPointerDown={(e) => e.stopPropagation()}>
-                <h1 className={styles.title}>LET'S GET IN TOUCH ?</h1>
+                <h1 className={styles.title}>LET'S GET IN TOUCH</h1>
                 <a href="mailto:pau.sabater.vilar@gmail.com">pau.sabater.vilar@gmail.com
                     <svg width="29" height="16" viewBox="0 0 29 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 7C0.447715 7 0 7.44772 0 8C0 8.55228 0.447715 9 1 9L1 7ZM28.7071 8.70711C29.0976 8.31658 29.0976 7.68342 28.7071 7.29289L22.3431 0.928932C21.9526 0.538408 21.3195 0.538408 20.9289 0.928932C20.5384 1.31946 20.5384 1.95262 20.9289 2.34315L26.5858 8L20.9289 13.6569C20.5384 14.0474 20.5384 14.6805 20.9289 15.0711C21.3195 15.4616 21.9526 15.4616 22.3431 15.0711L28.7071 8.70711ZM1 9L28 9V7L1 7L1 9Z" fill="currentColor"/>

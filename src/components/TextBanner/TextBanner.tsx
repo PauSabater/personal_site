@@ -41,13 +41,6 @@ export function TextBanner({ texts, mode, perfMode }: { texts: ITextBannerTexts,
                 )}
                 <Cta props={texts.Cta}></Cta>
 
-                {!isMobileScreen() ?
-                    <div className={styles.canvasContainer} id="text-banner-canvas">
-                        {isHighPerf(perfMode) ? <TextBannerCanvas mode={mode}/> : <LowPerfLogo/>}
-                        <NoteLogo/>
-                    </div>
-                    : ''
-                }
             </div>
         </div>
     )

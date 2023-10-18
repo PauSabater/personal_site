@@ -17,7 +17,6 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
 
         const pathEllipse: SVGPathElement | null = elEllipse.querySelector("path")
         const pathUnderline: SVGPathElement | null = elUnderline.querySelector("path")
-        const pathsTicks = document.querySelector("[data-svg-ticks]")?.querySelectorAll("path")
         const baseDelay = 0.5
 
         const tl = gsap.timeline().pause()
@@ -40,11 +39,6 @@ export function setMobileTopBannerAnimations(el: HTMLElement | null) {
             .set([pathUnderline], {
                 strokeDashoffset: 0,
                 delay: 0.4
-            })
-            .set([pathsTicks], {
-                strokeDashoffset: 0,
-                delay: 0.3,
-                stagger: 0.2,
             })
             .to(elTopBanner, {
                 opacity: 1,

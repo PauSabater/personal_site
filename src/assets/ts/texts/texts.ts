@@ -16,25 +16,22 @@ export const texts = {
             dateText: "Available for work"
         },
         intro: {
-            title: "hello. i'm pau",
+            title: "Hello. I am Pau.",
             textDesktop: [
                 "I am a <span>frontend developer</span> striving",
-                "for the <span>highest quality interfaces</span> . With",
+                "for  <span>high quality interfaces</span> . With",
                 "an eye for design and a multidisciplinary",
                 "background, I can tackle with success",
-                "complex projects and goals.",
-                "<span>Scroll down</span> to learn more about me !"
+                "<span>complex projects</span> and goals.",
             ],
             textMobile: [
                 "I am a <span>frontend developer</span>",
-                "striving for the <span>highest</span>",
+                "striving for the <span>high</span>",
                 "<span>quality interfaces.</span> With",
                 "an eye for design and a",
                 "multidisciplinary background",
                 "I can tackle with success",
-                "complex projects and goals.",
-                "<span>Scroll down</span> to learn more",
-                "about me !"
+                "<span>complex projects</span> and goals.",
             ],
             Cta: {
                 text: "Contact me",
