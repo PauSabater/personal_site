@@ -247,7 +247,7 @@ export function FootBanner({perfMode}: {perfMode: string}) {
                 <group position={[0, -1, 0]}>
                     <Ground />
                     <VideoText
-                        text={isMobileScreen() ? "let's+shape some+ideas ?" : "let's+shape some+ideas ?"}
+                        text={isMobileScreen() ? "let's+shape some+ideas" : "let's+shape some+ideas"}
                         position={[-1.7, 1.55, -2] as Vector3}
                     />
                     <mesh position={[0.1, 4.8, -2.05] as Vector3}>

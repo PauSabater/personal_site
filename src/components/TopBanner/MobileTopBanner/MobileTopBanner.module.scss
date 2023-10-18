@@ -34,20 +34,6 @@
             stroke-width: 8;
         }
     }
-
-    [data-svg-ticks] {
-        position: absolute;
-        height: 6vw;
-        width: 6vw;
-        left: -4vw;
-        top: 2vw;
-
-        path {
-            stroke-dashoffset: 100;
-            stroke-dasharray: 100;
-            transition: stroke-dashoffset 0.6s;
-        }
-    }
 }
 
 .gridDark svg {
@@ -62,6 +48,7 @@ p.line {
     margin: 0;
     width: fit-content;
     line-height: 1.25;
+    letter-spacing: 0.1vw;
 
 
     span {
@@ -85,6 +72,7 @@ p.line {
 
 p.pretitle {
     font-size: clamp(25px, 10vw, 70px);
+    letter-spacing: -0.03vw;
     color: var(--c-primary);
     margin-bottom: var(--mg-sm);
 }

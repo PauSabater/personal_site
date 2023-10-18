@@ -40,7 +40,6 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
         return (
             <Fragment>
                 <p className={`${styles.line} line`}>giving&nbsp;
-                    <div id="top-banner-ticks" dangerouslySetInnerHTML={{__html: ticks}}></div>
                     <span
                         className={`${styles.spanAnimated} span-animated`}
                         onClick={()=> dispatchChangeThemeEvent()}
