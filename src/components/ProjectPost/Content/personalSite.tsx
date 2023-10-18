@@ -26,7 +26,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <div className={styles.ctaContainer}>
                     <Cta props={{
                         text: "Check out the code",
-                        href: "https://github.com/PauSabater/weather_app",
+                        href: "https://github.com/PauSabater/personal_site",
                         color: "black",
                         isBold: false
                     }}></Cta>
@@ -155,7 +155,7 @@ export const personalSiteContent = (): JSX.Element => { return (
                 <div className={styles.ctaContainer}>
                     <Cta props={{
                         text: "Check out the code",
-                        href: "https://github.com/PauSabater/weather_app",
+                        href: "https://github.com/PauSabater/personal_site",
                         color: "black",
                         isBold: false
                     }}></Cta>
