@@ -139,6 +139,21 @@ p.pretitle {
     }
 }
 
+@include mixins.tablet {
+    .container {
+        margin-top: 5vh;
+        padding-left: 75px;
+    }
+
+    .line {
+        font-size: clamp(40px, 20vw, 120px);
+
+        [data-svg-underline] {
+            bottom: -65px;
+        }
+    }
+}
+
 
 @include mixins.horizontal {
     .line {
