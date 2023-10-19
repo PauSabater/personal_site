@@ -44,11 +44,13 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
                         className={`${styles.spanAnimated} span-animated`}
                         onClick={()=> dispatchChangeThemeEvent()}
                     >
-                    <div id="top-banner-ellipse" dangerouslySetInnerHTML={{__html: ellipse}}></div>
-                        shape
-                        <span className={styles.shadowText}>
+                        <div className={styles.shapeContainer}>
+                            <div id="top-banner-ellipse" dangerouslySetInnerHTML={{__html: ellipse}}></div>
                             shape
-                        </span>
+                            <span className={styles.shadowText}>
+                                shape
+                            </span>
+                        </div>
                     </span>
                 </p>
             </Fragment>
