@@ -34,6 +34,10 @@
             stroke-width: 8;
         }
     }
+
+    .shapeContainer {
+        position: relative;
+    }
 }
 
 .gridDark svg {
@@ -71,7 +75,7 @@ p.line {
 }
 
 p.pretitle {
-    font-size: clamp(25px, 10vw, 70px);
+    font-size: clamp(23px, 9vw, 70px);
     letter-spacing: -0.03vw;
     color: var(--c-primary);
     margin-bottom: var(--mg-sm);
