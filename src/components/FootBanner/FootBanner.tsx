@@ -241,7 +241,16 @@ export function FootBanner({perfMode}: {perfMode: string}) {
       return (
         <div className={styles.container} ref={refContainer} id="foot-banner">
             {/* @ts-ignore */}
-            <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{ preserveDrawingBuffer: false, precision: "mediump" }} dpr={[1, 1]}>
+            <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{
+                    preserveDrawingBuffer: false,
+                    precision: "lowp",
+                    autoClear: false,
+                    autoClearColor: false,
+                    autoClearDepth: true,
+                    autoClearStencil: false
+                }}
+                dpr={[1, 1]}
+            >
             <color attach="background" args={['hsl(0, 0%, 15%)']} />
             <Camera />
                 <group position={[0, -1, 0]}>

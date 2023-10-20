@@ -24,7 +24,7 @@ export function SkillsBanner({texts, mode}: {texts: ISkillsBannerTexts, mode: st
     }, [])
 
     return (
-        <div className={styles.container} data-theme={mode}>
+        <div className={styles.container} data-theme={"dark"}>
             <div ref={refBanner} className={styles.banner}>
                 <h1>{texts.title}</h1>
                 <div className={styles.skillsContainer}>
@@ -32,7 +32,6 @@ export function SkillsBanner({texts, mode}: {texts: ISkillsBannerTexts, mode: st
                         <div className={`${styles.skillContainer} skill-container`} key={`skill-${i}`}>
                             <img
                                 alt={`skill ${skill}`}
-                                // loading="lazy"
                                 className={styles.img}
                                 src={require(`../../assets/svg/logos/${skill.icon}.svg`)}
                             ></img>

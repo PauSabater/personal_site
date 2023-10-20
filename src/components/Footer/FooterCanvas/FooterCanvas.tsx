@@ -29,7 +29,18 @@ export function FooterCanvas({mode, perfMode}: {mode: string, perfMode: string})
     // const colorBackground = mode === "light" ? 'hsl(136, 0%, 96%)' : 'hsl(136, 0%, 96%)'
 
     return (
-        <Canvas shadows dpr={[1, 1]} camera={{ position: [0, 160, 160], fov: 20 }}>
+        <Canvas
+            gl={{
+                preserveDrawingBuffer: false,
+                precision: "lowp",
+                autoClear: false,
+                autoClearColor: true,
+                autoClearDepth: true,
+                autoClearStencil: false
+            }}
+            dpr={[1, 1]}
+            camera={{ position: [0, 160, 160], fov: 20 }}
+        >
             <fog attach="fog" args={[colorBackground, 110, 130]} />
             <color attach="background" args={[colorBackground]} />
             <Suspense fallback={null}>

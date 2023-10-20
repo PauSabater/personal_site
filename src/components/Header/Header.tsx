@@ -13,10 +13,9 @@ import { scrollToContact } from "../../assets/ts/utils/utils"
 
 gsap.registerPlugin(CustomEase, ScrollToPlugin)
 
-export function Header({ links, mode, isMobile, perfMode }: { links: string[], mode: string, isMobile: boolean, perfMode: string}) {
+export function Header({ mode, isMobile, perfMode }: { links: string[], mode: string, isMobile: boolean, perfMode: string}) {
 
     const [isBurgerOpen, setIsBurgerOpen] = useState(false)
-    const [initialPerf] = useState(getPerfMode(navigator.hardwareConcurrency))
 
     const [isMobileView, setIsMobileView] = useState(isMobileScreen())
     const navigate = useNavigate()
@@ -382,17 +381,9 @@ export function Header({ links, mode, isMobile, perfMode }: { links: string[], m
                             <path d="M13.1009 22V11.0909H16.5739V22H13.1009ZM14.8409 9.8196C14.3532 9.8196 13.9342 9.65862 13.5838 9.33665C13.2334 9.00994 13.0582 8.61695 13.0582 8.15767C13.0582 7.70312 13.2334 7.31487 13.5838 6.9929C13.9342 6.66619 14.3532 6.50284 14.8409 6.50284C15.3333 6.50284 15.7524 6.66619 16.098 6.9929C16.4484 7.31487 16.6236 7.70312 16.6236 8.15767C16.6236 8.61695 16.4484 9.00994 16.098 9.33665C15.7524 9.65862 15.3333 9.8196 14.8409 9.8196Z" fill="var(--c-font-global)"/>
                             <circle cx="15" cy="15" r="14.5" stroke="var(--c-font-global)"/>
                         </svg>
-                        {initialPerf === perfMode
-                            ? <p>You have loaded a {isHighPerf(perfMode) ? "high" : "lower"} requirements page version given your device's number of logical processors available.
-                            {isHighPerf(perfMode)
-                                ? " If you are unfortunately not experiencing a smooth scroll, please try with the lower requirements version."
-                                : " You can test the high requirements one, however you may experience a janky scroll."}
-                            </p>
-                            : isHighPerf(perfMode)
-                                ? <p>You are viewing a version with high performance requirements, click to load a less demanding version.</p>
-                                : <p>You are browsing on a lighter version of the site. Click to view a mode demanding version for your device. {
-                                    initialPerf === "low" ? "You may experience a lesser smooth scroll given your device" : ""}
-                                </p>
+                        {perfMode === "high"
+                            ? <p>You have loaded a high requirements page version. With low end devices or if your system is under a heavy load, you might not experience a smooth experience. If that is unfortunately the case, please try with the lower requirements version.</p>
+                            : <p>You are viewing a version with low performance requirements, click to load a more demanding version with a few more effects.</p>
                         }
                         </div>
                     </li>
