@@ -21,7 +21,7 @@ import PersonalSiteProject from '../../pages/projects/PersonalSite'
 import PapernestProject from '../../pages/projects/Papernest'
 import WeatherAppProject from '../../pages/projects/WeatherApp'
 // @ts-ignore -- TODO: solve declaration file from package
-import { highPerf, lowPerf, getPerfMode, matchMediaMobile, msTransitionPage, msTransitionPageLong } from '@pausabater/utils/dist/index.esm.js'
+import { highPerf, lowPerf, matchMediaMobile, msTransitionPage, msTransitionPageLong } from '@pausabater/utils/dist/index.esm.js'
 const WeatherAppLiveResult = lazy(() => import('../../pages/projectsLive/WeatherAppLiveResult'))
 
 const routes = [
@@ -51,7 +51,7 @@ function App() {
         localStorage.getItem("theme") || document.body.parentElement?.getAttribute("data-theme") || "light"
     )
     const [perfMode, setPerfMode] = useState(
-        localStorage.getItem("perfMode") || getPerfMode(navigator.hardwareConcurrency)
+        localStorage.getItem("perfMode") || "high"
     )
     const [isMobileView, setIsMobileView] = useState(mqMobile.matches)
 
