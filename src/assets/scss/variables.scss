@@ -148,7 +148,8 @@
 
 }
 
-html[data-theme="dark"] {
+html[data-theme="dark"],
+[data-theme="dark"] {
 
     --c-primary: hsl(54, 67%, 68%);
 

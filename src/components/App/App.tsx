@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { useLayoutEffect, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import {texts} from "../../assets/ts/texts/texts"
 import './App.css'
 import '../../assets/scss/variables.scss'
@@ -145,6 +146,7 @@ function App() {
             <Footer mode={theme} perfMode={perfMode}/>
             <Overlay/>
             </div>
+            <Analytics />
         </div>
     )
 }

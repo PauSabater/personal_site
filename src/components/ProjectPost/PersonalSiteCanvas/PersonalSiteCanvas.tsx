@@ -20,14 +20,24 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
 
     return (
         <div className={styles.canvasContainer} ref={siteCanvas} id="personal-site-canvas">
-            <Canvas dpr={[1, 1]}>
+            <Canvas
+                dpr={[1, 1]}
+                gl={{
+                    preserveDrawingBuffer: false,
+                    precision: "lowp",
+                    autoClear: true,
+                    autoClearColor: true,
+                    autoClearDepth: false,
+                    autoClearStencil: false
+                }}
+            >
             <fog attach="fog" args={[mode === "light" ? "hsl(136, 0%, 96%)" : "hsl(0, 0%, 7%)", 50, 130]} />
                 <group >
                     <Camera />
                     <Suspense>
                         <Model mode={mode}/>
                     </Suspense>
-                    <Environment files="city-small.hdr"  resolution={512}></Environment>
+                    <Environment files="city-small.hdr"  resolution={256}></Environment>
                     <CameraControls enabled={false} makeDefault dollyToCursor minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
                 </group>
             </Canvas>
@@ -52,9 +62,20 @@ function Model({mode}: {mode: string}) {
 
             const io = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
-                    if (entry.intersectionRatio > 0) setShouldRender(true)
-                    else setShouldRender(false)
+                    console.log(entry.intersectionRatio)
+                    if (entry.intersectionRatio > 0.1) {
+                        console.log("SET SHOULD RENDER")
+                        setShouldRender(true)
+                    }
+                    else {
+                        console.log("NOT RENDER")
+                        setShouldRender(false)
+                    }
                 })
+            },
+            {
+                rootMargin: "-200px",
+                threshold: 0.9,
             })
 
             if (elTopBanner !== null) io.observe(elTopBanner)
