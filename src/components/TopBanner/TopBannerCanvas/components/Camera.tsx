@@ -20,8 +20,6 @@ export function Camera() {
     function getCameraCoordinates() {
         const aspectRatio = getViewportAspectRatio()
 
-        console.log(aspectRatio)
-
         if (aspectRatio < 0.6) {
             return [115, 10]
         } else if (aspectRatio < 0.8) {
