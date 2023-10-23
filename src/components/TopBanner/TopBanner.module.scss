@@ -36,16 +36,16 @@
         margin-top: -15vh;
     }
 
+    @media (max-aspect-ratio: 1.3) {
+        margin-top: -9vh;
+    }
+
     @include mixins.mobile {
         margin-top: 0;
     }
 
     div {
         z-index: 0;
-    }
-
-    @media (max-aspect-ratio: 1.3) {
-        margin-top: -9vh;
     }
 }
 

@@ -181,13 +181,14 @@
     </div>
     <script>
         // get active theme
-        let theme = localStorage.getItem("theme") || null
+        let theme = localStorage.getItem("theme") || "dark"
         let mediaTheme
 
-        if (theme === null) {
-            mediaTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-            theme = mediaTheme === true ? "dark" : "light"
-        }
+        // Deactivate for now, make dark by default
+        // if (theme === null) {
+        //     mediaTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        //     theme = mediaTheme === true ? "dark" : "light"
+        // }
 
         document.body.parentElement?.setAttribute("data-theme", theme)
         const isMobileView = window.innerWidth < 768
