@@ -244,10 +244,10 @@ export function FootBanner({perfMode}: {perfMode: string}) {
             <Canvas ref={refCanvas} concurrent="true" gl={{ alpha: false }} gl={{
                     preserveDrawingBuffer: false,
                     precision: "lowp",
-                    autoClear: false,
-                    autoClearColor: false,
-                    autoClearDepth: true,
-                    autoClearStencil: false
+                    // autoClear: false,
+                    // autoClearColor: false,
+                    // autoClearDepth: true,
+                    // autoClearStencil: false
                 }}
                 dpr={[1, 1]}
             >

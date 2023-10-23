@@ -25,10 +25,10 @@ export function PersonalSiteCanvas({mode}: {mode: string}) {
                 gl={{
                     preserveDrawingBuffer: false,
                     precision: "lowp",
-                    autoClear: true,
-                    autoClearColor: true,
-                    autoClearDepth: false,
-                    autoClearStencil: false
+                    // autoClear: true,
+                    // autoClearColor: true,
+                    // autoClearDepth: false,
+                    // autoClearStencil: false
                 }}
             >
             <fog attach="fog" args={[mode === "light" ? "hsl(136, 0%, 96%)" : "hsl(0, 0%, 7%)", 50, 130]} />

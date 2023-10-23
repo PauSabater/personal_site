@@ -33,10 +33,10 @@ export function FooterCanvas({mode, perfMode}: {mode: string, perfMode: string})
             gl={{
                 preserveDrawingBuffer: false,
                 precision: "lowp",
-                autoClear: false,
-                autoClearColor: true,
-                autoClearDepth: true,
-                autoClearStencil: false
+                // autoClear: false,
+                // autoClearColor: true,
+                // autoClearDepth: true,
+                // autoClearStencil: false
             }}
             dpr={[1, 1]}
             camera={{ position: [0, 160, 160], fov: 20 }}
