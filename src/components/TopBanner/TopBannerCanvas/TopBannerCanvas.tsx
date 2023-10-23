@@ -31,10 +31,10 @@ export function TopBannerCanvas({mode}: {mode: string}) {
                 preserveDrawingBuffer: false,
                 precision: "mediump",
                 powerPreference: "high-performance",
-                autoClear: false,
-                autoClearColor: true,
-                autoClearDepth: true,
-                autoClearStencil: false
+                // autoClear: true,
+                // autoClearColor: true,
+                // autoClearDepth: true,
+                // autoClearStencil: false
             }}
             dpr={[1, 1]}
         >
