@@ -95,6 +95,7 @@ export function SceneComponents({ mode, font = '/Inter_Medium_Regular.json', ...
         if (shouldRender && renderFrame) {
             setRenderFrame(false)
 
+            // CHANGE FOR A MORE PERFORMANT FUNCTION
             // @ts-ignore
             const distToTop = elCanvas?.getBoundingClientRect().top || 0
 

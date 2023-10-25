@@ -29,14 +29,14 @@ export function TopBannerCanvas({mode}: {mode: string}) {
         <Canvas
             gl={{
                 preserveDrawingBuffer: false,
-                precision: "mediump",
+                precision: "lowp",
                 powerPreference: "high-performance",
                 // autoClear: true,
                 // autoClearColor: true,
                 // autoClearDepth: true,
                 // autoClearStencil: false
             }}
-            dpr={[1, 1]}
+            dpr={[1, 2]}
         >
             <color attach="background" args={[mode === "dark" ? 'hsl(0, 0%, 7%)' : 'hsl(136, 0%, 96%)']} />
             <Camera />
