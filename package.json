@@ -56,10 +56,9 @@
       "last 2 chrome versions",
       "last 2 firefox versions",
       "last 2 safari versions",
-      "not_dead",
+      "not dead",
       "not ie > 0",
-      "not op_mini all",
-      "not iemob > 0"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",
