@@ -136,10 +136,9 @@ export function reverseMountainsAnimation(container: HTMLElement) {
     const elDarkeningLayer: HTMLElement = (container as HTMLElement).querySelector('#darkening-layer') as HTMLElement
     const elSkyDarkeningImg: HTMLElement = (container as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
     const elsClouds = (container as HTMLElement).querySelectorAll('.cloud') as NodeListOf<Element>
-    const elRain = (container.parentElement as HTMLElement).querySelector('#rain-container')
 
     gsap.timeline()
-        .to([elMoon, elRain, elDarkeningLayer, elSkyDarkeningImg, elsClouds], {
+        .to([elMoon, elDarkeningLayer, elSkyDarkeningImg, elsClouds], {
             opacity: '0',
             duration: 0.75
         }, 'start')
@@ -147,8 +146,6 @@ export function reverseMountainsAnimation(container: HTMLElement) {
             opacity: '1',
             duration: 0.75,
         }, 'start')
-
-    gsap.set(elRain, {opacity: 0})
 }
 
 function setMountainsInitialState(container: HTMLElement) {
@@ -156,9 +153,7 @@ function setMountainsInitialState(container: HTMLElement) {
     const elDarkeningLayer: HTMLElement = (container as HTMLElement).querySelector('#darkening-layer') as HTMLElement
     const elSkyDarkeningImg: HTMLElement = (container as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
     const elsClouds = (container as HTMLElement).querySelectorAll('.cloud') as NodeListOf<Element>
-    const rain = (container.parentElement as HTMLElement).querySelector('#rain-container')
 
-    gsap.set(rain, {opacity: '0', display: "block"})
     gsap.set(elMoon, {opacity: '1'})
     gsap.set([elDarkeningLayer, elSkyDarkeningImg, elsClouds], {opacity: '0'})
 }
@@ -169,13 +164,13 @@ export function getMountainsAnimation(container: HTMLElement): gsap.core.Timelin
         const elDarkeningLayer: HTMLElement = (container as HTMLElement).querySelector('#darkening-layer') as HTMLElement
         const elSkyDarkeningImg: HTMLElement = (container as HTMLElement).querySelector('#sky-darkening-img') as HTMLElement
         const elsClouds = (container as HTMLElement).querySelectorAll('.cloud') as NodeListOf<Element>
-        const duration: number = 0.7
+        const duration: number = 1
         const delay: number = 0
 
         const tl = gsap.timeline()
             .to(elMoon, {
                 opacity: 0,
-                duration: duration - 0.2,
+                duration: duration - 0.4,
                 delay: delay
             }, 0)
             .to(elDarkeningLayer, {
@@ -197,8 +192,6 @@ export function getMountainsAnimation(container: HTMLElement): gsap.core.Timelin
                     cloudAnimation.play()
                 }
             }, 0)
-            .to((container.parentElement as HTMLElement).querySelector('#rain-container'),
-                {opacity: "1"})
         tl.pause()
 
         return tl

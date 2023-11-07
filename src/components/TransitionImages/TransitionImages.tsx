@@ -46,7 +46,7 @@ export function TransitionImages({mode}: {mode: string}) {
                 {getImg("personal-site.svg")}
             </div>
             <div className={`${styles.imageContainer} transition-images-container`} id={`transition-img-${'mountains'}`}>
-                {getImg("mountains")}
+                {getImg("mountains", false)}
             </div>
         </div>
     )
