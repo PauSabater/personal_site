@@ -63,19 +63,13 @@ function Model({mode}: {mode: string}) {
             const io = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     console.log(entry.intersectionRatio)
-                    if (entry.intersectionRatio > 0.1) {
-                        console.log("SET SHOULD RENDER")
+                    if (entry.intersectionRatio > 0) {
                         setShouldRender(true)
                     }
                     else {
-                        console.log("NOT RENDER")
                         setShouldRender(false)
                     }
                 })
-            },
-            {
-                rootMargin: "-200px",
-                threshold: 0.9,
             })
 
             if (elTopBanner !== null) io.observe(elTopBanner)

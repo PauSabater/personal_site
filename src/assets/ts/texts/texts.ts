@@ -141,8 +141,8 @@ export const texts = {
                     description: "Pretty things can improve our well being in our every day life. From a nicely plated breakfast to a nice interface, a tidy documentation or clean piece of code. The effort is worth it !"
                 },
                 {
-                    title: "+ Listen to and give contructive critics",
-                    description: "Critics and feedback should be considered and should be given to others when needed as they are useful to grow and get aware of sides to improve. So, do me a favor and give me some feedback !"
+                    title: "+ Listen to and give contructive feedback",
+                    description: "Feedback should be considered and should be given to others when needed as they are useful to grow and get aware of sides to improve. So, do me a favor and give me some feedback !"
                 }
             ]
         }

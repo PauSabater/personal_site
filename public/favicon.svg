@@ -1,20 +1,12 @@
-<svg width="187" height="187" viewBox="0 0 187 187" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="187" height="187" rx="30" fill="url(#paint0_radial_0_1)"/>
-<path d="M16 35C16 23.9543 24.9543 15 36 15H59C61.7614 15 64 17.2386 64 20V58C64 60.7614 61.7614 63 59 63H21C18.2386 63 16 60.7614 16 58V35Z" fill="#121212"/>
-<rect x="70" y="15" width="48" height="48" rx="5" fill="#121212"/>
-<path d="M124 20C124 17.2386 126.239 15 129 15H152C163.046 15 172 23.9543 172 35V58C172 60.7614 169.761 63 167 63H129C126.239 63 124 60.7614 124 58V20Z" fill="#121212"/>
-<rect x="16" y="69" width="48" height="48" rx="5" fill="#121212"/>
-<rect x="70" y="69" width="48" height="48" rx="5" fill="#121212"/>
-<path d="M124 74C124 71.2386 126.239 69 129 69H167C169.761 69 172 71.2386 172 74V97C172 108.046 163.046 117 152 117H129C126.239 117 124 114.761 124 112V74Z" fill="#121212"/>
-<path d="M16 128C16 125.239 18.2386 123 21 123H59C61.7614 123 64 125.239 64 128V166C64 168.761 61.7614 171 59 171H36C24.9543 171 16 162.046 16 151V128Z" fill="#121212"/>
-<defs>
-<radialGradient id="paint0_radial_0_1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(93.5 93.5) rotate(90) scale(93.5)">
-<stop stop-color="#A29520"/>
-<stop offset="0.364583" stop-color="#A29520" stop-opacity="0.4"/>
-<stop offset="0.661458" stop-color="#A29520" stop-opacity="0.3"/>
-<stop offset="1" stop-color="#A29520" stop-opacity="0"/>
-</radialGradient>
-</defs>
+<svg width="217" height="217" viewBox="0 0 217 217" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="217" height="217" rx="15" fill="#0A0A0A"/>
+<path d="M31 46C31 37.7157 37.7157 31 46 31H74C76.7614 31 79 33.2386 79 36V74C79 76.7614 76.7614 79 74 79H36C33.2386 79 31 76.7614 31 74V46Z" fill="white"/>
+<rect x="85" y="31" width="48" height="48" rx="5" fill="white"/>
+<path d="M139 36C139 33.2386 141.239 31 144 31H172C180.284 31 187 37.7157 187 46V74C187 76.7614 184.761 79 182 79H144C141.239 79 139 76.7614 139 74V36Z" fill="white"/>
+<rect x="31" y="85" width="48" height="48" rx="5" fill="white"/>
+<rect x="85" y="85" width="48" height="48" rx="5" fill="white"/>
+<path d="M139 90C139 87.2386 141.239 85 144 85H182C184.761 85 187 87.2386 187 90V118C187 126.284 180.284 133 172 133H144C141.239 133 139 130.761 139 128V90Z" fill="white"/>
+<path d="M31 144C31 141.239 33.2386 139 36 139H74C76.7614 139 79 141.239 79 144V182C79 184.761 76.7614 187 74 187H46C37.7157 187 31 180.284 31 172V144Z" fill="white"/>
 </svg>
 
 

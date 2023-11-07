@@ -2,7 +2,7 @@
   "short_name": "Pau Sabater",
   "name": "Pau Sabater Portfolio",
   "icons": [{
-      "src": "favicon-large.png",
+      "src": "favicon.svg",
       "sizes": "512x512"
   }],
   "start_url": ".",
