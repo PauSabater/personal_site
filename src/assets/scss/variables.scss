@@ -153,13 +153,13 @@ html[data-theme="dark"],
 
     --c-primary: hsl(54, 67%, 68%);
 
-    --bg-main: hsl(0, 0%, 7%);
-    --c-white: hsl(0, 0%, 7%);
+    --bg-main: hsl(0, 0%, 3%);
+    --c-white: hsl(0, 100%, 0%);
     --c-font-global: hsl(136, 0%, 96%);
     --c-font-global-light: hsl(136, 0%, 86%);
     --c-font-global-lighter: hsl(136, 0%, 75%);
     --bg-white: hsl(0, 0%, 12%);
-    --bg-white-translucent: hsla(0, 0%, 13%, 0.75);
+    --bg-white-translucent: hsla(0, 0%, 13%, 0.45);
     --bg-white-translucent-dark-mode: hsla(0, 0%, 13%, 0.75);
     --c-br-light: hsl(136, 0%, 60%);
 }

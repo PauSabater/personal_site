@@ -92,6 +92,41 @@ export function executeInitialPageAnimation() {
     return () => ctx.revert()
 }
 
+export function setScrollTopBannerAnimation() {
+    const elTopBanner = document.getElementById("top-banner")
+    const elGradient: HTMLElement | null = document.getElementById("top-banner-gradient")
+
+    console.log("TOP BANNER SET ANIMATION")
+
+    if (elGradient === null) return
+
+    console.log(elTopBanner)
+
+    let ctx = gsap.context(() => {
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                markers: true,
+                scrub: 1,
+                trigger: elTopBanner,
+                start: "top",
+                end: "bottom",
+            }
+        })
+
+        tl.to(elGradient as HTMLElement, {
+            y: '130vh',
+            x: '40vw',
+            opacity: 0.6,
+            // scaleX: 1.5,
+            // scaleY: 0.8
+
+        })
+    })
+
+    return () => ctx.revert()
+}
+
 export function setDayNumCounter(elDayNumber: HTMLElement, delayExec: number) {
     if (elDayNumber === null) return
     const numToday: number = parseInt(getTodayDayNum())

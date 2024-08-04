@@ -3,8 +3,9 @@ import styles from "./TopBanner.module.scss"
 // @ts-ignore -- TODO: solve declaration file from package
 import { getTodayMonthName, highPerf, isMobileScreen } from "@pausabater/utils/dist/index.esm.js"
 import { hideAllTransitionImages } from "../../assets/ts/utils/utils"
-import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
+// import { TopBannerCanvas } from './TopBannerCanvas/TopBannerCanvas'
 import { MobileTopBanner } from "./MobileTopBanner/MobileTopBanner"
+import { setScrollTopBannerAnimation } from "./TopBanner.animations"
 
 export interface ITopBannerProps {
     desktop: {
@@ -28,15 +29,13 @@ export function TopBanner({ props, mode, perfMode }: { props: ITopBannerProps, m
 
     useLayoutEffect(()=> {
         hideAllTransitionImages()
+        setScrollTopBannerAnimation()
     }, [perfMode])
 
     return (
         <Fragment>
             <div className={styles.canvasContainer} id="top-banner" data-theme={mode}>
-                {isMobile
-                    ? <MobileTopBanner mode={mode}/>
-                    : perfMode === highPerf ? <TopBannerCanvas mode={mode}/> : <MobileTopBanner mode={mode}
-                />}
+                <MobileTopBanner mode={mode} />
             </div>
             <div className={styles.container} id={"top-banner-container"}>
                 <div ref={refsizedTopBanner} className={styles.sizedTopBanner} />

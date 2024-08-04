@@ -63,6 +63,7 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
                 dangerouslySetInnerHTML={{__html: isVerticalView ? gridMobile() : gridHorizontal()}}
             ></div>
             <div ref={refContainer} className={styles.container}>
+                <div className={styles.gradientLight} id="top-banner-gradient"></div>
                 <p className={styles.pretitle}>frontend dev
                 </p>
                 {getAnimatedText()}
@@ -74,7 +75,6 @@ export function MobileTopBanner({ props, mode }: { props?: any, mode: string}) {
                         </span> */}
                     </span>
                 </p>
-                <div className={styles.gradientLight} id="top-banner-gradient"></div>
             </div>
         </Fragment>
     )

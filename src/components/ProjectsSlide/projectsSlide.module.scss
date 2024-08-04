@@ -1,0 +1,12 @@
+.container {
+    height: 100vh;
+    width: fit-content;
+    background: white;
+    overflow-x: hidden;
+}
+
+.containerSlider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}

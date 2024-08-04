@@ -17,12 +17,20 @@ export const texts = {
         },
         intro: {
             title: "Hello. I am Pau.",
+            // textDesktop: [
+            //     "I am a <span>frontend developer</span> striving",
+            //     "for  <span><div></div><span>high quality interfaces</span></span> . With",
+            //     "an eye for design and a multidisciplinary",
+            //     "background, I can tackle with success",
+            //     "<span><div></div><span>complex projects</span></span> and goals.",
+            // ],
             textDesktop: [
-                "I am a <span>frontend developer</span> striving",
-                "for  <span>high quality interfaces</span> . With",
-                "an eye for design and a multidisciplinary",
-                "background, I can tackle with success",
-                "<span>complex projects</span> and goals.",
+                "I am a frontend developer striving for <span><div></div><span>high quality</span></span>",
+                "<span><div></div><span>interfaces</span></span> and passionate about modern tools and",
+                "development approaches. Specialised in <span><div></div><span>modern</span></span>",
+                "<span><div></div><span>JavaScript</span></span> , <span><div></div><span>TypeScript</span></span> and <span><div></div><span>React</span></span> and with an eye",
+                "for design and a multidisciplinary background, ",
+                "I can tackle with success complex projects and goals.",
             ],
             textMobile: [
                 "I am a <span>frontend developer</span>",

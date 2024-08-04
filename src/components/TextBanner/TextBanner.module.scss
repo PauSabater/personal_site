@@ -4,6 +4,7 @@
     position: relative;
     margin-top: 200px;
     width: 90vw;
+    height: 80vh;
     border-radius: 15px;
     margin: var(--pd-fullwidth);
     margin-bottom: 100px;
@@ -45,12 +46,23 @@
     position: relative;
     width: 100%;
     margin: auto;
+    margin-top: 12vh;
     box-sizing: border-box;
     padding: var(--pd-xl) 5vw 60px;
     background: var(--bg-white-translucent);
     border-radius: 20px;
     z-index: 10;
-    border: 1px solid var(--c-br-light);
+    // border: 1px solid var(--c-br-light);
+
+    .blur {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        // background: red;
+        filter: blur(4px);
+    }
 }
 
 .title {
@@ -80,10 +92,11 @@
     transform: translateY(100px);
 
     span {
+        display: inline;
         position: relative;
 
-        &:before {
-            content: "";
+        div {
+            // content: "";
             border-radius: 5px;
             position: absolute;
             top: 0;
@@ -100,7 +113,7 @@
 }
 
 [data-animation-is-finished] {
-    span:before {
+    span div {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 }
@@ -124,6 +137,10 @@
 
     .title {
         font-size: clamp(30px, 7vw, 35px);
+    }
+
+    .wrap {
+        margin-top: 0;
     }
 
     .canvasContainer {

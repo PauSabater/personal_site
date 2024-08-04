@@ -27,6 +27,7 @@ export function TextBanner({ texts, mode, perfMode }: { texts: ITextBannerTexts,
     return (
         <div ref={refTextBanner} className={styles.container} id="text-banner" data-theme={mode}>
             <div className={styles.wrap} >
+                <div className={styles.blur}></div>
                 <p className={styles.title}>{texts.title}</p>
                 {
                     texts.textDesktop.map((line, i) =>
@@ -39,7 +40,7 @@ export function TextBanner({ texts, mode, perfMode }: { texts: ITextBannerTexts,
                             <p className={styles.text} dangerouslySetInnerHTML={{__html: line}}></p>
                         </div>
                 )}
-                <Cta props={texts.Cta}></Cta>
+                {/* <Cta props={texts.Cta}></Cta> */}
 
             </div>
         </div>

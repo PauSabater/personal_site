@@ -7,6 +7,7 @@ import { MethodSection } from "../components/MethodSection/MethodSection";
 import { FootBanner } from "../components/FootBanner/FootBanner";
 import styles from "./pages.module.scss"
 import {texts} from "../assets/ts/texts/texts"
+import { ProjectsSlide } from "../components/ProjectsSlide/ProjectsSlide";
 
 
 export function Home({mode, perfMode, isMobile}: {mode: string, perfMode: string, isMobile: boolean}) {
@@ -20,8 +21,11 @@ export function Home({mode, perfMode, isMobile}: {mode: string, perfMode: string
 
     return (
         <div id="page-home">
-            <TopBanner props={textsPage.topBanner} mode={mode} perfMode={perfMode}/>
-            <TextBanner texts={textsPage.intro} mode={mode} perfMode={perfMode}/>
+            <div className={styles.containerIntro}>
+                <TopBanner props={textsPage.topBanner} mode={mode} perfMode={"low"}/>
+                <TextBanner texts={textsPage.intro} mode={mode} perfMode={"low"}/>
+            </div>
+            <ProjectsSlide />
             <WorkBanner props={textsPage.workBanner} mode={mode}/>
             <div className={styles.containerSecondHalf} id={"homepage-second-half"}>
                 <SkillsBanner texts={textsPage.skillsBanner} mode={mode}/>

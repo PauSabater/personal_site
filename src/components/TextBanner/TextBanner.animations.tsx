@@ -79,7 +79,7 @@ export function setTextBannerAnimations(refTextBanner: React.MutableRefObject<nu
         {
             root: null,
             rootMargin: "0px 0px 0% 0px",
-            threshold: 0.3
+            threshold: 0.15
         })
 
         observer.observe(elTextBanner)
